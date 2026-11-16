@@ -36,9 +36,7 @@ struct map_data {
 
 int get_flag(map_data* mapdata, int mapflag) {
     switch (mapflag) {
-#ifdef Pandas_MapFlag_NoCapture
 @@GET_CASE@@
-#endif
         default:
             return mapdata->getMapFlag(mapflag);
     }
@@ -46,9 +44,7 @@ int get_flag(map_data* mapdata, int mapflag) {
 
 void set_flag(map_data* mapdata, int mapflag, bool status) {
     switch (mapflag) {
-#ifdef Pandas_MapFlag_NoCapture
 @@SET_CASE@@
-#endif
         default:
             mapdata->setMapFlag(mapflag, status);
             break;
@@ -94,8 +90,18 @@ def extract_production_cases() -> tuple[str, str]:
             f"map.cpp 應有兩個 MF_NOCAPTURE switch case，實際為 {len(positions)}"
         )
 
-    get_case = source[positions[0]:source.index("case MF_SKILL_DAMAGE:", positions[0])]
-    set_case = source[positions[1]:source.index("case MF_SKILL_DAMAGE:", positions[1])]
+    def complete_case_block(position: int) -> str:
+        start = source.rfind(f"#ifdef {MACRO}", 0, position)
+        end = source.index("case MF_SKILL_DAMAGE:", position)
+        if start < 0:
+            raise AssertionError("找不到 NoCapture 巨集區塊起點")
+        block = source[start:end]
+        if f"#endif // {MACRO}" not in block:
+            raise AssertionError("NoCapture 巨集區塊未正確結束")
+        return block
+
+    get_case = complete_case_block(positions[0])
+    set_case = complete_case_block(positions[1])
 
     if "return mapdata->getMapFlag(MF_NOPETCAPTURE);" not in get_case:
         raise AssertionError("NoCapture getter 未轉接 MF_NOPETCAPTURE")
