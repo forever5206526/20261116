@@ -5827,10 +5827,10 @@ size_t npc_script_event( map_session_data& sd, enum npce_event type ){
 		// Filter 必須在原始操作修改資料前同步執行，否則 processhalt 無法阻止鑑定。
 		// 複製事件清單，避免過濾器內執行 unloadnpc 時使原向量失效。
 		std::vector<struct script_event_s> vector = script_event[type];
-		enum npce_event previous_event = sd.pandas.workinevent;
+		enum npce_event previous_event = static_cast<enum npce_event>(sd.pandas.workinevent);
 
 		for (struct script_event_s& evt : vector) {
-			sd.pandas.workinevent = type;
+			sd.pandas.workinevent = static_cast<uint8>(type);
 			pc_setreg(&sd, add_str("@interrupt_npcid"), sd.npc_id);
 			run_script(evt.event->nd->u.scr.script, evt.event->pos, sd.bl.id, evt.event->nd->bl.id);
 			pc_setreg(&sd, add_str("@interrupt_npcid"), 0);

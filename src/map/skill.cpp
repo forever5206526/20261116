@@ -20546,9 +20546,9 @@ void skill_identify(map_session_data *sd, int32 idx)
 	clif_item_identified( *sd, idx, failure );
 
 #ifdef Pandas_BattleConfig_Identify_Event_Mode
-	if (!failure || battle_config.identify_event_mode == 0) {
+	if (idx >= 0 && idx < MAX_INVENTORY && (!failure || battle_config.identify_event_mode == 0)) {
 #else
-	if (!failure) {
+	if (idx >= 0 && idx < MAX_INVENTORY && !failure) {
 #endif // Pandas_BattleConfig_Identify_Event_Mode
 		pc_setreg(sd, add_str("@identify_idx"), idx);
 		npc_script_event(*sd, NPCE_IDENTIFY);

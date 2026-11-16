@@ -27702,7 +27702,7 @@ BUILDIN_FUNC(processhalt)
 	if (script_hasdata(st, 2) && script_isint(st, 2))
 		halt = (cap_value(script_getnum(st, 2), 0, 1) == 1);
 
-	if (!setProcessHalt(sd, sd->pandas.workinevent, halt)) {
+	if (!setProcessHalt(sd, static_cast<enum npce_event>(sd->pandas.workinevent), halt)) {
 		ShowError("processhalt: unable to set the filter interruption state.\n");
 		return SCRIPT_CMD_FAILURE;
 	}
