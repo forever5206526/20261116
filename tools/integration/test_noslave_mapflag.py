@@ -89,10 +89,9 @@ class NoSlaveMapFlagTest(unittest.TestCase):
         constants = (ROOT / "src/map/script_constants.hpp").read_text(encoding="utf-8-sig")
         self.assertIn("export_constant(MF_NOSLAVE);", constants)
 
-        self.assertIn(
-            "void",
-            production_guard_block()
-        )
+        guard = production_guard_block()
+        self.assertTrue(guard.startswith(f"#ifdef {MACRO}"))
+        self.assertTrue(guard.rstrip().endswith(f"#endif // {MACRO}"))
 
     def test_enabled_and_disabled_builds(self) -> None:
         guard = production_guard_block()
