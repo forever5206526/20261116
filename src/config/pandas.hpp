@@ -16,5 +16,6 @@
 #define Pandas_NpcFilter_IDENTIFY
 #define Pandas_ScriptCommand_ProcessHalt
 #define Pandas_MapFlag_NoAutoLoot
+#define Pandas_MapFlag_NoToken
 
 #endif // CONFIG_PANDAS_HPP

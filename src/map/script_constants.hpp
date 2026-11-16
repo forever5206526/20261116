@@ -547,6 +547,9 @@
 #ifdef Pandas_MapFlag_NoAutoLoot
 	export_constant(MF_NOAUTOLOOT);
 #endif // Pandas_MapFlag_NoAutoLoot
+#ifdef Pandas_MapFlag_NoToken
+	export_constant(MF_NOTOKEN);
+#endif // Pandas_MapFlag_NoToken
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

@@ -37,3 +37,21 @@ removemapflag "prontera", MF_NOAUTOLOOT;
 ```
 
 將 `prontera` 改成要套用的地圖名稱。
+
+### NoToken 地圖標記
+
+- 新增 `MF_NOTOKEN`／`notoken` 地圖標記。
+- 地圖啟用此標記後，玩家在該地圖使用原地復活之證時，伺服器會阻止原地復活並顯示提示訊息。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOTOKEN;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOTOKEN;
+```
+

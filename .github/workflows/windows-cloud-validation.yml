@@ -27,6 +27,9 @@ jobs:
       - name: 執行 NoAutoLoot 地圖標記回歸測試
         run: python tools/integration/test_noautoloot_mapflag.py
 
+      - name: 執行 NoToken 地圖標記回歸測試
+        run: python tools/integration/test_notoken_mapflag.py
+
   windows-build:
     runs-on: windows-2022
     timeout-minutes: 90
