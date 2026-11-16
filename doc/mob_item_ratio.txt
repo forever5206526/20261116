@@ -1,0 +1,88 @@
+//===== rAthena Documentation ================================
+//===== Documentação do rAthena ================================
+//= Estrutura de Banco de Dados de Proporção de Itens de Monstros
+//===== Por: ==================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ===================================
+//= 20210624
+//===== Descrição: ============================================
+//= Explicação do arquivo mob_item_ratio.yml e sua estrutura.
+//============================================================
+
+As taxas de queda base dos itens definidas em mob_db.yml não serão multiplicadas pelos valores globais de item_rate* (taxas de queda) presentes em
+conf/battle/drops.conf e, em vez disso, a proporção (Ratio) será utilizada (100 = 1x).
+Se nenhum monstro for especificado, todos os monstros serão afetados, caso contrário, apenas os listados.
+
+Exemplos:
+Jellopies dos monstros irão cair com uma taxa de queda de 1x, independentemente da taxa de queda global.
+Corpo:
+ - Item: Jellopy
+   Ratio: 100
+
+Jellopies dos monstros irão cair com uma taxa de queda de 10x, independentemente da taxa de queda global.
+Corpo:
+ - Item: Jellopy
+   Ratio: 1000
+
+Remove as Jellopies dos drops dos monstros.
+Corpo:
+ - Item: Jellopy
+   Ratio: 0
+
+Jellopies dos Porings irão cair com uma taxa de queda de 1x. Outros monstros que também dropam Jellopies não serão afetados (utilize a taxa de queda global).
+Corpo:
+ - Item: Jellopy
+   Ratio: 100
+   List:
+     PORING: true
+
+Observações:
+- Não substitui as configurações item_drop_*_min/max.
+- Não afeta os drops concedidos por cartas/itens. Para ajustar esses drops, edite-os no item_db.
+- Afeta prêmios de MVP e Caixas do Tesouro.
+- É possível adicionar apenas UMA proporção (Ratio) por item. Se você precisar de proporções diferentes para diferentes monstros, substitua a taxa de queda pelo Ratio=100 e edite as taxas de queda base no mob_db.
+- Esse arquivo é recarregado pelo comando @reloadmobdb.
+
+
+//= Mob Item Ratio Database Structure
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Last Updated: ========================================
+//= 20210624
+//===== Description: =========================================
+//= Explanation of the mob_item_ratio.yml file and structure.
+//============================================================
+
+Item base drop rates defined in mob_db.yml will not get multiplied by global item_rate* values (aka drop rates) from
+conf/battle/drops.conf and instead, Ratio will be used (100 = 1x).
+If no Mob is specified, all monsters will be affected, otherwise only the ones listed.
+
+Examples:
+Jellopies from monsters will drop with 1x drop rate regardless of global drop rate
+Body:
+ - Item: Jellopy
+   Ratio: 100
+
+Jellopies from monsters will drop with 10x drop rate regardless of global drop rate
+Body:
+ - Item: Jellopy
+   Ratio: 1000
+
+Removes Jellopies from monsters drop
+Body:
+ - Item: Jellopy
+   Ratio: 0
+
+Jellopies from Porings will drop with 1x drop rate. Other monsters that drop Jellopies are unaffected (use global drop rate).
+Body:
+ - Item: Jellopy
+   Ratio: 100
+   List:
+     PORING: true
+
+Notes:
+- Does not override item_drop_*_min/max settings.
+- Does not affect card/item-granted drops. To adjust card/item-granted drops, edit them in item_db.
+- Does affect MVP prizes and Treasure Boxes.
+- You can add only ONE Ratio per Item. If you need various ratios for different monsters, override drop rate with Ratio=100 and edit base drop rates in mob_db.
+- This file is reloaded by @reloadmobdb.
