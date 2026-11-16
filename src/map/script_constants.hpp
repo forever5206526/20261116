@@ -556,6 +556,9 @@
 #ifdef Pandas_MapFlag_NoMail
 	export_constant(MF_NOMAIL);
 #endif // Pandas_MapFlag_NoMail
+#ifdef Pandas_MapFlag_NoSlave
+	export_constant(MF_NOSLAVE);
+#endif // Pandas_MapFlag_NoSlave
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

@@ -3725,6 +3725,12 @@ int32 mob_summonslave(struct mob_data *md2,int32 *value,int32 amount,uint16 skil
 
 	if(mobdb_checkid(value[0]) == 0)
 		return 0;
+#ifdef Pandas_MapFlag_NoSlave
+	if (md2 && map_getmapflag(md2->bl.m, MF_NOSLAVE)) {
+		return 0;
+	}
+#endif // Pandas_MapFlag_NoSlave
+
 	/**
 	 * Flags this monster is able to summon; saves a worth amount of memory upon deletion
 	 **/

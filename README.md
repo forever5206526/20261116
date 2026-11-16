@@ -88,3 +88,20 @@ setmapflag "prontera", MF_NOCAPTURE;
 ```text
 removemapflag "prontera", MF_NOCAPTURE;
 ```
+
+### NoSlave 地圖標記
+
+- 新增 `MF_NOSLAVE`／`noslave` 地圖標記。
+- 地圖啟用此標記時，會阻止位於該地圖的魔物召喚隨從；不影響一般魔物刷新。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOSLAVE;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOSLAVE;
+```

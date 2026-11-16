@@ -699,6 +699,9 @@ enum e_mapflag : int16 {
 #ifdef Pandas_MapFlag_NoMail
 	MF_NOMAIL,
 #endif // Pandas_MapFlag_NoMail
+#ifdef Pandas_MapFlag_NoSlave
+	MF_NOSLAVE,
+#endif // Pandas_MapFlag_NoSlave
 	MF_MAX
 };
 
