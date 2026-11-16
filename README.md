@@ -71,3 +71,20 @@ setmapflag "prontera", MF_NOMAIL;
 ```text
 removemapflag "prontera", MF_NOMAIL;
 ```
+
+### NoCapture 寵物捕捉相容別名
+
+- 新增 `MF_NOCAPTURE`；讀取及設定都會轉接至 brHades 已有的原生 `MF_NOPETCAPTURE`。
+- 不新增第二套寵物捕捉阻擋邏輯；既有捕捉流程仍由原生標記處理。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOCAPTURE;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOCAPTURE;
+```

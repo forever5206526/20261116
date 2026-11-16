@@ -4607,6 +4607,11 @@ int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, union u_mapflag_args *
 			return mapdata->getMapFlag(MF_NOEXPPENALTY) && mapdata->getMapFlag(MF_NOZENYPENALTY);
 		case MF_NOEXP:
 			return mapdata->getMapFlag(MF_NOBASEEXP) && mapdata->getMapFlag(MF_NOJOBEXP);
+#ifdef Pandas_MapFlag_NoCapture
+		case MF_NOCAPTURE:
+			// nocapture 查詢等同於查詢原生 nopetcapture 標記。
+			return mapdata->getMapFlag(MF_NOPETCAPTURE);
+#endif // Pandas_MapFlag_NoCapture
 		case MF_SKILL_DAMAGE:
 			nullpo_retr(-1, args);
 
@@ -4863,6 +4868,12 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 			mapdata->setMapFlag(MF_NOBASEEXP, status);
 			mapdata->setMapFlag(MF_NOJOBEXP, status);
 			break;
+#ifdef Pandas_MapFlag_NoCapture
+		case MF_NOCAPTURE:
+			// nocapture 設定等同於設定原生 nopetcapture 標記。
+			mapdata->setMapFlag(MF_NOPETCAPTURE, status);
+			break;
+#endif // Pandas_MapFlag_NoCapture
 		case MF_SKILL_DAMAGE:
 			if (!status) {
 				mapdata->damage_adjust = {};

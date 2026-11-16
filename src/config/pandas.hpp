@@ -18,5 +18,6 @@
 #define Pandas_MapFlag_NoAutoLoot
 #define Pandas_MapFlag_NoToken
 #define Pandas_MapFlag_NoMail
+#define Pandas_MapFlag_NoCapture
 
 #endif // CONFIG_PANDAS_HPP
