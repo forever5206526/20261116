@@ -6251,6 +6251,13 @@ int32 pc_useitem(map_session_data *sd,int32 n)
 
 	if (sd->state.mail_writing)
 		return 0;
+#ifdef Pandas_MapFlag_NoUseItem
+	if (sd && map_getmapflag(sd->bl.m, MF_NOUSEITEM)) {
+		clif_messagecolor(&sd->bl, color_table[COLOR_RED], msg_txt(sd, 1543), false, SELF);
+		return 0;
+	}
+#endif // Pandas_MapFlag_NoUseItem
+
 
 	if (sd->npc_id) {
 		if (sd->progressbar.npc_id) {

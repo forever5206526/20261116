@@ -705,6 +705,9 @@ enum e_mapflag : int16 {
 #ifdef Pandas_MapFlag_NoAttack
 	MF_NOATTACK,
 #endif // Pandas_MapFlag_NoAttack
+#ifdef Pandas_MapFlag_NoUseItem
+	MF_NOUSEITEM,
+#endif // Pandas_MapFlag_NoUseItem
 	MF_MAX
 };
 

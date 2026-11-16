@@ -122,3 +122,21 @@ setmapflag "prontera", MF_NOATTACK;
 ```text
 removemapflag "prontera", MF_NOATTACK;
 ```
+
+### NoUseItem 地圖標記
+
+- 新增 `MF_NOUSEITEM`／`nouseitem` 地圖標記。
+- 啟用後，玩家無法在該地圖使用消耗型道具；會顯示對應訊息並拒絕此次道具使用。
+- 已補上英文及繁體中文訊息文字。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOUSEITEM;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOUSEITEM;
+```

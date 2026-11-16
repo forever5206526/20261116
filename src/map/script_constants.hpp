@@ -562,6 +562,9 @@
 #ifdef Pandas_MapFlag_NoAttack
 	export_constant(MF_NOATTACK);
 #endif // Pandas_MapFlag_NoAttack
+#ifdef Pandas_MapFlag_NoUseItem
+	export_constant(MF_NOUSEITEM);
+#endif // Pandas_MapFlag_NoUseItem
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);
