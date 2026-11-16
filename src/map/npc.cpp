@@ -5822,6 +5822,25 @@ size_t npc_script_event( map_session_data& sd, enum npce_event type ){
 	if (type == NPCE_MAX)
 		return 0;
 
+#ifdef Pandas_NpcFilter_IDENTIFY
+	if (type == NPCF_IDENTIFY) {
+		// Filter 必須在原始操作修改資料前同步執行，否則 processhalt 無法阻止鑑定。
+		// 複製事件清單，避免過濾器內執行 unloadnpc 時使原向量失效。
+		std::vector<struct script_event_s> vector = script_event[type];
+		enum npce_event previous_event = static_cast<enum npce_event>(sd.pandas.workinevent);
+
+		for (struct script_event_s& evt : vector) {
+			sd.pandas.workinevent = static_cast<uint8>(type);
+			pc_setreg(&sd, add_str("@interrupt_npcid"), sd.npc_id);
+			run_script(evt.event->nd->u.scr.script, evt.event->pos, sd.bl.id, evt.event->nd->bl.id);
+			pc_setreg(&sd, add_str("@interrupt_npcid"), 0);
+		}
+
+		sd.pandas.workinevent = previous_event;
+		return vector.size();
+	}
+#endif // Pandas_NpcFilter_IDENTIFY
+
 	std::vector<struct script_event_s>& vector = script_event[type];
 
 	for( struct script_event_s& evt : vector ){
@@ -5830,6 +5849,38 @@ size_t npc_script_event( map_session_data& sd, enum npce_event type ){
 
 	return vector.size();
 }
+
+#ifdef Pandas_Struct_Map_Session_Data_EventHalt
+bool setProcessHalt(map_session_data *sd, enum npce_event event, bool halt)
+{
+	if (sd == nullptr || event >= NPCE_MAX)
+		return false;
+
+	sd->pandas.eventhalt[event] = halt;
+	return true;
+}
+
+bool getProcessHalt(map_session_data *sd, enum npce_event event, bool autoreset)
+{
+	if (sd == nullptr || event >= NPCE_MAX)
+		return false;
+
+	const bool current = sd->pandas.eventhalt[event];
+	if (autoreset)
+		sd->pandas.eventhalt[event] = false;
+	return current;
+}
+
+bool npc_script_filter(map_session_data* sd, enum npce_event type)
+{
+	if (sd == nullptr || type >= NPCE_MAX)
+		return false;
+
+	setProcessHalt(sd, type, false);
+	npc_script_event(*sd, type);
+	return getProcessHalt(sd, type);
+}
+#endif // Pandas_Struct_Map_Session_Data_EventHalt
 
 /**
  * Duplicates a NPC.
@@ -5991,6 +6042,12 @@ const char *npc_get_script_event_name(int32 npce_index)
 		return script_config.kill_pc_event_name;
 	case NPCE_KILLNPC:
 		return script_config.kill_mob_event_name;
+	case NPCE_IDENTIFY:
+		return script_config.identify_event_name;
+#ifdef Pandas_NpcFilter_IDENTIFY
+	case NPCF_IDENTIFY:
+		return script_config.identify_filter_name;
+#endif // Pandas_NpcFilter_IDENTIFY
 	default:
 		ShowError("npc_get_script_event_name: npce_index is outside the array limits: %d (max: %d).\n", npce_index, NPCE_MAX);
 		return nullptr;

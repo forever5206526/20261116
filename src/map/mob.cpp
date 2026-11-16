@@ -2373,6 +2373,9 @@ static void mob_item_drop(struct mob_data *md, std::shared_ptr<s_item_drop_list>
 		test_autoloot = test_autoloot && sd->bl.m == md->bl.m
 		&& check_distance_blxy(&sd->bl, dlist->x, dlist->y, AUTOLOOT_DISTANCE);
 #endif
+#ifdef Pandas_MapFlag_NoAutoLoot
+		test_autoloot = test_autoloot && (sd && sd->bl.m >= 0 && !map_getmapflag(sd->bl.m, MF_NOAUTOLOOT));
+#endif // Pandas_MapFlag_NoAutoLoot
 	if( test_autoloot ) {	//Autoloot.
 		struct party_data *p = party_search(sd->status.party_id);
 
@@ -3722,6 +3725,12 @@ int32 mob_summonslave(struct mob_data *md2,int32 *value,int32 amount,uint16 skil
 
 	if(mobdb_checkid(value[0]) == 0)
 		return 0;
+#ifdef Pandas_MapFlag_NoSlave
+	if (md2 && map_getmapflag(md2->bl.m, MF_NOSLAVE)) {
+		return 0;
+	}
+#endif // Pandas_MapFlag_NoSlave
+
 	/**
 	 * Flags this monster is able to summon; saves a worth amount of memory upon deletion
 	 **/

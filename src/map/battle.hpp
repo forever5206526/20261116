@@ -772,6 +772,9 @@ struct Battle_Config
 	int32 feature_goldpc_time;
 	int32 feature_goldpc_max_points;
 	int32 feature_goldpc_vip;
+#ifdef Pandas_BattleConfig_Identify_Event_Mode
+	int32 identify_event_mode; // 0: Pandas 1.2.4; 1: rAthena
+#endif // Pandas_BattleConfig_Identify_Event_Mode
 
 #include <custom/battle_config_struct.inc>
 };

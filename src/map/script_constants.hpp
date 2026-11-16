@@ -12,6 +12,13 @@
 	#define export_deprecated_constant2(a,b) script_set_constant(a,b,false,true)
 	#define export_deprecated_constant3(a,b,c) script_set_constant_(a,b,c,false,true)
 
+	/* NPC event constants used by migrated Pandas features */
+	export_constant(NPCE_LOGIN);
+	export_constant(NPCE_IDENTIFY);
+#ifdef Pandas_NpcFilter_IDENTIFY
+	export_constant(NPCF_IDENTIFY);
+#endif // Pandas_NpcFilter_IDENTIFY
+
 	/* min and maximum variable value */
 	export_constant(INT_MIN);
 	export_constant(INT_MAX);
@@ -537,6 +544,27 @@
 	export_constant(MF_SPECIALPOPUP);
 	export_constant(MF_NOLOOTNORMALMOB);
 	export_constant(MF_NO_NPC_SELFDESTRUCTION_ON_ALL);
+#ifdef Pandas_MapFlag_NoAutoLoot
+	export_constant(MF_NOAUTOLOOT);
+#endif // Pandas_MapFlag_NoAutoLoot
+#ifdef Pandas_MapFlag_NoToken
+	export_constant(MF_NOTOKEN);
+#endif // Pandas_MapFlag_NoToken
+#ifdef Pandas_MapFlag_NoCapture
+	export_constant(MF_NOCAPTURE);
+#endif // Pandas_MapFlag_NoCapture
+#ifdef Pandas_MapFlag_NoMail
+	export_constant(MF_NOMAIL);
+#endif // Pandas_MapFlag_NoMail
+#ifdef Pandas_MapFlag_NoSlave
+	export_constant(MF_NOSLAVE);
+#endif // Pandas_MapFlag_NoSlave
+#ifdef Pandas_MapFlag_NoAttack
+	export_constant(MF_NOATTACK);
+#endif // Pandas_MapFlag_NoAttack
+#ifdef Pandas_MapFlag_NoUseItem
+	export_constant(MF_NOUSEITEM);
+#endif // Pandas_MapFlag_NoUseItem
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

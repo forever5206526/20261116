@@ -1604,6 +1604,8 @@ enum npce_event : uint8 {
 	NPCE_DIE,
 	NPCE_KILLPC,
 	NPCE_KILLNPC,
+	NPCE_IDENTIFY,
+	NPCF_IDENTIFY,
 	NPCE_MAX
 };
 
@@ -1672,6 +1674,12 @@ int32 npc_unload(struct npc_data* nd, bool single);
 int32 npc_reload(void);
 void npc_read_event_script(void);
 size_t npc_script_event( map_session_data& sd, enum npce_event type );
+
+#ifdef Pandas_Struct_Map_Session_Data_EventHalt
+bool setProcessHalt(map_session_data *sd, enum npce_event event, bool halt = true);
+bool getProcessHalt(map_session_data *sd, enum npce_event event, bool autoreset = true);
+bool npc_script_filter(map_session_data* sd, enum npce_event type);
+#endif // Pandas_Struct_Map_Session_Data_EventHalt
 
 int32 npc_duplicate4instance(struct npc_data *snd, int16 m);
 int32 npc_instanceinit(struct npc_data* nd);

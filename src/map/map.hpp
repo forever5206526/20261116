@@ -687,6 +687,27 @@ enum e_mapflag : int16 {
 	MF_SPECIALPOPUP,
 	MF_NOLOOTNORMALMOB,
 	MF_NO_NPC_SELFDESTRUCTION_ON_ALL,
+#ifdef Pandas_MapFlag_NoAutoLoot
+	MF_NOAUTOLOOT,
+#endif // Pandas_MapFlag_NoAutoLoot
+#ifdef Pandas_MapFlag_NoToken
+	MF_NOTOKEN,
+#endif // Pandas_MapFlag_NoToken
+#ifdef Pandas_MapFlag_NoCapture
+	MF_NOCAPTURE,
+#endif // Pandas_MapFlag_NoCapture
+#ifdef Pandas_MapFlag_NoMail
+	MF_NOMAIL,
+#endif // Pandas_MapFlag_NoMail
+#ifdef Pandas_MapFlag_NoSlave
+	MF_NOSLAVE,
+#endif // Pandas_MapFlag_NoSlave
+#ifdef Pandas_MapFlag_NoAttack
+	MF_NOATTACK,
+#endif // Pandas_MapFlag_NoAttack
+#ifdef Pandas_MapFlag_NoUseItem
+	MF_NOUSEITEM,
+#endif // Pandas_MapFlag_NoUseItem
 	MF_MAX
 };
 

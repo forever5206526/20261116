@@ -2532,6 +2532,11 @@ int32 unit_attack(struct block_list *src,int32 target_id,int32 continuous)
 	int32 range;
 
 	nullpo_ret(ud = unit_bl2ud(src));
+#ifdef Pandas_MapFlag_NoAttack
+	if (src && map_getmapflag(src->m, MF_NOATTACK))
+		return 1;
+#endif // Pandas_MapFlag_NoAttack
+
 
 	target = map_id2bl(target_id);
 	if( target == nullptr || status_isdead(*target) ) {

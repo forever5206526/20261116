@@ -406,6 +406,12 @@ int32 mail_openmail(map_session_data *sd)
 	if( sd->state.storage_flag || sd->state.vending || sd->state.buyingstore || sd->state.trading )
 		return 0;
 
+#ifdef Pandas_MapFlag_NoMail
+	if (mail_invalid_operation(sd)) {
+		return 0;
+	}
+#endif // Pandas_MapFlag_NoMail
+
 	clif_Mail_window(sd->fd, 0);
 
 	return 1;
@@ -435,6 +441,13 @@ void mail_deliveryfail(map_session_data *sd, struct mail_message *msg){
 // This function only check if the mail operations are valid
 bool mail_invalid_operation(map_session_data *sd)
 {
+#ifdef Pandas_MapFlag_NoMail
+	if (map_getmapflag(sd->bl.m, MF_NOMAIL)) {
+		clif_displaymessage(sd->fd, msg_txt(sd, 1542));
+		return true;
+	}
+#endif // Pandas_MapFlag_NoMail
+
 #if PACKETVER < 20150513
 	if( !map_getmapflag(sd->bl.m, MF_TOWN) && !pc_can_use_command(sd, "mail", COMMAND_ATCOMMAND) )
 	{

@@ -6251,6 +6251,13 @@ int32 pc_useitem(map_session_data *sd,int32 n)
 
 	if (sd->state.mail_writing)
 		return 0;
+#ifdef Pandas_MapFlag_NoUseItem
+	if (sd && map_getmapflag(sd->bl.m, MF_NOUSEITEM)) {
+		clif_messagecolor(&sd->bl, color_table[COLOR_RED], msg_txt(sd, 1543), false, SELF);
+		return 0;
+	}
+#endif // Pandas_MapFlag_NoUseItem
+
 
 	if (sd->npc_id) {
 		if (sd->progressbar.npc_id) {
@@ -9951,6 +9958,13 @@ bool pc_revive_item(map_session_data *sd) {
 
 	if (sd->sc.getSCE(SC_HELLPOWER)) // Cannot resurrect while under the effect of SC_HELLPOWER.
 		return false;
+
+#ifdef Pandas_MapFlag_NoToken
+	if (sd->bl.m >= 0 && map_getmapflag(sd->bl.m, MF_NOTOKEN)) {
+		clif_displaymessage(sd->fd, msg_txt(sd, 1541));
+		return false;
+	}
+#endif // Pandas_MapFlag_NoToken
 
 	int16 item_position = itemdb_group.item_exists_pc(sd, IG_TOKEN_OF_SIEGFRIED);
 	uint8 hp = 100, sp = 100;
