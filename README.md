@@ -55,3 +55,19 @@ setmapflag "prontera", MF_NOTOKEN;
 removemapflag "prontera", MF_NOTOKEN;
 ```
 
+### NoMail 地圖標記
+
+- 新增 `MF_NOMAIL`／`nomail` 地圖標記。
+- 地圖啟用此標記後，玩家無法在該地圖開啟郵件／RODEX 視窗或進行郵件操作。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOMAIL;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOMAIL;
+```

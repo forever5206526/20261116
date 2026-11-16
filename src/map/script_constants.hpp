@@ -550,6 +550,9 @@
 #ifdef Pandas_MapFlag_NoToken
 	export_constant(MF_NOTOKEN);
 #endif // Pandas_MapFlag_NoToken
+#ifdef Pandas_MapFlag_NoMail
+	export_constant(MF_NOMAIL);
+#endif // Pandas_MapFlag_NoMail
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);
