@@ -2373,6 +2373,9 @@ static void mob_item_drop(struct mob_data *md, std::shared_ptr<s_item_drop_list>
 		test_autoloot = test_autoloot && sd->bl.m == md->bl.m
 		&& check_distance_blxy(&sd->bl, dlist->x, dlist->y, AUTOLOOT_DISTANCE);
 #endif
+#ifdef Pandas_MapFlag_NoAutoLoot
+		test_autoloot = test_autoloot && (sd && sd->bl.m >= 0 && !map_getmapflag(sd->bl.m, MF_NOAUTOLOOT));
+#endif // Pandas_MapFlag_NoAutoLoot
 	if( test_autoloot ) {	//Autoloot.
 		struct party_data *p = party_search(sd->status.party_id);
 

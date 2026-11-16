@@ -1,5 +1,5 @@
 // Pandas 特色功能移植設定
-// 本檔僅啟用目前已移植的鑑定事件相容功能及其必要相依項目。
+// 本檔僅啟用目前已移植的 Pandas 功能及其必要相依項目。
 
 #ifndef CONFIG_PANDAS_HPP
 #define CONFIG_PANDAS_HPP
@@ -15,5 +15,6 @@
 
 #define Pandas_NpcFilter_IDENTIFY
 #define Pandas_ScriptCommand_ProcessHalt
+#define Pandas_MapFlag_NoAutoLoot
 
 #endif // CONFIG_PANDAS_HPP

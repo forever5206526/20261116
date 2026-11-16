@@ -687,6 +687,9 @@ enum e_mapflag : int16 {
 	MF_SPECIALPOPUP,
 	MF_NOLOOTNORMALMOB,
 	MF_NO_NPC_SELFDESTRUCTION_ON_ALL,
+#ifdef Pandas_MapFlag_NoAutoLoot
+	MF_NOAUTOLOOT,
+#endif // Pandas_MapFlag_NoAutoLoot
 	MF_MAX
 };
 

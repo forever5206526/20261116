@@ -18,3 +18,22 @@ identify_event_mode: 0
 ```
 
 修改 `conf/battle/battle.conf` 後重新啟動 map-server，使設定生效。
+
+### NoAutoLoot 地圖標記
+
+- 新增 `MF_NOAUTOLOOT`／`noautoloot` 地圖標記。
+- 地圖啟用此標記後，該地圖的魔物掉落不會由 `@autoloot` 自動拾取。
+
+在 NPC 腳本中設定：
+
+```text
+setmapflag "prontera", MF_NOAUTOLOOT;
+```
+
+移除標記：
+
+```text
+removemapflag "prontera", MF_NOAUTOLOOT;
+```
+
+將 `prontera` 改成要套用的地圖名稱。
