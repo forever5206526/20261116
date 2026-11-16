@@ -13,7 +13,7 @@ Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`
 
 ## Pandas MapFlag 完整清單
 
-Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。目前已移植 7 項；其餘 17 項列為待逐項比對及移植。
+Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。目前已移植 8 項；其餘 16 項列為待逐項比對及移植。
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
@@ -25,7 +25,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。目前已移植 7 項�
 | `Pandas_MapFlag_HidePartyInfo` | 隱藏其他玩家隊伍名稱 | 待核對及移植 |
 | `Pandas_MapFlag_NoMail` | 禁止郵件／RODEX 操作 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoPet` | 禁止召喚寵物 | 待核對及移植 |
-| `Pandas_MapFlag_NoHomun` | 禁止召喚人工生命體 | 待核對及移植 |
+| `Pandas_MapFlag_NoHomun` | 禁止召喚人工生命體 | 已移植／等待 CI 驗證 |
 | `Pandas_MapFlag_NoMerc` | 禁止召喚佣兵 | 待核對及移植 |
 | `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 待核對及移植 |
 | `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 待核對及移植 |
