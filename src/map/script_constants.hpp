@@ -559,6 +559,9 @@
 #ifdef Pandas_MapFlag_NoSlave
 	export_constant(MF_NOSLAVE);
 #endif // Pandas_MapFlag_NoSlave
+#ifdef Pandas_MapFlag_NoAttack
+	export_constant(MF_NOATTACK);
+#endif // Pandas_MapFlag_NoAttack
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

@@ -105,3 +105,20 @@ setmapflag "prontera", MF_NOSLAVE;
 ```text
 removemapflag "prontera", MF_NOSLAVE;
 ```
+
+### NoAttack 地圖標記
+
+- 新增 `MF_NOATTACK`／`noattack` 地圖標記。
+- 啟用時，禁止位於該地圖上的單位進行普通攻擊；此標記不等同於禁止所有技能施放。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOATTACK;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOATTACK;
+```
