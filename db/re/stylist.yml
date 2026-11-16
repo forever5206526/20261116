@@ -1,0 +1,1077 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2022 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Stylist Database
+###########################################################################
+#
+# Stylist Settings
+#
+###########################################################################
+# - Look                     Look that will be changed.
+#   Options                  Possible options to select from.
+#     - Index                Client side index of the option.
+#       Value                Value of the look (can also be an item name).
+#       RequiredJob          Jobs can buy that.
+#       CostsHuman:          Costs for human players.
+#           Price            Required zeny. (Default: 0)
+#           RequiredItem     Required item. (Default: None)
+#           RequiredItemBox  Required item box. (Default: None)
+#       CostsDoram:          Costs for doram players.
+#           Price            Required zeny. (Default: 0)
+#           RequiredItem     Required item. (Default: None)
+#           RequiredItemBox  Required item box. (Default: None)
+###########################################################################
+
+Header:
+  Type: STYLIST_DB
+  Version: 2
+
+Body:
+  - Look: Hair_Color
+    Options:
+      - Index: -1
+        Value: 0
+        CostsHuman:
+            Price: 0
+        CostsDoram:
+            Price: 0
+      - Index: 1
+        Value: 1
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 2
+        Value: 2
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 3
+        Value: 3
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 4
+        Value: 4
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 5
+        Value: 5
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 6
+        Value: 6
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 7
+        Value: 7
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 8
+        Value: 8
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+  - Look: Hair
+    Options:
+      - Index: 1
+        Value: 1
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 2
+        Value: 2
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 3
+        Value: 3
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 4
+        Value: 4
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 5
+        Value: 5
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 6
+        Value: 6
+        CostsHuman:
+            Price: 100000
+        CostsDoram:
+            Price: 100000
+      - Index: 7
+        Value: 7
+        CostsHuman:
+            Price: 100000
+        CostDoram:
+            RequiredItem: J_Shop_Coupon2
+            RequiredItemBox: J_Shop_Coupon2
+      - Index: 8
+        Value: 8
+        CostsHuman:
+            Price: 100000
+        CostDoram:
+            RequiredItem: J_Shop_Coupon2
+            RequiredItemBox: J_Shop_Coupon2
+      - Index: 9
+        Value: 9
+        CostsHuman:
+            Price: 100000
+        CostDoram:
+            RequiredItem: J_Shop_Coupon2
+            RequiredItemBox: J_Shop_Coupon2
+      - Index: 10
+        Value: 10
+        CostsHuman:
+            Price: 100000
+        CostDoram:
+            RequiredItem: J_Shop_Coupon2
+            RequiredItemBox: J_Shop_Coupon2
+      - Index: 11
+        Value: 11
+        CostsHuman:
+            Price: 100000
+      - Index: 12
+        Value: 12
+        CostsHuman:
+            Price: 100000
+      - Index: 13
+        Value: 13
+        CostsHuman:
+            Price: 100000
+      - Index: 14
+        Value: 14
+        CostsHuman:
+            Price: 100000
+      - Index: 15
+        Value: 15
+        CostsHuman:
+            Price: 100000
+      - Index: 16
+        Value: 16
+        CostsHuman:
+            Price: 100000
+      - Index: 17
+        Value: 17
+        CostsHuman:
+            Price: 100000
+      - Index: 18
+        Value: 18
+        CostsHuman:
+            Price: 100000
+      - Index: 19
+        Value: 19
+        CostsHuman:
+            Price: 100000
+      - Index: 20
+        Value: 20
+        CostsHuman:
+            Price: 100000
+      - Index: 21
+        Value: 21
+        CostsHuman:
+            Price: 100000
+      - Index: 22
+        Value: 22
+        CostsHuman:
+            Price: 100000
+      - Index: 23
+        Value: 23
+        CostsHuman:
+            Price: 100000
+      - Index: 24
+        Value: 24
+        CostsHuman:
+            RequiredItem: New_Style_Coupon
+            RequiredItemBox: C_New_Style_Box
+      - Index: 25
+        Value: 25
+        CostsHuman:
+            RequiredItem: New_Style_Coupon
+            RequiredItemBox: C_New_Style_Box
+      - Index: 26
+        Value: 26
+        CostsHuman:
+            RequiredItem: New_Style_Coupon
+            RequiredItemBox: C_New_Style_Box
+      - Index: 27
+        Value: 27
+        CostsHuman:
+            RequiredItem: New_Style_Coupon
+            RequiredItemBox: C_New_Style_Box
+      - Index: 28
+        Value: 28
+        CostsHuman:
+            RequiredItem: J_Shop_Coupon
+            RequiredItemBox: J_Shop_Coupon_Box
+      - Index: 29
+        Value: 29
+        CostsHuman:
+            RequiredItem: J_Shop_Coupon
+            RequiredItemBox: J_Shop_Coupon_Box
+      - Index: 30
+        Value: 30
+        CostsHuman:
+            RequiredItem: J_Shop_Coupon2
+            RequiredItemBox: J_Shop_Coupon2
+      - Index: 31
+        Value: 31
+        CostsHuman:
+            RequiredItem: J_Shop_Coupon2
+            RequiredItemBox: J_Shop_Coupon2
+      - Index: 32
+        Value: 32
+        CostsHuman:
+            Price: 100000
+      - Index: 33
+        Value: 33
+        CostsHuman:
+            Price: 3000000
+      - Index: 34
+        Value: 34
+        CostsHuman:
+            Price: 3000000
+      - Index: 35
+        Value: 35
+        CostsHuman:
+            Price: 3000000
+      - Index: 36
+        Value: 36
+        CostsHuman:
+            Price: 3000000
+      - Index: 37
+        Value: 37
+        CostsHuman:
+            Price: 3000000
+      - Index: 38
+        Value: 38
+        CostsHuman:
+            Price: 3000000
+      - Index: 39
+        Value: 39
+        CostsHuman:
+            Price: 3000000
+      - Index: 40
+        Value: 40
+        CostsHuman:
+            Price: 3000000
+      - Index: 41
+        Value: 41
+        CostsHuman:
+            Price: 3000000
+      - Index: 42
+        Value: 42
+        CostsHuman:
+            Price: 3000000
+  - Look: Clothes_Color
+    Options:
+      - Index: 1
+        Value: 0
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon2
+            RequiredItemBox: CCloth_Dye_Coupon2_Box
+        CostsDoram:
+            RequiredItem: Clothing_Dye_Coupon2
+            RequiredItemBox: CCloth_Dye_Coupon2_Box
+      - Index: 2
+        Value: 2
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+        CostsDoram:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+      - Index: 3
+        Value: 3
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+        CostsDoram:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+      - Index: 4
+        Value: 4
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+      - Index: 5
+        Value: 5
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+      - Index: 6
+        Value: 6
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+      - Index: 7
+        Value: 7
+        CostsHuman:
+            RequiredItem: Clothing_Dye_Coupon
+            RequiredItemBox: CCloth_Dye_Coupon_Box
+  - Look: Head_Top
+    Options:
+      - Index: 1
+        Value: Hat
+        CostsHuman:
+            Price: 1000
+        CostsDoram:
+            Price: 1000
+      - Index: 2
+        Value: Ribbon
+        CostsHuman:
+            Price: 800
+        CostsDoram:
+            Price: 800
+      - Index: 3
+        Value: Bandana
+        CostsHuman:
+            Price: 400
+        CostsDoram:
+            Price: 400
+  - Look: Head_Mid
+    Options:
+      - Index: 1
+        Value: One_Eyed_Glass
+        CostsHuman:
+            Price: 10000
+        CostsDoram:
+            Price: 10000
+      - Index: 2
+        Value: Sunglasses
+        CostsHuman:
+            Price: 5000
+        CostsDoram:
+            Price: 5000
+      - Index: 3
+        Value: Luxury_Sunglasses
+        CostsHuman:
+            Price: 24000
+        CostsDoram:
+            Price: 24000
+      - Index: 4
+        Value: Spinning_Eyes
+        CostsHuman:
+            Price: 20000
+        CostsDoram:
+            Price: 20000
+      - Index: 5
+        Value: Diver's_Goggles
+        CostsHuman:
+            Price: 3500
+        CostsDoram:
+            Price: 3500
+      - Index: 6
+        Value: Glasses
+        CostsHuman:
+            Price: 4000
+        CostsDoram:
+            Price: 4000
+      - Index: 7
+        Value: Eye_Bandage
+        CostsHuman:
+            Price: 1000
+        CostsDoram:
+            Price: 1000
+  - Look: Head_Bottom
+    Options:
+      - Index: 1
+        Value: Granpa_Beard
+        CostsHuman:
+            Price: 5000
+        CostsDoram:
+            Price: 5000
+  - Look: Body2
+    Options:
+      - Index: 1
+        Value: Job_Dragon_Knight
+        RequiredJob: Job_Dragon_Knight
+        CostsHuman:
+            Price: 0
+      - Index: 2
+        Value: Job_Rune_Knight_T
+        RequiredJob: Job_Dragon_Knight
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 3
+        Value: Job_Rune_Knight_2nd
+        RequiredJob: Job_Dragon_Knight
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 4
+        Value: Job_Meister
+        RequiredJob: Job_Meister
+        CostsHuman:
+            Price: 0
+      - Index: 5
+        Value: Job_Mechanic_T
+        RequiredJob: Job_Meister
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 6
+        Value: Job_Mechanic_2nd
+        RequiredJob: Job_Meister
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 7
+        Value: Job_Shadow_Cross
+        RequiredJob: Job_Shadow_Cross
+        CostsHuman:
+            Price: 0
+      - Index: 8
+        Value: Job_Guillotine_Cross_T
+        RequiredJob: Job_Shadow_Cross
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 9
+        Value: Job_Guillotine_Cross_2nd
+        RequiredJob: Job_Shadow_Cross
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 10
+        Value: Job_Arch_Mage
+        RequiredJob: Job_Arch_Mage
+        CostsHuman:
+            Price: 0
+      - Index: 11
+        Value: Job_Warlock_T
+        RequiredJob: Job_Arch_Mage
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 12
+        Value: Job_Warlock_2nd
+        RequiredJob: Job_Arch_Mage
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 13
+        Value: Job_Cardinal
+        RequiredJob: Job_Cardinal
+        CostsHuman:
+            Price: 0
+      - Index: 14
+        Value: Job_Arch_Bishop_T
+        RequiredJob: Job_Cardinal
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 15
+        Value: Job_Arch_Bishop_2nd
+        RequiredJob: Job_Cardinal
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 16
+        Value: Job_Windhawk
+        RequiredJob: Job_Windhawk
+        CostsHuman:
+            Price: 0
+      - Index: 17
+        Value: Job_Ranger_T
+        RequiredJob: Job_Windhawk
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 18
+        Value: Job_Ranger_2nd
+        RequiredJob: Job_Windhawk
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 19
+        Value: Job_Imperial_Guard
+        RequiredJob: Job_Imperial_Guard
+        CostsHuman:
+            Price: 0
+      - Index: 20
+        Value: Job_Royal_Guard_T
+        RequiredJob: Job_Imperial_Guard
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 21
+        Value: Job_Royal_Guard_2nd
+        RequiredJob: Job_Imperial_Guard
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 22
+        Value: Job_Biolo
+        RequiredJob: Job_Biolo
+        CostsHuman:
+            Price: 0
+      - Index: 23
+        Value: Job_Genetic_T
+        RequiredJob: Job_Biolo
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 24
+        Value: Job_Genetic_2nd
+        RequiredJob: Job_Biolo
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 25
+        Value: Job_Abyss_Chaser
+        RequiredJob: Job_Abyss_Chaser
+        CostsHuman:
+            Price: 0
+      - Index: 26
+        Value: Job_Shadow_Chaser_T
+        RequiredJob: Job_Abyss_Chaser
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 27
+        Value: Job_Shadow_Chaser_2nd
+        RequiredJob: Job_Abyss_Chaser
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 28
+        Value: Job_Elemental_Master
+        RequiredJob: Job_Elemental_Master
+        CostsHuman:
+            Price: 0
+      - Index: 29
+        Value: Job_Sorcerer_T
+        RequiredJob: Job_Elemental_Master
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 30
+        Value: Job_Sorcerer_2nd
+        RequiredJob: Job_Elemental_Master
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 31
+        Value: Job_Inquisitor
+        RequiredJob: Job_Inquisitor
+        CostsHuman:
+            Price: 0
+      - Index: 32
+        Value: Job_Sura_T
+        RequiredJob: Job_Inquisitor
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 33
+        Value: Job_Sura_2nd
+        RequiredJob: Job_Inquisitor
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 34
+        Value: Job_Troubadour
+        RequiredJob: Job_Troubadour
+        CostsHuman:
+            Price: 0
+      - Index: 35
+        Value: Job_Minstrel_T
+        RequiredJob: Job_Troubadour
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 36
+        Value: Job_Minstrel_2nd
+        RequiredJob: Job_Troubadour
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 37
+        Value: Job_Trouvere
+        RequiredJob: Job_Trouvere
+        CostsHuman:
+            Price: 0
+      - Index: 38
+        Value: Job_Wanderer_T
+        RequiredJob: Job_Trouvere
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 39
+        Value: Job_Wanderer_2nd
+        RequiredJob: Job_Trouvere
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 40
+        Value: Job_Rune_Knight_T
+        RequiredJob: Job_Rune_Knight_T
+        CostsHuman:
+            Price: 0
+      - Index: 41
+        Value: Job_Rune_Knight_2nd
+        RequiredJob: Job_Rune_Knight_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 42
+        Value: Job_Rune_Knight
+        RequiredJob: Job_Rune_Knight
+        CostsHuman:
+            Price: 0
+      - Index: 43
+        Value: Job_Rune_Knight
+        RequiredJob: Job_Rune_Knight_2nd
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 44
+        Value: Job_Baby_Rune_Knight
+        RequiredJob: Job_Baby_Rune_Knight
+        CostsHuman:
+            Price: 0
+      - Index: 45
+        Value: Job_Rune_Knight_2nd
+        RequiredJob: Job_Baby_Rune_Knight
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 46
+        Value: Job_Mechanic_T
+        RequiredJob: Job_Mechanic_T
+        CostsHuman:
+            Price: 0
+      - Index: 47
+        Value: Job_Mechanic_2nd
+        RequiredJob: Job_Mechanic_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 48
+        Value: Job_Mechanic
+        RequiredJob: Job_Mechanic
+        CostsHuman:
+            Price: 0
+      - Index: 49
+        Value: Job_Mechanic_2nd
+        RequiredJob: Job_Mechanic
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 50
+        Value: Job_Guillotine_Cross_T
+        RequiredJob: Job_Guillotine_Cross_T
+        CostsHuman:
+            Price: 0
+      - Index: 51
+        Value: Job_Guillotine_Cross_2nd
+        RequiredJob: Job_Guillotine_Cross_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 52
+        Value: Job_Guillotine_Cross
+        RequiredJob: Job_Guillotine_Cross
+        CostsHuman:
+            Price: 0
+      - Index: 53
+        Value: Job_Guillotine_Cross_2nd
+        RequiredJob: Job_Guillotine_Cross
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 54
+        Value: Job_Guillotine_Cross
+        RequiredJob: Job_Guillotine_Cross
+        CostsHuman:
+            Price: 0
+      - Index: 55
+        Value: Job_Guillotine_Cross_2nd
+        RequiredJob: Job_Guillotine_Cross
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 56
+        Value: Job_Baby_Guillotine_Cross
+        RequiredJob: Job_Baby_Guillotine_Cross
+        CostsHuman:
+            Price: 0
+      - Index: 57
+        Value: Job_Guillotine_Cross_2nd
+        RequiredJob: Job_Baby_Guillotine_Cross
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 58
+        Value: Job_Warlock_T
+        RequiredJob: Job_Warlock_T
+        CostsHuman:
+            Price: 0
+      - Index: 59
+        Value: Job_Warlock_2nd
+        RequiredJob: Job_Warlock_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 60
+        Value: Job_Warlock
+        RequiredJob: Job_Warlock
+        CostsHuman:
+            Price: 0
+      - Index: 61
+        Value: Job_Warlock_2nd
+        RequiredJob: Job_Warlock
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 62
+        Value: Job_Baby_Warlock
+        RequiredJob: Job_Baby_Warlock
+        CostsHuman:
+            Price: 0
+      - Index: 63
+        Value: Job_Warlock_2nd
+        RequiredJob: Job_Baby_Warlock
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 64
+        Value: Job_Arch_Bishop_T
+        RequiredJob: Job_Arch_Bishop_T
+        CostsHuman:
+            Price: 0
+      - Index: 65
+        Value: Job_Arch_Bishop_2nd
+        RequiredJob: Job_Arch_Bishop_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 66
+        Value: Job_Arch_Bishop
+        RequiredJob: Job_Arch_Bishop
+        CostsHuman:
+            Price: 0
+      - Index: 67
+        Value: Job_Arch_Bishop_2nd
+        RequiredJob: Job_Arch_Bishop
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 68
+        Value: Job_Baby_Arch_Bishop
+        RequiredJob: Job_Baby_Arch_Bishop
+        CostsHuman:
+            Price: 0
+      - Index: 69
+        Value: Job_Arch_Bishop_2nd
+        RequiredJob: Job_Baby_Arch_Bishop
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 70
+        Value: Job_Ranger_T
+        RequiredJob: Job_Ranger_T
+        CostsHuman:
+            Price: 0
+      - Index: 71
+        Value: Job_Ranger_2nd
+        RequiredJob: Job_Ranger_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 72
+        Value: Job_Ranger
+        RequiredJob: Job_Ranger
+        CostsHuman:
+            Price: 0
+      - Index: 73
+        Value: Job_Ranger_2nd
+        RequiredJob: Job_Ranger
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 74
+        Value: Job_Baby_Ranger
+        RequiredJob: Job_Baby_Ranger
+        CostsHuman:
+            Price: 0
+      - Index: 75
+        Value: Job_Ranger_2nd
+        RequiredJob: Job_Baby_Ranger
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 76
+        Value: Job_Royal_Guard_T
+        RequiredJob: Job_Royal_Guard_T
+        CostsHuman:
+            Price: 0
+      - Index: 77
+        Value: Job_Royal_Guard_2nd
+        RequiredJob: Job_Royal_Guard_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 78
+        Value: Job_Royal_Guard
+        RequiredJob: Job_Royal_Guard
+        CostsHuman:
+            Price: 0
+      - Index: 79
+        Value: Job_Royal_Guard_2nd
+        RequiredJob: Job_Royal_Guard
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 80
+        Value: Job_Baby_Royal_Guard
+        RequiredJob: Job_Baby_Royal_Guard
+        CostsHuman:
+            Price: 0
+      - Index: 81
+        Value: Job_Royal_Guard_2nd
+        RequiredJob: Job_Baby_Royal_Guard
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 82
+        Value: Job_Genetic_T
+        RequiredJob: Job_Genetic_T
+        CostsHuman:
+            Price: 0
+      - Index: 83
+        Value: Job_Genetic_2nd
+        RequiredJob: Job_Genetic_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 84
+        Value: Job_Genetic
+        RequiredJob: Job_Genetic
+        CostsHuman:
+            Price: 0
+      - Index: 85
+        Value: Job_Genetic_2nd
+        RequiredJob: Job_Genetic
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 86
+        Value: Job_Baby_Genetic
+        RequiredJob: Job_Baby_Genetic
+        CostsHuman:
+            Price: 0
+      - Index: 87
+        Value: Job_Genetic_2nd
+        RequiredJob: Job_Baby_Genetic
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 88
+        Value: Job_Shadow_Chaser_T
+        RequiredJob: Job_Shadow_Chaser_T
+        CostsHuman:
+            Price: 0
+      - Index: 89
+        Value: Job_Shadow_Chaser_2nd
+        RequiredJob: Job_Shadow_Chaser_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 90
+        Value: Job_Shadow_Chaser
+        RequiredJob: Job_Shadow_Chaser
+        CostsHuman:
+            Price: 0
+      - Index: 91
+        Value: Job_Shadow_Chaser_2nd
+        RequiredJob: Job_Shadow_Chaser
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 92
+        Value: Job_Baby_Shadow_Chaser
+        RequiredJob: Job_Baby_Shadow_Chaser
+        CostsHuman:
+            Price: 0
+      - Index: 93
+        Value: Job_Shadow_Chaser_2nd
+        RequiredJob: Job_Baby_Shadow_Chaser
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 94
+        Value: Job_Sorcerer_T
+        RequiredJob: Job_Sorcerer_T
+        CostsHuman:
+            Price: 0
+      - Index: 95
+        Value: Job_Sorcerer_2nd
+        RequiredJob: Job_Sorcerer_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 96
+        Value: Job_Sorcerer
+        RequiredJob: Job_Sorcerer
+        CostsHuman:
+            Price: 0
+      - Index: 97
+        Value: Job_Sorcerer_2nd
+        RequiredJob: Job_Sorcerer
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 98
+        Value: Job_Baby_Sorcerer
+        RequiredJob: Job_Baby_Sorcerer
+        CostsHuman:
+            Price: 0
+      - Index: 99
+        Value: Job_Sorcerer_2nd
+        RequiredJob: Job_Baby_Sorcerer
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 100
+        Value: Job_Sura_T
+        RequiredJob: Job_Sura_T
+        CostsHuman:
+            Price: 0
+      - Index: 101
+        Value: Job_Sura_2nd
+        RequiredJob: Job_Sura_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 102
+        Value: Job_Sura
+        RequiredJob: Job_Sura
+        CostsHuman:
+            Price: 0
+      - Index: 103
+        Value: Job_Sura_2nd
+        RequiredJob: Job_Sura
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 104
+        Value: Job_Baby_Sura
+        RequiredJob: Job_Baby_Sura
+        CostsHuman:
+            Price: 0
+      - Index: 105
+        Value: Job_Sura_2nd
+        RequiredJob: Job_Baby_Sura
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 106
+        Value: Job_Minstrel_T
+        RequiredJob: Job_Minstrel_T
+        CostsHuman:
+            Price: 0
+      - Index: 107
+        Value: Job_Minstrel_2nd
+        RequiredJob: Job_Minstrel_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 108
+        Value: Job_Minstrel
+        RequiredJob: Job_Minstrel
+        CostsHuman:
+            Price: 0
+      - Index: 109
+        Value: Job_Minstrel_2nd
+        RequiredJob: Job_Minstrel
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 110
+        Value: Job_Baby_Minstrel
+        RequiredJob: Job_Baby_Minstrel
+        CostsHuman:
+            Price: 0
+      - Index: 111
+        Value: Job_Minstrel_2nd
+        RequiredJob: Job_Baby_Minstrel
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 112
+        Value: Job_Wanderer_T
+        RequiredJob: Job_Wanderer_T
+        CostsHuman:
+            Price: 0
+      - Index: 113
+        Value: Job_Wanderer_2nd
+        RequiredJob: Job_Wanderer_T
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 114
+        Value: Job_Wanderer
+        RequiredJob: Job_Wanderer
+        CostsHuman:
+            Price: 0
+      - Index: 115
+        Value: Job_Wanderer_2nd
+        RequiredJob: Job_Wanderer
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 116
+        Value: Job_Baby_Wanderer
+        RequiredJob: Job_Baby_Wanderer
+        CostsHuman:
+            Price: 0
+      - Index: 117
+        Value: Job_Wanderer_2nd
+        RequiredJob: Job_Baby_Wanderer
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 118
+        Value: Job_Sky_Emperor
+        RequiredJob: Job_Sky_Emperor
+        CostsHuman:
+            Price: 0
+      - Index: 119
+        Value: Job_Star_Emperor
+        RequiredJob: Job_Sky_Emperor
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 120
+        Value: Job_Soul_Ascetic
+        RequiredJob: Job_Soul_Ascetic
+        CostsHuman:
+            Price: 0
+      - Index: 121
+        Value: Job_Soul_Reaper
+        RequiredJob: Job_Soul_Ascetic
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 122
+        Value: Job_Shinkiro
+        RequiredJob: Job_Shinkiro
+        CostsHuman:
+            Price: 0
+      - Index: 123
+        Value: Job_Kagerou
+        RequiredJob: Job_Shinkiro
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 124
+        Value: Job_Shiranui
+        RequiredJob: Job_Shiranui
+        CostsHuman:
+            Price: 0
+      - Index: 125
+        Value: Job_Oboro
+        RequiredJob: Job_Shiranui
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 126
+        Value: Job_Night_Watch
+        RequiredJob: Job_Night_Watch
+        CostsHuman:
+            Price: 0
+      - Index: 127
+        Value: Job_Rebellion
+        RequiredJob: Job_Night_Watch
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 128
+        Value: Job_Hyper_Novice
+        RequiredJob: Job_Hyper_Novice
+        CostsHuman:
+            Price: 0
+      - Index: 129
+        Value: Job_Super_Novice_E
+        RequiredJob: Job_Hyper_Novice
+        CostsHuman:
+            RequiredItem: Costume_Ticket
+      - Index: 130
+        Value: Job_Spirit_Handler
+        RequiredJob: Job_Spirit_Handler
+        CostsDoram:
+            Price: 0
+      - Index: 131
+        Value: Job_Summoner
+        RequiredJob: Job_Spirit_Handler
+        CostsDoram:
+            RequiredItem: Costume_Ticket
