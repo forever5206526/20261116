@@ -1,0 +1,217 @@
+//===== Documentação do rAthena ================================
+//= Referência do Banco de Dados de Disponibilidade de Monstros do rAthena
+//===== Por: ===================================================
+//= Equipe de Desenvolvimento do rAthena
+//===== Última Atualização: ===================================
+//= 20191213
+//===== Descrição: ============================================
+//= Explicação do arquivo mob_avail.yml e sua estrutura.
+//=============================================================
+
+---------------------------------------
+
+Mob: O nome AEGIS do monstro.
+
+---------------------------------------
+
+Sprite: O nome do sprite para o qual o monstro será alterado.
+
+Isso pode ser outro monstro, um jogador (com prefixo 'JOB_') ou um NPC. Ao usar um sprite de NPC,
+o prefixo não é necessário no banco de dados mob_avail, pois o mecanismo de script o removerá.
+
+Exemplo:
+  - Mob: POPORING
+    Sprite: PORING # Isso transformará o Poporing em um Poring.
+
+  - Mob: PORING
+    Sprite: JOB_STALKER # Isso transformará o Poring em um Stalker.
+
+  - Mob: WOLF
+    Sprite: 4_M_BARBER # Isso transformará o Lobo no NPC Barbeiro.
+
+Essas constantes podem ser encontradas em src/map/script_constants.hpp.
+
+---------------------------------------
+
+Sexo: O sexo a ser exibido se o Sprite for um jogador.
+
+Tipos válidos:
+	Feminino
+	Masculino
+
+---------------------------------------
+
+HairStyle: O ID do estilo de cabelo a ser exibido se o Sprite for um jogador.
+
+---------------------------------------
+
+HairColor: O ID da cor do cabelo a ser exibida se o Sprite for um jogador.
+
+---------------------------------------
+
+ClothColor: O ID da cor da roupa a ser exibida se o Sprite for um jogador.
+
+---------------------------------------
+
+Arma: O nome AEGIS do item a ser exibido se o Sprite for um jogador.
+
+---------------------------------------
+
+Escudo: O nome AEGIS do item a ser exibido se o Sprite for um jogador.
+
+---------------------------------------
+
+CabeçaSuperior: O nome AEGIS do item a ser exibido se o Sprite for um jogador.
+
+---------------------------------------
+
+CabeçaMeio: O nome AEGIS do item a ser exibido se o Sprite for um jogador.
+
+---------------------------------------
+
+CabeçaInferior: O nome AEGIS do item a ser exibido se o Sprite for um jogador.
+
+---------------------------------------
+
+PetEquip: O nome AEGIS do item a ser exibido se o Monstro for um animal de estimação válido.
+
+---------------------------------------
+
+Opções: A opção de visualização a ser aplicada ao Monstro.
+
+Tipos válidos:
+	Sight
+	Cart1
+	Falcon
+	Riding
+	Cart2
+	Cart3
+	Cart4
+	Cart5
+	Orcish
+	Wedding
+	Ruwach
+	Flying
+	Xmas
+	Transform
+	Summer
+	Dragon1
+	Wug
+	WugRider
+	MadoGear
+	Dragon2
+	Dragon3
+	Dragon4
+	Dragon5
+	Hanbok
+	Oktoberfest
+	Summer2
+
+//===== rAthena Documentation ================================
+//= rAthena Monster Availability Database Reference
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Last Updated: ========================================
+//= 20191213
+//===== Description: =========================================
+//= Explanation of the mob_avail.yml file and structure.
+//============================================================
+
+---------------------------------------
+
+Mob: The AEGIS name of the monster.
+
+---------------------------------------
+
+Sprite: The name of the sprite the monster will be changed to.
+
+This can be another mob, a player (prefixed with 'JOB_'), or an NPC. When using an NPC sprite,
+the prefix is not required in the mob_avail database as the script engine will strip it.
+
+Example:
+  - Mob: POPORING
+    Sprite: PORING # This will change the Poporing into a Poring.
+
+  - Mob: PORING
+    Sprite: JOB_STALKER # This will change the Poring into a Stalker.
+
+  - Mob: WOLF
+    Sprite: 4_M_BARBER # This will change the Wolf into the Barber NPC.
+
+These constants can be found in src/map/script_constants.hpp.
+
+---------------------------------------
+
+Sex: The sex to be displayed if the Sprite is a player.
+
+Valid types:
+	Female
+	Male
+
+---------------------------------------
+
+HairStyle: The hair style ID to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+HairColor: The hair color ID to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+ClothColor: The cloth color ID to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+Weapon: The AEGIS name of the item to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+Shield: The AEGIS name of the item to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+HeadTop: The AEGIS name of the item to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+HeadMid: The AEGIS name of the item to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+HeadLow: The AEGIS name of the item to be displayed if the Sprite is a player.
+
+---------------------------------------
+
+PetEquip: The AEGIS name of the item to be displayed if the Mob is a valid pet.
+
+---------------------------------------
+
+Options: The view option to be applied to the Mob.
+
+Valid types:
+	Sight
+	Cart1
+	Falcon
+	Riding
+	Cart2
+	Cart3
+	Cart4
+	Cart5
+	Orcish
+	Wedding
+	Ruwach
+	Flying
+	Xmas
+	Transform
+	Summer
+	Dragon1
+	Wug
+	WugRider
+	MadoGear
+	Dragon2
+	Dragon3
+	Dragon4
+	Dragon5
+	Hanbok
+	Oktoberfest
+	Summer2

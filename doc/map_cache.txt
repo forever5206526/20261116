@@ -1,0 +1,122 @@
+//===== Documentação rAthena ================================
+//= Construtor de Cache de Mapa e Documentação de Formato
+//===== Por: =================================================
+//= DracoRPG
+//===== Última atualização: ==================================
+//= 20070724
+//===== Descrição: ===========================================
+//= Um manual completo para o gerador de cache de mapa do rAthena, bem como uma referência sobre o formato de cache de mapa utilizado.
+//============================================================
+
+Prefácio:
+-------------------------------------------------------------------------------
+
+Desde a revisão SVN ~10000, o servidor de mapas não sabe mais como ler GRFs diretamente. Ele lê os mapas de um arquivo de "cache de mapa" que contém todos e apenas os dados úteis sobre os mapas. Uma cache de mapa contendo todos os mapas oficiais do kRO Sakray atualmente suportados pelo rAthena é fornecida como padrão.
+Se você tiver mapas personalizados ou quiser minimizar o tamanho da sua cache de mapa porque o seu servidor não carrega todos eles (multi-map-server ou servidor de teste leve), você pode usar o construtor de cache de mapa para gerar um novo que atenda às suas necessidades.
+
+Manual do construtor de cache de mapa:
+-------------------------------------------------------------------------------
+
+O código-fonte do construtor de cache de mapa está localizado em src/tool/. Ele pode ser compilado usando "make tools" se você estiver usando o Makefile ou usando o projeto "mapcache" no Visual Studio. Nomeado como "mapcache", o executável estará na pasta principal do seu rAthena.
+O construtor de cache de mapa precisa de 3 caminhos de arquivo: um é uma lista de GRFs e/ou diretório de dados contendo os mapas, o segundo é a lista de mapas a serem adicionados à cache de mapa, e o último é o caminho da cache de mapa a ser gerada. Os valores padrão para esses caminhos são "tools/mapcache/grf_files.txt", "db/map_index.txt" e "db/(pre-)re/map_cache.dat".
+
+A partir da versão r16867, a cache de mapa pode ser localizada em db/pre-re/ e db/re/. Isso ocorre devido aos modos de renovação e pré-renovação terem mapas ligeiramente diferentes. Ao construir a sua cache, você deve garantir que está apontando a ferramenta para o local correto.
+
+A lista de GRFs e/ou diretório de dados deve seguir o formato e indicação do arquivo padrão: tantas entradas "grf:" quanto desejar e opcionalmente apenas uma entrada "data_dir:" com a barra invertida incluída no final. Os comentários // são suportados como de costume.
+Na verdade, qualquer arquivo com um nome de mapa por linha pode ser usado como lista de mapas, é por isso que a lista de índice de mapas é usada como padrão: temos certeza de que ela contém todos os mapas suportados pelo servidor. Qualquer coisa após o nome do mapa é ignorada, os comentários // são suportados e se a primeira palavra na linha for "map:", a segunda palavra é usada como nome do mapa: isso permite usar o maps_athena.conf como sua lista de mapas, o que é útil se você quiser gerar uma cache de mapa mínima para cada um dos seus múltiplos map-servers.
+O caminho do arquivo de cache de mapa pode apontar para um arquivo já existente, pois o construtor adiciona um mapa somente se ele ainda não estiver em cache. Dessa forma, você pode adicionar mapas personalizados à cache de mapa base sem precisar dos mapas kRO Sakray. Se você deseja reconstruir toda a cache de mapa, no entanto, você pode fornecer um caminho para um arquivo que não existe ou forçar o modo de reconstrução.
+
+Aqui estão os argumentos de linha de comando que você pode fornecer ao construtor de cache de mapa para personalizar seu comportamento:
+ -grf caminho/para/lista/de/grfs
+   Permite especificar o arquivo contendo a lista de GRFs e/ou diretório de dados
+ -list caminho/para/lista/de/mapas
+   Permite especificar o arquivo contendo a lista de mapas a serem adicionados à cache de mapa
+ -cache caminho/para/cache/de/mapa
+   Permite especificar o caminho para a cache de mapa gerada
+ -rebuild
+   Permite forçar o modo de reconstrução (a cache de mapa será sobrescrita mesmo se já existir)
+
+
+Referência de formato de cache de mapa:
+-------------------------------------------------------------------------------
+
+O arquivo é escrito em ordem little-endian, mesmo em sistemas big-endian, por motivos de compatibilidade cruzada. As conversões apropriadas são feitas ao gerá-lo, então não se preocupe com isso.
+Os primeiros 6 bytes são um cabeçalho principal:
+<unsigned int> tamanho do arquivo
+<unsigned short> número de mapas
+Em seguida, os mapas são armazenados um após o outro:
+<cadeia de caracteres de 12 caracteres> nome do mapa
+<short> tamanho X
+<short> tamanho Y
+<long> comprimento de dados de célula comprimidos
+<variável> dados de célula comprimidos
+
+
+//===== rAthena Documentation ================================
+//= rAthena Map Cache Builder and Format Documentation
+//===== By: ==================================================
+//= DracoRPG
+//===== Last Updated: ========================================
+//= 20070724
+//===== Description: =========================================
+//= A complete manual for rAthena's map cache generator as 
+//= well as a reference on the map cache format used.
+//============================================================
+
+Preface:
+-------------------------------------------------------------------------------
+
+Since SVN revision ~10000, the map-server no longer knows how to read GRFs directly. It reads maps from a
+"map cache" file that contains all and only the useful data about the maps. A map cache containing every official
+kRO Sakray map currently supported by rAthena is provided as a default.
+If you have custom maps or want to minimize the size of your map cache because your server does not load all of them
+(multi-map-server or light test server), you can use the map cache builder to generate a new one fitting your needs.
+
+Map cache builder manual:
+-------------------------------------------------------------------------------
+
+The source code for the map cache builder is located in src/tool/. It can be built using "make tools" if you use the Makefile
+or using the "mapcache" project under Visual Studio. Named "mapcache", the executable will be in your rAthena main folder.
+The map cache builder needs 3 file paths : one is a list of GRFs and/or data directory containing the maps, the second
+is the list of maps to add to the map cache, and the last one is the path of the map cache to generate. Default values for
+those paths are "tools/mapcache/grf_files.txt", "db/map_index.txt" and "db/(pre-)re/map_cache.dat".
+
+As of r16867, the mapcache can be located in db/pre-re/ and db/re/. This is due to renewal and pre-renewal modes having
+slightly different maps. When building your cache, you should ensure you're pointing the tool to the correct location.
+
+The list of GRFs and/or data directory must follow the format and indication of the default file: as many "grf:" entries as
+you wish and optionally only one "data_dir:" entry with trailing backslash included. // comments are supported as usual.
+In fact, any file with one map name per line can be used as a map list, that's why the map index list is used as a default:
+we are sure it contains every map supported by the server. Anything after the map name is ignored, // comments are supported
+and if the first word on the line is "map:" then the second word is used as the map name instead: that allows using
+maps_athena.conf as your map list, which is handy if you want to generate a minimal map cache for each of your multiple
+map-servers.
+The map cache file path can point to an already existing file, as the builder adds a map only if it's not already cached.
+This way, you can add custom maps to the base map cache without even needing kRO Sakray maps. If you wish to rebuild the
+entire map cache, though, you can either provide a path to a non-existing file, or force the rebuild mode.
+
+Here are the command-line arguments you can provide to the map cache builder to customize its behavior:
+ -grf path/to/grf/list
+   Allows to specify the file containing the list of GRFs and/or data directory
+ -list path/to/map/list
+   Allows to specify the file containing the list of maps to add to the map cache
+ -cache path/to/map/cache
+   Allows to specify the path to the generated map cache
+ -rebuild
+   Allows to force the rebuild mode (map cache will be overwritten even if it already exists)
+
+
+Map cache format reference:
+-------------------------------------------------------------------------------
+
+The file is written as little-endian, even on big-endian systems, for cross-compatibility reasons. Appropriate conversions
+are done when generating it, so don't worry about it.
+The first 6 bytes are a main header:
+<unsigned int> file size
+<unsigned short> number of maps
+Then maps are stored one right after another:
+<12-characters-long string> map name
+<short> X size
+<short> Y size
+<long> compressed cell data length
+<variable> compressed cell data

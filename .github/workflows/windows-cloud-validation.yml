@@ -1,0 +1,107 @@
+name: Windows 雲端編譯驗證
+
+on:
+  push:
+    branches:
+      - work/brhades-pandas-full-port
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  identify-event-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得目前正式工作分支
+        uses: actions/checkout@v6
+
+      - name: 設定 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: 執行鑑定事件 C++ 回歸測試
+        run: python tools/integration/test_identify_event.py
+
+      - name: 執行 NoAutoLoot 地圖標記回歸測試
+        run: python tools/integration/test_noautoloot_mapflag.py
+
+      - name: 執行 NoToken 地圖標記回歸測試
+        run: python tools/integration/test_notoken_mapflag.py
+
+      - name: 執行 NoMail 地圖標記回歸測試
+        run: python tools/integration/test_nomail_mapflag.py
+
+      - name: 執行 NoCapture 相容別名回歸測試
+        run: python tools/integration/test_nocapture_mapflag.py
+
+      - name: 執行 NoSlave 地圖標記回歸測試
+        run: python tools/integration/test_noslave_mapflag.py
+
+      - name: 執行 NoAttack 地圖標記回歸測試
+        run: python tools/integration/test_noattack_mapflag.py
+
+      - name: 執行 NoUseItem 地圖標記回歸測試
+        run: python tools/integration/test_nouseitem_mapflag.py
+
+  windows-build:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+        platform: [x64, Win32]
+
+    steps:
+      - name: 取得目前正式工作分支
+        uses: actions/checkout@v6
+
+      - name: 設定 Visual Studio MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: 驗證 Visual Studio 與 MSBuild
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          if (-not (Test-Path $vswhere)) { throw '找不到 Visual Studio Installer。' }
+          $vsVersion = & $vswhere -latest -products '*' -property installationVersion
+          if (-not $vsVersion) { throw '找不到 Visual Studio 安裝版本。' }
+          Write-Host "Visual Studio version: $vsVersion"
+          msbuild.exe -version -nologo
+
+      - name: 完整重建解決方案（${{ matrix.configuration }} ${{ matrix.platform }}）
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $solution = Join-Path $env:GITHUB_WORKSPACE 'brHades.sln'
+          if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
+          & msbuild.exe $solution /m /t:Rebuild /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: 記錄建置版本資訊
+        if: matrix.configuration == 'Release' && matrix.platform == 'x64'
+        shell: pwsh
+        run: |
+          @(
+            "Commit: $env:GITHUB_SHA"
+            "Configuration: ${{ matrix.configuration }}"
+            "Platform: ${{ matrix.platform }}"
+            "Runner: $env:ImageOS"
+          ) | Set-Content build-info.txt
+
+      - name: 上傳 Release x64 執行檔與建置資訊
+        if: matrix.configuration == 'Release' && matrix.platform == 'x64'
+        uses: actions/upload-artifact@v4
+        with:
+          name: brHades-Release-x64-${{ github.sha }}
+          path: |
+            login-server.exe
+            char-server.exe
+            map-server.exe
+            web-server.exe
+            build-info.txt
+          if-no-files-found: error
+          retention-days: 14
