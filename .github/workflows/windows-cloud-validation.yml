@@ -1,0 +1,105 @@
+name: Windows 雲端工具與基準編譯驗證
+
+on:
+  push:
+    branches:
+      - work/brhades-pandas-full-port
+    paths:
+      - .github/workflows/windows-cloud-validation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-baseline:
+    runs-on: windows-2022
+    timeout-minutes: 90
+
+    steps:
+      - name: 取得 brHades 核心來源
+        uses: actions/checkout@v6
+        with:
+          repository: AoShinRO/brHades
+          ref: main
+          path: sources/brHades
+
+      - name: 取得 Pandas develop 來源
+        uses: actions/checkout@v6
+        with:
+          repository: PandasWS/Pandas
+          ref: develop
+          path: sources/Pandas
+
+      - name: 設定 Visual Studio MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: 安裝 TortoiseGit 與 Notepad++
+        shell: pwsh
+        run: choco install tortoisegit notepadplusplus --yes --no-progress
+
+      - name: 驗證指定開發工具
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $git = Get-Command git.exe -ErrorAction Stop
+          Write-Host "Git for Windows: $($git.Source)"
+          git --version
+
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          if (-not (Test-Path $vswhere)) {
+            throw '找不到 Visual Studio Installer 的 vswhere.exe。'
+          }
+          $vsVersion = & $vswhere -latest -products '*' -property installationVersion
+          if (-not $vsVersion) {
+            throw '找不到 Visual Studio 安裝版本。'
+          }
+          Write-Host "Visual Studio version: $vsVersion"
+
+          $msbuild = Get-Command msbuild.exe -ErrorAction Stop
+          Write-Host "MSBuild: $($msbuild.Source)"
+          & msbuild.exe -version -nologo
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          $tortoiseCandidates = @(
+            (Join-Path ${env:ProgramFiles} 'TortoiseGit/bin/TortoiseGitProc.exe'),
+            (Join-Path ${env:ProgramFiles(x86)} 'TortoiseGit/bin/TortoiseGitProc.exe')
+          )
+          $tortoise = $tortoiseCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $tortoise) { throw 'TortoiseGit 安裝檔未找到。' }
+          Write-Host "TortoiseGit: $tortoise"
+
+          $notepadCandidates = @(
+            (Join-Path ${env:ProgramFiles} 'Notepad++/notepad++.exe'),
+            (Join-Path ${env:ProgramFiles(x86)} 'Notepad++/notepad++.exe')
+          )
+          $notepad = $notepadCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $notepad) { throw 'Notepad++ 安裝檔未找到。' }
+          Write-Host "Notepad++: $notepad"
+
+      - name: 編譯 brHades 原始基準（Release x64）
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $solution = Join-Path $env:GITHUB_WORKSPACE 'sources/brHades/brHades.sln'
+          if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
+          & msbuild.exe $solution /m /t:Rebuild /p:Configuration=Release /p:Platform=x64 /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: 編譯 Pandas 原始基準（PRE）
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $solution = Join-Path $env:GITHUB_WORKSPACE 'sources/Pandas/rAthena.sln'
+          if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
+          & msbuild.exe $solution /m /t:Rebuild /p:Configuration=Debug '/p:DefineConstants=BUILDBOT%3BPRERE' /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: 編譯 Pandas 原始基準（RE）
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $solution = Join-Path $env:GITHUB_WORKSPACE 'sources/Pandas/rAthena.sln'
+          & msbuild.exe $solution /m /t:Rebuild /p:Configuration=Debug /p:DefineConstants=BUILDBOT /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
