@@ -48,6 +48,11 @@ jobs:
   windows-build:
     runs-on: windows-2022
     timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+        platform: [x64, Win32]
 
     steps:
       - name: 取得目前正式工作分支
@@ -56,55 +61,47 @@ jobs:
       - name: 設定 Visual Studio MSBuild
         uses: microsoft/setup-msbuild@v1.1
 
-      - name: 安裝 TortoiseGit 與 Notepad++
-        shell: pwsh
-        run: choco install tortoisegit notepadplusplus --yes --no-progress
-
-      - name: 驗證指定開發工具
+      - name: 驗證 Visual Studio 與 MSBuild
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-
-          $git = Get-Command git.exe -ErrorAction Stop
-          Write-Host "Git for Windows: $($git.Source)"
-          git --version
-
           $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
-          if (-not (Test-Path $vswhere)) {
-            throw '找不到 Visual Studio Installer 的 vswhere.exe。'
-          }
+          if (-not (Test-Path $vswhere)) { throw '找不到 Visual Studio Installer。' }
           $vsVersion = & $vswhere -latest -products '*' -property installationVersion
-          if (-not $vsVersion) {
-            throw '找不到 Visual Studio 安裝版本。'
-          }
+          if (-not $vsVersion) { throw '找不到 Visual Studio 安裝版本。' }
           Write-Host "Visual Studio version: $vsVersion"
+          msbuild.exe -version -nologo
 
-          $msbuild = Get-Command msbuild.exe -ErrorAction Stop
-          Write-Host "MSBuild: $($msbuild.Source)"
-          & msbuild.exe -version -nologo
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-          $tortoiseCandidates = @(
-            (Join-Path ${env:ProgramFiles} 'TortoiseGit/bin/TortoiseGitProc.exe'),
-            (Join-Path ${env:ProgramFiles(x86)} 'TortoiseGit/bin/TortoiseGitProc.exe')
-          )
-          $tortoise = $tortoiseCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
-          if (-not $tortoise) { throw 'TortoiseGit 安裝檔未找到。' }
-          Write-Host "TortoiseGit: $tortoise"
-
-          $notepadCandidates = @(
-            (Join-Path ${env:ProgramFiles} 'Notepad++/notepad++.exe'),
-            (Join-Path ${env:ProgramFiles(x86)} 'Notepad++/notepad++.exe')
-          )
-          $notepad = $notepadCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
-          if (-not $notepad) { throw 'Notepad++ 安裝檔未找到。' }
-          Write-Host "Notepad++: $notepad"
-
-      - name: 編譯目前正式工作樹（Release x64）
+      - name: 完整重建解決方案（${{ matrix.configuration }} ${{ matrix.platform }}）
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           $solution = Join-Path $env:GITHUB_WORKSPACE 'brHades.sln'
           if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
-          & msbuild.exe $solution /m /t:Rebuild /p:Configuration=Release /p:Platform=x64 /v:minimal
+          & msbuild.exe $solution /m /t:Rebuild /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /v:minimal
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: 記錄建置版本資訊
+        if: matrix.configuration == 'Release' && matrix.platform == 'x64'
+        shell: pwsh
+        run: |
+          @(
+            "Commit: $env:GITHUB_SHA"
+            "Configuration: ${{ matrix.configuration }}"
+            "Platform: ${{ matrix.platform }}"
+            "Runner: $env:ImageOS"
+          ) | Set-Content build-info.txt
+
+      - name: 上傳 Release x64 執行檔與建置資訊
+        if: matrix.configuration == 'Release' && matrix.platform == 'x64'
+        uses: actions/upload-artifact@v4
+        with:
+          name: brHades-Release-x64-${{ github.sha }}
+          path: |
+            login-server.exe
+            char-server.exe
+            map-server.exe
+            web-server.exe
+            build-info.txt
+          if-no-files-found: error
+          retention-days: 14
