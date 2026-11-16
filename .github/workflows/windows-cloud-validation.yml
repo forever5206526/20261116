@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - work/brhades-pandas-full-port
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
