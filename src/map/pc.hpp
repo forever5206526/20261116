@@ -947,10 +947,10 @@ public:
 #ifdef Pandas_Struct_Map_Session_Data_Pandas
 	struct s_pandas {
 #ifdef Pandas_Struct_Map_Session_Data_WorkInEvent
-		enum npce_event workinevent = NPCE_MAX;
+		uint8 workinevent = PANDAS_NPCE_NONE;
 #endif // Pandas_Struct_Map_Session_Data_WorkInEvent
 #ifdef Pandas_Struct_Map_Session_Data_EventHalt
-		bool eventhalt[NPCE_MAX] = { false };
+		bool eventhalt[PANDAS_NPCE_MAX] = { false };
 #endif // Pandas_Struct_Map_Session_Data_EventHalt
 	} pandas;
 #endif // Pandas_Struct_Map_Session_Data_Pandas

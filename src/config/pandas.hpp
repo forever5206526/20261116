@@ -4,6 +4,9 @@
 #ifndef CONFIG_PANDAS_HPP
 #define CONFIG_PANDAS_HPP
 
+#define PANDAS_NPCE_MAX 10
+#define PANDAS_NPCE_NONE 0xFF
+
 #define Pandas_BattleConfig_Identify_Event_Mode
 
 #define Pandas_Struct_Map_Session_Data_Pandas
