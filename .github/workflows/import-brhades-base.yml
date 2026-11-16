@@ -32,7 +32,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 固定取得已盤點的 brHades main，不接受來源 HEAD 靜默改變。
           git fetch --no-tags --depth=1 https://github.com/AoShinRO/brHades.git main
           ACTUAL_CORE_COMMIT="$(git rev-parse FETCH_HEAD)"
           if [ "$ACTUAL_CORE_COMMIT" != "$CORE_COMMIT" ]; then
@@ -43,9 +42,17 @@ jobs:
           fi
 
           CORE_TREE="$(git rev-parse "$ACTUAL_CORE_COMMIT^{tree}")"
-          CORE_SNAPSHOT="$(printf 'brHades main snapshot %s\n' "$CORE_COMMIT" | git commit-tree "$CORE_TREE")"
 
-          # 保留正式成果庫原有 README 位元內容，避免來源 README 覆蓋。
+          # GitHub Actions 執行身分缺少 workflows 寫入權限。
+          # 先排除來源的 workflow 檔案，稍後由具備權限的 GitHub 連線逐一恢復。
+          export GIT_INDEX_FILE="$RUNNER_TEMP/brhades.index"
+          git read-tree --empty
+          git ls-tree -r "$CORE_TREE" | grep -v $'\t.github/workflows/' | git update-index --index-info
+          FILTERED_CORE_TREE="$(git write-tree)"
+          unset GIT_INDEX_FILE
+
+          CORE_SNAPSHOT="$(printf 'brHades main snapshot %s (workflow files restored separately)\n' "$CORE_COMMIT" | git commit-tree "$FILTERED_CORE_TREE")"
+
           git show HEAD:README.md > "$RUNNER_TEMP/20261116-original-README.md"
 
           set +e
@@ -61,7 +68,7 @@ jobs:
             exit 1
           fi
 
-          # README.md 是明確已知的唯一衝突：依規則保留成果庫原始檔案。
+          # 唯一預期衝突是 README.md；明確保留成果庫原始位元內容。
           cp "$RUNNER_TEMP/20261116-original-README.md" README.md
           git add README.md
 
