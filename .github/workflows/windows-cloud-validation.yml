@@ -3,7 +3,11 @@ name: Windows 雲端編譯驗證
 on:
   push:
     branches:
+      - main
       - work/brhades-pandas-full-port
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:

@@ -140,3 +140,9 @@ setmapflag "prontera", MF_NOUSEITEM;
 ```text
 removemapflag "prontera", MF_NOUSEITEM;
 ```
+
+
+## Pandas 完整移植盤點文件
+
+- [Pandas develop 416 項功能開關完整清冊](docs/PANDAS_FEATURE_FLAGS_CATALOG.md)：以固定上游 commit 的 `src/config/pandas.hpp` 為來源，列出全部 416 個啟用中的 `Pandas_*` 巨集，作為逐項追蹤索引；不代表這些項目已完成移植。
+- [Pandas 地圖標記功能盤點](docs/PANDAS_MAPFLAG_INVENTORY.md)：列出 24 項地圖標記功能及目前已移植／待核對狀態。

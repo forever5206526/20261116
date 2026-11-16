@@ -30,9 +30,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-          # The ubuntu-latest label currently points to ubuntu-22.04.
-          # Available: ubuntu-22.04, ubuntu-20.04
-          os: [ubuntu-latest]
+          # Pin Ubuntu 22.04 because this workflow installs legacy GCC and libpcre3 packages.
+          # Keep the legacy build environment pinned to Ubuntu 22.04.
+          os: [ubuntu-22.04]
           # Only a single version of GCC is required for validating NPC scripts and database changes.
           gcc: ['11']
           # We run build checks for both Renewal and PRE-Renewal
