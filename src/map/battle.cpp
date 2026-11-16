@@ -12010,6 +12010,9 @@ static const struct _battle_data {
 	{ "feature.goldpc_time",                &battle_config.feature_goldpc_time,          3600,      0,   3600,              },
 	{ "feature.goldpc_max_points",          &battle_config.feature_goldpc_max_points,     300,      0,    300,              },
 	{ "feature.goldpc_vip",                 &battle_config.feature_goldpc_vip,              1,      0,      1,              },
+#ifdef Pandas_BattleConfig_Identify_Event_Mode
+	{ "identify_event_mode",                 &battle_config.identify_event_mode,              0,      0,      1,              },
+#endif // Pandas_BattleConfig_Identify_Event_Mode
 
 #include <custom/battle_config_init.inc>
 };

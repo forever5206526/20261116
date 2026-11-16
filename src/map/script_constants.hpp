@@ -12,6 +12,13 @@
 	#define export_deprecated_constant2(a,b) script_set_constant(a,b,false,true)
 	#define export_deprecated_constant3(a,b,c) script_set_constant_(a,b,c,false,true)
 
+	/* NPC event constants used by migrated Pandas features */
+	export_constant(NPCE_LOGIN);
+	export_constant(NPCE_IDENTIFY);
+#ifdef Pandas_NpcFilter_IDENTIFY
+	export_constant(NPCF_IDENTIFY);
+#endif // Pandas_NpcFilter_IDENTIFY
+
 	/* min and maximum variable value */
 	export_constant(INT_MIN);
 	export_constant(INT_MAX);

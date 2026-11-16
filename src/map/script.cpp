@@ -268,6 +268,10 @@ struct Script_Config script_config = {
 	"OnPCLoadMapEvent", //loadmap_event_name
 	"OnPCBaseLvUpEvent", //baselvup_event_name
 	"OnPCJobLvUpEvent", //joblvup_event_name
+	"OnPCIdentifyEvent", //identify_event_name
+#ifdef Pandas_NpcFilter_IDENTIFY
+	"OnPCIdentifyFilter", //identify_filter_name
+#endif // Pandas_NpcFilter_IDENTIFY
 	// NPC related
 	"OnTouch_",	//ontouch_event_name (runs on first visible char to enter area, picks another char if the first char leaves)
 	"OnTouch",	//ontouch2_event_name (run whenever a char walks into the OnTouch area)
@@ -4121,6 +4125,29 @@ int32 run_func(struct script_state *st)
 			script_reportsrc(st);
 		}
 #endif
+
+#ifdef Pandas_Struct_Map_Session_Data_EventHalt
+		if (st && st->rid) {
+			map_session_data *sd = map_id2sd(st->rid);
+			if (sd && sd->pandas.workinevent == NPCF_IDENTIFY) {
+				static const char *blocked_commands[] = {
+					"mes", "next", "close", "close2", "menu", "select", "prompt", "input",
+					"openstorage", "guildopenstorage", "produce", "cooking", "birthpet",
+					"callshop", "sleep", "sleep2", "openmail", "openauction", "progressbar",
+					"buyingstore", "makerune", "opendressroom", "openstorage2"
+				};
+				const char *command = get_str(func);
+				for (const char *blocked : blocked_commands) {
+					if (strcmpi(command, blocked) == 0) {
+						ShowWarning("Please do not use '%s' in OnPCIdentifyFilter.\n", command);
+						script_reportsrc(st);
+						st->state = END;
+						return 1;
+					}
+				}
+			}
+		}
+#endif // Pandas_Struct_Map_Session_Data_EventHalt
 
 		if (str_data[func].func(st) == SCRIPT_CMD_FAILURE) {
 			//Report error
@@ -10378,6 +10405,12 @@ BUILDIN_FUNC(end)
 	sd = map_id2sd(st->rid);
 
 	st->state = END;
+
+#ifdef Pandas_Struct_Map_Session_Data_WorkInEvent
+	// Filter 內的 end 只結束目前過濾器腳本，不得關閉玩家原有 NPC 對話。
+	if (sd && sd->pandas.workinevent == NPCF_IDENTIFY)
+		return SCRIPT_CMD_SUCCESS;
+#endif // Pandas_Struct_Map_Session_Data_WorkInEvent
 
 	npc_data* nd = map_id2nd( st->oid );
 
@@ -27653,6 +27686,30 @@ BUILDIN_FUNC(preg_match) {
 #endif
 }
 
+#ifdef Pandas_ScriptCommand_ProcessHalt
+BUILDIN_FUNC(processhalt)
+{
+	map_session_data *sd = nullptr;
+	if (!script_rid2sd(sd))
+		return SCRIPT_CMD_SUCCESS;
+
+	if (sd->pandas.workinevent != NPCF_IDENTIFY) {
+		ShowError("processhalt: this command is only available in OnPCIdentifyFilter.\n");
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	bool halt = true;
+	if (script_hasdata(st, 2) && script_isint(st, 2))
+		halt = (cap_value(script_getnum(st, 2), 0, 1) == 1);
+
+	if (!setProcessHalt(sd, sd->pandas.workinevent, halt)) {
+		ShowError("processhalt: unable to set the filter interruption state.\n");
+		return SCRIPT_CMD_FAILURE;
+	}
+	return SCRIPT_CMD_SUCCESS;
+}
+#endif // Pandas_ScriptCommand_ProcessHalt
+
 /// script command definitions
 /// for an explanation on args, see add_buildin_func
 struct script_function buildin_func[] = {
@@ -28246,6 +28303,9 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(geteleminfo,"i?"),
 	BUILDIN_DEF(opendressroom,"?"),
 	BUILDIN_DEF(navigateto,"s???????"),
+#ifdef Pandas_ScriptCommand_ProcessHalt
+	BUILDIN_DEF(processhalt, "?"),
+#endif // Pandas_ScriptCommand_ProcessHalt
 	BUILDIN_DEF(getguildalliance,"ii"),
 	BUILDIN_DEF(adopt,"vv"),
 	BUILDIN_DEF(getexp2,"ii?"),

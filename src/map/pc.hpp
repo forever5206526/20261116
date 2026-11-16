@@ -944,6 +944,17 @@ public:
 	std::vector<int16> hatEffects;
 #endif
 
+#ifdef Pandas_Struct_Map_Session_Data_Pandas
+	struct s_pandas {
+#ifdef Pandas_Struct_Map_Session_Data_WorkInEvent
+		enum npce_event workinevent = NPCE_MAX;
+#endif // Pandas_Struct_Map_Session_Data_WorkInEvent
+#ifdef Pandas_Struct_Map_Session_Data_EventHalt
+		bool eventhalt[NPCE_MAX] = { false };
+#endif // Pandas_Struct_Map_Session_Data_EventHalt
+	} pandas;
+#endif // Pandas_Struct_Map_Session_Data_Pandas
+
 	struct{
 		int32 tid;
 		uint16 skill_id;

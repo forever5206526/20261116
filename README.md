@@ -1,1 +1,20 @@
 # 20261116
+
+## 已移植的 Pandas 特色功能
+
+### 鑑定事件與相容模式
+
+- 新增 `OnPCIdentifyEvent`；鑑定結果送出後可觸發 NPC 事件。
+- 事件腳本可使用 `@identify_idx` 取得本次鑑定的背包序號。
+- `conf/battle/battle.conf` 的 `identify_event_mode` 控制觸發規則：
+  - `0`：Pandas 1.2.4 相容模式，成功或失敗的鑑定結果都觸發事件。
+  - `1`：rAthena 相容模式，只有鑑定成功時觸發事件。
+- 新增 `OnPCIdentifyFilter` 與 `processhalt;`，可在鑑定資料變更前中斷本次鑑定。
+
+預設設定：
+
+```text
+identify_event_mode: 0
+```
+
+修改 `conf/battle/battle.conf` 後重新啟動 map-server，使設定生效。
