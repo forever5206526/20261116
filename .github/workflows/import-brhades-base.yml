@@ -1,0 +1,82 @@
+name: 匯入 brHades 核心基準
+
+on:
+  push:
+    branches:
+      - work/brhades-pandas-full-port
+    paths:
+      - .github/workflows/import-brhades-base.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-core:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得正式成果工作分支
+        uses: actions/checkout@v6
+        with:
+          ref: work/brhades-pandas-full-port
+          fetch-depth: 0
+
+      - name: 匯入指定 brHades main 快照並保留成果庫既有內容
+        shell: bash
+        env:
+          CORE_COMMIT: cffe264644a32e059a505d744587c1e696c67ac0
+          WORK_BRANCH: work/brhades-pandas-full-port
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 固定取得已盤點的 brHades main，不接受來源 HEAD 靜默改變。
+          git fetch --no-tags --depth=1 https://github.com/AoShinRO/brHades.git main
+          ACTUAL_CORE_COMMIT="$(git rev-parse FETCH_HEAD)"
+          if [ "$ACTUAL_CORE_COMMIT" != "$CORE_COMMIT" ]; then
+            echo "brHades main 已移動；停止匯入，需重新盤點來源。"
+            echo "expected=$CORE_COMMIT"
+            echo "actual=$ACTUAL_CORE_COMMIT"
+            exit 1
+          fi
+
+          CORE_TREE="$(git rev-parse "$ACTUAL_CORE_COMMIT^{tree}")"
+          CORE_SNAPSHOT="$(printf 'brHades main snapshot %s\n' "$CORE_COMMIT" | git commit-tree "$CORE_TREE")"
+
+          # 保留正式成果庫原有 README 位元內容，避免來源 README 覆蓋。
+          git show HEAD:README.md > "$RUNNER_TEMP/20261116-original-README.md"
+
+          set +e
+          git merge --allow-unrelated-histories --no-commit --no-ff "$CORE_SNAPSHOT"
+          MERGE_EXIT=$?
+          set -e
+
+          CONFLICTS="$(git diff --name-only --diff-filter=U)"
+          if [ -n "$CONFLICTS" ] && [ "$CONFLICTS" != "README.md" ]; then
+            echo "出現 README.md 以外的衝突，停止且不推送："
+            printf '%s\n' "$CONFLICTS"
+            git merge --abort || true
+            exit 1
+          fi
+
+          # README.md 是明確已知的唯一衝突：依規則保留成果庫原始檔案。
+          cp "$RUNNER_TEMP/20261116-original-README.md" README.md
+          git add README.md
+
+          REMAINING_CONFLICTS="$(git diff --name-only --diff-filter=U)"
+          if [ -n "$REMAINING_CONFLICTS" ]; then
+            echo "仍有未解決衝突，停止且不推送："
+            printf '%s\n' "$REMAINING_CONFLICTS"
+            git merge --abort || true
+            exit 1
+          fi
+
+          if [ ! -f .git/MERGE_HEAD ]; then
+            echo "合併狀態不存在，停止且不推送。"
+            exit 1
+          fi
+
+          git commit -m "chore: 匯入 brHades 核心基準 $CORE_COMMIT"
+          git push origin "HEAD:refs/heads/$WORK_BRANCH"
