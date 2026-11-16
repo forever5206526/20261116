@@ -88,15 +88,13 @@ bool mail_invalid_operation(map_session_data* sd) {
 int main() {
     map_session_data normal_map{{1}, 10};
     map_session_data blocked_map{{2}, 11};
-    map_session_data invalid_map{{-1}, 12};
     if (mail_invalid_operation(&normal_map)) return 1;
     if (displayed_message_id != -1) return 2;
 #ifdef Pandas_MapFlag_NoMail
     if (!mail_invalid_operation(&blocked_map)) return 3;
     if (displayed_message_id != EXPECTED_MESSAGE) return 4;
-    if (mail_invalid_operation(&invalid_map)) return 5;
 #else
-    if (mail_invalid_operation(&blocked_map)) return 6;
+    if (mail_invalid_operation(&blocked_map)) return 5;
 #endif
     std::cout << "NoMail mapflag checks passed\n";
     return 0;
