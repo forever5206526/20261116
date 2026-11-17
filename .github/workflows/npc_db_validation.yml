@@ -68,6 +68,31 @@ jobs:
         shell: bash
         run: bash tools/ci/npc.sh
 
+      - name: Verify and stage map-server runtime DLL dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $runtimeDlls = @(
+            @{ Name = 'libmysql.dll'; Source = '3rdparty\\mysql\\lib\\x64\\libmysql.dll' },
+            @{ Name = 'pcre8.dll'; Source = '3rdparty\\pcre\\lib\\x64\\pcre8.dll' },
+            @{ Name = 'zlib.dll'; Source = '3rdparty\\zlib\\lib\\x64\\zlib.dll' }
+          )
+          foreach ($dll in $runtimeDlls) {
+            if (-not (Test-Path $dll.Source)) {
+              throw "Required runtime DLL source is missing: $($dll.Source)"
+            }
+            Copy-Item -LiteralPath $dll.Source -Destination (Join-Path $PWD $dll.Name) -Force
+            if (-not (Test-Path (Join-Path $PWD $dll.Name))) {
+              throw "Failed to stage runtime DLL: $($dll.Name)"
+            }
+            Write-Host "Staged $($dll.Name)"
+          }
+          $dumpbin = Get-Command dumpbin.exe -ErrorAction Stop
+          & $dumpbin.Source /dependents map-server.exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Write-Host 'Runtime DLL inventory:'
+          Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+
       - name: Run map-server NPC and database startup validation
         shell: pwsh
         run: |
