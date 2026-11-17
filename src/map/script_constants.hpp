@@ -545,6 +545,9 @@
 	export_constant(MF_NOLOOTNORMALMOB);
 	export_constant(MF_NO_NPC_SELFDESTRUCTION_ON_ALL);
 	export_constant(MF_NOHOMUN);
+#ifdef Pandas_MapFlag_NoMerc
+	export_constant(MF_NOMERC);
+#endif // Pandas_MapFlag_NoMerc
 #ifdef Pandas_MapFlag_NoAutoLoot
 	export_constant(MF_NOAUTOLOOT);
 #endif // Pandas_MapFlag_NoAutoLoot

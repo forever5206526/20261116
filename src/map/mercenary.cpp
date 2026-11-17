@@ -56,6 +56,13 @@ struct view_data *mercenary_get_viewdata( uint16 class_ ){
 bool mercenary_create(map_session_data *sd, uint16 class_, uint32 lifetime) {
 	nullpo_retr(false,sd);
 
+#ifdef Pandas_MapFlag_NoMerc
+	if (sd && map_getmapflag(sd->bl.m, MF_NOMERC)) {
+		clif_displaymessage(sd->fd, msg_txt(sd, 1548));
+		return true;
+	}
+#endif // Pandas_MapFlag_NoMerc
+
 	std::shared_ptr<s_mercenary_db> db = mercenary_db.find(class_);
 
 	if (db == nullptr) {

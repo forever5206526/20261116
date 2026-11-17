@@ -183,3 +183,21 @@ setmapflag "prontera", MF_NOHOMUN;
 ```text
 removemapflag "prontera", MF_NOHOMUN;
 ```
+
+### NoMerc 地圖標記
+
+- 新增 `Pandas_MapFlag_NoMerc` 功能開關及 `MF_NOMERC` 腳本常量。
+- 啟用時阻止玩家在該地圖召喚佣兵，並將目前位於該地圖的既有佣兵隱藏。
+- 新增英文及繁體中文提示訊息。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOMERC;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOMERC;
+```
