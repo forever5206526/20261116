@@ -73,9 +73,9 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $runtimeDlls = @(
-            @{ Name = 'libmysql.dll'; Source = '3rdparty\\mysql\\lib\\x64\\libmysql.dll' },
-            @{ Name = 'pcre8.dll'; Source = '3rdparty\\pcre\\lib\\x64\\pcre8.dll' },
-            @{ Name = 'zlib.dll'; Source = '3rdparty\\zlib\\lib\\x64\\zlib.dll' }
+            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' }
+            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' }
+            @{ Name = 'zlib.dll'; Source = '3rdparty/zlib/lib/x64/zlib.dll' }
           )
           foreach ($dll in $runtimeDlls) {
             if (-not (Test-Path $dll.Source)) {
@@ -87,11 +87,11 @@ jobs:
             }
             Write-Host "Staged $($dll.Name)"
           }
-          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\\Installer\\vswhere.exe'
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
           if (-not (Test-Path $vswhere)) { throw 'vswhere.exe was not found on the Visual Studio runner.' }
           $vsPath = & $vswhere -latest -property installationPath
           if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Could not locate the Visual Studio installation.' }
-          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC\\Tools\\MSVC\\*\\bin\\Hostx64\\x64\\dumpbin.exe') -ErrorAction Stop |
+          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe') -ErrorAction Stop |
             Sort-Object FullName -Descending | Select-Object -First 1
           if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
           & $dumpbin.FullName /dependents map-server.exe
