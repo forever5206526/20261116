@@ -1,4 +1,4 @@
-name: Compilação em VisualStudio
+name: Visual Studio MSBuild build (VS2019 16.11+ / VS2022 / VS2026)
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
@@ -21,11 +21,12 @@ on:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
-    runs-on: windows-2022
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
+        runner: [windows-2022, windows-2025]
         configuration: [Debug, Release]
         platform: [Win32, x64]
         mode: [PRE, RE]
@@ -37,15 +38,18 @@ jobs:
       - name: 設定 Visual Studio 2022 MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: 驗證 Visual Studio 2022 與 C++ 工具鏈
+      - name: 驗證 Visual Studio 2019 16.11 以上與 C++ 工具鏈
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
           $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
           if (-not (Test-Path $vswhere)) { throw '找不到 Visual Studio Installer。' }
-          $vsVersion = & $vswhere -latest -products '*' -version '[17.0,18.0)' -property installationVersion
-          if (-not $vsVersion) { throw '此工作要求 Visual Studio 2022（17.x）。' }
-          Write-Host "Visual Studio version: $vsVersion"
+          $vsVersionText = & $vswhere -latest -products '*' -version '[16.11,)' -property installationVersion
+          if (-not $vsVersionText) { throw '需要 Visual Studio 2019 16.11 或更新版本。' }
+          $vsVersion = [version]$vsVersionText
+          if ($vsVersion -lt [version]'16.11') { throw "Visual Studio 版本過舊：$vsVersionText" }
+          Write-Host "Visual Studio version: $vsVersionText"
+          Write-Host "Runner image: $env:ImageOS"
           msbuild.exe -version -nologo
 
       - name: 完整重建 Visual Studio 解決方案
