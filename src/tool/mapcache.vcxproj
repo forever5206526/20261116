@@ -182,8 +182,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <Target Name="AfterClean">
-    <Delete Files="$(SolutionDir)zlib.dll" ContinueOnError="true" />
-    <Delete Files="$(SolutionDir)serv.bat" ContinueOnError="true" />
+    
+    
     <Delete Files="$(SolutionDir)mapcache.bat" ContinueOnError="true" />
   </Target>
   <Target Name="AfterBuild">
