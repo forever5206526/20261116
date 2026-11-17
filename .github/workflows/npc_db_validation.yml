@@ -94,9 +94,17 @@ jobs:
           $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe') -ErrorAction Stop |
             Sort-Object FullName -Descending | Select-Object -First 1
           if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
-          & $dumpbin.FullName /dependents map-server.exe
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          Write-Host 'Runtime DLL inventory:'
+          foreach ($binary in @('map-server.exe', 'libmysql.dll', 'pcre8.dll', 'zlib.dll')) {
+            Write-Host "===== Native dependencies: $binary ====="
+            & $dumpbin.FullName /dependents $binary
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $mysqlBin = 'C:/Program Files/MySQL/MySQL Server 8.0/bin'
+          if (Test-Path $mysqlBin) {
+            Write-Host 'MySQL server runtime DLL inventory:'
+            Get-ChildItem -Path $mysqlBin -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+          }
+          Write-Host 'Application runtime DLL inventory:'
           Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
 
       - name: Run map-server NPC and database startup validation
