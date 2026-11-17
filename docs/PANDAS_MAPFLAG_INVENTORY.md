@@ -24,7 +24,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。目前已移植 8 項�
 | `Pandas_MapFlag_HideGuildInfo` | 隱藏其他玩家公會資訊 | 待核對及移植 |
 | `Pandas_MapFlag_HidePartyInfo` | 隱藏其他玩家隊伍名稱 | 待核對及移植 |
 | `Pandas_MapFlag_NoMail` | 禁止郵件／RODEX 操作 | 已移植／回歸測試通過 |
-| `Pandas_MapFlag_NoPet` | 禁止召喚寵物 | 待核對及移植 |
+| `Pandas_MapFlag_NoPet` | 禁止地圖使用寵物（啟用時退回寵物蛋） | 已實作；等待雲端編譯及回歸驗證 |
 | `Pandas_MapFlag_NoHomun` | 禁止召喚人工生命體 | 已移植／等待 CI 驗證 |
 | `Pandas_MapFlag_NoMerc` | 禁止召喚佣兵 | 待核對及移植 |
 | `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 待核對及移植 |

@@ -148,6 +148,24 @@ removemapflag "prontera", MF_NOUSEITEM;
 - [Pandas 地圖標記功能盤點](docs/PANDAS_MAPFLAG_INVENTORY.md)：列出 24 項地圖標記功能及目前已移植／待核對狀態。
 
 
+### NoPet 地圖標記
+
+- 新增 `MF_NOPET` 腳本常量及 `Pandas_MapFlag_NoPet` 功能開關。
+- 啟用地圖標記時，會將目前位於該地圖的已召喚寵物退回寵物蛋。
+- 保留 Pandas 原始觸發時機；此項不額外改寫寵物孵化或捕捉流程。
+
+設定：
+
+```text
+setmapflag "prontera", MF_NOPET;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOPET;
+```
+
 ### NoHomun 地圖標記
 
 - 新增 `MF_NOHOMUN` 腳本常量及地圖標記。

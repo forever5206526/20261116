@@ -557,6 +557,9 @@
 #ifdef Pandas_MapFlag_NoMail
 	export_constant(MF_NOMAIL);
 #endif // Pandas_MapFlag_NoMail
+#ifdef Pandas_MapFlag_NoPet
+	export_constant(MF_NOPET);
+#endif // Pandas_MapFlag_NoPet
 #ifdef Pandas_MapFlag_NoSlave
 	export_constant(MF_NOSLAVE);
 #endif // Pandas_MapFlag_NoSlave
