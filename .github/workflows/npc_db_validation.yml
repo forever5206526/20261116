@@ -73,8 +73,8 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $runtimeDlls = @(
-            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' }
-            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' }
+            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' },
+            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' },
             @{ Name = 'zlib.dll'; Source = '3rdparty/zlib/lib/x64/zlib.dll' }
           )
           foreach ($dll in $runtimeDlls) {
