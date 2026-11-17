@@ -207,8 +207,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <Target Name="AfterClean">
-    <Delete Files="$(SolutionDir)libmysql.dll" ContinueOnError="true" />
-    <Delete Files="$(SolutionDir)serv.bat" ContinueOnError="true" />
+    
+    
     <Delete Files="$(SolutionDir)webserv.bat" ContinueOnError="true" />
   </Target>
   <Target Name="AfterBuild">
