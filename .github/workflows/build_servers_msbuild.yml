@@ -35,7 +35,7 @@ jobs:
       - name: 取得原始碼
         uses: actions/checkout@v4
 
-      - name: 設定 Visual Studio 2022 MSBuild
+      - name: 設定 Visual Studio MSBuild
         uses: microsoft/setup-msbuild@v2
 
       - name: 驗證 Visual Studio 2019 16.11 以上與 C++ 工具鏈
