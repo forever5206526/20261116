@@ -87,8 +87,14 @@ jobs:
             }
             Write-Host "Staged $($dll.Name)"
           }
-          $dumpbin = Get-Command dumpbin.exe -ErrorAction Stop
-          & $dumpbin.Source /dependents map-server.exe
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\\Installer\\vswhere.exe'
+          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe was not found on the Visual Studio runner.' }
+          $vsPath = & $vswhere -latest -property installationPath
+          if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Could not locate the Visual Studio installation.' }
+          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC\\Tools\\MSVC\\*\\bin\\Hostx64\\x64\\dumpbin.exe') -ErrorAction Stop |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
+          & $dumpbin.FullName /dependents map-server.exe
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Write-Host 'Runtime DLL inventory:'
           Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
