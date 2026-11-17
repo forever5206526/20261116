@@ -4860,6 +4860,24 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 				mapit_free(iter);
 			}
 			break;
+#ifdef Pandas_MapFlag_NoMerc
+		case MF_NOMERC:
+			mapdata->setMapFlag(mapflag, status);
+			if (status) {
+				struct s_mapiterator* iter = mapit_getallusers();
+				map_session_data* pl_sd = nullptr;
+				for (pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter)) {
+					if (!pl_sd || pl_sd->bl.m != m)
+						continue;
+					if (pl_sd->md) {
+						clif_displaymessage(pl_sd->fd, msg_txt(pl_sd, 1547));
+						unit_remove_map(&pl_sd->md->bl, CLR_OUTSIGHT);
+					}
+				}
+				mapit_free(iter);
+			}
+			break;
+#endif // Pandas_MapFlag_NoMerc
 		case MF_SPECIALPOPUP:
 			if (status) {
 				nullpo_retr(false, args);

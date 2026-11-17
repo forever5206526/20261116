@@ -19,6 +19,7 @@
 #define Pandas_MapFlag_NoToken
 #define Pandas_MapFlag_NoMail
 #define Pandas_MapFlag_NoPet
+#define Pandas_MapFlag_NoMerc
 #define Pandas_MapFlag_NoCapture
 #define Pandas_MapFlag_NoSlave
 #define Pandas_MapFlag_NoAttack
