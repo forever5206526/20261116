@@ -95,8 +95,9 @@
 #include "scanctx.h"
 
 /* these delcarations are provided to suppress compiler warnings */
-extern int libconfig_yylex();
-extern int libconfig_yyget_lineno();
+/* Match the reentrant Flex scanner declarations in scanner.h. */
+extern int libconfig_yylex(void *yylval_param, void *scanner);
+extern int libconfig_yyget_lineno(void *scanner);
 
 static const char *err_array_elem_type = "mismatched element type in array";
 static const char *err_duplicate_setting = "duplicate setting name";
