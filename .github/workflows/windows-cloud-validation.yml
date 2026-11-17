@@ -52,6 +52,9 @@ jobs:
       - name: 執行 NoHomun 地圖標記回歸測試
         run: python tools/integration/test_nohomun_mapflag.py
 
+      - name: 執行 NoPet 地圖標記回歸測試
+        run: python tools/integration/test_nopet_mapflag.py
+
   windows-build:
     runs-on: windows-2022
     timeout-minutes: 90
