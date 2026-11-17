@@ -4823,6 +4823,43 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 			} else
 				mapdata->setMapFlag(mapflag, false);
 			break;
+#ifdef Pandas_MapFlag_NoPet
+		case MF_NOPET:
+			mapdata->setMapFlag(mapflag, status);
+			if (status) {
+				struct s_mapiterator* iter = mapit_getallusers();
+				map_session_data* pl_sd = nullptr;
+				for (pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter)) {
+					if (!pl_sd || pl_sd->bl.m != m)
+						continue;
+					if (pl_sd->pd) {
+						clif_displaymessage(pl_sd->fd, msg_txt(pl_sd, 1546));
+						pet_return_egg(pl_sd, pl_sd->pd);
+#if PACKETVER >= 20180620 && PACKETVER < 20180704
+						clif_inventorylist(pl_sd);
+#endif
+					}
+				}
+				mapit_free(iter);
+			}
+			break;
+#endif // Pandas_MapFlag_NoPet
+		case MF_NOHOMUN:
+			mapdata->setMapFlag(mapflag, status);
+			if (status) {
+				struct s_mapiterator* iter = mapit_getallusers();
+				map_session_data* pl_sd = nullptr;
+				for (pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter)) {
+					if (!pl_sd || pl_sd->bl.m != m)
+						continue;
+					if (hom_is_active(pl_sd->hd)) {
+						clif_displaymessage(pl_sd->fd, msg_txt(pl_sd, 1544));
+						hom_vaporize(pl_sd, HOM_ST_REST);
+					}
+				}
+				mapit_free(iter);
+			}
+			break;
 		case MF_SPECIALPOPUP:
 			if (status) {
 				nullpo_retr(false, args);

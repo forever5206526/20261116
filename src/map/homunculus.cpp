@@ -1121,6 +1121,11 @@ bool hom_call(map_session_data *sd)
 {
 	struct homun_data *hd;
 
+	if (sd && map_getmapflag(sd->bl.m, MF_NOHOMUN)) {
+		clif_displaymessage(sd->fd, msg_txt(sd, 1545));
+		return true;
+	}
+
 	if (!sd->status.hom_id) //Create a new homun.
 		return hom_create_request(sd, HM_CLASS_BASE + rnd_value(0, 7)) ;
 
