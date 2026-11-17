@@ -1,0 +1,76 @@
+name: NPC and database validation (Visual Studio)
+
+concurrency:
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/**'
+      - '.vsconfig'
+      - 'brHades.sln'
+      - 'tools/ci/**'
+      - 'src/**'
+      - '3rdparty/**'
+      - 'db/**'
+      - 'npc/**'
+
+jobs:
+  validate:
+    if: "!contains(github.event.head_commit.message, 'ci-skip')"
+    name: NPC and DB validation [${{ matrix.mode }}]
+    runs-on: windows-2022
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [PRE, RE]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Visual Studio MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Set up MySQL
+        uses: ankane/setup-mysql@v1
+        with:
+          mysql-version: '8.0'
+
+      - name: Set MySQL root password for repository CI scripts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & mysqladmin.exe -uroot password root
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Build map-server with Visual Studio
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $defines = 'BUILDBOT'
+          if ('${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
+          & msbuild.exe brHades.sln /m /t:Rebuild /p:Configuration=Release /p:Platform=x64 "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (-not (Test-Path 'map-server.exe')) { throw 'Visual Studio build did not produce map-server.exe' }
+
+      - name: Import database schema and seed data
+        shell: bash
+        run: bash tools/ci/sql.sh
+
+      - name: Enable custom and test NPC scripts
+        shell: bash
+        run: bash tools/ci/npc.sh
+
+      - name: Run map-server NPC and database startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & .\\map-server.exe --run-once
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
