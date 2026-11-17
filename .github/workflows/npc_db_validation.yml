@@ -38,6 +38,18 @@ jobs:
       - name: Set up Visual Studio MSBuild
         uses: microsoft/setup-msbuild@v2
 
+      - name: Install Visual C++ 2012 x64 runtime required by PCRE
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          choco install vcredist2012 --yes --no-progress
+          if ($LASTEXITCODE -notin @(0, 3010)) { exit $LASTEXITCODE }
+          $runtime = Join-Path $env:WINDIR 'System32/msvcr110.dll'
+          if (-not (Test-Path $runtime)) {
+            throw "Visual C++ 2012 x64 runtime was not installed: $runtime"
+          }
+          Write-Host "Verified required runtime: $runtime"
+
       - name: Set up MySQL
         uses: ankane/setup-mysql@v1
         with:
