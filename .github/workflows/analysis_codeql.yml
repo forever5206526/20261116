@@ -33,7 +33,7 @@ jobs:
         mode: ['PRE', 'RE']
         include:
           - language: c-cpp
-            build-mode: autobuild
+            build-mode: manual
 
     steps:
     - name: Checkout repository
@@ -57,6 +57,12 @@ jobs:
       if: ${{ matrix.mode == 'RE' }}
       run: |
         echo "PRERE=no" >> $GITHUB_ENV
+
+    - name: Configure CMake for CodeQL
+      run: cmake -S . -B codeql-build -DCMAKE_CXX_STANDARD=20 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+
+    - name: Build project for CodeQL
+      run: cmake --build codeql-build --parallel 2
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
