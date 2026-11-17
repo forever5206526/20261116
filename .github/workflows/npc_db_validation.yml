@@ -72,5 +72,55 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          & .\\map-server.exe --run-once
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $processes = @()
+          $loginOut = Join-Path $env:RUNNER_TEMP 'login-server.stdout.log'
+          $loginErr = Join-Path $env:RUNNER_TEMP 'login-server.stderr.log'
+          $charOut = Join-Path $env:RUNNER_TEMP 'char-server.stdout.log'
+          $charErr = Join-Path $env:RUNNER_TEMP 'char-server.stderr.log'
+          $mapOut = Join-Path $env:RUNNER_TEMP 'map-server.stdout.log'
+          $mapErr = Join-Path $env:RUNNER_TEMP 'map-server.stderr.log'
+
+          function Wait-ForServerPort([int]$port, $process, [string]$serverName) {
+            $deadline = (Get-Date).AddSeconds(45)
+            while ((Get-Date) -lt $deadline) {
+              if ($process.HasExited) {
+                throw "$serverName exited early with code $($process.ExitCode)."
+              }
+              if (Test-NetConnection -ComputerName 127.0.0.1 -Port $port -InformationLevel Quiet -WarningAction SilentlyContinue) {
+                return
+              }
+              Start-Sleep -Seconds 1
+            }
+            throw "$serverName did not open TCP port $port within 45 seconds."
+          }
+
+          try {
+            $login = Start-Process -FilePath '.\\login-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $loginOut -RedirectStandardError $loginErr
+            $processes += $login
+            Wait-ForServerPort 6900 $login 'login-server'
+
+            $char = Start-Process -FilePath '.\\char-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $charOut -RedirectStandardError $charErr
+            $processes += $char
+            Wait-ForServerPort 6121 $char 'char-server'
+
+            $map = Start-Process -FilePath '.\\map-server.exe' -ArgumentList '--run-once' -PassThru -Wait -NoNewWindow -RedirectStandardOutput $mapOut -RedirectStandardError $mapErr
+            if (Test-Path $mapOut) { Get-Content $mapOut }
+            if (Test-Path $mapErr) { Get-Content $mapErr }
+            if ($map.ExitCode -ne 0) { throw "map-server --run-once exited with code $($map.ExitCode)." }
+          }
+          catch {
+            foreach ($log in @($loginOut, $loginErr, $charOut, $charErr, $mapOut, $mapErr)) {
+              if (Test-Path $log) {
+                Write-Host "===== $log ====="
+                Get-Content $log
+              }
+            }
+            throw
+          }
+          finally {
+            foreach ($process in $processes) {
+              if (-not $process.HasExited) {
+                Stop-Process -Id $process.Id -Force
+              }
+            }
+          }
