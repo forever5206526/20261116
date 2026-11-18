@@ -188,6 +188,7 @@ void ipban_init(void) {
 
 	// establish connections
 	sql_handle = Sql_Malloc();
+	Sql_ConfigApply(ipban_db_hostname, ipban_db_port, ipban_db_username, ipban_db_password);
 	if( SQL_ERROR == Sql_Connect(sql_handle, ipban_db_username.c_str(), ipban_db_password.c_str(), ipban_db_hostname.c_str(), ipban_db_port, ipban_db_database.c_str()) )
 	{
 		ShowError("Couldn't connect with uname='%s',host='%s',port='%hu',database='%s'\n",
