@@ -59,7 +59,6 @@
 using namespace brhades;
 using namespace brhades::server_map;
 
-std::string default_codepage = "";
 
 int32 map_server_port = 3306;
 std::string map_server_ip = "127.0.0.1";
@@ -4256,9 +4255,6 @@ int32 inter_config_read(const char *cfgName)
 		if(strcmpi(w1,"map_server_db")==0)
 			map_server_db = w2;
 		else
-		if(strcmpi(w1,"default_codepage")==0)
-			default_codepage = w2;
-		else
 		if(strcmpi(w1,"use_sql_db")==0) {
 			db_use_sqldbs = config_switch(w2);
 			ShowStatus ("Usando SQL dbs: %s\n",w2);
@@ -4325,12 +4321,6 @@ int32 map_sql_init(void)
 	}
 	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de mapas)\n");
 
-	if( !default_codepage.empty() ) {
-		if ( SQL_ERROR == Sql_SetEncoding(mmysql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(mmysql_handle);
-		if ( SQL_ERROR == Sql_SetEncoding(qsmysql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(qsmysql_handle);
-	}
 	return 0;
 }
 
@@ -4368,9 +4358,6 @@ int32 log_sql_init(void)
 	}
 	ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": '" CL_GREEN "conectou" CL_RESET "' com sucesso ao banco de dados '" CL_WHITE "%s" CL_RESET "'.\n", log_db_db.c_str());
 
-	if( !default_codepage.empty() )
-		if ( SQL_ERROR == Sql_SetEncoding(logmysql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(logmysql_handle);
 
 	return 0;
 }
