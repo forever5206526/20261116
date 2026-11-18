@@ -10159,6 +10159,12 @@ void clif_name( struct block_list* src, struct block_list *bl, send_target targe
 				safestrncpy( packet.party_name, p->party.name, NAME_LENGTH );
 			}
 
+#ifdef Pandas_MapFlag_HidePartyInfo
+			// Hide the party name from other players on maps with this flag.
+			if (p && map_getmapflag(sd->bl.m, MF_HIDEPARTYINFO) && src->id != bl->id)
+				safestrncpy(packet.party_name, "", NAME_LENGTH);
+#endif // Pandas_MapFlag_HidePartyInfo
+
 			if( sd->guild ){
 				int32 position;
 
@@ -10170,6 +10176,14 @@ void clif_name( struct block_list* src, struct block_list *bl, send_target targe
 			}else if( sd->clan ){
 				safestrncpy( packet.position_name, sd->clan->name, NAME_LENGTH );
 			}
+
+#ifdef Pandas_MapFlag_HideGuildInfo
+			// Hide guild and position names from other players on maps with this flag.
+			if (sd->guild && map_getmapflag(sd->bl.m, MF_HIDEGUILDINFO) && src->id != bl->id) {
+				safestrncpy(packet.guild_name, "", NAME_LENGTH);
+				safestrncpy(packet.position_name, "", NAME_LENGTH);
+			}
+#endif // Pandas_MapFlag_HideGuildInfo
 
 #if PACKETVER_MAIN_NUM >= 20150225 || PACKETVER_RE_NUM >= 20141126 || defined( PACKETVER_ZERO )
 			packet.title_id = sd->status.title_id; // Title ID
