@@ -43,20 +43,20 @@
 //	afterskill		After mob casts the specified skill.
 //	casttargeted		When a target is in cast range (no condition value).
 //	rudeattacked		When mob is rude attacked (no condition value).
-//	mobnearbygt		When monsters in range become greater than specified number.
+//	mobnearbygt		指定範圍內的魔物數量大於設定值時觸發。
 //	groundattacked		When mob is hit by ground targeted skill (no condition value).
 //	damagedgt		When single attack deals greater damage than specified number.
 //
-//	Status abnormalities specified through the statuson/statusoff system:
-//	    anybad (any type of state change) / stone / freeze / stun / sleep /
-//	    poison / curse / silence / confusion / blind / hiding / sight (unhidden)
+//	透過 statuson/statusoff 系統指定的異常狀態：
+//	    anybad（任何狀態變更）／stone（石化）／freeze（冰凍）／stun（暈眩）／sleep（睡眠）／
+//	    poison（中毒）／curse（詛咒）／silence（沉默）／confusion（混亂）／blind（黑暗）／hiding（隱匿）／sight（解除隱匿）
 //
 // Note: if a negative MobID is provided, the skill will be treated as 'global':
-//	-1: added for all boss types.
-//	-2: added for all normal types.
-//	-3: added for all mobs.
+//	-1: 套用至所有首領類型。
+//	-2: 套用至所有一般類型。
+//	-3: 套用至所有魔物。
 
-// rAthena Dev Team
+// rAthena 開發團隊
 //1900,Valaris@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 //1900,Valaris@AL_TELEPORT,walk,26,1,500,0,5000,yes,self,rudeattacked,,,,,,,,
 //1900,Valaris@KN_BRANDISHSPEAR,attack,57,10,2000,500,5000,no,target,always（永遠成立）,0,,,,,,29,
@@ -113,11 +113,11 @@
 //1903,Poki#3@NPC_CHANGETELEKINESIS,attack,169,1,500,2000,5000,no,self,myhpltmaxrate,10,,,,,,7,
 //1903,Poki#3@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 
-// Easter Bunny (not in the db?? it's in db2!)
+// 復活節兔子（不在此資料庫？其實位於 db2！）
 //1921,Easter Bunny@NPC_SUMMONSLAVE,attack,196,5,10000,3000,10000,no,self,slavele,2,1063,,,,,,
 //1921,Easter Bunny@NPC_SUMMONSLAVE,idle,196,5,5000,2000,40000,no,self,always（永遠成立）,2,1920,,,,,,
 
-//Custom Fire Poring. Warning, Colides with META_DENIRO
+//自訂火焰波利。警告：會與 META_DENIRO 衝突。
 //1239,Fire Poring@AL_HEAL,idle,28,10,10000,0,2000,yes,self,always（永遠成立）,0,,,,,,4,
 //1239,Fire Poring@AL_HEAL,walk,28,10,10000,0,2000,yes,self,always（永遠成立）,0,,,,,,4,
 //1239,Fire Poring@AL_TELEPORT,attack,26,1,1000,5000,60000,no,self,myhpltmaxrate,30,,,,,,,
@@ -131,10 +131,10 @@
 //1239,Fire Poring@RG_STRIPSHIELD,attack,216,5,2000,0,3000,yes,target,always（永遠成立）,0,,,,,,,
 //1239,Fire Poring@RG_STRIPWEAPON,attack,215,5,2000,0,3000,yes,target,always（永遠成立）,0,,,,,,,
 
-//iRO Halloween Event 2009
+//iRO 2009 年萬聖節活動
 //3014,Halloween Whisper@AS_CLOAKING,idle,135,1,2000,200,5000,yes,self,always（永遠成立）,0,,,,,,,
 //3014,Halloween Whisper@AS_CLOAKING,chase,135,1,2000,200,5000,yes,self,always（永遠成立）,0,,,,,,,
 //3014,Halloween Whisper@NPC_EMOTION,idle,197,1,2000,0,5000,yes,self,always（永遠成立）,0,,,,,,,
 //3014,Halloween Whisper@NPC_EMOTION,chase,197,1,200,0,5000,yes,self,always（永遠成立）,0,19,0x81,,,,,
 
-// Here you can place your custom mob skills
+// 你可以在此處加入自訂魔物技能。
