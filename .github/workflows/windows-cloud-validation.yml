@@ -61,3 +61,6 @@ jobs:
 
       - name: HideGuildInfo and HidePartyInfo mapflag regression test
         run: python tools/integration/test_hide_info_mapflags.py
+
+      - name: HideDamage mapflag regression test
+        run: python tools/integration/test_hidedamage_mapflag.py
