@@ -6,6 +6,7 @@
 
 #include <cstdarg>// va_list
 #include <stdexcept>
+#include <string>
 
 #ifdef WIN32
 #include "winapi.hpp"
@@ -83,6 +84,14 @@ uint32 Sql_GetError( Sql* self );
 ///
 /// @return SQL_SUCCESS or SQL_ERROR
 int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* host, uint16 port, const char* db);
+
+
+/// Reads shared SQL connection settings from a configuration entry.
+bool Sql_ConfigRead(const char* key, const char* value);
+
+/// Applies shared SQL connection settings over a connection's legacy values.
+void Sql_ConfigApply(std::string& host, uint16& port, std::string& user, std::string& password);
+void Sql_ConfigApply(std::string& host, int32& port, std::string& user, std::string& password);
 
 
 
