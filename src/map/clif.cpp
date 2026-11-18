@@ -6223,6 +6223,10 @@ int32 clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tic
 	}
 	WBUFW(buf,28)=skill_lv;
 	WBUFW(buf,30)=div;
+#ifdef Pandas_MapFlag_HideDamage
+	if (map_getmapflag(src->m, MF_HIDEDAMAGE))
+		WBUFW(buf,30) = static_cast<uint16>(-div);
+#endif // Pandas_MapFlag_HideDamage
 	// For some reason, late 2013 and newer clients have
 	// a issue that causes players and monsters to endure
 	// type 6 (ACTION_SKILL) skills. So we have to do a small
