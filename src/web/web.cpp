@@ -287,6 +287,7 @@ void web_set_defaults() {
 int32 web_sql_init(void) {
 	// login db connection
 	login_handle = Sql_Malloc();
+	Sql_ConfigApply(login_server_ip, login_server_port, login_server_id, login_server_pw);
 	ShowInfo("Conectando ao servidor Login DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(login_handle, login_server_id.c_str(), login_server_pw.c_str(), login_server_ip.c_str(), login_server_port, login_server_db.c_str())) {
@@ -304,6 +305,7 @@ int32 web_sql_init(void) {
 	}
 
 	char_handle = Sql_Malloc();
+	Sql_ConfigApply(char_server_ip, char_server_port, char_server_id, char_server_pw);
 	ShowInfo("Conectando ao servidor Char DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(char_handle, char_server_id.c_str(), char_server_pw.c_str(), char_server_ip.c_str(), char_server_port, char_server_db.c_str())) {
@@ -321,6 +323,7 @@ int32 web_sql_init(void) {
 	}
 
 	map_handle = Sql_Malloc();
+	Sql_ConfigApply(map_server_ip, map_server_port, map_server_id, map_server_pw);
 	ShowInfo("Conectando ao servidor Map DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(map_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str())) {
@@ -338,6 +341,7 @@ int32 web_sql_init(void) {
 	}
 
 	web_handle = Sql_Malloc();
+	Sql_ConfigApply(web_server_ip, web_server_port, web_server_id, web_server_pw);
 	ShowInfo("Conectando ao servidor Web DB.....\n");
 
 	if (SQL_ERROR == Sql_Connect(web_handle, web_server_id.c_str(), web_server_pw.c_str(), web_server_ip.c_str(), web_server_port, web_server_db.c_str())) {
