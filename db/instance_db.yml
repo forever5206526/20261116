@@ -2,39 +2,31 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Instance Database
+# 副本資料庫
 ###########################################################################
 #
-# Instance Settings
+# 副本設定
 #
 ###########################################################################
 # - Id                Instance ID.
-#   Name              Instance Name.
-#   TimeLimit         Total lifetime of instance in seconds. Use 0 to define infinite time. (Default: 3600)
-#   IdleTimeOut       Time before an idle instance is destroyed in seconds. Use 0 to define infinite idle time. (Default: 300)
-#   NoNpc             Prevent copying NPCs from the source map. (Default: false)
-#   NoMapFlag         Prevent copying Mapflags from the source map. (Default: false)
-#   Destroyable       Toggles the ability to destroy the instance using instance 'Destroy' button. (Default: true)
-#                     Note: the button is displayed based on parties. For any mode, it requires the party leader to be the instance owner to destroy it.
-#   Enter:            Instance entrance coordinates.
-#     Map             Map Name where players start.
-#     X               X Coordinate where players start.
-#     Y               Y Coordinate where players start.
-#   AdditionalMaps:   List of maps that are part of an instance. (Optional)
+#   Name              副本名稱。
+#   TimeLimit         副本總存續時間（秒）。設為 0 表示不限制時間。（預設：3600）
+#   IdleTimeOut       閒置副本被銷毀前的等待時間（秒）。設為 0 表示不限制閒置時間。（預設：300）
+#   NoNpc             是否禁止從來源地圖複製 NPC。（預設：false）
+#   NoMapFlag         是否禁止從來源地圖複製地圖旗標。（預設：false）
+#   Destroyable       是否允許使用副本介面的「Destroy」按鈕銷毀副本。（預設：true）
+#                     注意：按鈕是否顯示取決於隊伍設定。無論何種模式，皆須由副本擁有者的隊長才能銷毀副本。
+#   Enter:            副本入口座標。
+#     Map             玩家開始的位置地圖名稱。
+#     X               玩家開始位置的 X 座標。
+#     Y               玩家開始位置的 Y 座標。
+#   AdditionalMaps:   屬於此副本的其他地圖清單。（選填）
 ###########################################################################
 
 Header:
