@@ -1,39 +1,39 @@
-# This file is a part of rAthena.
-#   Copyright(C) 2022 rAthena Development Team
+# 此檔案屬於 rAthena 專案。
+#   Copyright(C) 2022 rAthena 開發團隊
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# 本程式為自由軟體，您可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+#（GNU General Public License）重新散布或修改本程式；
+# 您可以選擇使用授權條款的第 3 版，或
+#（由您選擇）任何更新版本。
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
+# 本程式的發布是希望能對使用者有所幫助，
+# 但不提供任何明示或默示的保證，
+# 包含適售性或特定用途適用性的默示保證。詳情請參閱
+# GNU 通用公共授權條款。
 #
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###########################################################################
-# Player Group Database
-###########################################################################
-#
-# Player Group Settings
+# 您應已隨本程式收到 GNU 通用公共授權條款的副本；
+# 若未收到，請參閱 <http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# - Id                    Group ID.
-#   Name                  Group name.
-#   Level                 GM Level used for ranking groups. (Default: 0)
-#   LogCommands           Whether atcommands should be logged or not. (Default: false)
-#   Commands:             List of atcommands that can be used by this group. (Default: none)
-#     <atcommand name>    Whether the specified atcommand can be used by this group or not.
-#   CharCommands:         List of charcommands that can be used by this group. (Default: none)
-#     <charcommand name>  Whether the specified charcommand can be used by this group or not.
-#   Permissions:          List of permissions the group has. (Default: none)
-#     <permission name>   Whether the group has this permission or not.
-#   Inherit:              List of groups that will be inherited. (Default: none)
-#     <group name>        Whether this group will be inherited or not.
+# 玩家群組資料庫
+###########################################################################
+#
+# 玩家群組設定
+#
+###########################################################################
+# - Id                    群組 ID。
+#   Name                  群組名稱。
+#   Level                 用於群組排序的 GM 等級。（預設：0）
+#   LogCommands           是否記錄 AtCommand 指令。（預設：false）
+#   Commands:             此群組可使用的 AtCommand 清單。（預設：無）
+#     <atcommand name>    設定此群組是否可使用指定的 AtCommand。
+#   CharCommands:         此群組可使用的 CharCommand 清單。（預設：無）
+#     <charcommand name>  設定此群組是否可使用指定的 CharCommand。
+#   Permissions:          此群組擁有的權限清單。（預設：無）
+#     <permission name>   設定此群組是否擁有指定權限。
+#   Inherit:              要繼承的群組清單。（預設：無）
+#     <group name>        設定是否繼承指定群組。
 ###########################################################################
 
 Header:
@@ -42,25 +42,25 @@ Header:
 
 Body:
   - Id: 0
-    # group 0 is the default group for every new account
+    # 群組 0 是每個新帳號的預設群組。
     Name: Player
     Level: 0
     Commands:
       changedress: true
       resurrect: true
     Permissions:
-      # without this basic permissions regular players could not trade or party
+      # 若沒有這些基本權限，一般玩家將無法交易或組隊。
       can_trade: true
       can_party: true
       attendance: true
   - Id: 1
     Name: Super Player
-    # Can do everything Players can and more
+    # 可執行玩家能做的所有操作，並擁有更多權限。
     Inherit:
       Player: true
     Level: 0
     Commands:
-      # Informational commands
+      # 資訊查詢指令
       commands: true
       charcommands: true
       help: true
@@ -78,7 +78,7 @@ Body:
       showexp: true
       showzeny: true
       whereis: true
-      # Feature commands
+      # 功能指令
       refresh: true
       noask: true
       noks: true
@@ -175,7 +175,7 @@ Body:
       any_warp: true
   - Id: 5
     Name: VIP
-    # Can do everything Players can
+    # 可執行玩家能做的所有操作。
     Inherit:
       Player: true
     Level: 0
