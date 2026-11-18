@@ -8911,6 +8911,9 @@ ACMD_FUNC(mapflag) {
 												MF_BATTLEGROUND,
 												MF_SKILL_DAMAGE,
 												MF_SKILL_DURATION };
+#ifdef Pandas_MapFlag_MobInfo
+			disabled_mf.push_back(MF_MOBINFO);
+#endif // Pandas_MapFlag_MobInfo
 
 			if (flag > 0 && util::vector_exists(disabled_mf, mapflag)) {
 				sprintf(atcmd_output,"[ @mapflag ] %s flag cannot be enabled as it requires unique values.", flag_name);
