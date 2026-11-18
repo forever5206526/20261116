@@ -42,7 +42,7 @@ def main() -> None:
     # Verify every distinct SQL connection initializer applies the shared
     # settings before opening the connection, including the Web server's four DBs.
     connection_functions = (
-        ("src/login/account.cpp", "static bool account_db_sql_init(", "static void account_db_sql_destroy(", 1),
+        ("src/login/account.cpp", "static bool account_db_sql_init(AccountDB* self) {", "static void account_db_sql_destroy(AccountDB* self){", 1),
         ("src/login/ipban.cpp", "void ipban_init(void)", "void ipban_final(void)", 1),
         ("src/login/loginlog.cpp", "bool loginlog_init(void)", "bool loginlog_final(void)", 1),
         ("src/char/inter.cpp", "int32 inter_init_sql(", "void inter_final(", 1),
