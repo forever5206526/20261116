@@ -1,6 +1,6 @@
 # Pandas develop 功能盤點 — 地圖標記批次
 
-盤點日期：2026-11-17  
+盤點日期：2026-11-18  
 Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`  
 核心基準：`AoShinRO/brHades@cffe264644a32e059a505d744587c1e696c67ac0`
 
@@ -13,7 +13,7 @@ Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`
 
 ## Pandas MapFlag 完整清單
 
-Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 10 項；其餘 14 項仍待逐項比對及移植。
+Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 12 項；其餘 12 項仍待逐項比對及移植。
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
@@ -21,8 +21,8 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_NoAutoLoot` | 禁止地圖自動拾取 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoToken` | 禁止原地復活之證 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoCapture` | 禁止寵物捕捉 | 已移植相容別名；轉接 brHades 原生 MF_NOPETCAPTURE |
-| `Pandas_MapFlag_HideGuildInfo` | 隱藏其他玩家公會資訊 | 待核對及移植 |
-| `Pandas_MapFlag_HidePartyInfo` | 隱藏其他玩家隊伍名稱 | 待核對及移植 |
+| `Pandas_MapFlag_HideGuildInfo` | 隱藏其他玩家公會資訊 | 已移植／PR #8 合併；16 組 VS 建置、PRE/RE NPC/DB、回歸測試及 CodeQL 通過 |
+| `Pandas_MapFlag_HidePartyInfo` | 隱藏其他玩家隊伍名稱 | 已移植／PR #8 合併；16 組 VS 建置、PRE/RE NPC/DB、回歸測試及 CodeQL 通過 |
 | `Pandas_MapFlag_NoMail` | 禁止郵件／RODEX 操作 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoPet` | 禁止地圖使用寵物（啟用時退回寵物蛋） | 已移植／PR #5 的 35 項 CI checks 全部成功 |
 | `Pandas_MapFlag_NoHomun` | 禁止召喚人工生命體 | brHades 原生等價實作；PR #5 的 NoHomun 回歸測試隨 CI 通過 |
@@ -44,7 +44,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 ## 下一批執行順序
 
-1. 先對 17 項待辦逐項搜尋 brHades 原生同等功能，確認是否已存在及行為差異。
+1. 先對剩餘 12 項待辦逐項搜尋 brHades 原生同等功能，確認是否已存在及行為差異。
 2. 對不存在的功能追蹤 Pandas 實作、相依資料結構、封包、腳本常量、設定、訊息與資料庫。
 3. 依相依關係排序，先處理可獨立驗證且不需大幅改動核心結構的功能。
 4. 每個功能獨立修改、回歸測試、Debug/Release x64/Win32 雲端建置，再更新本表狀態。
@@ -60,3 +60,12 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 - 8 項功能回歸測試：成功
 
 Release x64 編譯成品由 Actions artifact 保存；這些驗證不等同完整伺服器載入、資料庫遷移或遊戲客戶端實測。
+
+
+## 2026-11-18 HideInfo 驗收紀錄
+
+- PR #8 已合併至正式 `main`：`2b31e13ca7cf22585ecea0645a8721599e70b399`。
+- 合併前最新 PR 提交的 16 組 Visual Studio Debug/Release、Win32/x64、PRE/RE 建置全部成功。
+- PRE/RE NPC 與資料庫啟動驗證成功；HideInfo 與既有功能回歸測試成功；PRE/RE CodeQL 成功。
+- 合併後針對 main 新提交啟動的 GitHub Actions 驗證仍需另外確認，不能以合併前結果代替。
+- 13 項 HideInfo source-contract regression checks 已納入 Windows validation workflow；不等同完整遊戲客戶端實測。
