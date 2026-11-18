@@ -15,6 +15,9 @@
 
 #define Pandas_NpcFilter_IDENTIFY
 #define Pandas_ScriptCommand_ProcessHalt
+#define Pandas_Mapflags
+#define Pandas_MobInfomation_Extend
+#define Pandas_MapFlag_MobInfo
 #define Pandas_MapFlag_NoAutoLoot
 #define Pandas_MapFlag_NoToken
 #define Pandas_MapFlag_NoMail
