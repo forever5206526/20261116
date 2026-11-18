@@ -2,34 +2,26 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Laphine Synthesis Database
+# 拉菲內合成資料庫
 ###########################################################################
 #
-# Laphine Synthesis Settings
+# 拉菲內合成設定
 #
 ###########################################################################
-# - Item                       Item that triggers Laphine Synthesis.
-#   RewardGroup                Item Group that will be given out as a reward.
-#   RequiredRequirementsCount  Amount of requirements that have to be fulfilled. (Default: 1)
-#   MinimumRefine              Minimum refine level of the required items. (Default: 0)
-#   MaximumRefine              Maximum refine level of the required items. (Default: MAX_REFINE)
-#   Requirements:              List of possible requirement items.
-#     - Item                   Item name of the required item
-#       Amount                 Amount of specific required item. (Default: 1)
+# - Item                       觸發拉菲內合成的道具。
+#   RewardGroup                作為獎勵發放的道具群組。
+#   RequiredRequirementsCount  必須符合的需求項目數量。（預設：1）
+#   MinimumRefine              需求道具的最低精煉等級。（預設：0）
+#   MaximumRefine              需求道具的最高精煉等級。（預設：MAX_REFINE）
+#   Requirements:              可選擇的需求道具清單。
+#     - Item                   需求道具名稱。
+#       Amount                 指定需求道具的數量。（預設：1）
 ###########################################################################
 
 Header:
