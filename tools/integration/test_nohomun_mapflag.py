@@ -15,7 +15,7 @@ checks = {
     "summoning is blocked": ("src/map/homunculus.cpp", "map_getmapflag(sd->bl.m, MF_NOHOMUN)"),
     "summoning message": ("src/map/homunculus.cpp", "msg_txt(sd, 1545)"),
     "activation message": ("src/map/map.cpp", "msg_txt(pl_sd, 1544)"),
-    "English message": ("conf/msg_conf/map_msg.conf", "1545: You cannot summon a homunculus on this map."),
+    "Traditional Chinese main message": ("conf/msg_conf/map_msg.conf", "1545: 此地圖禁止召喚人工生命體。"),
     "Traditional Chinese message": ("conf/msg_conf/map_msg_chn.conf", "1545: 此地圖禁止召喚人工生命體。"),
 }
 for label, (path, needle) in checks.items():

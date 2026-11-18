@@ -13,7 +13,7 @@ CHECKS = (
     ("activation notice", "src/map/map.cpp", "msg_txt(pl_sd, 1547)"),
     ("new mercenary is blocked", "src/map/mercenary.cpp", "map_getmapflag(sd->bl.m, MF_NOMERC)"),
     ("summon denial notice", "src/map/mercenary.cpp", "msg_txt(sd, 1548)"),
-    ("English message", "conf/msg_conf/map_msg.conf", "1548: You cannot summon a mercenary on this map."),
+    ("Traditional Chinese main message", "conf/msg_conf/map_msg.conf", "1548: 此地圖禁止召喚傭兵。"),
     ("Traditional Chinese message", "conf/msg_conf/map_msg_chn.conf", "1548: 此地圖禁止召喚傭兵。"),
     ("Windows CI step", ".github/workflows/windows-cloud-validation.yml", "test_nomerc_mapflag.py"),
 )

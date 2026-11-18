@@ -69,7 +69,6 @@ std::string web_server_id = "ragnarok";
 std::string web_server_pw = "";
 std::string web_server_db = "ragnarok";
 
-std::string default_codepage = "";
 
 Sql * login_handle = nullptr;
 Sql * char_handle = nullptr;
@@ -234,8 +233,6 @@ int32 inter_config_read(const char* cfgName)
 			web_server_pw = w2;
 		else if(!strcmpi(w1,"web_server_db"))
 			web_server_db = w2;
-		else if(!strcmpi(w1,"default_codepage"))
-			default_codepage = w2;
 		else if (!strcmpi(w1, "user_configs"))
 			safestrncpy(user_configs_table, w2, sizeof(user_configs_table));
 		else if (!strcmpi(w1, "char_configs"))
@@ -299,11 +296,6 @@ int32 web_sql_init(void) {
 	}
 	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de login)\n");
 
-	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(login_handle, default_codepage.c_str()))
-			Sql_ShowDebug(login_handle);
-	}
-
 	char_handle = Sql_Malloc();
 	Sql_ConfigApply(char_server_ip, char_server_port, char_server_id, char_server_pw);
 	ShowInfo("Conectando ao servidor Char DB.....\n");
@@ -316,11 +308,6 @@ int32 web_sql_init(void) {
 		exit(EXIT_FAILURE);
 	}
 	ShowStatus("Conexao bem-sucedida! (Conexao do servidor Char)\n");
-
-	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(char_handle, default_codepage.c_str()))
-			Sql_ShowDebug(char_handle);
-	}
 
 	map_handle = Sql_Malloc();
 	Sql_ConfigApply(map_server_ip, map_server_port, map_server_id, map_server_pw);
@@ -335,11 +322,6 @@ int32 web_sql_init(void) {
 	}
 	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de mapas)\n");
 
-	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(map_handle, default_codepage.c_str()))
-			Sql_ShowDebug(map_handle);
-	}
-
 	web_handle = Sql_Malloc();
 	Sql_ConfigApply(web_server_ip, web_server_port, web_server_id, web_server_pw);
 	ShowInfo("Conectando ao servidor Web DB.....\n");
@@ -352,11 +334,6 @@ int32 web_sql_init(void) {
 		exit(EXIT_FAILURE);
 	}
 	ShowStatus("Conexao bem-sucedida! (Conexao com o servidor Web)\n");
-
-	if (!default_codepage.empty()) {
-		if (SQL_ERROR == Sql_SetEncoding(web_handle, default_codepage.c_str()))
-			Sql_ShowDebug(web_handle);
-	}
 
 
 	return 0;

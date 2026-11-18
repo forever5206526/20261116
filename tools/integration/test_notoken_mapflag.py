@@ -52,7 +52,7 @@ def source_contract() -> None:
         raise AssertionError("MF_NOTOKEN 腳本常量匯出缺失")
 
     messages = (ROOT / "conf/msg_conf/map_msg.conf").read_text(encoding="utf-8-sig")
-    if f"{MESSAGE_ID}: Resurrection using a Token of Siegfried is disabled on this map." not in messages:
+    if f"{MESSAGE_ID}: 此地圖已停用使用齊格弗裡德之證復活的功能。" not in messages:
         raise AssertionError("NoToken 地圖提示訊息缺失")
 
 

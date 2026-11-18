@@ -26,8 +26,34 @@ def main() -> None:
             "uint16 shared SQL apply declaration is missing", failures)
     require("void Sql_ConfigApply(std::string& host, int32& port" in sql_hpp,
             "int32 shared SQL apply declaration is missing", failures)
-    for key in ("sql_host", "sql_port", "sql_user", "sql_password"):
+    for key in ("sql_host", "sql_port", "sql_user", "sql_password", "sql_codepage"):
         require(f'"{key}"' in sql_cpp, f"common SQL parser does not recognize {key}", failures)
+    for legacy_key in ("default_codepage", "login_codepage", "ipban_codepage", "log_codepage"):
+        require(f'"{legacy_key}"' in sql_cpp,
+                f"legacy {legacy_key} configuration is not mapped to the shared codepage", failures)
+
+    # MySQL error 1045 is the authentication-rejection signal. Keep its warning
+    # explicit, avoid printing the password, and still fail the connection.
+    try:
+        connect_start = sql_cpp.index("int32 Sql_Connect(")
+        connect_section = sql_cpp[connect_start:sql_cpp.index("/// Retrieves the timeout", connect_start)]
+    except ValueError:
+        connect_section = ""
+        failures.append("could not isolate Sql_Connect authentication handling")
+    require("error_code == 1045" in connect_section,
+            "Sql_Connect does not detect MySQL access-denied error 1045", failures)
+    require("database username or password is incorrect" in connect_section,
+            "Sql_Connect does not show a clear incorrect-credentials warning", failures)
+    require("sql_user and sql_password" in connect_section,
+            "authentication warning does not point to the shared credential settings", failures)
+    require("return SQL_ERROR;" in connect_section,
+            "Sql_Connect must reject the connection after authentication failure", failures)
+    require("mysql_error(&self->handle)" in connect_section,
+            "Sql_Connect must preserve the original diagnostic for other connection errors", failures)
+    require("sql_config_codepage_set && !sql_config_codepage.empty()" in connect_section,
+            "Sql_Connect does not apply the configured shared codepage", failures)
+    require("Sql_SetEncoding(self, sql_config_codepage.c_str())" in connect_section,
+            "shared codepage is not applied centrally to each SQL connection", failures)
 
     parser_files = (
         "src/login/login.cpp",
@@ -38,6 +64,21 @@ def main() -> None:
     for path in parser_files:
         require("Sql_ConfigRead(w1, w2)" in read(path),
                 f"{path} does not read shared SQL settings", failures)
+
+    connection_modules = (
+        "src/login/account.cpp",
+        "src/login/ipban.cpp",
+        "src/login/loginlog.cpp",
+        "src/char/inter.cpp",
+        "src/map/map.cpp",
+        "src/web/web.cpp",
+    )
+    for path in connection_modules:
+        source = read(path)
+        require("Sql_SetEncoding(" not in source,
+                f"{path} still applies a service-specific codepage instead of the shared setting", failures)
+        require("default_codepage" not in source and "ipban_codepage" not in source and "log_codepage" not in source,
+                f"{path} still stores a separate codepage value", failures)
 
     # Verify every distinct SQL connection initializer applies the shared
     # settings before opening the connection, including the Web server's four DBs.
@@ -72,11 +113,16 @@ def main() -> None:
             require(len(apply_positions) == len(connect_positions) and
                     all(a < c for a, c in zip(apply_positions, connect_positions)),
                     "Web DB connections must each apply the shared credentials before connecting", failures)
+        require("return false" in section or "exit(EXIT_FAILURE)" in section,
+                f"{path} {start}: failed SQL authentication must block service initialization", failures)
 
     config = read("conf/inter_athena.conf")
-    configured_keys = re.findall(r"^\s*(sql_(?:host|port|user|password))\s*:", config, re.MULTILINE)
-    require(sorted(configured_keys) == sorted(["sql_host", "sql_port", "sql_user", "sql_password"]),
+    configured_keys = re.findall(r"^\s*(sql_(?:host|port|user|password|codepage))\s*:", config, re.MULTILINE)
+    require(sorted(configured_keys) == sorted(["sql_host", "sql_port", "sql_user", "sql_password", "sql_codepage"]),
             "inter_athena.conf must define each shared SQL setting exactly once", failures)
+    codepage_keys = re.findall(r"^\s*([a-z_]*codepage)\s*:", config, re.MULTILINE)
+    require(codepage_keys == ["sql_codepage"],
+            f"database codepage must be configured once, found {codepage_keys}", failures)
     legacy_active = re.findall(
         r"^(?!\s*//)\s*(?:login_server|ipban_db|char_server|map_server|web_server|log_db)_(?:ip|port|id|pw)\s*:",
         config,
@@ -99,7 +145,7 @@ def main() -> None:
     if failures:
         raise SystemExit("\n".join(failures))
 
-    print("PASS: shared MySQL credentials, connection coverage, schema separation and legacy inter-server credentials")
+    print("PASS: shared MySQL credentials and codepage, connection coverage, schema separation and legacy compatibility")
 
 
 if __name__ == "__main__":

@@ -1,2 +1,2 @@
-// Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.cpp
-Bem vindo ao brHades, reporte qualquer bug que encontrar.
+// 內部預設最多支援 128 行。若需要更多行，必須修改 pc.cpp 中的 MOTD_LINE_SIZE 定義。
+歡迎使用 brHades，若發現任何錯誤，請回報給管理員。

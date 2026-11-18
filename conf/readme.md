@@ -1,20 +1,20 @@
-# Import Directories
+# 匯入設定目錄
 
-## What is the import directory for?
+## import 目錄的用途是什麼？
 
-The `import/` directory provides a way for you to change your config settings without the need to even touch the main `/conf/` and `/db/` files.
+`import/` 目錄可讓您修改設定，而不必直接變更主要的 `/conf/` 與 `/db/` 檔案。
 
-By placing your custom entries into the `import/` directory within these two locations, your core files will not need to have any conflicts resolved when you update your server. You store your changes, and the rest is updated with rAthena.
+只要將自訂設定放入這兩個位置中的 `import/` 目錄，更新伺服器時就不必處理核心檔案的衝突。您的變更會保留在匯入檔案中，其餘內容則可隨 rAthena 更新。
 
-## How does this work?
+## 這個機制如何運作？
 
-Think of "import" as in "override". Place only the settings you have changed in the import files, or settings you are "overriding".
+請將「import」理解為「覆寫」。只需將您已變更或想要覆寫的設定放入匯入檔案中。
 
-For example, when setting up a server there are always a few config settings that users would like to change in order for rAthena to suit their needs. The following example will show you how to use the `/conf/import/` directory correctly. (for `/db/import/` examples, see [/db/readme.md](/db/readme.md))
+例如，設定伺服器時，通常會有一些設定需要調整，才能符合您的需求。以下範例說明如何正確使用 `/conf/import/` 目錄。（`/db/import/` 的範例請參閱 [/db/readme.md](/db/readme.md)。）
 
-### Login Server
+### 登入伺服器
 ---
-We want to use MD5 passwords and disable `_m/f` account creation methods.
+我們要使用 MD5 密碼，並停用 `_m/f` 帳號註冊方式。
 
 #### /conf/import/login_conf.txt
 
@@ -22,53 +22,53 @@ We want to use MD5 passwords and disable `_m/f` account creation methods.
 	use_MD5_passwords: yes
 
 
-### Char Server
+### 角色伺服器
 ---
-We want to change the server name to "Odin".
+我們要將伺服器名稱改為「Odin」。
 
 #### /conf/import/char_conf.txt
 
 	server_name: Odin
 
 
-### Map Server
+### 地圖伺服器
 ---
-We want to hide all error messages and add a few custom maps.
+我們要隱藏所有錯誤訊息，並新增幾張自訂地圖。
 
 #### /conf/import/map_conf.txt
 
-	//Makes server output more silent by omitting certain types of messages:
-	//16: Hide Error and SQL Error messages.
+	// 隱藏指定類型的訊息，讓伺服器輸出更精簡：
+	//16：隱藏錯誤與 SQL 錯誤訊息。
 	console_silent: 16
 	map: 1@toy
 	map: 1@valley
 	map: shops
 
 
-### Inter Server
+### 伺服器間設定
 ---
-We want to use MySQL tables instead of .txt files.
+我們要使用 MySQL 資料表，而不是 .txt 檔案。
 
 #### /conf/import/inter_conf.txt
 
 	use_sql_db: yes
 
 
-### Logging Settings
+### 記錄設定
 ---
-We want to log all items and all chat messages.
+我們要記錄所有物品與所有聊天訊息。
 
 #### /conf/import/log_conf.txt
 
 	log_filter: 1
-	// Log CHAT (Global, Whisper, Party, Guild, Main chat, Clan) (Note 3)
-	// log_chat: 63 = logs everything
+	// 記錄聊天訊息（全域、密語、隊伍、公會、主頻道、氏族）。（注意 3）
+	// log_chat: 63 = 記錄所有聊天訊息
 	log_chat: 63
 
 
-### Battle Configs
+### 戰鬥設定
 ---
-We want to change the way various mechanics work. For anything that would be configured in the `/conf/battle/` directory, it will go into `import/battle_conf.txt`. To help you find which configs came from where, it's generally a good idea to comment out the name of the file that specific collection of configs came from.
+我們要調整各種遊戲機制。原本應設定在 `/conf/battle/` 目錄中的項目，都可以放入 `import/battle_conf.txt`。為了方便辨識各項設定的來源，建議在每組設定前方以註解標示原始檔名。
 
 #### /conf/import/battle_conf.txt
 
@@ -88,11 +88,11 @@ We want to change the way various mechanics work. For anything that would be con
 	at_monsterignore: yes
 	cashshop_show_points: yes
 	hide_fav_sell: yes
-	// Whether or not mail box status is displayed upon login.
-	// Default: 0
-	// 0 = No
-	// 1 = Yes
-	// 2 = Yes, when there are unread mails
+	// 登入時是否顯示信箱狀態？
+	// 預設值：0
+	// 0 = 否
+	// 1 = 是
+	// 2 = 有未讀郵件時才顯示
 	mail_show_status: 2
 
 	// monster.conf
@@ -115,4 +115,4 @@ We want to change the way various mechanics work. For anything that would be con
 	debuff_on_logout: 3
 
 
-We cannot stress enough how helpful this system is for everyone. The majority of git conflicts will simply go away if users make use of the `import/` system.
+這個機制對所有使用者都非常有幫助。只要善用 `import/` 系統，大多數 Git 合併衝突都能避免。

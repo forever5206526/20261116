@@ -33,6 +33,8 @@ static bool sql_config_host_set = false;
 static bool sql_config_port_set = false;
 static bool sql_config_user_set = false;
 static bool sql_config_password_set = false;
+static std::string sql_config_codepage;
+static bool sql_config_codepage_set = false;
 
 bool Sql_ConfigRead(const char* key, const char* value)
 {
@@ -62,6 +64,19 @@ bool Sql_ConfigRead(const char* key, const char* value)
 	} else if (strcmpi(key, "sql_password") == 0) {
 		sql_config_password = value;
 		sql_config_password_set = true;
+	} else if (strcmpi(key, "sql_codepage") == 0) {
+		sql_config_codepage = value;
+		// An empty shared value leaves room for a non-empty legacy alias.
+		sql_config_codepage_set = (value[0] != '\0');
+	} else if (strcmpi(key, "default_codepage") == 0 ||
+		strcmpi(key, "login_codepage") == 0 ||
+		strcmpi(key, "ipban_codepage") == 0 ||
+		strcmpi(key, "log_codepage") == 0) {
+		// Accept legacy per-service keys as a single fallback for older configs.
+		if (!sql_config_codepage_set && value[0] != '\0') {
+			sql_config_codepage = value;
+			sql_config_codepage_set = true;
+		}
 	} else {
 		return false;
 	}
@@ -164,7 +179,17 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 
 	if( !mysql_real_connect(&self->handle, host, user, passwd, db, (uint32)port, nullptr/*unix_socket*/, 0/*clientflag*/) )
 	{
-		ShowSQL("%s\n", mysql_error(&self->handle));
+		// MySQL error 1045 (ER_ACCESS_DENIED_ERROR) means authentication was rejected.
+		const uint32 error_code = mysql_errno(&self->handle);
+		if (error_code == 1045) {
+			ShowSQL("MySQL authentication failed (error 1045 - Access denied): "
+				"the database username or password is incorrect for user '%s'. "
+				"Check sql_user and sql_password in conf/inter_athena.conf or "
+				"the corresponding legacy service settings. The connection was rejected.\n",
+				user != nullptr ? user : "(unknown)");
+		} else {
+			ShowSQL("%s\n", mysql_error(&self->handle));
+		}
 		return SQL_ERROR;
 	}
 
@@ -174,6 +199,11 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 		ShowSQL("Failed to establish keepalive for DB connection!\n");
 		return SQL_ERROR;
 	}
+
+	// Apply one shared SQL character set to every database connection.
+	if (sql_config_codepage_set && !sql_config_codepage.empty() &&
+		SQL_ERROR == Sql_SetEncoding(self, sql_config_codepage.c_str()))
+		Sql_ShowDebug(self);
 
 	return SQL_SUCCESS;
 }
