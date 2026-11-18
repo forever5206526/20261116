@@ -4309,6 +4309,7 @@ int32 map_sql_init(void)
 	// main db connection
 	mmysql_handle = Sql_Malloc();
 	qsmysql_handle = Sql_Malloc();
+	Sql_ConfigApply(map_server_ip, map_server_port, map_server_id, map_server_pw);
 
 	ShowInfo("Connecting to the Map DB Server....\n");
 	if( SQL_ERROR == Sql_Connect(mmysql_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str()) ||
@@ -4355,6 +4356,7 @@ int32 log_sql_init(void)
 {
 	// log db connection
 	logmysql_handle = Sql_Malloc();
+	Sql_ConfigApply(log_db_ip, log_db_port, log_db_id, log_db_pw);
 
 	ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": Conectando ao Banco de Dados de Log " CL_WHITE "%s" CL_RESET " Em " CL_WHITE "%s" CL_RESET "...\n",log_db_db.c_str(), log_db_ip.c_str());
 	if ( SQL_ERROR == Sql_Connect(logmysql_handle, log_db_id.c_str(), log_db_pw.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str()) ){
