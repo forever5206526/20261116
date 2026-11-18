@@ -2,47 +2,39 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Quest Database
+# 任務資料庫
 ###########################################################################
 #
-# Quest Settings
+# 任務設定
 #
 ###########################################################################
-# - Id                     Quest ID.
-#   Title                  Quest title.
-#   TimeLimit              Amount of time before the quest expires. (Default: 0)
-#   Targets:               Quest objective target. (Default: null)
-#     - Mob                Name of monster to kill.
-#       Count              Amount of monsters to kill. Set to 0 to skip the target on import.
-#       Id                 Unique target index for the quest Id. Requires a positive number.
-#       Race               Monster race target. (Default: All)
-#       Size               Monster size target. (Default: All)
-#       Element            Monster element target. (Default: All)
-#       MinLevel           Minimum monster level target. If not supplied but MaxLevel defined, MinLevel is 1. Set to 0 to ignore MinLevel on import. (Default: 0)
-#       MaxLevel           Maximum monster level target. Set to 0 to ignore MaxLevel on import. (Default: 0)
-#       Location           Map name where kills are counted. (Default: All)
-#       MapName            Displayed map name in quest UI. (Default: empty string)
-#       MapMobTargets      List of monster names. Only names in the list will increase the kill counter. Only active when Id is used. (Default: all monsters)
-#         <name>: <bool>   Monster name and whether the monster is added or removed from the list.
-#   Drops:                 Quest item drop targets. (Default: null)
-#     - Mob                Monster to kill. 0 will apply to all monsters. (Default: 0)
-#       Item               Item to drop.
-#       Count              Amount of items that will drop. Non-stackable items default to 1. (Default: 1)
-#       Rate               Item drop rate. (10000 = 100%)
+# - Id                     任務 ID。
+#   Title                  任務標題。
+#   TimeLimit              任務到期前的時間。（預設：0）
+#   Targets:               任務目標設定。（預設：null）
+#     - Mob                要擊殺的魔物名稱。
+#       Count              要擊殺的魔物數量。匯入時設為 0 可略過此目標。
+#       Id                 此任務 ID 的唯一目標索引，必須為正整數。
+#       Race               目標魔物種族。（預設：All）
+#       Size               目標魔物體型。（預設：All）
+#       Element            目標魔物屬性。（預設：All）
+#       MinLevel           目標魔物最低等級。若未設定但已設定 MaxLevel，MinLevel 將為 1。匯入時設為 0 可忽略此條件。（預設：0）
+#       MaxLevel           目標魔物最高等級。匯入時設為 0 可忽略此條件。（預設：0）
+#       Location           計算擊殺數的地圖名稱。（預設：All）
+#       MapName            任務介面顯示的地圖名稱。（預設：空字串）
+#       MapMobTargets      魔物名稱清單。只有清單中的魔物會增加擊殺計數，且僅在使用 Id 時生效。（預設：所有魔物）
+#         <name>: <bool>   魔物名稱，以及是否將該魔物加入或移出清單。
+#   Drops:                 任務道具掉落目標。（預設：null）
+#     - Mob                要擊殺的魔物。設為 0 表示適用所有魔物。（預設：0）
+#       Item               要掉落的道具。
+#       Count              掉落道具數量。不可堆疊道具的預設數量為 1。（預設：1）
+#       Rate               道具掉落率。（10000 = 100%）
 ###########################################################################
 
 Header:

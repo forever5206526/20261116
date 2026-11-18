@@ -1,31 +1,23 @@
-# Specific Item Drop Ratio Database
+# 指定道具掉落比率資料庫
 # This file is a part of rAthena.
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Mob Item Ratio Database
+# 魔物道具掉落比率資料庫
 ###########################################################################
 #
-# Mob Item Ratio Settings
+# 魔物道具掉落比率設定
 #
 ###########################################################################
-# - Item          AegisName of item to adjust.
-#   Ratio         Drop rate.
-#   List:         List of monster(s) affected (format <Aegis monster name>: true/false). (Defaulted to all monsters)
+# - Item          要調整的道具 AegisName。
+#   Ratio         掉落率。
+#   List:         套用設定的魔物清單（格式為 <魔物 AegisName>: true/false）。（預設套用至所有魔物）
 ###########################################################################
 
 Header:

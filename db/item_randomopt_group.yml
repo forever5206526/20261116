@@ -2,43 +2,35 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Item Random Option Group Database
+# 道具隨機附加能力群組資料庫
 ###########################################################################
 #
-# Item Random Option Group Settings
+# 道具隨機附加能力群組設定
 #
 ###########################################################################
-# - Id                  Item Random Option Group ID.
-#   Group               Item Random Option Group constant.
-#   Slots:              Slot in which an Item Random Option is guaranteed to be applied. Max of MAX_ITEM_RDM_OPT.
-#     - Slot            Slot number.
-#       Options:        List of possible Item Random Options for slot.
+# - Id                  道具隨機附加能力群組 ID。
+#   Group               道具隨機附加能力群組常數。
+#   Slots:              保證套用道具隨機附加能力的欄位。最多為 MAX_ITEM_RDM_OPT。
+#     - Slot            欄位編號。
+#       Options:        此欄位可套用的道具隨機附加能力清單。
 #         - Option      Item Random Option constant.
-#           MinValue    Minimum value. (Default: 0)
-#           MaxValue    Maximum value. (Default: 0)
-#           Param       Parameter value. (Default: 0)
-#           Chance      Chance applied specifically to this Item Random Option (1 = 0.01%, 10000 = 100%). (Default: 0)
-#   MaxRandom           Maximum amount of random options applied. These options are not guaranteed to be applied. Max of (MAX_ITEM_RDM_OPT - Total 'Slots'). (Default: 0)
-#   Random:             List of possible Item Random Options for remaining slots. (Optional)
+#           MinValue    最小值。（預設：0）
+#           MaxValue    最大值。（預設：0）
+#           Param       參數值。（預設：0）
+#           Chance      此道具隨機附加能力的套用機率（1 = 0.01%，10000 = 100%）。（預設：0）
+#   MaxRandom           最多套用的隨機附加能力數量。這些選項不保證一定套用，最大值為 MAX_ITEM_RDM_OPT 減去 Slots 總數。（預設：0）
+#   Random:             剩餘欄位可套用的道具隨機附加能力清單。（選填）
 #     - Option          Item Random Option constant.
-#       MinValue        Minimum value. (Default: 0)
-#       MaxValue        Maximum value. (Default: 0)
-#       Param           Parameter value. (Default: 0)
-#       Chance          Chance applied specifically to this Item Random Option (1 = 0.01%, 10000 = 100%). (Default: 0)
+#       MinValue        最小值。（預設：0）
+#       MaxValue        最大值。（預設：0）
+#       Param           參數值。（預設：0）
+#       Chance          此道具隨機附加能力的套用機率（1 = 0.01%，10000 = 100%）。（預設：0）
 ###########################################################################
 
 Header:

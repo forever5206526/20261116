@@ -1,44 +1,40 @@
-# This file is a part of rAthena.
+# 本檔案屬於 rAthena 專案。
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# 本程式為自由軟體；你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
+# 本程式的散布是希望能對使用者有所幫助，但不提供任何明示或默示的保證，
+# 包括但不限於適售性或特定用途適用性的默示保證。詳情請參閱 GNU 通用公共授權條款。
 #
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 你應已隨本程式收到 GNU 通用公共授權條款副本；若沒有，請參閱
+# <http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Achievement Database
+# 成就資料庫
 ###########################################################################
 #
-# Achievement Settings
+# 成就設定
 #
 ###########################################################################
-# - Id                  Achievement ID.
-#   Group               Achievement group type. (Defaut: None)
-#   Name                Achievement name.
-#   Targets:            List of targets the achievement requires. (Default: null)
-#     - Id              Index value used for import methods.
-#       Mob             Target mob. (Default: 0)
-#       Count           Target count. (Default: 1)
-#   Condition           Conditional statement that must be met for the achievement to be considered complete. (Default: null)
-#   Map                 Map name that is used for the AG_CHATTING type. (Default: -1)
-#   Dependents:         List of achievements that need to be completed before this achievement is considered complete. (Default: null)
-#     - Id: <bool>      Achievement ID pre-requisite.
-#   Rewards:            List of rewards that are given on completion. (Default: null)
-#     Item              Item name.
-#     Amount            Amount of item. (Default: 1)
-#     Script            Bonus Script. (Default: null)
-#     TitleId           Title ID. (Default: 0)
-#   Score               Achievement points that are given on completion. (Default: 0)
+# - Id                  成就 ID。
+#   Group               成就群組類型。（預設：None）
+#   Name                成就名稱。
+#   Targets:            完成成就所需目標清單。（預設：null）
+#     - Id              匯入方法使用的索引值。
+#       Mob             目標魔物。（預設：0）
+#       Count           目標數量。（預設：1）
+#   Condition           判定成就完成前必須符合的條件敘述。（預設：null）
+#   Map                 AG_CHATTING 類型使用的地圖名稱。（預設：-1）
+#   Dependents:         必須先完成才能完成此成就的其他成就清單。（預設：null）
+#     - Id: <bool>      前置成就 ID。
+#   Rewards:            完成時發放的獎勵清單。（預設：null）
+#     Item              道具名稱。
+#     Amount            道具數量。（預設：1）
+#     Script            Bonus 腳本。（預設：null）
+#     TitleId           稱號 ID。（預設：0）
+#   Score               完成時取得的成就點數。（預設：0）
 ###########################################################################
 
 Header:

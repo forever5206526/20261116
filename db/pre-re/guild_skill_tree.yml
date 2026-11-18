@@ -2,24 +2,16 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Pre-Renewal Guild Skill Database
+# 自訂公會技能資料庫
 ###########################################################################
 #
-# Guild Skill Settings
+# 公會技能設定
 #
 ###########################################################################
 # Id - Skill ID of the guild skill.
@@ -27,8 +19,8 @@
 # MaxLevel - Maximum level of the guild skill.
 ###########################################################################
 # Required - A list of required skills for the skill to become available.
-#   Id: Skill ID of the required guild skill.
-#   Level: Level of the required guild skill.
+#   Id: 前置公會技能的技能 ID。
+#   Level: 前置公會技能的等級。
 ###########################################################################
 
 Header:

@@ -2,30 +2,23 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Reputation Database
+# 聲望資料庫
 ###########################################################################
 #
-# Reputation Settings
+# 聲望設定
 #
 ###########################################################################
-# - Id                                  Client side index.
-#   Visibility                          Always = Always show
-#                                       Never = Never show
-#                                       Exist = Only show if greater than 0
+# - Id                                  客戶端索引。
+#   Name                                聲望類型名稱。
+#   Variable                            用來儲存聲望的變數名稱。（預設：RepPoints<id>）
+#   Minimum                             最低點數。（預設：INT64_MIN）
+#   Maximum                             最高點數。（預設：INT64_MAX）
 ###########################################################################
 
 Header:

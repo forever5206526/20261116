@@ -2,39 +2,31 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Stylist Database
+# 造型師資料庫
 ###########################################################################
 #
-# Stylist Settings
+# 造型師設定
 #
 ###########################################################################
-# - Look                     Look that will be changed.
-#   Options                  Possible options to select from.
-#     - Index                Client side index of the option.
-#       Value                Value of the look (can also be an item name).
-#       RequiredJob          Jobs can buy that.
-#       CostsHuman:          Costs for human players.
-#           Price            Required zeny. (Default: 0)
-#           RequiredItem     Required item. (Default: None)
-#           RequiredItemBox  Required item box. (Default: None)
-#       CostsDoram:          Costs for doram players.
-#           Price            Required zeny. (Default: 0)
-#           RequiredItem     Required item. (Default: None)
-#           RequiredItemBox  Required item box. (Default: None)
+# - Look                     要變更的外觀項目。
+#   Options                  可供選擇的選項。
+#     - Index                選項在客戶端使用的索引。
+#       Value                外觀數值（也可以是道具名稱）。
+#       RequiredJob          可購買此項目的職業。
+#       CostsHuman:          人類玩家的費用。
+#           Price            所需 Zeny。（預設：0）
+#           RequiredItem     所需道具。（預設：None）
+#           RequiredItemBox  所需道具箱。（預設：None）
+#       CostsDoram:          杜蘭族玩家的費用。
+#           Price            所需 Zeny。（預設：0）
+#           RequiredItem     所需道具。（預設：None）
+#           RequiredItemBox  所需道具箱。（預設：None）
 ###########################################################################
 
 Header:

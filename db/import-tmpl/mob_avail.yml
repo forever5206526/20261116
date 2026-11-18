@@ -2,40 +2,32 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Mob Availability and Alias Database
+# 魔物可用性與別名資料庫
 ###########################################################################
 #
-# Mob Availability and Alias Settings
+# 魔物可用性與別名設定
 #
 ###########################################################################
-# - Mob                     Mob to adjust.
-#   Sprite                  Sprite which will be sent to the client instead of Mob.
-#   Sex                     Sex (if Sprite is a player). (Default: Female)
-#   HairStyle               Hair Style ID (if Sprite is a player). (Default: 0)
-#   HairColor               Hair Color ID (if Sprite is a player). (Default: 0)
-#   ClothColor              Cloth Color ID (if Sprite is a player). (Default: 0)
-#   Weapon                  Item name of weapon (if Sprite is a player). (Default: 0)
-#   Shield                  Item name of shield (if Sprite is a player). (Default: 0)
-#   HeadTop                 Item name of headgear (if Sprite is a player). (Default: 0)
-#   HeadMid                 Item name of headgear (if Sprite is a player). (Default: 0)
-#   HeadLow                 Item name of headgear (if Sprite is a player). (Default: 0)
-#   Robe                    Item name of robe (if Sprite is a player). (Default: 0)
-#   PetEquip                Item name of pet equipment (if Mob is a valid pet). (Default: 0)
-#   Options:                Set an option for an object. (Optional)
+# - Mob                     要調整的魔物。
+#   Sprite                  傳送給客戶端以取代原魔物的外觀代碼。
+#   Sex                     若 Sprite 為玩家外觀，則指定性別。（預設：Female）
+#   HairStyle               若 Sprite 為玩家外觀，則指定髮型 ID。（預設：0）
+#   HairColor               若 Sprite 為玩家外觀，則指定髮色 ID。（預設：0）
+#   ClothColor              若 Sprite 為玩家外觀，則指定服裝顏色 ID。（預設：0）
+#   Weapon                  若 Sprite 為玩家外觀，則指定武器道具名稱。（預設：0）
+#   Shield                  若 Sprite 為玩家外觀，則指定盾牌道具名稱。（預設：0）
+#   HeadTop                 若 Sprite 為玩家外觀，則指定頭飾道具名稱。（預設：0）
+#   HeadMid                 若 Sprite 為玩家外觀，則指定頭飾道具名稱。（預設：0）
+#   HeadLow                 若 Sprite 為玩家外觀，則指定頭飾道具名稱。（預設：0）
+#   Robe                    若 Sprite 為玩家外觀，則指定披風道具名稱。（預設：0）
+#   PetEquip                若 Mob 是有效寵物，則指定寵物裝備道具名稱。（預設：0）
+#   Options:                為物件設定選項。（選填）
 #     <Option>: bool
 ###########################################################################
 

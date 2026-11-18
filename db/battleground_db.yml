@@ -2,56 +2,48 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Battleground Queue Database
+# 戰場佇列資料庫
 ###########################################################################
 #
-# Battleground Queue Settings
+# 戰場佇列設定
 #
 ###########################################################################
 # - Id                Unique ID for the battleground type.
-#   Name              Name of the battleground. Must be the exact same as in the client for players to be able to join.
-#   MinPlayers        Minimum number of players required on each team. (Default: 1)
-#   MaxPlayers        Maximum number of players on each team. (Default: MAX_BG_MEMBERS / 2)
-#   MinLevel          Minimum level required to join the battleground. (Default: 1)
-#   MaxLevel          Maximum level to join the battleground. (Default: MAX_LEVEL value)
-#   Deserter          Amount of time in seconds a player is marked deserter. (Default: 600)
-#   StartDelay        Amount of time in seconds once a queue is filled before players are warped. (Default: 0)
-#   Join:             Which application type is accepted. The entryqueuelist.lub can visually disable these options.
-#     Solo            Able to join a queue as an individual. (Default: true)
-#     Party           Able to join a queue as a party. (Default: true)
-#     Guild           Able to join a queue as a guild. (Default: true)
-#   JobRestrictions   List of jobs that are unable to join the battleground.
-#   Locations:        Battleground location settings.
-#     - Map           The map on which the battleground will be played.
-#       StartEvent    NPC event triggered when the battleground starts.
-#       TeamA:        TeamA settings.
-#         RespawnX    X coordinate for warping on death.
-#         RespawnY    Y coordinate for warping on death.
-#         DeathEvent  NPC event triggered when a player dies.
-#         QuitEvent   NPC event triggered when a player quits.
-#         ActiveEvent NPC event triggered when a player joints an active battleground.
-#         Variable    Name of BG ID variable used in the battleground script.
-#       TeamB:        TeamB settings.
-#         RespawnX    X coordinate for warping on death.
-#         RespawnY    Y coordinate for warping on death.
-#         DeathEvent  NPC event triggered when a player dies.
-#         QuitEvent   NPC event triggered when a player quits.
-#         ActiveEvent NPC event triggered when a player joints an active battleground.
-#         Variable    Name of BG ID variable used in the battleground script.
+#   Name              戰場名稱。必須與客戶端中的名稱完全一致，玩家才能加入。
+#   MinPlayers        每隊所需的最低玩家人數。（預設：1）
+#   MaxPlayers        每隊可容納的最高玩家人數。（預設：MAX_BG_MEMBERS / 2）
+#   MinLevel          加入戰場所需的最低等級。（預設：1）
+#   MaxLevel          可加入戰場的最高等級。（預設：MAX_LEVEL 值）
+#   Deserter          玩家被標記為逃兵的時間（秒）。（預設：600）
+#   StartDelay        佇列額滿後，傳送玩家前等待的時間（秒）。（預設：0）
+#   Join:             允許的報名方式。entryqueuelist.lub 可控制這些選項是否顯示。
+#     Solo            允許個人加入佇列。（預設：true）
+#     Party           允許隊伍加入佇列。（預設：true）
+#     Guild           允許公會加入佇列。（預設：true）
+#   JobRestrictions   無法加入戰場的職業清單。
+#   Locations:        戰場地點設定。
+#     - Map           進行戰場的地圖。
+#       StartEvent    戰場開始時觸發的 NPC 事件。
+#       TeamA:        A 隊設定。
+#         RespawnX    死亡後傳送的 X 座標。
+#         RespawnY    死亡後傳送的 Y 座標。
+#         DeathEvent  玩家死亡時觸發的 NPC 事件。
+#         QuitEvent   玩家退出時觸發的 NPC 事件。
+#         ActiveEvent 玩家加入進行中的戰場時觸發的 NPC 事件。
+#         Variable    戰場腳本中使用的 BG ID 變數名稱。
+#       TeamB:        B 隊設定。
+#         RespawnX    死亡後傳送的 X 座標。
+#         RespawnY    死亡後傳送的 Y 座標。
+#         DeathEvent  玩家死亡時觸發的 NPC 事件。
+#         QuitEvent   玩家退出時觸發的 NPC 事件。
+#         ActiveEvent 玩家加入進行中的戰場時觸發的 NPC 事件。
+#         Variable    戰場腳本中使用的 BG ID 變數名稱。
 ###########################################################################
 
 Header:

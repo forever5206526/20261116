@@ -2,56 +2,48 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Mercenary Database
+# 傭兵資料庫
 ###########################################################################
 #
-# Mercenary Settings
+# 傭兵設定
 #
 ###########################################################################
-# - Id                      Mercenary ID.
-#   AegisName               Server name to reference the mercenary in scripts and lookups, should use no spaces.
-#   Name                    Name in English.
-#   Level                   Level. (Default: 1)
-#   Hp                      Total HP. (Default: 1)
-#   Sp                      Total SP. (Default: 1)
-#   Attack                  Minimum attack. (Default: 0)
-#   Attack2                 Maximum attack. (Default: 0)
-#   Defense                 Physical defense of the mercenary, reduces melee and ranged physical attack/skill damage. (Default: 0)
-#   MagicDefense            Magic defense of the mercenary, reduces magical skill damage. (Default: 0)
-#   Str                     Strength which affects attack. (Default: 1)
-#   Agi                     Agility which affects flee. (Default: 1)
-#   Vit                     Vitality which affects defense. (Default: 1)
-#   Int                     Intelligence which affects magic attack. (Default: 1)
-#   Dex                     Dexterity which affects hit rate. (Default: 1)
-#   Luk                     Luck which affects perfect dodge/lucky flee/perfect flee/lucky dodge rate. (Default: 1)
-#   AttackRange             Attack range. (Default: 0)
-#   SkillRange              Skill cast range. (Default: 0)
-#   ChaseRange              Chase range. (Default: 0)
-#   Size                    Size. (Default: Small)
-#   Race                    Race. (Default: Formless)
-#   Element                 Element. (Default: Neutral)
-#   ElementLevel            Level of element. (Default: 1)
-#   WalkSpeed               Walk speed. (Default: DEFAULT_WALK_SPEED)
-#   AttackDelay             Attack speed. (Default: 4000)
-#   AttackMotion            Attack animation speed. (Default: 2000)
-#   DamageMotion            Damage animation speed. (Default: 0)
-#   Skills:                 List of mercenary skills. (Optional)
-#     - Name                Skill name.
-#       MaxLevel            Max skill level.
+# - Id                      傭兵 ID。
+#   AegisName               伺服器腳本及查詢使用的傭兵名稱，不可包含空格。
+#   Name                    英文名稱。
+#   Level                   等級。（預設：1）
+#   Hp                      HP 總量。（預設：1）
+#   Sp                      SP 總量。（預設：1）
+#   Attack                  最低攻擊力。（預設：0）
+#   Attack2                 最高攻擊力。（預設：0）
+#   Defense                 傭兵的物理防禦，可降低近戰與遠距離物理攻擊／技能傷害。（預設：0）
+#   MagicDefense            傭兵的魔法防禦，可降低魔法技能傷害。（預設：0）
+#   Str                     力量，影響攻擊力。（預設：1）
+#   Agi                     敏捷，影響迴避率。（預設：1）
+#   Vit                     體質，影響防禦力。（預設：1）
+#   Int                     智力，影響魔法攻擊力。（預設：1）
+#   Dex                     靈巧，影響命中率。（預設：1）
+#   Luk                     幸運，影響完全迴避／幸運迴避／完全閃避／幸運閃避率。（預設：1）
+#   AttackRange             攻擊距離。（預設：0）
+#   SkillRange              技能施放距離。（預設：0）
+#   ChaseRange              追擊距離。（預設：0）
+#   Size                    體型。（預設：Small）
+#   Race                    種族。（預設：Formless）
+#   Element                 屬性。（預設：Neutral）
+#   ElementLevel            屬性等級。（預設：1）
+#   WalkSpeed               移動速度。（預設：DEFAULT_WALK_SPEED）
+#   AttackDelay             攻擊延遲。（預設：4000）
+#   AttackMotion            攻擊動作速度。（預設：2000）
+#   DamageMotion            受傷動作速度。（預設：0）
+#   Skills:                 傭兵技能清單。（選填）
+#     - Name                技能名稱。
+#       MaxLevel            技能最高等級。
 ###########################################################################
 
 Header:

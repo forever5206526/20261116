@@ -2,46 +2,38 @@
 #   Copyright(C) 2024 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Item Group Database
+# 道具群組資料庫
 ###########################################################################
 #
-# Item Group Settings
+# 道具群組設定
 #
 ###########################################################################
-# - Group                      Group name of the item.
+# - Group                      道具群組名稱。
 #   SubGroups:
-#     - SubGroup:              SubGroup number associated with the list of item. See doc/item_group.txt for more information.
-#       Algorithm:             Type of algorithm associated with SubGroup. (Default: SharedPool)
-#       List:                  List of item(s) for the SubGroup.
-#        - Index               Unique number that can be used to add the same Item with different data in the list.
-#          Item                AegisName of item that will be obtained from this item group.
-#          Rate                Probability to get the item. (Default: 0)
-#          Amount              Amount of item that will be obtained. (Default: 1)
-#          Duration            Makes the item a rental item which will expire within the given amount in minutes. Not intended for use with stackable items. (Default: 0)
-#          Announced           If player obtains this item it will be broadcasted to the server. (Default: false)
-#          UniqueId            Makes the given item(s) have a Unique ID. (Default: UniqueId from item_db)
-#          Stacked             Whether stackable items are given stacked or not. (Default: true)
-#          Named               Inscribes the item with the obtainer's name. (Default: false)
-#          Bound               Binds the obtained item. (Default: None)
-#          RandomOptionGroup   Applies random options of this group to all equipable items (Default: None)
-#          RefineMinimum       Applies at least this refine level to all equipable items (Default: 0)
-#          RefineMaximum       Applies at most this refine level to all equipable items (Default: 0)
-#          Clear               Whether the current datas should be removed. (Optional)
-#       Clear                  Remove the given SubGroup. (Optional)
+#     - SubGroup:              與道具清單關聯的子群組編號。詳細資訊請參閱 doc/item_group.txt。
+#       Algorithm:             子群組使用的演算法類型。（預設：SharedPool）
+#       List:                  子群組的道具清單。
+#        - Index               可用來在清單中以不同資料新增相同道具的唯一編號。
+#          Item                從此道具群組取得的道具 AegisName。
+#          Rate                取得道具的機率。（預設：0）
+#          Amount              取得的道具數量。（預設：1）
+#          Duration            將道具設定為租賃道具，並於指定分鐘數後到期。不建議用於可堆疊道具。（預設：0）
+#          Announced           玩家取得此道具時是否向全伺服器公告。（預設：false）
+#          UniqueId            是否為指定道具配置唯一 ID。（預設：沿用 item_db 的 UniqueId）
+#          Stacked             可堆疊道具是否以堆疊方式發放。（預設：true）
+#          Named               是否在道具上刻印取得者名稱。（預設：false）
+#          Bound               取得的道具綁定類型。（預設：None）
+#          RandomOptionGroup   將此群組的隨機附加能力套用至所有可裝備道具。（預設：None）
+#          RefineMinimum       所有可裝備道具至少套用的精煉等級。（預設：0）
+#          RefineMaximum       所有可裝備道具最多套用的精煉等級。（預設：0）
+#          Clear               是否移除目前資料。（選填）
+#       Clear                  移除指定子群組。（選填）
 ###########################################################################
 
 Header:

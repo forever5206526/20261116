@@ -2,38 +2,30 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Skill Tree Database
+# 技能樹資料庫
 ###########################################################################
 #
-# Skill Tree Settings
+# 技能樹設定
 #
 ###########################################################################
-# - Job                   Job name.
-#   Inherit               Map of job name from which Job will inherit the skill tree. (Default: null)
-#                         Note that Job doesn't inherit the child skills, it only inherits the skills defined in Tree of the given job name.
-#   Tree:                 List of skills available for the job. (Default: null)
-#     - Name              Skill name.
-#       MaxLevel          Max level of the skill. Set to 0 to remove the skill.
-#       Exclude           Whether the skill is excluded from being inherited. (Default: false)
-#       BaseLevel         Minimum base level required to unlock the skill. (Default: 0)
-#       JobLevel          Minimum job level required to unlock the skill. (Default: 0)
-#       Requires:         List of skills required to unlock the skill. (Default: null)
-#         - Name          Skill name.
-#           Level         Skill level required. Set to 0 to remove the skill.
+# - Job                   職業名稱。
+#   Inherit               此職業要繼承技能樹的來源職業名稱對照表。（預設：null）
+#                         注意：職業不會繼承子職業技能，只會繼承指定職業 Tree 中定義的技能。
+#   Tree:                 此職業可使用的技能清單。（預設：null）
+#     - Name              技能名稱。
+#       MaxLevel          技能最高等級。設為 0 可移除此技能。
+#       Exclude           是否排除此技能，使其不會被繼承。（預設：false）
+#       BaseLevel         解鎖此技能所需的最低基本等級。（預設：0）
+#       JobLevel          解鎖此技能所需的最低職業等級。（預設：0）
+#       Requires:         解鎖此技能所需的前置技能清單。（預設：null）
+#         - Name          技能名稱。
+#           Level         所需技能等級。設為 0 可移除此技能。
 ###########################################################################
 
 Header:

@@ -2,18 +2,10 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
 # Script Constant Database
@@ -23,11 +15,11 @@
 #
 ###########################################################################
 # - Name             Unique name for the constant. Must not have same name as script commands, functions, or variables.
-#   Value            Value assigned to the constant. This value cannot be changed during the runtime of the server.
-#   Parameter        Specifies whether the identifier is a parameter. (Default: false)
-#                    Note: Parameters are special in that they retrieve certain runtime values depending on the specified ID
-#                    in field Value. Depending on the implementation values assigned by scripts the parameters will affect
-#                    runtime values, such as Zeny, as well (see pc_readparam/pc_setparam).
+#   Value            指派給常數的值。伺服器執行期間無法變更此值。
+#   Parameter        指定此識別項是否為參數。（預設：false）
+#                    注意：參數較為特殊，會依照指定的 ID 取得特定執行階段數值。
+#                    依照實作方式，腳本指派給參數的值也可能影響執行階段數值，
+#                    例如 Zeny（請參閱 pc_readparam/pc_setparam）。
 ###########################################################################
 
 Header:

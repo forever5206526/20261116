@@ -1,27 +1,27 @@
-// Forbidden Skills Database
-// Defines unusable skills in map types and zones.
+// 禁止使用技能資料庫
+// 定義不同地圖類型與區域中禁止使用的技能。
 //
-// Structure of Database:
+// 資料庫格式：
 // SkillID,Flag
 //
-// Legend for 'Flag' field (bitmask):
-// 1    - cannot be used in normal maps
-// 2    - cannot be used in PvP maps (use this instead of 1 for PK-mode servers)
-// 4    - cannot be used in GvG maps
-// 8    - cannot be used in Battleground maps
+// 「Flag」欄位說明（位元遮罩）：
+// 1    - 一般地圖中禁止使用
+// 2    - PvP 地圖中禁止使用（PK 模式伺服器請使用此設定取代 1）
+// 4    - GvG 地圖中禁止使用
+// 8    - 戰場地圖中禁止使用
 // 16   - cannot be used in WOE:TE castles
-// Restricted zones - configured by 'restricted <number>' mapflag
-// 32   - cannot be used in zone 1 maps
-// 64   - cannot be used in zone 2 maps
-// 128  - cannot be used in zone 3 maps
-// 256  - cannot be used in zone 4 maps
-// 512  - cannot be used in zone 5 maps
-// 1024 - cannot be used in zone 6 maps
-// 2048 - cannot be used in zone 7 maps
+// 限制區域：透過 'restricted <number>' 地圖旗標設定
+// 32   - 區域 1 地圖中禁止使用
+// 64   - 區域 2 地圖中禁止使用
+// 128  - 區域 3 地圖中禁止使用
+// 256  - 區域 4 地圖中禁止使用
+// 512  - 區域 5 地圖中禁止使用
+// 1024 - 區域 6 地圖中禁止使用
+// 2048 - 區域 7 地圖中禁止使用
 // 4096 - cannot be used in zone 8 maps
 //
-// Example:
-// 8,6  // Endure cannot be used in PvP and GvG maps (2+4)
+// 範例：
+// 8,6  // 霸體在 PvP 與 GvG 地圖中禁止使用（2+4）
 
 //----------------------------------------------------------------------------
 // Normal

@@ -2,31 +2,23 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Summonable Monsters Database
+# 可召喚魔物資料庫
 ###########################################################################
 #
-# Summonable Monsters Settings
+# 可召喚魔物設定
 #
 ###########################################################################
-# - Group                   Monster random group name. "MOBG_" is appended to the name during the parsing.
-#   Default                 Monster AegisName summoned by default when the summon fails.
-#   Summon:                 List of Summonable Monsters.
-#     - Mob                 Monster AegisName.
-#       Rate                Summon rate of Mob (from [0-1000000]).
+# - Group                   魔物隨機群組名稱。解析時會在名稱前加上「MOBG_」。
+#   Default                 召喚失敗時預設召喚的魔物 AegisName。
+#   Summon:                 可召喚魔物清單。
+#     - Mob                 魔物 AegisName。
+#       Rate                魔物召喚機率（範圍為 0～1000000）。
 ###########################################################################
 
 Header:
@@ -34,7 +26,7 @@ Header:
   Version: 1
 
 #Body:
-# Pre-re Brasilis
+# 巴西利斯更新前資料
 #=============================================================
 #  - Group: BLOODY_DEAD_BRANCH
 #    Summon:
