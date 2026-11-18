@@ -2,41 +2,33 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Item Reform Database
+# 道具改造資料庫
 ###########################################################################
 #
-# Item Reform Settings
+# 道具改造設定
 #
 ###########################################################################
-# - Item                       Item that triggers Item Reform UI.
-#   BaseItems:                 Items that can be reformed.
-#     - BaseItem               Item that can be reformed.
-#       MinimumRefine          Minimum refine level of the required items. (Default: 0)
-#       MaximumRefine          Maximum refine level of the required items. (Default: MAX_REFINE)
-#       RequiredRandomOptions  Amount of random options have to be in the item. (Default: 0)
-#       CardsAllowed           Allow cards in the target item. (Default: true)
-#       Materials:             Additional items needed for the reformation. (Default: none)
-#         - Material           Material item that is needed.
-#           Amount             Amount of the material item that is needed. (Default: 1)
-#       ResultItem             Item after the reform.
-#       ChangeRefine           Increase or decrease the refine during reformation. (Default: 0)
-#       RandomOptionGroup      Name of the random option group that will be applied. (Default: none)
-#       ClearSlots             Remove cards and socket enchants during reformation. (Default: false)
-#       RemoveEnchantgrade     Remove enchantgrade during reformation. (Default: false)
+# - Item                       開啟道具改造介面的觸發道具。
+#   BaseItems:                 可進行改造的道具。
+#     - BaseItem               可進行改造的道具。
+#       MinimumRefine          需求道具的最低精煉等級。（預設：0）
+#       MaximumRefine          需求道具的最高精煉等級。（預設：MAX_REFINE）
+#       RequiredRandomOptions  道具必須具有的隨機附加能力數量。（預設：0）
+#       CardsAllowed           是否允許目標道具附有卡片。（預設：true）
+#       Materials:             改造所需的額外道具。（預設：none）
+#         - Material           所需的材料道具。
+#           Amount             所需材料道具數量。（預設：1）
+#       ResultItem             改造後取得的道具。
+#       ChangeRefine           改造時精煉等級增加或減少的數值。（預設：0）
+#       RandomOptionGroup      要套用的隨機附加能力群組名稱。（預設：none）
+#       ClearSlots             改造時是否移除卡片與插槽附魔。（預設：false）
+#       RemoveEnchantgrade     改造時是否移除附魔階級。（預設：false）
 ###########################################################################
 
 Header:
