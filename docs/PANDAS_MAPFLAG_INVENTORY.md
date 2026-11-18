@@ -26,7 +26,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_NoMail` | 禁止郵件／RODEX 操作 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoPet` | 禁止地圖使用寵物（啟用時退回寵物蛋） | 已移植／PR #5 的 35 項 CI checks 全部成功 |
 | `Pandas_MapFlag_NoHomun` | 禁止召喚人工生命體 | brHades 原生等價實作；PR #5 的 NoHomun 回歸測試隨 CI 通過 |
-| `Pandas_MapFlag_NoMerc` | 禁止召喚佣兵 | 已新增旗標、阻止召喚、隱藏既有佣兵及雙語訊息；等待 CI |
+| `Pandas_MapFlag_NoMerc` | 禁止召喚佣兵 | 已移植並合併至 main；39 項 CI checks 全部成功（含 VS Debug/Release、Win32/x64、PRE/RE、NPC/DB、CodeQL） |
 | `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 待核對及移植 |
 | `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 待核對及移植 |
 | `Pandas_MapFlag_MaxHeal` | 限制地圖最大治癒量 | 待核對及移植 |
