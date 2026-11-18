@@ -56,6 +56,9 @@ jobs:
       - name: NoPet mapflag regression test
         run: python tools/integration/test_nopet_mapflag.py
 
+      - name: Shared MySQL credentials regression test
+        run: python tools/integration/test_shared_sql_credentials.py
+
       - name: NoMerc mapflag regression test
         run: python tools/integration/test_nomerc_mapflag.py
 
