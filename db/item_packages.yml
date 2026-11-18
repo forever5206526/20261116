@@ -2,36 +2,28 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Item Package Database
+# 道具組合包資料庫
 ###########################################################################
 #
-# Item Package Settings
+# 道具組合包設定
 #
 ###########################################################################
-# - Item                       Item that triggers Item Package Selection.
-#   Groups:                    Groups that can be selected.
-#     - Group                  Group ID that can be selected (has to match the client's LUA file).
-#       Items:                 Items that will be given out.
-#         - Item               Item that will be given out.
-#           Amount             Amount of the item. (Default: 1)
-#                              To remove an item via import set amount to 0.
-#           RentalHours        Rental time in hours. (Default: 0)
-#           Refine             Refine level of the item. (Default: 0)
-#           RandomOptionGroup  Name of the random option group that will be applied. (Default: none)
+# - Item                       觸發道具組合包選擇介面的道具。
+#   Groups:                    可供選擇的群組。
+#     - Group                  可選擇的群組 ID（必須與客戶端 LUA 檔案一致）。
+#       Items:                 將發放的道具清單。
+#         - Item               將發放的道具。
+#           Amount             道具數量。（預設：1）
+#                              透過匯入移除道具時，請將數量設為 0。
+#           RentalHours        租賃時間（小時）。（預設：0）
+#           Refine             道具精煉等級。（預設：0）
+#           RandomOptionGroup  要套用的隨機附加能力群組名稱。（預設：none）
 ###########################################################################
 
 Header:
