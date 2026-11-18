@@ -33,6 +33,8 @@ static bool sql_config_host_set = false;
 static bool sql_config_port_set = false;
 static bool sql_config_user_set = false;
 static bool sql_config_password_set = false;
+static std::string sql_config_codepage;
+static bool sql_config_codepage_set = false;
 
 bool Sql_ConfigRead(const char* key, const char* value)
 {
@@ -62,6 +64,18 @@ bool Sql_ConfigRead(const char* key, const char* value)
 	} else if (strcmpi(key, "sql_password") == 0) {
 		sql_config_password = value;
 		sql_config_password_set = true;
+	} else if (strcmpi(key, "sql_codepage") == 0) {
+		sql_config_codepage = value;
+		sql_config_codepage_set = true;
+	} else if (strcmpi(key, "default_codepage") == 0 ||
+		strcmpi(key, "login_codepage") == 0 ||
+		strcmpi(key, "ipban_codepage") == 0 ||
+		strcmpi(key, "log_codepage") == 0) {
+		// Accept legacy per-service keys as a single fallback for older configs.
+		if (!sql_config_codepage_set && value[0] != '\0') {
+			sql_config_codepage = value;
+			sql_config_codepage_set = true;
+		}
 	} else {
 		return false;
 	}
@@ -184,6 +198,11 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 		ShowSQL("Failed to establish keepalive for DB connection!\n");
 		return SQL_ERROR;
 	}
+
+	// Apply one shared SQL character set to every database connection.
+	if (sql_config_codepage_set && !sql_config_codepage.empty() &&
+		SQL_ERROR == Sql_SetEncoding(self, sql_config_codepage.c_str()))
+		Sql_ShowDebug(self);
 
 	return SQL_SUCCESS;
 }
