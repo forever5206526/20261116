@@ -22,6 +22,7 @@ CHECKS = (
     ("removemapflag script resets MobInfo option", "src/map/script.cpp", "map_setmapflag_param(m, MF_MOBINFO, 1, 0);"),
     ("per-map mob info overrides global setting", "src/map/clif.cpp", "mob_info_option = map_getmapflag_param(md->bl.m, MF_MOBINFO, 1);"),
     ("@mapinfo reports the configured MobInfo option", "src/map/atcommand.cpp", 'map_getmapflag_param(m_id, MF_MOBINFO, 1)'),
+    ("@mapflag cannot toggle parameterized MobInfo", "src/map/atcommand.cpp", "disabled_mf.push_back(MF_MOBINFO);"),
     ("map-specific MobInfo can enable display", "src/map/clif.cpp", "|| (md->bl.m >= 0 && map_getmapflag(md->bl.m, MF_MOBINFO))"),
 )
 
