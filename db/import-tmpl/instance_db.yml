@@ -23,18 +23,18 @@
 #
 ###########################################################################
 # - Id                Instance ID.
-#   Name              Instance Name.
-#   TimeLimit         Total lifetime of instance in seconds. Use 0 to define infinite time. (Default: 3600)
-#   IdleTimeOut       Time before an idle instance is destroyed in seconds. Use 0 to define infinite idle time. (Default: 300)
-#   NoNpc             Prevent copying NPCs from the source map. (Default: false)
-#   NoMapFlag         Prevent copying Mapflags from the source map. (Default: false)
-#   Destroyable       Toggles the ability to destroy the instance using instance 'Destroy' button. (Default: true)
-#                     Note: the button is displayed based on parties. For any mode, it requires the party leader to be the instance owner to destroy it.
-#   Enter:            Instance entrance coordinates.
-#     Map             Map Name where players start.
-#     X               X Coordinate where players start.
-#     Y               Y Coordinate where players start.
-#   AdditionalMaps:   List of maps that are part of an instance. (Optional)
+#   Name              副本名稱。
+#   TimeLimit         副本總存續時間（秒）。設為 0 表示不限制時間。（預設：3600）
+#   IdleTimeOut       閒置副本被銷毀前的等待時間（秒）。設為 0 表示不限制閒置時間。（預設：300）
+#   NoNpc             是否禁止從來源地圖複製 NPC。（預設：false）
+#   NoMapFlag         是否禁止從來源地圖複製地圖旗標。（預設：false）
+#   Destroyable       是否允許使用副本介面的「Destroy」按鈕銷毀副本。（預設：true）
+#                     注意：按鈕是否顯示取決於隊伍設定。無論何種模式，皆須由副本擁有者的隊長才能銷毀副本。
+#   Enter:            副本入口座標。
+#     Map             玩家開始的位置地圖名稱。
+#     X               玩家開始位置的 X 座標。
+#     Y               玩家開始位置的 Y 座標。
+#   AdditionalMaps:   屬於此副本的其他地圖清單。（選填）
 ###########################################################################
 
 Header:
