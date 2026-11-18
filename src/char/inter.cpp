@@ -17,6 +17,7 @@
 #include <common/malloc.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
+#include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 
@@ -849,6 +850,9 @@ int32 inter_config_read(const char* cfgName)
 			continue;
 
 		if (sscanf(line, "%23[^:]: %1023[^\r\n]", w1, w2) != 2)
+			continue;
+
+		if (Sql_ConfigRead(w1, w2))
 			continue;
 
 		if(!strcmpi(w1,"char_server_ip"))
