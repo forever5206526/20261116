@@ -23,9 +23,9 @@
 #
 ###########################################################################
 # - Id                Index value.
-#   Filename          Name of the BMP image file (with location).
-#   Answer            Correct answer for the captcha (case-sensitive).
-#   Bonus             Bonus Script ran on success. (Default: Level 10 Blessing and Increase Agility)
+#   Filename          BMP 圖片檔案名稱（包含路徑）。
+#   Answer            驗證碼的正確答案（區分大小寫）。
+#   Bonus             驗證成功時執行的 Bonus 腳本。（預設：10 級天使之賜福與加速術）
 ###########################################################################
 
 Header:
