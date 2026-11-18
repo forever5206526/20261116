@@ -58,6 +58,10 @@
 using namespace brhades;
 using namespace brhades::server_map;
 
+#ifdef Pandas_Mapflags
+std::unordered_map<e_mapflag, s_mapflag_item> mapflag_config;
+#endif // Pandas_Mapflags
+
 std::string default_codepage = "";
 
 int32 map_server_port = 3306;
@@ -3667,6 +3671,17 @@ int32 map_delmap(char* mapname){
 
 /// Initializes map flags and adjusts them depending on configuration.
 void map_flags_init(void) {
+#ifdef Pandas_Mapflags
+	mapflag_config.clear();
+#ifdef Pandas_MapFlag_MobInfo
+	mapflag_config.emplace(MF_MOBINFO, s_mapflag_item{
+		"MobInfo",
+		false,
+		true,
+		{{0, 0, 127, nullptr}}
+	});
+#endif // Pandas_MapFlag_MobInfo
+#endif // Pandas_Mapflags
 	for (int i = 0; i < map_num; i++) {
 		struct map_data* mapdata = &map[i];
 		union u_mapflag_args args = {};
@@ -4584,6 +4599,56 @@ bool map_getmapflag_name( enum e_mapflag mapflag, char* output ){
  * @param args: Arguments for special flags
  * @return Mapflag value on success or -1 on failure
  */
+#ifdef Pandas_Mapflags
+bool map_mapflag_valid_index(e_mapflag mapflag, size_t index)
+{
+	const auto* conf = util::umap_find(mapflag_config, mapflag);
+	return conf != nullptr && index < conf->args.size() && index < 4;
+}
+
+int32 map_getmapflag_param(int16 m, enum e_mapflag mapflag, size_t index)
+{
+	if (m < 0 || m >= MAX_MAP_PER_SERVER || index == 0)
+		return 0;
+
+	const auto* conf = util::umap_find(mapflag_config, mapflag);
+	if (conf == nullptr || !map_mapflag_valid_index(mapflag, index - 1))
+		return 0;
+
+	const auto* values = util::umap_find(map[m].mapflag_values, mapflag);
+	if (values == nullptr || index > values->size())
+		return conf->args[index - 1].def_val;
+
+	return values->at(index - 1);
+}
+
+void map_setmapflag_param(int16 m, enum e_mapflag mapflag, size_t index, int32 value)
+{
+	if (m < 0 || m >= MAX_MAP_PER_SERVER || index == 0)
+		return;
+
+	const auto* conf = util::umap_find(mapflag_config, mapflag);
+	if (conf == nullptr || !map_mapflag_valid_index(mapflag, index - 1))
+		return;
+
+	const auto& arg = conf->args[index - 1];
+	if (value < arg.min || value > arg.max) {
+		ShowWarning("map_setmapflag_param: value %d outside %d..%d for %s on %s; using default %d.\\n",
+			value, arg.min, arg.max, conf->name, map[m].name, arg.def_val);
+		value = arg.def_val;
+	}
+
+	auto& values = map[m].mapflag_values[mapflag];
+	if (values.size() != conf->args.size()) {
+		values.clear();
+		for (const auto& item : conf->args)
+			values.push_back(item.def_val);
+	}
+
+	values[index - 1] = value;
+}
+#endif // Pandas_Mapflags
+
 int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, union u_mapflag_args *args)
 {
 	if (m < 0 || m >= MAX_MAP_PER_SERVER) {
@@ -5385,10 +5450,16 @@ void map_data::setMapFlag(int32 flag, int32 value) {
 void map_data::initMapFlags() {
 	flags.clear();
 	flags.resize(MF_MAX, 0);
+#ifdef Pandas_Mapflags
+	mapflag_values.clear();
+#endif // Pandas_Mapflags
 }
 
 void map_data::copyFlags(const map_data& other) {
 	flags = other.flags;
+#ifdef Pandas_Mapflags
+	mapflag_values = other.mapflag_values;
+#endif // Pandas_Mapflags
 }
 
 /// Called when a terminate signal is received.
