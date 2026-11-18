@@ -91,13 +91,13 @@ def main() -> None:
 
     for path in ("conf/char_athena.conf", "conf/map_athena.conf"):
         conf = read(path)
-        require(re.search(r"^userid:\\s*s1\\s*$", conf, re.MULTILINE) is not None,
+        require(re.search(r"^userid:\s*s1\s*$", conf, re.MULTILINE) is not None,
                 f"{path} must preserve inter-server userid s1", failures)
-        require(re.search(r"^passwd:\\s*p1\\s*$", conf, re.MULTILINE) is not None,
+        require(re.search(r"^passwd:\s*p1\s*$", conf, re.MULTILINE) is not None,
                 f"{path} must preserve inter-server password p1", failures)
 
     if failures:
-        raise SystemExit("\\n".join(failures))
+        raise SystemExit("\n".join(failures))
 
     print("PASS: shared MySQL credentials, connection coverage, schema separation and legacy inter-server credentials")
 
