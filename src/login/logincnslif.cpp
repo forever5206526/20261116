@@ -74,7 +74,7 @@ int32 cnslif_parse(const char* buf){
 			char username[NAME_LENGTH], password[NAME_LENGTH], md5password[32+1], sex; //23+1 plaintext 32+1 md5
 			bool md5 = 0;
 			if( sscanf(command, "%23s %23s %c", username, password, &sex) < 3 || strnlen(username, sizeof(username)) < 4 || strnlen(password, sizeof(password)) < 1 ){
-				ShowWarning("Console: Parâmetros invalidos para '%s'. Uso: %s <nome de usuario> <senha> <sexo:F/M>\n", type, type);
+				ShowWarning("Console: Parametros invalidos para '%s'. Uso: %s <nome de usuario> <senha> <sexo:F/M>\n", type, type);
 				return 0;
 			}
 			if( login_config.use_md5_passwds ){
