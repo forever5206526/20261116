@@ -187,6 +187,9 @@ int32 inter_config_read(const char* cfgName)
 		if (sscanf(line, "%23[^:]: %1023[^\r\n]", w1, w2) != 2)
 			continue;
 
+		if (Sql_ConfigRead(w1, w2))
+			continue;
+
 		if (!strcmpi(w1, "emblem_transparency_limit"))
 			inter_config.emblem_woe_change = atoi(w2);
 		else if (!strcmpi(w1, "emblem_transparency_limit"))
