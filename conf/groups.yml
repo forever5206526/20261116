@@ -57,7 +57,7 @@ Body:
     Name: 超級玩家
     # 可執行玩家能做的所有操作，並擁有更多權限。
     Inherit:
-      Player: true
+      玩家: true
     Level: 0
     Commands:
       # 資訊查詢指令
@@ -96,7 +96,7 @@ Body:
   - Id: 2
     Name: 支援人員
     Inherit:
-      Super Player: true
+      超級玩家: true
     Level: 1
     Commands:
       version: true
@@ -118,7 +118,7 @@ Body:
   - Id: 3
     Name: 腳本管理員
     Inherit:
-      Support: true
+      支援人員: true
     Level: 1
     Commands:
       tonpc: true
@@ -134,7 +134,7 @@ Body:
   - Id: 4
     Name: 活動管理員
     Inherit:
-      Support: true
+      支援人員: true
     Level: 1
     Commands:
       monster: true
@@ -177,7 +177,7 @@ Body:
     Name: VIP
     # 可執行玩家能做的所有操作。
     Inherit:
-      Player: true
+      玩家: true
     Level: 0
     Commands:
       rates: true
@@ -185,7 +185,7 @@ Body:
   - Id: 10
     Name: 執法人員
     Inherit:
-      Support: true
+      支援人員: true
     Level: 2
     Commands:
       hide: true
@@ -221,8 +221,8 @@ Body:
     Name: 管理員
     Level: 99
     Inherit:
-      Support: true
-      Law Enforcement: true
+      支援人員: true
+      執法人員: true
     LogCommands: true
     Permissions:
       can_trade: true
