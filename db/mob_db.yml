@@ -2,78 +2,70 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Monster Database
+# 魔物資料庫
 ###########################################################################
 #
-# Monster Settings
+# 魔物設定
 #
 ###########################################################################
-# - Id                      Monster ID.
-#   AegisName               Server name to reference the monster in scripts and lookups, should use no spaces.
-#   Name                    Name in English.
-#   JapaneseName            Name in Japanese. (Default: 'Name' value)
-#   Level                   Level. (Default: 1)
-#   Hp                      Total HP. (Default: 1)
-#   Sp                      Total SP. (Default: 1)
-#   BaseExp                 Base experience gained. (Default: 0)
-#   JobExp                  Job experience gained. (Default: 0)
-#   MvpExp                  MVP experience gained. (Default: 0)
-#   Attack                  Minimum attack in pre-renewal and base attack in renewal. (Default: 0)
-#   Attack2                 Maximum attack in pre-renewal and base magic attack in renewal. (Default: 0)
-#   Defense                 Physical defense of the monster, reduces melee and ranged physical attack/skill damage. (Default: 0)
-#   MagicDefense            Magic defense of the monster, reduces magical skill damage. (Default: 0)
-#   Resistance              Physical resistance of the monster, reduces melee and ranged physical attack/skill damage. (Default: 0)
-#   MagicResistance         Magic resistance of the monster, reduces magical skill damage. (Default: 0)
-#   Str                     Strength which affects attack. (Default: 1)
-#   Agi                     Agility which affects flee. (Default: 1)
-#   Vit                     Vitality which affects defense. (Default: 1)
-#   Int                     Intelligence which affects magic attack. (Default: 1)
-#   Dex                     Dexterity which affects hit rate. (Default: 1)
-#   Luk                     Luck which affects perfect dodge/lucky flee/perfect flee/lucky dodge rate. (Default: 1)
-#   AttackRange             Attack range. (Default: 0)
-#   SkillRange              Skill cast range. (Default: 0)
-#   ChaseRange              Chase range. (Default: 0)
-#   Size                    Size. (Default: Small)
-#   Race                    Race. (Default: Formless)
-#   RaceGroups:             List of secondary groups the monster may be part of. (Optional)
-#     <group>: <value>      Group to toggle.
-#   Element                 Element. (Default: Neutral)
-#   ElementLevel            Level of element. (Default: 1)
-#   WalkSpeed               Walk speed. (Default: DEFAULT_WALK_SPEED)
-#   AttackDelay             Attack speed. (Default: 0)
-#   AttackMotion            Attack animation speed. (Default: 0)
-#   ClientAttackMotion      Client attack speed. (Default: AttackMotion)
-#   DamageMotion            Damage animation speed. (Default: 0)
-#   DamageTaken             Rate at which the monster will receive incoming damage. (Default: 100)
-#   Ai                      Aegis monster type AI behavior. (Default: 06)
-#   Class                   Aegis monster class. (Default: Normal)
-#   Modes:                  List of unique behavior not defined by AI, Class, or Attribute. (Optional)
-#     <mode>: <value>       Mode to toggle.
-#   MvpDrops:               List of possible MVP prize items. Max of MAX_MVP_DROP. (Optional)
-#     - Item                Item name.
-#       Rate                Drop rate of item. (Default: 1)
-#       RandomOptionGroup   Random Option Group applied to item on drop. (Default: None)
-#       Index               Index used for overwriting item. (Optional)
-#   Drops:                  List of possible normal item drops. Max of MAX_MOB_DROP. (Optional)
-#     - Item                Item name.
-#       Rate                Drop rate of item. (Default: 1)
-#       StealProtected      If the item is shielded from TF_STEAL. (Default: false)
-#       RandomOptionGroup   Random Option Group applied to item on drop. (Default: None)
-#       Index               Index used for overwriting item. (Optional)
+# - Id                      魔物 ID。
+#   AegisName               伺服器腳本及查詢使用的魔物名稱，不可包含空格。
+#   Name                    英文名稱。
+#   JapaneseName            日文名稱。（預設：'Name' 欄位的值）
+#   Level                   等級。（預設：1）
+#   Hp                      HP 總量。（預設：1）
+#   Sp                      SP 總量。（預設：1）
+#   BaseExp                 取得的基本經驗值。（預設：0）
+#   JobExp                  取得的職業經驗值。（預設：0）
+#   MvpExp                  取得的 MVP 經驗值。（預設：0）
+#   Attack                  在舊制中代表最低攻擊力，在新制中代表基礎攻擊力。（預設：0）
+#   Attack2                 在舊制中代表最高攻擊力，在新制中代表基礎魔法攻擊力。（預設：0）
+#   Defense                 魔物的物理防禦，可降低近戰與遠距離物理攻擊／技能傷害。（預設：0）
+#   MagicDefense            魔物的魔法防禦，可降低魔法技能傷害。（預設：0）
+#   Resistance              魔物的物理抗性，可降低近戰與遠距離物理攻擊／技能傷害。（預設：0）
+#   MagicResistance         魔物的魔法抗性，可降低魔法技能傷害。（預設：0）
+#   Str                     力量，影響攻擊力。（預設：1）
+#   Agi                     敏捷，影響迴避率。（預設：1）
+#   Vit                     體質，影響防禦力。（預設：1）
+#   Int                     智力，影響魔法攻擊力。（預設：1）
+#   Dex                     靈巧，影響命中率。（預設：1）
+#   Luk                     幸運，影響完全迴避／幸運迴避／完全閃避／幸運閃避率。（預設：1）
+#   AttackRange             攻擊距離。（預設：0）
+#   SkillRange              技能施放距離。（預設：0）
+#   ChaseRange              追擊距離。（預設：0）
+#   Size                    體型。（預設：Small）
+#   Race                    種族。（預設：Formless）
+#   RaceGroups:             魔物可能所屬的次要群組清單。（選填）
+#     <group>: <value>      要啟用或停用的群組。
+#   Element                 屬性。（預設：Neutral）
+#   ElementLevel            屬性等級。（預設：1）
+#   WalkSpeed               移動速度。（預設：DEFAULT_WALK_SPEED）
+#   AttackDelay             攻擊延遲。（預設：0）
+#   AttackMotion            攻擊動作速度。（預設：0）
+#   ClientAttackMotion      客戶端攻擊速度。（預設：AttackMotion）
+#   DamageMotion            受傷動作速度。（預設：0）
+#   DamageTaken             魔物承受傷害的比率。（預設：100）
+#   Ai                      Aegis 魔物類型的 AI 行為。（預設：06）
+#   Class                   Aegis 魔物類別。（預設：Normal）
+#   Modes:                  未由 AI、Class 或 Attribute 定義的特殊行為清單。（選填）
+#     <mode>: <value>       要啟用或停用的模式。
+#   MvpDrops:               MVP 可能掉落的獎勵道具清單，最多 MAX_MVP_DROP 項。（選填）
+#     - Item                道具名稱。
+#       Rate                道具掉落率。（預設：1）
+#       RandomOptionGroup   道具掉落時套用的隨機附加能力群組。（預設：None）
+#       Index               用於覆寫道具的索引。（選填）
+#   Drops:                  一般可能掉落的道具清單，最多 MAX_MOB_DROP 項。（選填）
+#     - Item                道具名稱。
+#       Rate                道具掉落率。（預設：1）
+#       StealProtected      是否防止 TF_STEAL 偷取此道具。（預設：false）
+#       RandomOptionGroup   道具掉落時套用的隨機附加能力群組。（預設：None）
+#       Index               用於覆寫道具的索引。（選填）
 ###########################################################################
 
 Header:

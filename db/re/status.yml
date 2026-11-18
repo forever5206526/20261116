@@ -2,43 +2,35 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Status Change Database
+# 狀態變更資料庫
 ###########################################################################
 #
-# Status Change Settings
+# 狀態變更設定
 #
 ###########################################################################
-# - Status                    Status change name.
-#   Icon                      Status change icon. (Default: EFST_BLANK)
-#   DurationLookup            Default status change duration. (Default: 0)
-#   States:                   Status change state to determine player states. (Default: None)
-#   CalcFlags:                Status change calculation to indicate which stat is adjusted. (Default: None)
-#   Opt1                      Special effect when a status change is active. Non-stackable. (Default: None)
-#   Opt2:                     Special options/client effects when a status change is active. (Default: None)
-#   Opt3:                     Special options/client effects when a status change is active. (Default: Normal)
-#   Options:                  Special options/client effects when a status change is active. (Default: Nothing)
-#   Flags:                    Special flags which trigger during certain events.  (Default: None)
-#   MinRate                   Minimum rate after status change reduction (10000 = 100%). (Default: 0)
-#   MinDuration               Minimum duration in milliseconds after status change reduction. (Default: 1)
-#   Fail:                     List of Status Changes that causes the status to fail to activate. (Optional)
-#   EndOnStart:               List of Status Changes that will end when the status activates. (Optional)
-#   EndReturn:                List of Status Changes that will end when the status activates and won't give its effect. (Optional)
-#   EndOnEnd:                 List of Status Changes that will end when the status becomes inactive. (Optional)
-#   Script:                   Script to execute, when starting the status change. (Optional)
+# - Status                    狀態變更名稱。
+#   Icon                      狀態變更圖示。（預設：EFST_BLANK）
+#   DurationLookup            狀態變更預設持續時間。（預設：0）
+#   States:                   用來判定玩家狀態的狀態變更類型。（預設：None）
+#   CalcFlags:                狀態變更計算設定，用來指定調整的能力值。（預設：None）
+#   Opt1                      狀態變更生效時的特殊效果，不可堆疊。（預設：None）
+#   Opt2:                     狀態變更生效時的特殊選項／客戶端效果。（預設：None）
+#   Opt3:                     狀態變更生效時的特殊選項／客戶端效果。（預設：Normal）
+#   Options:                  狀態變更生效時的特殊選項／客戶端效果。（預設：Nothing）
+#   Flags:                    在特定事件中觸發的特殊旗標。（預設：None）
+#   MinRate                   狀態變更效果經過減少後的最低比率（10000 = 100%）。（預設：0）
+#   MinDuration               狀態變更效果經過減少後的最短持續時間（毫秒）。（預設：1）
+#   Fail:                     會導致此狀態無法啟動的其他狀態變更清單。（選填）
+#   EndOnStart:               此狀態啟動時會結束的其他狀態變更清單。（選填）
+#   EndReturn:                此狀態啟動時會結束且不會產生效果的其他狀態變更清單。（選填）
+#   EndOnEnd:                 此狀態失效時會結束的其他狀態變更清單。（選填）
+#   Script:                   此狀態變更開始時要執行的腳本。（選填）
 ###########################################################################
 
 Header:

@@ -2,50 +2,42 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Custom Pet Database
+# 自訂寵物資料庫
 ###########################################################################
 #
-# Pet Settings
+# 寵物設定
 #
 ###########################################################################
-# - Mob                      Monster that can be used as pet
-#   TameItem                 Pet Tame Item.
-#   EggItem                  Pet Egg Item.
-#   EquipItem                Pet Accessory Item. (Default: 0)
-#   FoodItem                 Pet Food Item. (Default: 0)
-#   Fullness                 The amount of hunger is decreased every [HungryDelay] seconds.
-#   HungryDelay              The amount of time in seconds it takes for hunger to decrease after feeding. (Default: 60)
-#   HungerIncrease           The amount of hunger that is increased every time the pet is fed (Default: 20)
-#   IntimacyStart            Amount of Intimacy the pet starts with. (Default: 250)
-#   IntimacyFed              Amount of Intimacy that is increased when fed. (Default: 50)
-#   IntimacyOverfed          Amount of Intimacy that is increased when over-fed. (Default: -100)
-#   IntimacyHungry           Amount of Intimacy that is increased when the pet is hungry. (Default: -5)
-#   IntimacyOwnerDie         Amount of Intimacy that is increased when the pet owner dies. (Default: -20)
-#   CaptureRate              Capture success rate. (10000 = 100%)
-#   SpecialPerformance       If a pet has a Special Performance. (Default: true)
-#   AttackRate               Rate of which the pet will attack [requires at least pet_support_min_friendly intimacy]. (10000 = 100%)
-#   RetaliateRate            Rate of which the pet will retaliate when master is being attacked [requires at least pet_support_min_friendly intimacy]. (10000 = 100%)
-#   ChangeTargetRate         Rate of which the pet will change its attack target. (10000 = 100%)
-#   AllowAutoFeed            Allows turning automatic pet feeding on. (Default: false)
-#   Script                   Bonus script to execute when the pet is alive. (Default: null)
-#   SupportScript            Bonus script to execute when pet_status_support is enabled. (Default: null)
-#   Evolution:               Pet evolution settings. (Optional) (Default: null)
-#     - Target               Mob this pet can evolve to.
-#       ItemRequirements:      Item requirements for evolving this pet.
+# - Mob                      可作為寵物的魔物
+#   TameItem                 寵物捕捉道具。
+#   EggItem                  寵物蛋道具。
+#   EquipItem                寵物配件道具。（預設：0）
+#   FoodItem                 寵物食物道具。（預設：0）
+#   Fullness                 每隔 [HungryDelay] 秒減少的飢餓值。
+#   HungryDelay              餵食後飢餓值再次下降前的時間（秒）。（預設：60）
+#   HungerIncrease           每次餵食增加的飢餓值。（預設：20）
+#   IntimacyStart            寵物初始親密度。（預設：250）
+#   IntimacyFed              餵食時增加的親密度。（預設：50）
+#   IntimacyOverfed          過度餵食時親密度的變化量。（預設：-100）
+#   IntimacyHungry           寵物飢餓時親密度的變化量。（預設：-5）
+#   IntimacyOwnerDie         寵物主人死亡時親密度的變化量。（預設：-20）
+#   CaptureRate              捕捉成功率。（10000 = 100%）
+#   SpecialPerformance       寵物是否具有特殊表演。（預設：true）
+#   AttackRate               寵物攻擊機率［親密度至少須達到 pet_support_min_friendly］。（10000 = 100%）
+#   RetaliateRate            主人受到攻擊時寵物反擊的機率［親密度至少須達到 pet_support_min_friendly］。（10000 = 100%）
+#   ChangeTargetRate         寵物更換攻擊目標的機率。（10000 = 100%）
+#   AllowAutoFeed            是否允許啟用寵物自動餵食。（預設：false）
+#   Script                   寵物存活時執行的 Bonus 腳本。（預設：null）
+#   SupportScript            啟用 pet_status_support 時執行的 Bonus 腳本。（預設：null）
+#   Evolution:               寵物進化設定。（選填；預設：null）
+#     - Target               此寵物可進化成的魔物。
+#       ItemRequirements:      此寵物進化所需的道具。
 #         - Item               Self-explanatory
 #           Amount
 ###########################################################################

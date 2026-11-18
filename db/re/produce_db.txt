@@ -1,14 +1,14 @@
-// Item Produce Database
+// 道具製作資料庫
 //
-// Structure of Database:
+// 資料庫格式：
 // ID,ProduceItemID,ItemLV,RequireSkill,RequireSkillLv,MaterialID1,MaterialAmount1,......
 //
-// Notes:
-// - ID is used to identify item order that will be used for overwriting on db/import.
-//   Value is started from 0 until 269 (MAX_PRODUCE_RESOURCE-1). Use same ID on import file to overwrite original result & requirements
-// - To remove entry by importing, put 0 on 'ProduceItemID'
-// - If MaterialAmount is 0, the player must have that item in their inventory (i.e. guides).
-//   For example, Mine Bottle requires 0x Marine Sphere Creation Guide (ID 7131).
+// 注意事項：
+// - ID 用於識別道具順序，以便在 db/import 中覆寫對應資料。
+//   數值範圍為 0 至 269（MAX_PRODUCE_RESOURCE-1）。在匯入檔中使用相同 ID，即可覆寫原始製作結果與需求。
+// - 匯入時若要移除此項目，請將 'ProduceItemID' 設為 0。
+// - 若 MaterialAmount 為 0，玩家必須在背包中持有該道具（例如製作指南）。
+//   例如，製作礦泉瓶需要 0 個海葵製作指南（ID 7131）。
 
 //===== Weapon === ItemLV=1~3 ==================
 

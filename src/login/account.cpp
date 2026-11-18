@@ -27,7 +27,6 @@ typedef struct AccountDB_SQL {
 	std::string db_username = "ragnarok";
 	std::string db_password = "";
 	std::string db_database = "ragnarok";
-	std::string codepage = "";
 	// other settings
 	bool case_sensitive;
 	//table name
@@ -109,6 +108,7 @@ static bool account_db_sql_init(AccountDB* self) {
 
 	db->accounts = Sql_Malloc();
 	sql_handle = db->accounts;
+	Sql_ConfigApply(db->db_hostname, db->db_port, db->db_username, db->db_password);
 
 	if( SQL_ERROR == Sql_Connect(sql_handle, db->db_username.c_str(), db->db_password.c_str(), db->db_hostname.c_str(), db->db_port, db->db_database.c_str()) )
 	{
@@ -119,9 +119,6 @@ static bool account_db_sql_init(AccountDB* self) {
 		db->accounts = nullptr;
 		return false;
 	}
-
-	if( !db->codepage.empty() && SQL_ERROR == Sql_SetEncoding(sql_handle, db->codepage.c_str()) )
-		Sql_ShowDebug(sql_handle);
 
 	self->remove_webtokens( self );
 
@@ -194,9 +191,6 @@ static bool account_db_sql_get_property(AccountDB* self, const char* key, char* 
 	signature = "login_";
 	if( strncmpi(key, signature, strlen(signature)) == 0 ) {
 		key += strlen(signature);
-		if( strcmpi(key, "codepage") == 0 )
-			safesnprintf(buf, buflen, "%s", db->codepage.c_str());
-		else
 		if( strcmpi(key, "case_sensitive") == 0 )
 			safesnprintf(buf, buflen, "%d", (db->case_sensitive ? 1 : 0));
 		else
@@ -253,9 +247,6 @@ static bool account_db_sql_set_property(AccountDB* self, const char* key, const 
 	signature = "login_";
 	if( strncmpi(key, signature, strlen(signature)) == 0 ) {
 		key += strlen(signature);
-		if( strcmpi(key, "codepage") == 0 )
-			db->codepage = value;
-		else
 		if( strcmpi(key, "case_sensitive") == 0 )
 			db->case_sensitive = (config_switch(value)==1);
 		else

@@ -101,7 +101,7 @@ class NoUseItemMapFlagTest(unittest.TestCase):
 
         english = (ROOT / "conf/msg_conf/map_msg.conf").read_text(encoding="utf-8-sig")
         chinese = (ROOT / "conf/msg_conf/map_msg_chn.conf").read_text(encoding="utf-8-sig")
-        self.assertIn("1543: You cannot use consumable items on this map.", english)
+        self.assertIn("1543: 此地圖禁止使用消耗型道具。", english)
         self.assertIn("1543: 此地圖禁止使用消耗型道具。", chinese)
 
         guard = production_guard_block()

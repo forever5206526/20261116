@@ -2,30 +2,22 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Captcha Database Table
+# 驗證碼資料表
 ###########################################################################
 #
-# Captcha Database Settings
+# 驗證碼資料庫設定
 #
 ###########################################################################
-# - Id                Index value.
-#   Filename          Name of the BMP image file (with location).
-#   Answer            Correct answer for the captcha (case-sensitive).
-#   Bonus             Bonus Script ran on success. (Default: Level 10 Blessing and Increase Agility)
+# - Id                索引值。
+#   Filename          BMP 圖片檔案名稱（包含路徑）。
+#   Answer            驗證碼的正確答案（區分大小寫）。
+#   Bonus             驗證成功時執行的 Bonus 腳本。（預設：10 級天使之賜福與加速術）
 ###########################################################################
 
 Header:

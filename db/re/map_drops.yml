@@ -2,41 +2,33 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Map Drop Database
+# 地圖掉落資料庫
 ###########################################################################
 #
-# Map Drop Settings
+# 地圖掉落設定
 #
 ###########################################################################
-# - Map                             Name of the map.
-#   GlobalDrops                     Drops for all monsters on this map. (Default: empty)
-#                                   These drops are unaffected by server drop rate and cannot be stolen.
-#     - Index                       Unique index of the drop.
-#       Item                        Item name.
-#       Rate                        Drop rate of item, n/100000.
-#       RandomOptionGroup           Random Option Group applied to item on drop. (Default: None)
-#   SpecificDrops                   Drops for specific monsters on this map. (Default: empty)
-#     - Monster                     Monster name.
-#       Drops                       Drops for this specific monster. (Default: empty)
-#                                   These drops are unaffected by server drop rate and cannot be stolen.
-#         - Index                   Unique index of the drop.
-#           Item                    Item name.
-#           Rate                    Drop rate of item, n/100000.
-#           RandomOptionGroup       Random Option Group applied to item on drop. (Default: None)
+# - Map                             地圖名稱。
+#   GlobalDrops                     此地圖上所有魔物的掉落設定。（預設：空）
+#                                   這些掉落不受伺服器掉落率影響，也無法透過偷竊取得。
+#     - Index                       掉落項目的唯一索引。
+#       Item                        道具名稱。
+#       Rate                        道具掉落率，格式為 n/100000。
+#       RandomOptionGroup           道具掉落時套用的隨機附加能力群組。（預設：None）
+#   SpecificDrops                   此地圖上指定魔物的掉落設定。（預設：空）
+#     - Monster                     魔物名稱。
+#       Drops                       此指定魔物的掉落設定。（預設：空）
+#                                   這些掉落不受伺服器掉落率影響，也無法透過偷竊取得。
+#         - Index                   掉落項目的唯一索引。
+#           Item                    道具名稱。
+#           Rate                    道具掉落率，格式為 n/100000。
+#           RandomOptionGroup       道具掉落時套用的隨機附加能力群組。（預設：None）
 ###########################################################################
 
 Header:

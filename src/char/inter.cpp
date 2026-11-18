@@ -17,6 +17,7 @@
 #include <common/malloc.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
+#include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 
@@ -51,7 +52,6 @@ std::string char_server_ip = "127.0.0.1";
 std::string char_server_id = "ragnarok";
 std::string char_server_pw = ""; // Allow user to send empty password (bugreport:7787)
 std::string char_server_db = "ragnarok";
-std::string default_codepage = ""; //Feature by irmin.
 uint32 party_share_level = 10;
 
 /// Received packet Lengths from map-server
@@ -851,6 +851,9 @@ int32 inter_config_read(const char* cfgName)
 		if (sscanf(line, "%23[^:]: %1023[^\r\n]", w1, w2) != 2)
 			continue;
 
+		if (Sql_ConfigRead(w1, w2))
+			continue;
+
 		if(!strcmpi(w1,"char_server_ip"))
 			char_server_ip = w2;
 		else if(!strcmpi(w1,"char_server_port"))
@@ -861,8 +864,6 @@ int32 inter_config_read(const char* cfgName)
 			char_server_pw = w2;
 		else if(!strcmpi(w1,"char_server_db"))
 			char_server_db = w2;
-		else if(!strcmpi(w1,"default_codepage"))
-			default_codepage = w2;
 		else if(!strcmpi(w1,"party_share_level"))
 			party_share_level = (uint32)atof(w2);
 		else if(!strcmpi(w1,"log_inter"))
@@ -977,6 +978,7 @@ uint64 InterServerDatabase::parseBodyNode( const ryml::NodeRef& node ){
 int32 inter_init_sql(const char *file)
 {
 	inter_config_read(file);
+	Sql_ConfigApply(char_server_ip, char_server_port, char_server_id, char_server_pw);
 
 	//DB connection initialized
 	sql_handle = Sql_Malloc();
@@ -988,11 +990,6 @@ int32 inter_init_sql(const char *file)
 		Sql_ShowDebug(sql_handle);
 		Sql_Free(sql_handle);
 		exit(EXIT_FAILURE);
-	}
-
-	if( !default_codepage.empty() ) {
-		if( SQL_ERROR == Sql_SetEncoding(sql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(sql_handle);
 	}
 
 	interServerDb.load();

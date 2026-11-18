@@ -20,6 +20,7 @@
 #include <common/random.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp> // WFIFO*()
+#include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
@@ -62,7 +63,6 @@ using namespace brhades::server_map;
 std::unordered_map<e_mapflag, s_mapflag_item> mapflag_config;
 #endif // Pandas_Mapflags
 
-std::string default_codepage = "";
 
 int32 map_server_port = 3306;
 std::string map_server_ip = "127.0.0.1";
@@ -4206,6 +4206,9 @@ int32 inter_config_read(const char *cfgName)
 		if( sscanf(line,"%1023[^:]: %1023[^\r\n]",w1,w2) < 2 )
 			continue;
 
+		if (Sql_ConfigRead(w1, w2))
+			continue;
+
 #define RENEWALPREFIX "renewal-"
 		if (!strncmpi(w1, RENEWALPREFIX, strlen(RENEWALPREFIX))) {
 #ifdef RENEWAL
@@ -4267,9 +4270,6 @@ int32 inter_config_read(const char *cfgName)
 		if(strcmpi(w1,"map_server_db")==0)
 			map_server_db = w2;
 		else
-		if(strcmpi(w1,"default_codepage")==0)
-			default_codepage = w2;
-		else
 		if(strcmpi(w1,"use_sql_db")==0) {
 			db_use_sqldbs = config_switch(w2);
 			ShowStatus ("Usando SQL dbs: %s\n",w2);
@@ -4320,6 +4320,7 @@ int32 map_sql_init(void)
 	// main db connection
 	mmysql_handle = Sql_Malloc();
 	qsmysql_handle = Sql_Malloc();
+	Sql_ConfigApply(map_server_ip, map_server_port, map_server_id, map_server_pw);
 
 	ShowInfo("Connecting to the Map DB Server....\n");
 	if( SQL_ERROR == Sql_Connect(mmysql_handle, map_server_id.c_str(), map_server_pw.c_str(), map_server_ip.c_str(), map_server_port, map_server_db.c_str()) ||
@@ -4335,12 +4336,6 @@ int32 map_sql_init(void)
 	}
 	ShowStatus("Conexao bem-sucedida! (Conexao do servidor de mapas)\n");
 
-	if( !default_codepage.empty() ) {
-		if ( SQL_ERROR == Sql_SetEncoding(mmysql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(mmysql_handle);
-		if ( SQL_ERROR == Sql_SetEncoding(qsmysql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(qsmysql_handle);
-	}
 	return 0;
 }
 
@@ -4366,6 +4361,7 @@ int32 log_sql_init(void)
 {
 	// log db connection
 	logmysql_handle = Sql_Malloc();
+	Sql_ConfigApply(log_db_ip, log_db_port, log_db_id, log_db_pw);
 
 	ShowInfo("" CL_WHITE "[SQL]" CL_RESET ": Conectando ao Banco de Dados de Log " CL_WHITE "%s" CL_RESET " Em " CL_WHITE "%s" CL_RESET "...\n",log_db_db.c_str(), log_db_ip.c_str());
 	if ( SQL_ERROR == Sql_Connect(logmysql_handle, log_db_id.c_str(), log_db_pw.c_str(), log_db_ip.c_str(), log_db_port, log_db_db.c_str()) ){
@@ -4377,9 +4373,6 @@ int32 log_sql_init(void)
 	}
 	ShowStatus("" CL_WHITE "[SQL]" CL_RESET ": '" CL_GREEN "conectou" CL_RESET "' com sucesso ao banco de dados '" CL_WHITE "%s" CL_RESET "'.\n", log_db_db.c_str());
 
-	if( !default_codepage.empty() )
-		if ( SQL_ERROR == Sql_SetEncoding(logmysql_handle, default_codepage.c_str()) )
-			Sql_ShowDebug(logmysql_handle);
 
 	return 0;
 }

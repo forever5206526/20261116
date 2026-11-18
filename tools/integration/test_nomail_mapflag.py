@@ -45,7 +45,7 @@ def source_contract() -> None:
         raise AssertionError("MF_NOMAIL 腳本常量匯出缺失")
 
     message_file = (ROOT / "conf/msg_conf/map_msg.conf").read_text(encoding="utf-8-sig")
-    if f"{MESSAGE_ID}: Mailbox and RODEX are disabled on this map." not in message_file:
+    if f"{MESSAGE_ID}: 此地圖已停用郵件訊箱與 RODEX。" not in message_file:
         raise AssertionError("NoMail 地圖提示訊息缺失")
 
     mail = (ROOT / "src/map/mail.cpp").read_text(encoding="utf-8-sig")

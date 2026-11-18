@@ -1,12 +1,12 @@
 //-----------------------------------------
-// GRF Files
-// Add as many as needed.
+// GRF 檔案
+// 可依需求新增多個檔案。
 //-----------------------------------------
 //grf: C:\Program Files\Gravity\RO\rdata.grf
 //grf: C:\Program Files\Gravity\RO\data.grf
 
 //-----------------------------------------
-// Data Directory
-// Use the base folder, not the data\ path.
+// 資料目錄
+// 請使用基底資料夾，不要填入 data\ 子目錄路徑。
 //-----------------------------------------
 //data_dir: C:\Program Files\Gravity\RO\

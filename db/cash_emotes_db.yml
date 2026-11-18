@@ -1,17 +1,17 @@
 #####################################################################################
-# Cash Emotiocons Database
+# 商城表情符號資料庫
 #####################################################################################
 #
-# Cash Emotes
+# 商城表情符號
 #
 #####################################################################################
-# - PackId                     The id of the pack
-#   PackType                   1: account bound, 2: char bound
-#   PackPrice                  How many nyang fruit needed to purshase the pack (6909 is hardcoded in the client)
-#   SaleStart                  The starting time for the pack to be sold in the fomat YYYYMMDD
-#   SaleEnd                    The ending time for the pack to be sold in the fomat YYYYMMDD
-#   RentalPeriod               The durration of usability the pack has once purshased in days, 0 for unlimited
-#   EmotesList                 The list of emotes belonging to the pack
+# - PackId                     組合包 ID。
+#   PackType                   1：帳號綁定；2：角色綁定。
+#   PackPrice                  購買組合包所需的喵果數量（6909 已寫死於客戶端）。
+#   SaleStart                  組合包開始販售的時間，格式為 YYYYMMDD。
+#   SaleEnd                    組合包結束販售的時間，格式為 YYYYMMDD。
+#   RentalPeriod               購買後組合包可使用的天數，設為 0 表示不限期限。
+#   EmotesList                 此組合包包含的表情符號清單。
 ######################################################################################
 Header:
   Type: CASH_EMOTES_DB

@@ -1,13 +1,13 @@
 //======================================================================================
-// Map Index
+// 地圖索引
 //======================================================================================
-// Contains the list of maps with their respective IDs for inter-server use.
-// IDs must never change, therefore any new maps need to be added at the end,
-// and old ones must not be removed, but may be replaced.
-// Format:
-// mapname<tab>index <- specifies index for this map
-// mapname <- map will use index of previous map +1
-// Note that map index 0 is special and reserved for "error" status. 
+// 包含地圖清單及其對應 ID，供伺服器間使用。
+// ID 絕不可變更，因此新增地圖必須加在清單末端，
+// 舊有項目不得刪除，但可以替換。
+// 格式：
+// mapname<tab>index <- 指定此地圖的索引
+// mapname <- 地圖會使用前一個地圖索引加 1
+// 注意：地圖索引 0 為特殊值，保留給「error」狀態使用。 
 
 alb_ship 1
 alb2trea

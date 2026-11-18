@@ -28,8 +28,8 @@ checks = [
     ("active pet is returned to egg", "src/map/map.cpp",
      "pet_return_egg(pl_sd, pl_sd->pd);"),
     ("iterator is released", "src/map/map.cpp", "mapit_free(iter);"),
-    ("English message", "conf/msg_conf/map_msg.conf",
-     "1546: Pets were returned to eggs because this map does not allow pets."),
+    ("Traditional Chinese main message", "conf/msg_conf/map_msg.conf",
+     "1546: 此地圖禁止使用寵物，已將寵物退回寵物蛋。"),
     ("Traditional Chinese message", "conf/msg_conf/map_msg_chn.conf",
      "1546: 此地圖禁止使用寵物，已將寵物退回寵物蛋。"),
 ]

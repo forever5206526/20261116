@@ -1,31 +1,31 @@
-# This file is a part of rAthena.
-#   Copyright(C) 2017 rAthena Development Team
+# 此檔案屬於 rAthena 專案。
+#   Copyright(C) 2017 rAthena 開發團隊
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# 本程式為自由軟體，您可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+#（GNU General Public License）重新散布或修改本程式；
+# 您可以選擇使用授權條款的第 3 版，或
+#（由您選擇）任何更新版本。
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
+# 本程式的發布是希望能對使用者有所幫助，
+# 但不提供任何明示或默示的保證，
+# 包含適售性或特定用途適用性的默示保證。詳情請參閱
+# GNU 通用公共授權條款。
 #
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###########################################################################
-# Atcommand Database
-###########################################################################
-#
-# Atcommand Settings
+# 您應已隨本程式收到 GNU 通用公共授權條款的副本；
+# 若未收到，請參閱 <http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# - Command                  Command name.
-#   Aliases:                 Aliases for the command. (Optional)
+# AtCommand 資料庫
+###########################################################################
+#
+# AtCommand 設定
+#
+###########################################################################
+# - Command                  指令名稱。
+#   Aliases:                 指令別名。（選填）
 #     - <AliasName>
-#   Help                     Help message for the command. (Optional)
+#   Help                     指令說明文字。（選填）
 ###########################################################################
 
 Header:
@@ -37,422 +37,422 @@ Body:
     Aliases:
       - h
     Help: |
-      Params: <command>
-      Shows help for specified command.
+      參數：<command>
+      顯示指定指令的說明。
   - Command: noask
     Help: |
-      Auto rejects deals/invites.
+      自動拒絕交易與邀請。
   - Command: gmotd
     Help: |
-      Broadcasts the Message of The Day to all players.
+      向所有玩家廣播每日訊息（MOTD）。
   - Command: me
     Help: |
-      Params: <message>
-      Displays normal text as a message in this format: *name message* (like /me in mIRC).
+      參數：<message>
+      以「*名稱 訊息*」格式顯示一般文字（類似 mIRC 的 /me）。
   - Command: fakename
     Help: |
-      Params: <name>
-      Changes your name to your choice temporarily.
+      參數：<name>
+      暫時將您的名稱變更為指定名稱。
   - Command: npctalk
     Aliases:
       - npctalkc
     Help: |
-      Params: <NPC name> <message>
-      Forces a NPC to display a message in normal chat.
+      參數：<NPC name> <message>
+      強制 NPC 在一般聊天頻道中顯示訊息。
   - Command: broadcast
     Help: |
-      Params: <message>
-      Broadcasts a message with your name (in yellow).
+      參數：<message>
+      以您的名稱廣播訊息（黃色）。
   - Command: kami
     Help: |
-      Params: <message>
-      Broadcasts a message without your name (in yellow).
+      參數：<message>
+      不顯示您的名稱，直接廣播訊息（黃色）。
   - Command: kamib
     Help: |
-      Params: <message>
-      Broadcasts a message without your name (in blue).
+      參數：<message>
+      不顯示您的名稱，直接廣播訊息（藍色）。
   - Command: localbroadcast
     Help: |
-      Params: <message>
-      Broadcasts a message with your name (in yellow) only on your map.
+      參數：<message>
+      只在您目前所在的地圖，以您的名稱廣播訊息（黃色）。
   - Command: commands
     Help: |
-      Displays a list of commands that you can use.
+      顯示您可以使用的指令清單。
   - Command: rates
     Help: |
-      Displays the server's current rates.
+      顯示伺服器目前的倍率。
   - Command: uptime
     Help: |
-      Displays how long the server has been online.
+      顯示伺服器已運作的時間。
   - Command: showdelay
     Help: |
-      Shows/hides the "There is a delay after this skill" message.
+      顯示／隱藏「此技能使用後有延遲」訊息。
   - Command: exp
     Help: |
-      Displays current levels and % progress.
+      顯示目前等級及經驗值進度百分比。
   - Command: mobinfo
     Aliases:
       - monsterinfo
       - mi
     Help: |
-      Params: <monster name|ID>
-      Shows monster info (stats, exp, drops etc).
+      參數：<monster name|ID>
+      顯示怪物資訊（能力值、經驗值、掉落物等）。
   - Command: iteminfo
     Aliases:
       - ii
     Help: |
-      Params: <item name|ID>
-      Shows item info (type, price etc).
+      參數：<item name|ID>
+      顯示物品資訊（類型、價格等）。
   - Command: whodrops
     Help: |
-      Params: <item name|ID>
-      Shows who drops an item (monster with highest drop rates).
+      參數：<item name|ID>
+      顯示哪些怪物會掉落指定物品（依掉落率由高至低列出）。
   - Command: version
     Help: |
-      Displays SVN version of the server.
+      顯示伺服器的 SVN 版本。
   - Command: email
     Help: |
-      Params: <current email> <new email>
-      Changes your account e-mail address.
+      參數：<current email> <new email>
+      變更您帳號的電子郵件地址。
   - Command: where
     Help: |
-      Params: <char name>
-      Tells you the location of a character.
+      參數：<char name>
+      查詢指定角色所在的位置。
   - Command: time
     Aliases:
       - date
       - serverdate
       - servertime
     Help: |
-      Shows the date and time of the server.
+      顯示伺服器的日期與時間。
   - Command: showexp
     Help: |
-      Displays/hides experience gained.
+      顯示／隱藏取得的經驗值。
   - Command: showzeny
     Help: |
-      Displays/hides Zeny gained.
+      顯示／隱藏取得的 Zeny。
   - Command: mobsearch
     Help: |
-      Params: <monster name|ID>
-      Shows the location of a certain mob on the current map.
+      參數：<monster name|ID>
+      顯示指定怪物在目前地圖上的位置。
   - Command: who
     Aliases:
       - whois
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their party and guild.
+      參數：[<name>]
+      顯示線上玩家清單，以及其隊伍與公會資訊。
   - Command: who2
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their job.
+      參數：[<name>]
+      顯示線上玩家清單，以及其職業資訊。
   - Command: who3
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their location.
+      參數：[<name>]
+      顯示線上玩家清單，以及其所在位置。
   - Command: whomap
     Help: |
-      @whomap/@whomap2/@whomap3 [map] - like @who/@who2/@who3 but only for specified map.
+      @whomap/@whomap2/@whomap3 [map] - 類似 @who/@who2/@who3，但只列出指定地圖上的玩家。
   - Command: whogm
     Help: |
-      Params: [match_text] - Like @who+@who2+who3, but only for GM.
+      參數：[match_text] - Like @who+@who2+who3, but only for GM.
   - Command: guildspy
     Help: |
-      Params: <guild name|id> - You will receive all messages of the guild channel (Chat logging must be enabled)
+      參數：<guild name|id> - You will receive all messages of the guild channel (Chat logging must be enabled)
   - Command: partyspy
     Help: |
-      @partyspy <party name|id> - You will receive all messages of the party channel (Chat logging must be enabled)
+      @partyspy <party name|id> - 接收隊伍頻道的所有訊息（必須啟用聊天記錄）。
   - Command: mapinfo
     Help: |
-      Params: [<0-3> [map]] - Give information about a map (general info +: 0: no more, 1: players, 2: NPC, 3: chatrooms).
+      參數：[<0-3> [map]] - Give information about a map (general info +: 0: no more, 1: players, 2: NPC, 3: chatrooms).
   - Command: go
     Help: |
-      Params: <city name|number>
-      Warps you to a city.
-      -3: (Memo point 2)  14: louyang         31: mora
-      -2: (Memo point 1)  15: start point     32: dewata
-      -1: (Memo point 0)  16: prison/jail     33: malangdo island
-       0: prontera              17: jawaii             34: malaya port
-       1: morocc                18: ayothaya       35: eclage
-       2: geffen                  19: einbroch       36: lasagna
-       3: payon                  20: lighthalzen
-       4: alberta                 21: einbech
-       5: izlude                   22: hugel
-       6: aldebaran           23: rachel
-       7: xmas (lutie)        24: veins
-       8: comodo               25: moscovia
-       9: yuno                     26: midgard camp
-      10: amatsu               27: manuk
-      11: gonryun              28: splendide
-      12: umbala               29: brasilis
-      13: niflheim              30: el dicastes
+      參數：<city name|number>
+      將您傳送至指定城市。
+      -3：記憶點 2　14：louyang　31：mora
+      -2：記憶點 1　15：出生點　32：dewata
+      -1：記憶點 0　16：監獄　33：malangdo island
+       0：prontera　17：jawaii　34：malaya port
+       1：morocc　18：ayothaya　35：eclage
+       2：geffen　19：einbroch　36：lasagna
+       3：payon　20：lighthalzen
+       4：alberta　21：einbech
+       5：izlude　22：hugel
+       6：aldebaran　23：rachel
+       7：xmas（lutie）　24：veins
+       8：comodo　25：moscovia
+       9：yuno　26：midgard camp
+      10：amatsu　27：manuk
+      11：gonryun　28：splendide
+      12：umbala　29：brasilis
+      13：niflheim　30：el dicastes
   - Command: jumpto
     Aliases:
       - goto
       - warpto
     Help: |
-      Params: <char name>
-      Warps you to selected character.
+      參數：<char name>
+      將您傳送至指定角色所在位置。
   - Command: follow
     Help: |
-      Params: <char name>
-      Follow a player.
+      參數：<char name>
+      跟隨指定玩家。
   - Command: mount
     Aliases:
       - mountpeco
     Help: |
-      Give/remove a job-based mount (class is required, but not the skill).
+      給予／移除職業專屬坐騎（需要符合職業條件，但不需要學習技能）。
   - Command: mount2
     Help: |
-      Give/remove a cash mount.
+      給予／移除商城坐騎。
   - Command: disguise
     Help: |
-      Params: <monster name|ID>
-      Change your appearence to other players to a mob.
+      參數：<monster name|ID>
+      將您在其他玩家眼中的外觀變更為指定怪物。
   - Command: undisguise
     Help: |
-      Restore your normal appearance.
+      恢復您的正常外觀。
   - Command: disguiseguild
     Help: |
-      Disguises all online characters of a guild.
+      將指定公會所有線上角色偽裝成怪物。
   - Command: undisguiseguild
     Help: |
-      Restore the normal appearance of all characters of a guild.
+      恢復指定公會所有角色的正常外觀。
   - Command: model
     Help: |
-      Params:  <hair ID: 0-17> <hair color: 0-8> <clothes color: 0-4> - Changes your characters appearence.
+      參數：<hair ID: 0-17> <hair color: 0-8> <clothes color: 0-4> - Changes your characters appearence.
   - Command: size
     Help: |
-      Params:  <0-2> Changes your size (0-Normal 1-Small 2-Large)
+      參數：<0-2> Changes your size (0-Normal 1-Small 2-Large)
   - Command: sizeall
     Help: |
-      Changes the size of all players.
+      變更所有玩家的體型。
   - Command: sizeguild
     Help: |
-      Changes the size of all online characters of a guild.
+      變更指定公會所有線上角色的體型。
   - Command: hide
     Help: |
-      Makes you character invisible (GM invisibility). Type again to become visible.
+      讓您的角色隱形（GM 隱形模式）。再次輸入即可恢復可見。
   - Command: save
     Help: |
-      Sets respawn point to current spot.
+      將重生位置設定為目前所在位置。
   - Command: load
     Aliases:
       - return
     Help: |
-      Warps you to your save point.
+      將您傳送至儲存點。
   - Command: warp
     Aliases:
       - rura
       - mapmove
     Help: |
-      Params: <mapname> [<x> <y>]
-      Warps you to the selected map and position.
+      參數：<mapname> [<x> <y>]
+      將您傳送至指定地圖與座標。
   - Command: jump
     Help: |
-      Params: [<x> [<y>]]
-      Randomly warps you like a flywing.
+      參數：[<x> [<y>]]
+      如同使用蒼蠅翅膀般隨機傳送。
   - Command: jobchange
     Aliases:
       - job
     Help: |
-      Params: <job name|ID>
-      Changes your job.
-      ----- Novice / 1st Class -----
-         0 Novice              1 Swordman            2 Magician            3 Archer
-         4 Acolyte              5 Merchant               6 Thief
-      ----- 2nd Class -----
-         7 Knight               8 Priest                     9 Wizard               10 Blacksmith
-        11 Hunter           12 Assassin            14 Crusader          15 Monk
-        16 Sage              17 Rogue                 18 Alchemist         19 Bard
-        20 Dancer
-      ----- High Novice / High 1st Class -----
-      4001 Novice High     4002 Swordman High    4003 Magician High    4004 Archer High
-      4005 Acolyte High     4006 Merchant High       4007 Thief High
-      ----- Transcendent 2nd Class -----
-      4008 Lord Knight      4009 High Priest             4010 High Wizard      4011 Whitesmith
-      4012 Sniper               4013 Assassin Cross   4015 Paladin              4016 Champion
-      4017 Professor         4018 Stalker                    4019 Creator               4020 Clown
-      4021 Gypsy
-      ----- 3rd Class (Regular) -----
-      4054 Rune Knight    4055 Warlock                 4056 Ranger            4057 Arch Bishop
-      4058 Mechanic         4059 Guillotine Cross  4066 Royal Guard   4067 Sorcerer
-      4068 Minstrel            4069 Wanderer              4070 Sura                 4071 Genetic
-      4072 Shadow Chaser
-      ----- 3rd Class (Transcendent) -----
-      4060 Rune Knight    4061 Warlock                 4062 Ranger             4063 Arch Bishop
-      4064 Mechanic         4065 Guillotine Cross  4073 Royal Guard    4074 Sorcerer
-      4075 Minstrel            4076 Wanderer              4077 Sura                  4078 Genetic
-      4079 Shadow Chaser
-      ----- 4th Class -----
-      4252 Dragon Knight    4253 Meister                    4254 Shadow Cross     4255 Arch Mage
-      4256 Cardinal               4257 Windhawk              4258 Imperial Guard     4259 Biolo
-      4260 Abyss Chaser     4261 Elemental Master 4262 Inquisitor               4263 Troubadour
-      4264 Trouvere
-      ----- Expanded Class -----
-           23 Super Novice      24 Gunslinger              25 Ninja                 4045 Super Baby
-      4046 Taekwon           4047 Star Gladiator     4049 Soul Linker
-      4190 Ex. Super Novice  4191 Ex. Super Baby
-      4211 Kagerou            4212 Oboro             4215 Rebellion        4218 Summoner
-      4239 Star Emperor   4240 Soul Reaper
-      4302 Sky Emperor    4303 Soul Ascetic         4304 Shinkiro                 4305 Shiranui
-      4306 Night Watch     4307 Hyper Novice        4308 Spirit Handler
-      ----- Baby Novice And Baby 1st Class -----
-      4023 Baby Novice      4024 Baby Swordman    4025 Baby Magician   4026 Baby Archer
-      4027 Baby Acolyte      4028 Baby Merchant       4029 Baby Thief
-      ---- Baby 2nd Class ----
-      4030 Baby Knight     4031 Baby Priest         4032 Baby Wizard         4033 Baby Blacksmith
-      4034 Baby Hunter    4035 Baby Assassin   4037 Baby Crusader    4038 Baby Monk
-      4039 Baby Sage       4040 Baby Rogue        4041 Baby Alchemist   4042 Baby Bard
-      4043 Baby Dancer
-      ---- Baby 3rd Class ----
-      4096 Baby Rune Knight  4097 Baby Warlock     4098 Baby Ranger           4099 Baby Arch Bishop
-      4100 Baby Mechanic       4101 Baby Glt. Cross  4102 Baby Royal Guard  4103 Baby Sorcerer
-      4104 Baby Minstrel          4105 Baby Wanderer   4106 Baby Sura             4107 Baby Genetic
-      4108 Baby Shadow Chaser
-      ---- Expanded Baby Class ----
-      4220 Baby Summoner        4222 Baby Ninja        4223 Baby Kagero         4224 Baby Oboro
-      4225 Baby Taekwon       4226 Baby Star Glad    4227 Baby Soul Linker    4228 Baby Gunslinger
-      4229 Baby Rebellion   4241 Baby Star Emperor    4242 Baby Soul Reaper
+      參數：<job name|ID>
+      變更您的職業。
+      ----- 初心者／一轉職業 -----
+         0 初心者　1 劍士　2 魔法師　3 弓箭手
+         4 服事　5 商人　6 盜賊
+      ----- 二轉職業 -----
+         7 騎士　8 祭司　9 巫師　10 鐵匠
+        11 獵人　12 刺客　14 十字軍　15 武僧
+        16 賢者　17 流氓　18 煉金術士　19 吟遊詩人
+        20 舞孃
+      ----- 進階初心者／進階一轉職業 -----
+      4001 進階初心者　4002 進階劍士　4003 進階魔法師　4004 進階弓箭手
+      4005 進階服事　4006 進階商人　4007 進階盜賊
+      ----- 轉生二轉職業 -----
+      4008 騎士領主　4009 高階祭司　4010 高階巫師　4011 神工匠
+      4012 神射手　4013 十字刺客　4015 聖殿十字軍　4016 武術宗師
+      4017 智者　4018 神行太保　4019 創造者　4020 搞笑藝人
+      4021 冷艷舞姬
+      ----- 三轉職業（一般）-----
+      4054 盧恩騎士　4055 咒術士　4056 遊俠　4057 大主教
+      4058 機械工匠　4059 十字斬首者　4066 皇家禁衛隊　4067 妖術師
+      4068 宮廷樂師　4069 浪跡舞者　4070 修羅　4071 基因學者
+      4072 魅影追蹤者
+      ----- 三轉職業（轉生）-----
+      4060 盧恩騎士　4061 咒術士　4062 遊俠　4063 大主教
+      4064 機械工匠　4065 十字斬首者　4073 皇家禁衛隊　4074 妖術師
+      4075 宮廷樂師　4076 浪跡舞者　4077 修羅　4078 基因學者
+      4079 魅影追蹤者
+      ----- 四轉職業 -----
+      4252 龍騎士　4253 機匠　4254 十字影者　4255 大法師
+      4256 樞機主教　4257 風鷹　4258 帝國衛士　4259 生化學者
+      4260 深淵追蹤者　4261 元素支配者　4262 審判者　4263 吟遊詩人
+      4264 舞者
+      ----- 擴充職業 -----
+           23 超級初心者　24 神槍手　25 忍者　4045 超級幼年初心者
+      4046 跆拳道少年　4047 星辰術士　4049 靈魂連結者
+      4190 擴充超級初心者　4191 擴充超級幼年初心者
+      4211 影狼　4212 朧　4215 叛亂者　4218 召喚師
+      4239 星帝　4240 靈魂收割者
+      4302 天帝　4303 靈氣修行者　4304 蜃氣樓　4305 不知火
+      4306 夜行者　4307 超級初心者（四轉）　4308 靈魂馭者
+      ----- 幼年初心者與幼年一轉職業 -----
+      4023 幼年初心者　4024 幼年劍士　4025 幼年魔法師　4026 幼年弓箭手
+      4027 幼年服事　4028 幼年商人　4029 幼年盜賊
+      ---- 幼年二轉職業 ----
+      4030 幼年騎士　4031 幼年祭司　4032 幼年巫師　4033 幼年鐵匠
+      4034 幼年獵人　4035 幼年刺客　4037 幼年十字軍　4038 幼年武僧
+      4039 幼年賢者　4040 幼年流氓　4041 幼年煉金術士　4042 幼年吟遊詩人
+      4043 幼年舞孃
+      ---- 幼年三轉職業 ----
+      4096 幼年盧恩騎士　4097 幼年咒術士　4098 幼年遊俠　4099 幼年大主教
+      4100 幼年機械工匠　4101 幼年十字斬首者　4102 幼年皇家禁衛隊　4103 幼年妖術師
+      4104 幼年宮廷樂師　4105 幼年浪跡舞者　4106 幼年修羅　4107 幼年基因學者
+      4108 幼年魅影追蹤者
+      ---- 擴充幼年職業 ----
+      4220 幼年召喚師　4222 幼年忍者　4223 幼年影狼　4224 幼年朧
+      4225 幼年跆拳道少年　4226 幼年星辰術士　4227 幼年靈魂連結者　4228 幼年神槍手
+      4229 幼年叛亂者　4241 幼年星帝　4242 幼年靈魂收割者
   - Command: option
     Help: |
-      Params: <param1> <param2>(stackable) <param3>(stackable)
-      Adds different visual effects on or around your character.
-       <param1>       <param2>        <param3>
-      01: Stone      01: Sight       01: Sight          512: Cart Lv. 4
-      02: Frozen     02: Curse       02: Hiding        1024: Cart Lv. 5
-      03: Stun       04: Silence     04: Cloaking      2048: Orc Head
-      04: Sleep      08: Signum      08: Cart Lv. 1    4096: Wedding
-      06: Petrify    16: Blind       16: Falcon        8192: Ruwach
-      07: Burning    32: Angelus     32: Riding       16384: Chasewalk
-      08: Imprison   64: Bleeding    64: Invisible
-      16: (Nothing) 128: D. Poison  128: Cart Lv. 2
-      32: (Nothing) 256: Fear       256: Cart Lv. 3
+      參數：<param1> <param2>(stackable) <param3>(stackable)
+      在您的角色身上或周圍加入不同的視覺效果。
+       <參數1>       <參數2>        <參數3>
+      01：石化　01：視界探知　01：視界探知　512：手推車等級 4
+      02：冰凍　02：詛咒　02：隱藏　1024：手推車等級 5
+      03：暈眩　04：沉默　04：隱匿　2048：獸人頭盔
+      04：睡眠　08：十字驅魔　08：手推車等級 1　4096：婚禮服裝
+      06：石化　16：黑暗　16：獵鷹　8192：天使之光
+      07：燃燒　32：天使之障壁　32：騎乘　16384：伪裝漫步
+      08：禁錮　64：出血　64：隱形
+      16：（無）　128：致命毒藥　128：手推車等級 2
+      32：（無）　256：恐懼　256：手推車等級 3
   - Command: heal
     Help: |
-      Params: [<HP> <SP>]
-      Heals the desired amount of HP and SP. No value specified will do a full heal.
+      參數：[<HP> <SP>]
+      恢復指定數量的 HP 與 SP。未指定數值時會完全恢復。
   - Command: healap
     Help: |
-      Params: [<AP>]
-      Heals the desired amount of AP. No value specified will do a full AP heal.
+      參數：[<AP>]
+      恢復指定數量的 AP。未指定數值時會完全恢復 AP。
   - Command: dye
     Aliases:
       - ccolor
     Help: |
-      Params: <clothes palette no.>
-      Changes your characters clothes color.
+      參數：<clothes palette no.>
+      變更您角色的服裝顏色。
   - Command: hairstyle
     Aliases:
       - hstyle
     Help: |
-      Params: <hairstyle no.>
-      Changes your hair style.
+      參數：<hairstyle no.>
+      變更您的髮型。
   - Command: haircolor
     Aliases:
       - hcolor
     Help: |
-      Params <hair palette no.>
-      Changes your hair color.
+      參數：<髮型調色盤編號>
+      變更您的髮色。
   - Command: speed
     Help: |
-      Params: <1-1000>
-      Changes you walking speed. 1 being the fastest and 1000 the slowest. Default is 150.
+      參數：<1-1000>
+      變更您的移動速度。1 為最快，1000 為最慢，預設值為 150。
   - Command: effect
     Help: |
-      Params: <effect id> [<flag>]
-      Give an effect to your character.
+      參數：<effect id> [<flag>]
+      讓您的角色獲得指定效果。
   - Command: dropall
     Help: |
-      Params: [<item type>]
-      Throws all your possession on the ground. No type specified will drop all items.
+      參數：[<item type>]
+      將您持有的物品全部丟在地上。未指定類型時會丟棄所有物品。
   - Command: stockall
     Help: |
-      Params: [<item type>]
-      Transfer items from cart to your inventory. No type specified will transfer all items.
+      參數：[<item type>]
+      將物品從手推車移至背包。未指定類型時會移動所有物品。
   - Command: storeall
     Help: |
-      Puts all your possessions in storage.
+      將您持有的物品全部存入倉庫。
   - Command: killable
     Help: |
-      Make your character killable.
+      讓您的角色可以被擊殺。
   - Command: memo
     Help: |
-      Params: [memo position]
-      Set/change a memo location (no position: display memo points).
+      參數：[memo position]
+      設定／變更記憶點位置（未指定位置時顯示目前記憶點）。
   - Command: spiritball
     Help: |
-      Params: <1-100>
-      Gives you "spirit spheres" like from the skill "Call Spirits".
+      參數：<1-100>
+      給予您「氣彈」，效果類似技能「Call Spirits」。
   - Command: questskill
     Help: |
-      Params: <#>
-      Gives you the specified quest skill
-      Novice = 142: First Aid, 143: Act Dead
-      Archer = 147: Create Arrow, 148: Charge Arrow
-      Swordman = 144: Moving HP Recovery, 145: Attack Weak Point, 146: Auto Berserk
-      Acolyte = 156: Holy Light
-      Thief = 149: Throw Sand, 150: Back Sliding, 151: Take Stone, 152: Throw Stone
-      Merchant = 153: Cart Revolution, 154: Change Cart, 155: Crazy Uproar, 2535: Open Buying Store
-      Magician = 157: Energy Coat
-      Hunter = 1009: Phantasmic Arrow
-      Bard = 1010: Pang Voice
-      Dancer = 1011: Wink of Charm
-      Knight = 1001: Charge Attack
-      Crusader = 1002: Shrink
-      Priest = 1014: Redemptio
-      Monk = 1015: Ki Translation, 1016: Ki Explosio
-      Assassin = 1003: Sonic Acceleration, 1004: Throw Venom Knife
-      Rogue = 1005: Close Confine
-      Blacksmith = 1012: Unfair Trick, 1013: Greed
-      Alchemist = 238: Basis of Life
-      Wizard = 1006: Sight Blaster
-      Sage = 1007: Create Elemental Converter, 1008: Elemental Change (Water), 1017: Elemental Change (Earth), 1018: Elemental Change (Fire), 1019: Elemental Change (Wind)
+      參數：<#>
+      給予您指定的任務技能。
+      初心者 = 142：急救、143：裝死
+      弓箭手 = 147：製作箭矢、148：衝鋒箭
+      劍士 = 144：移動時 HP 恢復、145：攻擊弱點、146：自動狂暴
+      服事 = 156：神聖之光
+      盜賊 = 149：擲沙、150：後退迴避、151：拾取石頭、152：投擲石頭
+      商人 = 153：手推車攻擊、154：更換手推車、155：大聲吶喊、2535：開設收購商店
+      魔法師 = 157：能量外套
+      獵人 = 1009：幻象箭
+      吟遊詩人 = 1010：驚聲尖叫
+      舞孃 = 1011：魅惑之眼
+      騎士 = 1001：衝鋒攻擊
+      十字軍 = 1002：縮小
+      祭司 = 1014：聖靈降臨祈禱
+      武僧 = 1015：氣功轉移、1016：氣功爆炸
+      刺客 = 1003：音速投擲加速、1004：投擲毒匕首
+      流氓 = 1005：緊密拘束
+      鐵匠 = 1012：不公平交易、1013：貪婪
+      煉金術士 = 238：生命基礎
+      巫師 = 1006：火焰之眼
+      賢者 = 1007：製作屬性轉換器、1008：屬性變化（水）、1017：屬性變化（地）、1018：屬性變化（火）、1019：屬性變化（風）
   - Command: lostskill
     Help: |
-      Params: <#>
-      Takes away the specified quest skill from you
-      Novice = 142: First Aid, 143: Act Dead
-      Archer = 147: Create Arrow, 148: Charge Arrow
-      Swordman = 144: Moving HP Recovery, 145: Attack Weak Point, 146: Auto Berserk
-      Acolyte = 156: Holy Light
-      Thief = 149: Throw Sand, 150: Back Sliding, 151: Take Stone, 152: Throw Stone
-      Merchant = 153: Cart Revolution, 154: Change Cart, 155: Crazy Uproar, 2535: Open Buying Store
-      Magician = 157: Energy Coat
-      Hunter = 1009: Phantasmic Arrow
-      Bard = 1010: Pang Voice
-      Dancer = 1011: Wink of Charm
-      Knight = 1001: Charge Attack
-      Crusader = 1002: Shrink
-      Priest = 1014: Redemptio
-      Monk = 1015: Ki Translation, 1016: Ki Explosio
-      Assassin = 1003: Sonic Acceleration, 1004: Throw Venom Knife
-      Rogue = 1005: Close Confine
-      Blacksmith = 1012: Unfair Trick, 1013: Greed
-      Alchemist = 238: Basis of Life
-      Wizard = 1006: Sight Blaster
-      Sage = 1007: Create Elemental Converter, 1008: Elemental Change (Water), 1017: Elemental Change (Earth), 1018: Elemental Change (Fire), 1019: Elemental Change (Wind)
+      參數：<#>
+      移除您指定的任務技能。
+      初心者 = 142：急救、143：裝死
+      弓箭手 = 147：製作箭矢、148：衝鋒箭
+      劍士 = 144：移動時 HP 恢復、145：攻擊弱點、146：自動狂暴
+      服事 = 156：神聖之光
+      盜賊 = 149：擲沙、150：後退迴避、151：拾取石頭、152：投擲石頭
+      商人 = 153：手推車攻擊、154：更換手推車、155：大聲吶喊、2535：開設收購商店
+      魔法師 = 157：能量外套
+      獵人 = 1009：幻象箭
+      吟遊詩人 = 1010：驚聲尖叫
+      舞孃 = 1011：魅惑之眼
+      騎士 = 1001：衝鋒攻擊
+      十字軍 = 1002：縮小
+      祭司 = 1014：聖靈降臨祈禱
+      武僧 = 1015：氣功轉移、1016：氣功爆炸
+      刺客 = 1003：音速投擲加速、1004：投擲毒匕首
+      流氓 = 1005：緊密拘束
+      鐵匠 = 1012：不公平交易、1013：貪婪
+      煉金術士 = 238：生命基礎
+      巫師 = 1006：火焰之眼
+      賢者 = 1007：製作屬性轉換器、1008：屬性變化（水）、1017：屬性變化（地）、1018：屬性變化（火）、1019：屬性變化（風）
   - Command: skillid
     Help: |
-      Params: <name>
-      Look up a skill by name
+      參數：<name>
+      依技能名稱查詢技能。
   - Command: useskill
     Help: |
-      Params: <skillid> <skillv> <target>
-      Use a skill on target
+      參數：<skillid> <skillv> <target>
+      對指定目標使用技能。
   - Command: skilltree
     Help: |
-      Params: <skillnum> <charname>
-      Prints the skill tree needed to get a skill for the target player.
+      參數：<skillnum> <charname>
+      列出指定玩家要學會某技能所需的技能樹。
   - Command: marry
     Help: |
-      Params: <player name>
-      Marry another player.
+      參數：<player name>
+      與另一名玩家結婚。
   - Command: divorce
     Help: |
-      Divorce player.
+      與玩家離婚。
   - Command: alive
     Help: |
-      Revives yourself from death.
+      將自己從死亡狀態復活。
   - Command: blvl
     Aliases:
       - lvup
@@ -462,8 +462,8 @@ Body:
       - baselevel
       - baselvlup
     Help: |
-      Params: <number of levels>
-      Raises your base level the desired number of levels.
+      參數：<number of levels>
+      依指定數量提高您的 Base Level。
   - Command: jlvl
     Aliases:
       - jlevel
@@ -472,251 +472,251 @@ Body:
       - joblevel
       - joblvlup
     Help: |
-      Params: <number of levels>
-      Raises your job level the desired number of levels.
+      參數：<number of levels>
+      依指定數量提高您的 Job Level。
   - Command: allskill
     Aliases:
       - allskills
       - skillall
       - skillsall
     Help: |
-      Give you all skills.
+      讓您學會所有技能。
   - Command: stpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of stat points.
+      參數：<number of points> - Gives you the desired number of stat points.
   - Command: trpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of trait stat points.
+      參數：<number of points> - Gives you the desired number of trait stat points.
   - Command: skpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of skill points.
+      參數：<number of points> - Gives you the desired number of skill points.
   - Command: zeny
     Help: |
-      Params: <amount> - Gives you desired amount of Zeny.
+      參數：<amount> - Gives you desired amount of Zeny.
   - Command: cash
     Help: |
-      Params: <amount> - Gives you the specified amount of cash points.
+      參數：<amount> - Gives you the specified amount of cash points.
   - Command: points
     Help: |
-      Params: <amount> - Gives you the specified amount of Kafra Points.
+      參數：<amount> - Gives you the specified amount of Kafra Points.
   - Command: str
     Help: |
-      Params: <amount>
-      Raises STR by given amount.
+      參數：<amount>
+      依指定數值提高 STR。
   - Command: agi
     Help: |
-      Params: <amount>
-      Raises AGI by given amount.
+      參數：<amount>
+      依指定數值提高 AGI。
   - Command: dex
     Help: |
-      Params: <amount>
-      Raises DEX by given amount.
+      參數：<amount>
+      依指定數值提高 DEX。
   - Command: vit
     Help: |
-      Params: <amount>
-      Raises VIT by given amount.
+      參數：<amount>
+      依指定數值提高 VIT。
   - Command: int
     Help: |
-      Params: <amount>
-      Raises INT by given amount.
+      參數：<amount>
+      依指定數值提高 INT。
   - Command: luk
     Help: |
-      Params: <amount>
-      Raises LUK by given amount.
+      參數：<amount>
+      依指定數值提高 LUK。
   - Command: pow
     Help: |
-      Params: <amount>
-      Raises POW by given amount.
+      參數：<amount>
+      依指定數值提高 POW。
   - Command: sta
     Help: |
-      Params: <amount>
-      Raises STA by given amount.
+      參數：<amount>
+      依指定數值提高 STA。
   - Command: wis
     Help: |
-      Params: <amount>
-      Raises WIS by given amount.
+      參數：<amount>
+      依指定數值提高 WIS。
   - Command: spl
     Help: |
-      Params: <amount>
-      Raises SPL by given amount.
+      參數：<amount>
+      依指定數值提高 SPL。
   - Command: con
     Help: |
-      Params: <amount>
-      Raises CON by given amount.
+      參數：<amount>
+      依指定數值提高 CON。
   - Command: crt
     Help: |
-      Params: <amount>
-      Raises CRT by given amount.
+      參數：<amount>
+      依指定數值提高 CRT。
   - Command: allstats
     Aliases:
       - allstat
       - statall
       - statsall
     Help: |
-      Params: <value>
-      Adds value in all stats (maximum if no value).
+      參數：<value>
+      將所有能力值增加指定數值（未指定時提高至上限）。
   - Command: alltraits
     Aliases:
       - alltrait
       - traitall
       - traitsall
     Help: |
-      Params: <value>
-      Adds value in all traits (maximum if no value).
+      參數：<value>
+      將所有特性能力值增加指定數值（未指定時提高至上限）。
   - Command: addwarp
     Help: |
-      Params: <map name> <x coord> <y coord> <NPC name>
+      參數：<map name> <x coord> <y coord> <NPC name>
   - Command: killmonster2
     Help: |
-      Kills all monsters of your map (without drops).
+      擊殺您所在地圖的所有怪物（不會掉落物品）。
   - Command: monster
     Aliases:
       - spawn
     Help: |
-      Params: <monster name|ID> [<number to spawn> [<desired_monster_name> [<x coord> [<y coord>]]]]
-      @monster2 <desired_monster_name> <monster name|ID> [<number to spawn> [<x coord> [<y coord>]]]
-      @spawn/@monster/@summon/@monster2 "desired monster name" <monster name|ID> [<number to spawn> [<x coord> [<y coord>]]]
-      @spawn/@monster/@summon/@monster2 <monster name|ID> "desired monster name" [<number to spawn> [<x coord> [<y coord>]]]
-      Spawns the desired monster with any desired name.
+      參數：<monster name|ID> [<number to spawn> [<desired_monster_name> [<x coord> [<y coord>]]]]
+      @monster2 <自訂怪物名稱> <怪物名稱|ID> [<生成數量> [<X 座標> [<Y 座標>]]]
+      @spawn/@monster/@summon/@monster2 "自訂怪物名稱" <怪物名稱|ID> [<生成數量> [<X 座標> [<Y 座標>]]]
+      @spawn/@monster/@summon/@monster2 <怪物名稱|ID> "自訂怪物名稱" [<生成數量> [<X 座標> [<Y 座標>]]]
+      生成指定怪物，並可自訂怪物名稱。
   - Command: monstersmall
     Help: |
-      Params: <monster name|ID>
-      Spawns a smaller version of a monster.
+      參數：<monster name|ID>
+      生成指定怪物的小型版本。
   - Command: monsterbig
     Help: |
-      Params: <monster name|ID>
-      Spawns a larger version of a monster.
+      參數：<monster name|ID>
+      生成指定怪物的大型版本。
   - Command: killmonster
     Help: |
-      Params: <map>
-      Kill all monsters of the map (they drop)
+      參數：<map>
+      擊殺指定地圖上的所有怪物（會掉落物品）。
   - Command: autoloot
     Help: |
-      Params: <on|off|#>
-      Makes items go straight into your inventory.
+      參數：<on|off|#>
+      讓物品直接進入您的背包。
   - Command: autotrade
     Aliases:
       - at
     Help: |
-      Allows you to vend while you are offline.
+      允許您離線時繼續擺設露天商店。
   - Command: changegm
     Help: |
-      Params: <charname>
-      Changes the leader of your guild (You must be guild leader)
+      參數：<charname>
+      變更公會會長（您必須是公會會長）。
   - Command: changeleader
     Help: |
-      Params: <charname>
-      Changes the leader of your party (You must be party leader)
+      參數：<charname>
+      變更隊伍隊長（您必須是隊伍隊長）。
   - Command: request
     Help: |
-      Params: <message>
-      Sends a message to all connected GMs (via the gm whisper system)
+      參數：<message>
+      透過 GM 密語系統向所有已連線的 GM 傳送訊息。
   - Command: sound
     Help: |
-      Params: <path to file in data folder or GRF file>
-      Plays a sound from the data folder or GRF file located on the client.
+      參數：<path to file in data folder or GRF file>
+      播放用戶端 data 資料夾或 GRF 檔案中的音效。
   - Command: clone
     Help: |
-      Params: <charname>
-      Spawns a supportive clone of the given player.
+      參數：<charname>
+      生成指定玩家的輔助型分身。
   - Command: slaveclone
     Help: |
-      Params: <charname>
-      Spawns a supportive clone of the given player that follows the creator around.
+      參數：<charname>
+      生成指定玩家的輔助型分身，並跟隨建立者移動。
   - Command: evilclone
     Help: |
-      Params: <charname>
-      Spawns an aggressive clone of the given player.
+      參數：<charname>
+      生成指定玩家的攻擊型分身。
   - Command: changesex
     Help: |
-      Changes your gender.
+      變更您的性別。
   - Command: duel
     Help: |
-      Starts a duel.
+      開始決鬥。
   - Command: invite
     Help: |
-      Invites a player to a duel.
+      邀請玩家進行決鬥。
   - Command: accept
     Help: |
-      Accepts an invitation to a duel.
+      接受決鬥邀請。
   - Command: reject
     Help: |
-      Rejects an invitation to a duel.
+      拒絕決鬥邀請。
   - Command: leave
     Help: |
-      Leaves a duel.
+      退出決鬥。
   - Command: mail
     Help: |
-      Open mail box.
+      開啟郵件信箱。
   - Command: storage
     Help: |
-      Opens storage.
+      開啟倉庫。
   - Command: itemreset
     Aliases:
       - clearinventory
     Help: |
-      Remove all your items.
+      移除您所有的物品。
   - Command: guildstorage
     Aliases:
       - gstorage
     Help: |
-      Opens guild storage.
+      開啟公會倉庫。
   - Command: idsearch
     Help: |
-      Params: <part_of_item_name>
-      Search all items that name have part_of_item_name
+      參數：<part_of_item_name>
+      搜尋名稱包含指定文字的所有物品。
   - Command: refine
     Help: |
-      Params: <equip position> <+/- amount>
+      參數：<equip position> <+/- amount>
   - Command: grade
     Help: |
-      Params: <equip position> <+/- amount>
+      參數：<equip position> <+/- amount>
   - Command: produce
     Help: |
-      Params: <equip name or equip ID> <element> <# of very's>
-      Element: 0=None 1=Ice 2=Earth 3=Fire 4=Wind
-      You can add up to 3 Star Crumbs and 1 element
+      參數：<equip name or equip ID> <element> <# of very's>
+      屬性：0=無、1=水、2=地、3=火、4=風
+      最多可加入 3 個星星的角及 1 種屬性。
   - Command: repairall
     Help: |
-      Repair all items of your inventory
+      修理您背包中的所有物品。
   - Command: item
     Help: |
-      Params: <item name or ID> <quantity>
-      Gives you the desired item.
+      參數：<item name or ID> <quantity>
+      給予您指定的物品。
   - Command: item2
     Help: |
-      Params: <item name or ID> <quantity> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
-      Gives you the desired item.
+      參數：<item name or ID> <quantity> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
+      給予您指定的物品。
   - Command: pvpon
     Help: |
-      Enables PvP on the current map
+      在目前地圖啟用 PvP。
   - Command: pvpoff
     Help: |
-      Disables PvP on the current map
+      在目前地圖停用 PvP。
   - Command: gvgon
     Aliases:
       - gpvpon
     Help: |
-      Enables GvG on the current map
+      在目前地圖啟用 GvG。
   - Command: gvgoff
     Aliases:
       - gpvpoff
     Help: |
-      Disables GvG on the current map
+      在目前地圖停用 GvG。
   - Command: agitstart
     Help: |
-      Starts War of Emperium
+      開始 WoE（攻城戰）。
   - Command: agitend
     Help: |
-      End War of Emperium
+      結束 WoE（攻城戰）。
   - Command: party
     Help: |
-      Params: <party_name>
-      Create a party.
+      參數：<party_name>
+      建立隊伍。
   - Command: guild
     Help: |
-      Params: <guild_name>
-      Create a guild.
+      參數：<guild_name>
+      建立公會。
   - Command: glvl
     Aliases:
       - glevel
@@ -725,264 +725,264 @@ Body:
       - guildlevel
       - guildlvlup
     Help: |
-      Params: <# of levels>
-      Raise Guild by desired number of levels
+      參數：<# of levels>
+      依指定數量提升公會等級。
   - Command: guildrecall
     Help: |
-      Params: <guild name|ID>
-      Warps all online characters of a guild to you.
+      參數：<guild name|ID>
+      將指定公會所有線上角色傳送到您身邊。
   - Command: partyrecall
     Help: |
-      Params: <party name|ID>
-      Warps all online characters of a party to you.
+      參數：<party name|ID>
+      將指定隊伍所有線上角色傳送到您身邊。
   - Command: petrename
     Help: |
-      Re-enable pet rename
+      重新啟用寵物改名功能。
   - Command: pettalk
     Help: |
-      Params: <message>
-      Makes your pet say a message.
+      參數：<message>
+      讓您的寵物說出指定訊息。
   - Command: petfriendly
     Help: |
-      Params: <#>
-      Set pet friendly amount (0-1000) 1000 = Max
+      參數：<#>
+      設定寵物親密度（0～1000，1000 為最大值）。
   - Command: pethungry
     Help: |
-      Params: <#>
-      Set pet hungry amount (0-100) 100 = Max
+      參數：<#>
+      設定寵物飢餓度（0～100，100 為最大值）。
   - Command: hatch
     Help: |
-      Create a pet from your inventory eggs list.
+      從您背包中的寵物蛋清單孵化寵物。
   - Command: makeegg
     Help: |
-      Params: <pet_id>
-      Gives pet egg for monster number in pet DB
+      參數：<pet_id>
+      依 pet DB 中的怪物編號給予寵物蛋。
   - Command: kick
     Help: |
-      Params: <char name>
-      Kicks specified character off the server
+      參數：<char name>
+      將指定角色踢出伺服器。
   - Command: unjail
     Aliases:
       - discharge
     Help: |
-      Params: <char name>
-      Discharges specified character/prisoner
+      參數：<char name>
+      釋放指定角色／囚犯。
   - Command: kill
     Aliases:
       - die
     Help: |
-      Kills player.
+      擊殺指定玩家。
   - Command: recall
     Help: |
-      Params: <char name>
-      Warps target character to you.
+      參數：<char name>
+      將指定角色傳送到您身邊。
   - Command: raise
     Aliases:
       - revive
     Help: |
-      Params: <char name>
-      Revives target character.
+      參數：<char name>
+      復活指定角色。
   - Command: block
     Help: |
-      Params: <char name>
-      Permanently blocks an account.
+      參數：<char name>
+      永久封鎖指定帳號。
   - Command: unblock
     Help: |
-      Params: <char name>
-      Unblocks an account.
+      參數：<char name>
+      解除帳號封鎖。
   - Command: ban
     Aliases:
       - banish
     Help: |
-      Params: <time> <name>\n" "Temporarily ban an account.
-      time usage: adjustment (+/- value) and element (y/a, m, d/j, h, mn, s)
-      Example: @ban +1m-2mn1s-6y testplayer
+      參數：<time> <name>\n" "Temporarily ban an account.
+      時間格式：調整量（+/- 數值）及時間單位（y/a：年、m：月、d/j：日、h：小時、mn：分鐘、s：秒）
+      範例：@ban +1m-2mn1s-6y testplayer
   - Command: unban
     Aliases:
       - unbanish
     Help: |
-      Params: <name> - Unban a account
+      參數：<name> - Unban a account
   - Command: jail
     Help: |
-      Params: <char name> - Sends specified character in jails
+      參數：<char name> - Sends specified character in jails
   - Command: trade
     Help: |
-      Params: <char name> - Open a trade window with a another player
+      參數：<char name> - Open a trade window with a another player
   - Command: recallall
     Help: |
-      Warps every character online to you.
+      將所有線上角色傳送到您身邊。
   - Command: doom
     Help: |
-      Kills all NON GM chars on the server.
+      擊殺伺服器上所有非 GM 角色。
   - Command: doommap
     Help: |
-      Kills all non GM characters on the map.
+      擊殺目前地圖上所有非 GM 角色。
   - Command: raisemap
     Help: |
-      Resurrects all characters on the map.
+      復活目前地圖上的所有角色。
   - Command: night
     Help: |
-      Enables night mode on all maps, all characters are affected.
+      在所有地圖啟用夜晚模式，所有角色都會受到影響。
   - Command: day
     Help: |
-      Disables night mode and restores regular lighting, all characters are affected.
+      停用夜晚模式並恢復一般光線，所有角色都會受到影響。
   - Command: skillon
     Help: |
-      Turn skills on for a map.
+      在指定地圖啟用技能。
   - Command: skilloff
     Help: |
-      Turn skills off for a map.
+      在指定地圖停用技能。
   - Command: snow
     Help: |
-      Makes all maps to have the snow weather effect.
+      讓所有地圖套用下雪天氣效果。
   - Command: rain
     Help: |
-      Makes all maps to have the rain weather effect.
+      讓所有地圖套用下雨天氣效果。
   - Command: clouds
     Help: |
-      Makes all maps to have the cloudy weather effect.
+      讓所有地圖套用陰天效果。
   - Command: clouds2
     Help: |
-      Makes all maps to have another cloudy weather effect.
+      讓所有地圖套用另一種陰天效果。
   - Command: fog
     Help: |
-      Makes all maps to have the fog weather effect.
+      讓所有地圖套用起霧效果。
   - Command: fireworks
     Help: |
-      Makes all maps to have the fireworks weather effect.
+      讓所有地圖套用煙火效果。
   - Command: sakura
     Help: |
-      Makes all maps to have the sakura weather effect.
+      讓所有地圖套用櫻花效果。
   - Command: leaves
     Help: |
-      Makes all maps to have the leaves weather effect.
+      讓所有地圖套用落葉效果。
   - Command: shownpc
     Help: |
-      Params: <NPC name>
-      Enable a NPC.
+      參數：<NPC name>
+      啟用指定 NPC。
   - Command: hidenpc
     Help: |
-      Params: <NPC name>
-      Disable a NPC.
+      參數：<NPC name>
+      停用指定 NPC。
   - Command: npcmove
     Help: |
-      Params: <x coord> <y coord> <NPC name>
-      Move a NPC.
+      參數：<x coord> <y coord> <NPC name>
+      移動指定 NPC。
   - Command: loadnpc
     Help: |
-      Params: <path to script>
-      Load the specified script file path.
+      參數：<path to script>
+      載入指定路徑的腳本檔案。
   - Command: unloadnpc
     Help: |
-      Params: <NPC name>
-      Unload the specified NPC according to name.
+      參數：<NPC name>
+      依 NPC 名稱卸載指定 NPC。
   - Command: unloadnpcfile
     Help: |
-      Params: <path>
-      Unload the specified script file path.
+      參數：<path>
+      卸載指定路徑的腳本檔案。
   - Command: adjgroup
     Help: |
-      Params: <level> <char name>
-      Do a temporary adjustment of the group level of a player.
+      參數：<level> <char name>
+      暫時調整玩家的群組等級。
   - Command: addperm
     Help: |
-      Params: <permission_name>
-      Temporarily add a permission to a player.
+      參數：<permission_name>
+      暫時授予玩家指定權限。
   - Command: rmvperm
     Help: |
-      Params: <permission_name>
-      Temporarily remove a permission from a player.
+      參數：<permission_name>
+      暫時移除玩家的指定權限。
   - Command: kickall
     Help: |
-      Kick all characters off the server
+      將所有角色踢出伺服器。
   - Command: mapexit
     Help: |
-      Kick all players and shut down map-server.
+      踢出所有玩家並關閉 map-server。
   - Command: gat
     Help: |
-      For debugging (you inspect around gat)
+      除錯用途（檢查 gat 周圍的資訊）。
   - Command: send
     Help: |
-      Params: <Hex Number> [<value>]
-      For debugging (packet variety)
+      參數：<Hex Number> [<value>]
+      除錯用途（封包測試）。
   - Command: nuke
     Help: |
-      Params: <char name>
-      Blow somebody up, including those surrounding them.
+      參數：<char name>
+      引爆指定玩家及其周圍的單位。
   - Command: reloadachievementdb
     Help: |
-      Reload achievement database.
+      重新載入成就資料庫。
   - Command: reloadatcommand
     Help: |
-      Reload atcommand settings.
+      重新載入 AtCommand 設定。
   - Command: reloadattendancedb
     Help: |
-      Reload attendance database.
+      重新載入簽到資料庫。
   - Command: reloadbattleconf
     Help: |
-      Reload battle settings.
+      重新載入戰鬥設定。
   - Command: reloadcashdb
     Aliases:
       - reloadcashshop
     Help: |
-      Reload cash shop database.
+      重新載入商城資料庫。
   - Command: reloadinstancedb
     Help: |
-      Reload instance database.
+      重新載入副本資料庫。
   - Command: reloaditemdb
     Help: |
-      Reload item database.
+      重新載入物品資料庫。
   - Command: reloadmobdb
     Help: |
-      Reload monster database.
+      重新載入怪物資料庫。
   - Command: reloadmotd
     Help: |
-      Reload Message of the Day.
+      重新載入每日訊息（MOTD）。
   - Command: reloadmsgconf
     Help: |
-      Reload message configuration.
+      重新載入訊息設定。
   - Command: reloadpcdb
     Help: |
-      Reload player settings.
+      重新載入玩家設定。
   - Command: reloadquestdb
     Help: |
-      Reload quest database.
+      重新載入任務資料庫。
   - Command: reloadscript
     Help: |
-      Reload all scripts.
+      重新載入所有腳本。
   - Command: reloadskilldb
     Help: |
-      Reload skills definition database.
+      重新載入技能定義資料庫。
   - Command: reloadstatusdb
     Help: |
-      Reload status settings.
+      重新載入狀態設定。
   - Command: reload
     Help: |
-      Params: <type>
-      Reload a database or configuration file.
-      itemdb                mobdb          skilldb
-      atcommand       battleconf     statusdb
-      pcdb                    motd             script
-      questdb              msgconf       packetdb
-      cashdb
+      參數：<type>
+      重新載入資料庫或設定檔。
+      itemdb（物品資料庫）　mobdb（怪物資料庫）　skilldb（技能資料庫）
+      atcommand（指令設定）　battleconf（戰鬥設定）　statusdb（狀態資料庫）
+      pcdb（玩家設定）　motd（每日訊息）　script（腳本）
+      questdb（任務資料庫）　msgconf（訊息設定）　packetdb（封包資料庫）
+      cashdb（商城資料庫）
   - Command: langtype
     Help: |
-      Params: <language>
-      Changes your language setting.
+      參數：<language>
+      變更您的語言設定。
   - Command: limitedsale
     Help: |
-      Opens the limited sale window.
+      開啟限時販售視窗。
   - Command: changedress
     Aliases:
       - nocosplay
     Help: |
-      Removes all character costumes.
+      移除角色目前穿著的所有服裝外觀。
   - Command: camerainfo
     Aliases:
       - viewpointvalue
       - setcamera
     Help: |
-      Shows or updates the client's camera settings.
+      顯示或更新用戶端的鏡頭設定。
   - Command: resetstat
     Aliases:
       - streset
@@ -1028,23 +1028,23 @@ Body:
       - famepoints
   - Command: enchantgradeui
     Help: |
-      Opens the enchantgrade UI.
+      開啟裝備附魔階級介面。
   - Command: roulette
     Help: |
-      Opens the roulette UI.
+      開啟輪盤介面。
   - Command: setcard 
     Help: |
-      Adds a card or enchant to the specific slot of the equipment.
+      將卡片或附魔加入裝備的指定插槽。
   - Command: bodystyle
     Help: |
-      Params: <1/0>
-      Params: off. Restores default job bodystyle.
-      Changes the character's bodystyle to alternate kro sprite.
+      參數：<1/0>
+      參數：off. Restores default job bodystyle.
+      將角色體型造型變更為 kRO 的替代角色精靈圖。
   - Command: resetcooltime
     Aliases:
       - resetcooldown
     Help: |
-      Resets the cooldown of all skills of the player and if active also of the homunculus or the mercenary.
+      重置玩家所有技能的冷卻時間；若生命體或傭兵處於啟用狀態，也會一併重置其技能冷卻時間。
 
 Footer:
   Imports:
