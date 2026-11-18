@@ -38,6 +38,6 @@ Header:
 
 #Body:
 #   - ID: 1
-#     Name: "VIP Storage"
+#     Name: "VIP 倉庫"
 #     Table: vip_storage
 #     Max: 300
