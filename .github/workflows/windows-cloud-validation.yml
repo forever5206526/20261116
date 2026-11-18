@@ -1,4 +1,4 @@
-name: Windows 雲端編譯驗證
+name: Feature integration regression tests
 
 on:
   push:
@@ -14,136 +14,47 @@ permissions:
   contents: read
 
 jobs:
-  identify-event-integration:
+  integration-tests:
+    name: Source-contract and feature regression tests
     runs-on: ubuntu-latest
     steps:
-      - name: 取得目前正式工作分支
+      - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: 設定 Python
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
-      - name: 執行鑑定事件 C++ 回歸測試
+      - name: Identify event regression test
         run: python tools/integration/test_identify_event.py
 
-      - name: 執行 NoAutoLoot 地圖標記回歸測試
+      - name: NoAutoLoot mapflag regression test
         run: python tools/integration/test_noautoloot_mapflag.py
 
-      - name: 執行 NoToken 地圖標記回歸測試
+      - name: NoToken mapflag regression test
         run: python tools/integration/test_notoken_mapflag.py
 
-      - name: 執行 NoMail 地圖標記回歸測試
+      - name: NoMail mapflag regression test
         run: python tools/integration/test_nomail_mapflag.py
 
-      - name: 執行 NoCapture 相容別名回歸測試
+      - name: NoCapture alias regression test
         run: python tools/integration/test_nocapture_mapflag.py
 
-      - name: 執行 NoSlave 地圖標記回歸測試
+      - name: NoSlave mapflag regression test
         run: python tools/integration/test_noslave_mapflag.py
 
-      - name: 執行 NoAttack 地圖標記回歸測試
+      - name: NoAttack mapflag regression test
         run: python tools/integration/test_noattack_mapflag.py
 
-      - name: 執行 NoUseItem 地圖標記回歸測試
+      - name: NoUseItem mapflag regression test
         run: python tools/integration/test_nouseitem_mapflag.py
 
-      - name: 執行 NoHomun 地圖標記回歸測試
+      - name: NoHomun mapflag regression test
         run: python tools/integration/test_nohomun_mapflag.py
 
-      - name: 執行 NoPet 地圖標記回歸測試
+      - name: NoPet mapflag regression test
         run: python tools/integration/test_nopet_mapflag.py
 
-      - name: 執行 NoMerc 地圖標記回歸測試
+      - name: NoMerc mapflag regression test
         run: python tools/integration/test_nomerc_mapflag.py
-
-  windows-build:
-    runs-on: windows-2022
-    timeout-minutes: 120
-    strategy:
-      fail-fast: false
-      matrix:
-        configuration: [Debug, Release]
-        platform: [x64, Win32]
-        mode: [PRE, RE]
-
-    steps:
-      - name: 取得目前正式工作分支
-        uses: actions/checkout@v6
-
-      - name: 設定 Visual Studio MSBuild
-        uses: microsoft/setup-msbuild@v1.1
-
-      - name: 驗證 Visual Studio 與 MSBuild
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
-          if (-not (Test-Path $vswhere)) { throw '找不到 Visual Studio Installer。' }
-          $vsVersion = & $vswhere -latest -products '*' -property installationVersion
-          if (-not $vsVersion) { throw '找不到 Visual Studio 安裝版本。' }
-          Write-Host "Visual Studio version: $vsVersion"
-          msbuild.exe -version -nologo
-
-      - name: 建立正式來源 ZIP（不包含 .git）
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $archive = Join-Path $env:RUNNER_TEMP 'brHades-source.zip'
-          $sourceRoot = Join-Path $env:RUNNER_TEMP 'brHades-source'
-          if (Test-Path $sourceRoot) { Remove-Item $sourceRoot -Recurse -Force }
-          New-Item -ItemType Directory -Path $sourceRoot | Out-Null
-          git archive --format=zip --output="$archive" HEAD
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          Expand-Archive -Path $archive -DestinationPath $sourceRoot -Force
-          $solutionItem = Get-ChildItem -Path $sourceRoot -Filter 'brHades.sln' -Recurse | Select-Object -First 1
-          if (-not $solutionItem) { throw '正式來源 ZIP 中找不到 brHades.sln。' }
-          $root = $solutionItem.Directory.FullName
-          if (Test-Path (Join-Path $root '.git')) { throw '來源 ZIP 不應包含 .git 資料夾。' }
-          [IO.File]::AppendAllText($env:GITHUB_ENV, "BRHADES_SOURCE_ROOT=$root" + [Environment]::NewLine)
-          Write-Host "Source archive root: $root"
-          Write-Host "Source archive commit: $env:GITHUB_SHA"
-          Write-Host 'Verified: source tree has no .git metadata.'
-
-      - name: 完整重建解決方案（${{ matrix.configuration }} ${{ matrix.platform }} ${{ matrix.mode }}）
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $solution = Join-Path $env:BRHADES_SOURCE_ROOT 'brHades.sln'
-          if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
-          $defines = 'BUILDBOT'
-          if ('${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
-          Write-Host "Build source: $env:BRHADES_SOURCE_ROOT"
-          Write-Host "Mode: ${{ matrix.mode }}"
-          Write-Host "Configuration: ${{ matrix.configuration }}"
-          Write-Host "Platform: ${{ matrix.platform }}"
-          & msbuild.exe $solution /m /t:Rebuild "/p:Configuration=${{ matrix.configuration }}" "/p:Platform=${{ matrix.platform }}" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-      - name: 記錄建置版本資訊
-        if: matrix.configuration == 'Release' && matrix.platform == 'x64' && matrix.mode == 'RE'
-        shell: pwsh
-        run: |
-          @(
-            "Commit: $env:GITHUB_SHA"
-            "Configuration: ${{ matrix.configuration }}"
-            "Platform: ${{ matrix.platform }}"
-            "Mode: ${{ matrix.mode }}"
-            "Source: ZIP archive without .git"
-            "Runner: $env:ImageOS"
-          ) | Set-Content build-info.txt
-
-      - name: 上傳 Release x64 執行檔與建置資訊
-        if: matrix.configuration == 'Release' && matrix.platform == 'x64' && matrix.mode == 'RE'
-        uses: actions/upload-artifact@v4
-        with:
-          name: brHades-Release-x64-${{ github.sha }}
-          path: |
-            ${{ runner.temp }}/brHades-source/login-server.exe
-            ${{ runner.temp }}/brHades-source/char-server.exe
-            ${{ runner.temp }}/brHades-source/map-server.exe
-            ${{ runner.temp }}/brHades-source/web-server.exe
-            build-info.txt
-          if-no-files-found: error
-          retention-days: 14

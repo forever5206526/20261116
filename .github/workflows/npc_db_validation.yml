@@ -1,8 +1,4 @@
-name: Validação de NPCS e alterações na DB
-# npc_db_validation.yml
-
-# For NPC and DB validation we only need two builds: one of Renewal and one for Pre-Renewal checks.
-# NPC scripts and database files are not platform dependent, so we can achieve this validation using only a simple linux setup.
+name: NPC and database validation (Visual Studio)
 
 concurrency:
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
@@ -15,82 +11,167 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      # Always trigger all Github Actions if an action or something CI related was changed
       - '.github/workflows/**'
+      - '.vsconfig'
+      - 'brHades.sln'
       - 'tools/ci/**'
-      # This workflow should run when a file in either the db/ or npc/ directory has been modified.
+      - 'src/**'
+      - '3rdparty/**'
       - 'db/**'
       - 'npc/**'
 
 jobs:
-  build:
-    # Github Actions checks for '[ci skip]', '[skip ci]', '[no ci]', '[skip actions]', or '[actions skip]' but not a hyphenated version.
-    # It's a catch-all incase a Pull Request has been opened and someone is on auto-pilot.
+  validate:
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
-    runs-on: ${{ matrix.os }}
+    name: NPC and DB validation [${{ matrix.mode }}]
+    runs-on: windows-2022
+    timeout-minutes: 90
     strategy:
+      fail-fast: false
       matrix:
-          # Pin Ubuntu 22.04 because this workflow installs legacy GCC and libpcre3 packages.
-          # Keep the legacy build environment pinned to Ubuntu 22.04.
-          os: [ubuntu-22.04]
-          # Only a single version of GCC is required for validating NPC scripts and database changes.
-          gcc: ['11']
-          # We run build checks for both Renewal and PRE-Renewal
-          mode: ['PRE', 'RE']
+        mode: [PRE, RE]
 
     steps:
-      - uses: actions/checkout@v4
-      
-      # A simple 'yes' and 'no' can be confusing, so we use names to display in the current job then convert them for use in the compiler.
-      - name: Variable Parsing - PRE
-        if: ${{ matrix.mode == 'PRE' }} 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Visual Studio MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Install Visual C++ 2012 x64 runtime required by PCRE
+        shell: pwsh
         run: |
-          echo "PRERE=yes" >> $GITHUB_ENV
-      - name: Variable Parsing - RE
-        if: ${{ matrix.mode == 'RE' }} 
+          $ErrorActionPreference = 'Stop'
+          choco install vcredist2012 --yes --no-progress
+          if ($LASTEXITCODE -notin @(0, 3010)) { exit $LASTEXITCODE }
+          $runtime = Join-Path $env:WINDIR 'System32/msvcr110.dll'
+          if (-not (Test-Path $runtime)) {
+            throw "Visual C++ 2012 x64 runtime was not installed: $runtime"
+          }
+          Write-Host "Verified required runtime: $runtime"
+
+      - name: Set up MySQL
+        uses: ankane/setup-mysql@v1
+        with:
+          mysql-version: '8.0'
+
+      - name: Set MySQL root password for repository CI scripts
+        shell: pwsh
         run: |
-          echo "PRERE=no" >> $GITHUB_ENV
+          $ErrorActionPreference = 'Stop'
+          & mysqladmin.exe -uroot password root
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-      - name: Update & Install packages
-        # Ubuntu runners already have most of the packages rAthena requires to build.
-        # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
+      - name: Build map-server with Visual Studio
+        shell: pwsh
         run: |
-          sudo apt update
-          sudo apt install zlib1g-dev libpcre3-dev gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
-          
-      - name: Start MySQL
-        run: sudo systemctl start mysql.service
+          $ErrorActionPreference = 'Stop'
+          $defines = 'BUILDBOT'
+          if ('${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
+          & msbuild.exe brHades.sln /m /t:Rebuild /p:Configuration=Release /p:Platform=x64 "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (-not (Test-Path 'map-server.exe')) { throw 'Visual Studio build did not produce map-server.exe' }
 
-      - name: Grant execute permissions to sql.sh
-        run: chmod +x ./tools/ci/sql.sh
+      - name: Import database schema and seed data
+        shell: bash
+        run: bash tools/ci/sql.sh
 
-      - name: Grant execute permissions to configure
-        run: chmod +x ./configure
+      - name: Enable custom and test NPC scripts
+        shell: bash
+        run: bash tools/ci/npc.sh
 
-      - name: Setup Database and import table data
-        run: ./tools/ci/sql.sh
+      - name: Verify and stage map-server runtime DLL dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $runtimeDlls = @(
+            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' },
+            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' },
+            @{ Name = 'zlib.dll'; Source = '3rdparty/zlib/lib/x64/zlib.dll' }
+          )
+          foreach ($dll in $runtimeDlls) {
+            if (-not (Test-Path $dll.Source)) {
+              throw "Required runtime DLL source is missing: $($dll.Source)"
+            }
+            Copy-Item -LiteralPath $dll.Source -Destination (Join-Path $PWD $dll.Name) -Force
+            if (-not (Test-Path (Join-Path $PWD $dll.Name))) {
+              throw "Failed to stage runtime DLL: $($dll.Name)"
+            }
+            Write-Host "Staged $($dll.Name)"
+          }
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe was not found on the Visual Studio runner.' }
+          $vsPath = & $vswhere -latest -property installationPath
+          if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Could not locate the Visual Studio installation.' }
+          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe') -ErrorAction Stop |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
+          foreach ($binary in @('map-server.exe', 'libmysql.dll', 'pcre8.dll', 'zlib.dll')) {
+            Write-Host "===== Native dependencies: $binary ====="
+            & $dumpbin.FullName /dependents $binary
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $mysqlBin = 'C:/Program Files/MySQL/MySQL Server 8.0/bin'
+          if (Test-Path $mysqlBin) {
+            Write-Host 'MySQL server runtime DLL inventory:'
+            Get-ChildItem -Path $mysqlBin -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+          }
+          Write-Host 'Application runtime DLL inventory:'
+          Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
 
-      - name: Grant execute permissions to npc.sh
-        run: chmod +x ./tools/ci/npc.sh
-          
-      - name: Command - configure
-        env:
-            CONFIGURE_FLAGS: 'CC=gcc-${{ matrix.gcc }} CXX=g++-${{ matrix.gcc }} --enable-prere=${{ env.PRERE }} --enable-buildbot=yes'
-        run: ./configure $CONFIGURE_FLAGS
-      
-      # npc.sh enables all NPC scripts in the custom and test folders.
-      - name: Enable All NPCs for Testing
-        run: ./tools/ci/npc.sh
+      - name: Run map-server NPC and database startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $processes = @()
+          $loginOut = Join-Path $env:RUNNER_TEMP 'login-server.stdout.log'
+          $loginErr = Join-Path $env:RUNNER_TEMP 'login-server.stderr.log'
+          $charOut = Join-Path $env:RUNNER_TEMP 'char-server.stdout.log'
+          $charErr = Join-Path $env:RUNNER_TEMP 'char-server.stderr.log'
+          $mapOut = Join-Path $env:RUNNER_TEMP 'map-server.stdout.log'
+          $mapErr = Join-Path $env:RUNNER_TEMP 'map-server.stderr.log'
 
-      - name: Command - make clean
-        run: make clean
+          function Wait-ForServerPort([int]$port, $process, [string]$serverName) {
+            $deadline = (Get-Date).AddSeconds(45)
+            while ((Get-Date) -lt $deadline) {
+              if ($process.HasExited) {
+                throw "$serverName exited early with code $($process.ExitCode)."
+              }
+              if (Test-NetConnection -ComputerName 127.0.0.1 -Port $port -InformationLevel Quiet -WarningAction SilentlyContinue) {
+                return
+              }
+              Start-Sleep -Seconds 1
+            }
+            throw "$serverName did not open TCP port $port within 45 seconds."
+          }
 
-      # Create import directories
-      - name: Command - make import
-        run: make import
+          try {
+            $login = Start-Process -FilePath '.\\login-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $loginOut -RedirectStandardError $loginErr
+            $processes += $login
+            Wait-ForServerPort 6900 $login 'login-server'
 
-      - name: Command - make map
-        run: make map
+            $char = Start-Process -FilePath '.\\char-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $charOut -RedirectStandardError $charErr
+            $processes += $char
+            Wait-ForServerPort 6121 $char 'char-server'
 
-      - name: Run Once - map-server
-        run: ./map-server --run-once
+            $map = Start-Process -FilePath '.\\map-server.exe' -ArgumentList '--run-once' -PassThru -Wait -NoNewWindow -RedirectStandardOutput $mapOut -RedirectStandardError $mapErr
+            if (Test-Path $mapOut) { Get-Content $mapOut }
+            if (Test-Path $mapErr) { Get-Content $mapErr }
+            if ($map.ExitCode -ne 0) { throw "map-server --run-once exited with code $($map.ExitCode)." }
+          }
+          catch {
+            foreach ($log in @($loginOut, $loginErr, $charOut, $charErr, $mapOut, $mapErr)) {
+              if (Test-Path $log) {
+                Write-Host "===== $log ====="
+                Get-Content $log
+              }
+            }
+            throw
+          }
+          finally {
+            foreach ($process in $processes) {
+              if (-not $process.HasExited) {
+                Stop-Process -Id $process.Id -Force
+              }
+            }
+          }
