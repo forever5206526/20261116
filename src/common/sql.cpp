@@ -66,7 +66,8 @@ bool Sql_ConfigRead(const char* key, const char* value)
 		sql_config_password_set = true;
 	} else if (strcmpi(key, "sql_codepage") == 0) {
 		sql_config_codepage = value;
-		sql_config_codepage_set = true;
+		// An empty shared value leaves room for a non-empty legacy alias.
+		sql_config_codepage_set = (value[0] != '\0');
 	} else if (strcmpi(key, "default_codepage") == 0 ||
 		strcmpi(key, "login_codepage") == 0 ||
 		strcmpi(key, "ipban_codepage") == 0 ||
