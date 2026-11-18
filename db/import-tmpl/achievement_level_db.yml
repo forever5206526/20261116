@@ -1,19 +1,19 @@
-# This file is a part of rAthena.
-#   Copyright(C) 2021 rAthena Development Team
+# 本檔案屬於 rAthena 專案。
+#   Copyright(C) 2021 rAthena 開發團隊
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 
+# 
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
+# 本程式的散布是希望能對使用者有所幫助，但不提供任何明示或默示的保證，
+# 包括但不限於適售性或特定用途適用性的默示保證。詳情請參閱 GNU 通用公共授權條款。
+# 
+# 
 #
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 你應已隨本程式收到 GNU 通用公共授權條款副本；若沒有，請參閱
+# <http://www.gnu.org/licenses/>。
 #
 ###########################################################################
 # Achievement Level Database
@@ -23,7 +23,7 @@
 #
 ###########################################################################
 # - Level     Achievement Level.
-#   Points    Required total scoring points to reach this level.
+#   Points    達到此等級所需的累計總積分。
 ###########################################################################
 
 Header:
