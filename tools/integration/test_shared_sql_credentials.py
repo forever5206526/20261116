@@ -29,6 +29,25 @@ def main() -> None:
     for key in ("sql_host", "sql_port", "sql_user", "sql_password"):
         require(f'"{key}"' in sql_cpp, f"common SQL parser does not recognize {key}", failures)
 
+    # MySQL error 1045 is the authentication-rejection signal. Keep its warning
+    # explicit, avoid printing the password, and still fail the connection.
+    try:
+        connect_start = sql_cpp.index("int32 Sql_Connect(")
+        connect_section = sql_cpp[connect_start:sql_cpp.index("/// Retrieves the timeout", connect_start)]
+    except ValueError:
+        connect_section = ""
+        failures.append("could not isolate Sql_Connect authentication handling")
+    require("error_code == 1045" in connect_section,
+            "Sql_Connect does not detect MySQL access-denied error 1045", failures)
+    require("database username or password is incorrect" in connect_section,
+            "Sql_Connect does not show a clear incorrect-credentials warning", failures)
+    require("sql_user and sql_password" in connect_section,
+            "authentication warning does not point to the shared credential settings", failures)
+    require("return SQL_ERROR;" in connect_section,
+            "Sql_Connect must reject the connection after authentication failure", failures)
+    require("mysql_error(&self->handle)" in connect_section,
+            "Sql_Connect must preserve the original diagnostic for other connection errors", failures)
+
     parser_files = (
         "src/login/login.cpp",
         "src/char/inter.cpp",
@@ -68,6 +87,8 @@ def main() -> None:
         if expected == 1:
             require(bool(apply_positions) and bool(connect_positions) and apply_positions[0] < connect_positions[0],
                     f"{path} {start}: shared credentials are not applied before Sql_Connect", failures)
+        require("return false" in section or "exit(EXIT_FAILURE)" in section,
+                f"{path} {start}: failed SQL authentication must block service initialization", failures)
         elif path == "src/web/web.cpp":
             require(len(apply_positions) == len(connect_positions) and
                     all(a < c for a, c in zip(apply_positions, connect_positions)),
