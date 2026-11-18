@@ -27,8 +27,8 @@
 # MaxLevel - Maximum level of the guild skill.
 ###########################################################################
 # Required - A list of required skills for the skill to become available.
-#   Id: Skill ID of the required guild skill.
-#   Level: Level of the required guild skill.
+#   Id: 前置公會技能的技能 ID。
+#   Level: 前置公會技能的等級。
 ###########################################################################
 
 Header:
