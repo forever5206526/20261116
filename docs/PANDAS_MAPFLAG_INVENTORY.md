@@ -76,6 +76,7 @@ Release x64 編譯成品由 Actions artifact 保存；這些驗證不等同完�
 
 - brHades 有原生全域 `show_mob_info` 設定及魔物名稱封包顯示，但沒有 `MF_MOBINFO`、`mapflag_config`、`mapflag_values`、`map_getmapflag_param()` 或 `map_setmapflag_param()`。
 - Pandas 的 `MF_MOBINFO` 依賴 `Pandas_Mapflags` 共用參數框架；此框架涉及 `map_data` 參數儲存、參數範圍/預設值設定、地圖旗標解析、NPC mapflag 參數解析、腳本 `setmapflag` 參數、查詢/設定 API，以及相關管理指令與地圖資訊顯示。
-- Pandas 同時預設啟用 `Pandas_MobInfomation_Extend`；其 `clif_name()` 會按地圖的 `MF_MOBINFO` 參數覆寫全域 `show_mob_info`，並支援額外魔物資訊欄位。brHades 目前未找到此擴充宏。
+- Pandas 同時預設啟用 `Pandas_MobInfomation_Extend`；其 `clif_name()` 會按地圖的 `MF_MOBINFO` 參數覆寫全域 `show_mob_info`，並將魔物等級／HP／編號、體型、種族、屬性分別放入名稱封包的多個欄位。brHades 目前未找到此擴充宏。此擴充還呼叫 `msg_txt_cn()`，依賴 Pandas `Pandas_Message_Conf`／`ALL_EXTEND_MSG` 自訂訊息偏移與翻譯設定；brHades 尚未移植該訊息框架，不能直接照搬 Pandas 的訊息 ID，否則會與既有 map message ID 衝突。
+- Pandas 的參數值存放在每張地圖的 `mapflag_values`，並由 `map_data::copyFlags()` 複製到 instance map；重新載入地圖旗標時也要清除舊參數。移植時必須同步處理 map data 初始化、instance 複製及 reloadscript，不能只新增 getter/setter。
 - 因此 MobInfo 不是單一 enum/handler 移植。應先設計並驗證共用 mapflag 參數框架，再移植 MobInfomation_Extend 與 MF_MOBINFO，最後驗證 mapflag/NPC/script/atcommand/封包路徑及 PRE/RE 建置。
 - 本次僅完成相依盤點，未修改任何 MobInfo 程式碼，亦未將其標記為完成。
