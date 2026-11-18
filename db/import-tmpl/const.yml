@@ -23,11 +23,11 @@
 #
 ###########################################################################
 # - Name             Unique name for the constant. Must not have same name as script commands, functions, or variables.
-#   Value            Value assigned to the constant. This value cannot be changed during the runtime of the server.
-#   Parameter        Specifies whether the identifier is a parameter. (Default: false)
-#                    Note: Parameters are special in that they retrieve certain runtime values depending on the specified ID
-#                    in field Value. Depending on the implementation values assigned by scripts the parameters will affect
-#                    runtime values, such as Zeny, as well (see pc_readparam/pc_setparam).
+#   Value            指派給常數的值。伺服器執行期間無法變更此值。
+#   Parameter        指定此識別項是否為參數。（預設：false）
+#                    注意：參數較為特殊，會依照指定的 ID 取得特定執行階段數值。
+#                    依照實作方式，腳本指派給參數的值也可能影響執行階段數值，
+#                    例如 Zeny（請參閱 pc_readparam/pc_setparam）。
 ###########################################################################
 
 Header:
