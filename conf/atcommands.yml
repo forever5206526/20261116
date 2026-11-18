@@ -502,51 +502,51 @@ Body:
   - Command: str
     Help: |
       參數：<amount>
-      Raises STR by given amount.
+      依指定數值提高 STR。
   - Command: agi
     Help: |
       參數：<amount>
-      Raises AGI by given amount.
+      依指定數值提高 AGI。
   - Command: dex
     Help: |
       參數：<amount>
-      Raises DEX by given amount.
+      依指定數值提高 DEX。
   - Command: vit
     Help: |
       參數：<amount>
-      Raises VIT by given amount.
+      依指定數值提高 VIT。
   - Command: int
     Help: |
       參數：<amount>
-      Raises INT by given amount.
+      依指定數值提高 INT。
   - Command: luk
     Help: |
       參數：<amount>
-      Raises LUK by given amount.
+      依指定數值提高 LUK。
   - Command: pow
     Help: |
       參數：<amount>
-      Raises POW by given amount.
+      依指定數值提高 POW。
   - Command: sta
     Help: |
       參數：<amount>
-      Raises STA by given amount.
+      依指定數值提高 STA。
   - Command: wis
     Help: |
       參數：<amount>
-      Raises WIS by given amount.
+      依指定數值提高 WIS。
   - Command: spl
     Help: |
       參數：<amount>
-      Raises SPL by given amount.
+      依指定數值提高 SPL。
   - Command: con
     Help: |
       參數：<amount>
-      Raises CON by given amount.
+      依指定數值提高 CON。
   - Command: crt
     Help: |
       參數：<amount>
-      Raises CRT by given amount.
+      依指定數值提高 CRT。
   - Command: allstats
     Aliases:
       - allstat
@@ -712,11 +712,11 @@ Body:
   - Command: party
     Help: |
       參數：<party_name>
-      Create a party.
+      建立隊伍。
   - Command: guild
     Help: |
       參數：<guild_name>
-      Create a guild.
+      建立公會。
   - Command: glvl
     Aliases:
       - glevel
@@ -726,70 +726,70 @@ Body:
       - guildlvlup
     Help: |
       參數：<# of levels>
-      Raise Guild by desired number of levels
+      依指定數量提升公會等級。
   - Command: guildrecall
     Help: |
       參數：<guild name|ID>
-      Warps all online characters of a guild to you.
+      將指定公會所有線上角色傳送到您身邊。
   - Command: partyrecall
     Help: |
       參數：<party name|ID>
-      Warps all online characters of a party to you.
+      將指定隊伍所有線上角色傳送到您身邊。
   - Command: petrename
     Help: |
-      Re-enable pet rename
+      重新啟用寵物改名功能。
   - Command: pettalk
     Help: |
       參數：<message>
-      Makes your pet say a message.
+      讓您的寵物說出指定訊息。
   - Command: petfriendly
     Help: |
       參數：<#>
-      Set pet friendly amount (0-1000) 1000 = Max
+      設定寵物親密度（0～1000，1000 為最大值）。
   - Command: pethungry
     Help: |
       參數：<#>
-      Set pet hungry amount (0-100) 100 = Max
+      設定寵物飢餓度（0～100，100 為最大值）。
   - Command: hatch
     Help: |
-      Create a pet from your inventory eggs list.
+      從您背包中的寵物蛋清單孵化寵物。
   - Command: makeegg
     Help: |
       參數：<pet_id>
-      Gives pet egg for monster number in pet DB
+      依 pet DB 中的怪物編號給予寵物蛋。
   - Command: kick
     Help: |
       參數：<char name>
-      Kicks specified character off the server
+      將指定角色踢出伺服器。
   - Command: unjail
     Aliases:
       - discharge
     Help: |
       參數：<char name>
-      Discharges specified character/prisoner
+      釋放指定角色／囚犯。
   - Command: kill
     Aliases:
       - die
     Help: |
-      Kills player.
+      擊殺指定玩家。
   - Command: recall
     Help: |
       參數：<char name>
-      Warps target character to you.
+      將指定角色傳送到您身邊。
   - Command: raise
     Aliases:
       - revive
     Help: |
       參數：<char name>
-      Revives target character.
+      復活指定角色。
   - Command: block
     Help: |
       參數：<char name>
-      Permanently blocks an account.
+      永久封鎖指定帳號。
   - Command: unblock
     Help: |
       參數：<char name>
-      Unblocks an account.
+      解除帳號封鎖。
   - Command: ban
     Aliases:
       - banish
@@ -810,156 +810,156 @@ Body:
       參數：<char name> - Open a trade window with a another player
   - Command: recallall
     Help: |
-      Warps every character online to you.
+      將所有線上角色傳送到您身邊。
   - Command: doom
     Help: |
-      Kills all NON GM chars on the server.
+      擊殺伺服器上所有非 GM 角色。
   - Command: doommap
     Help: |
-      Kills all non GM characters on the map.
+      擊殺目前地圖上所有非 GM 角色。
   - Command: raisemap
     Help: |
-      Resurrects all characters on the map.
+      復活目前地圖上的所有角色。
   - Command: night
     Help: |
-      Enables night mode on all maps, all characters are affected.
+      在所有地圖啟用夜晚模式，所有角色都會受到影響。
   - Command: day
     Help: |
-      Disables night mode and restores regular lighting, all characters are affected.
+      停用夜晚模式並恢復一般光線，所有角色都會受到影響。
   - Command: skillon
     Help: |
-      Turn skills on for a map.
+      在指定地圖啟用技能。
   - Command: skilloff
     Help: |
-      Turn skills off for a map.
+      在指定地圖停用技能。
   - Command: snow
     Help: |
-      Makes all maps to have the snow weather effect.
+      讓所有地圖套用下雪天氣效果。
   - Command: rain
     Help: |
-      Makes all maps to have the rain weather effect.
+      讓所有地圖套用下雨天氣效果。
   - Command: clouds
     Help: |
-      Makes all maps to have the cloudy weather effect.
+      讓所有地圖套用陰天效果。
   - Command: clouds2
     Help: |
-      Makes all maps to have another cloudy weather effect.
+      讓所有地圖套用另一種陰天效果。
   - Command: fog
     Help: |
-      Makes all maps to have the fog weather effect.
+      讓所有地圖套用起霧效果。
   - Command: fireworks
     Help: |
-      Makes all maps to have the fireworks weather effect.
+      讓所有地圖套用煙火效果。
   - Command: sakura
     Help: |
-      Makes all maps to have the sakura weather effect.
+      讓所有地圖套用櫻花效果。
   - Command: leaves
     Help: |
-      Makes all maps to have the leaves weather effect.
+      讓所有地圖套用落葉效果。
   - Command: shownpc
     Help: |
       參數：<NPC name>
-      Enable a NPC.
+      啟用指定 NPC。
   - Command: hidenpc
     Help: |
       參數：<NPC name>
-      Disable a NPC.
+      停用指定 NPC。
   - Command: npcmove
     Help: |
       參數：<x coord> <y coord> <NPC name>
-      Move a NPC.
+      移動指定 NPC。
   - Command: loadnpc
     Help: |
       參數：<path to script>
-      Load the specified script file path.
+      載入指定路徑的腳本檔案。
   - Command: unloadnpc
     Help: |
       參數：<NPC name>
-      Unload the specified NPC according to name.
+      依 NPC 名稱卸載指定 NPC。
   - Command: unloadnpcfile
     Help: |
       參數：<path>
-      Unload the specified script file path.
+      卸載指定路徑的腳本檔案。
   - Command: adjgroup
     Help: |
       參數：<level> <char name>
-      Do a temporary adjustment of the group level of a player.
+      暫時調整玩家的群組等級。
   - Command: addperm
     Help: |
       參數：<permission_name>
-      Temporarily add a permission to a player.
+      暫時授予玩家指定權限。
   - Command: rmvperm
     Help: |
       參數：<permission_name>
-      Temporarily remove a permission from a player.
+      暫時移除玩家的指定權限。
   - Command: kickall
     Help: |
-      Kick all characters off the server
+      將所有角色踢出伺服器。
   - Command: mapexit
     Help: |
-      Kick all players and shut down map-server.
+      踢出所有玩家並關閉 map-server。
   - Command: gat
     Help: |
-      For debugging (you inspect around gat)
+      除錯用途（檢查 gat 周圍的資訊）。
   - Command: send
     Help: |
       參數：<Hex Number> [<value>]
-      For debugging (packet variety)
+      除錯用途（封包測試）。
   - Command: nuke
     Help: |
       參數：<char name>
-      Blow somebody up, including those surrounding them.
+      引爆指定玩家及其周圍的單位。
   - Command: reloadachievementdb
     Help: |
-      Reload achievement database.
+      重新載入成就資料庫。
   - Command: reloadatcommand
     Help: |
-      Reload atcommand settings.
+      重新載入 AtCommand 設定。
   - Command: reloadattendancedb
     Help: |
-      Reload attendance database.
+      重新載入簽到資料庫。
   - Command: reloadbattleconf
     Help: |
-      Reload battle settings.
+      重新載入戰鬥設定。
   - Command: reloadcashdb
     Aliases:
       - reloadcashshop
     Help: |
-      Reload cash shop database.
+      重新載入商城資料庫。
   - Command: reloadinstancedb
     Help: |
-      Reload instance database.
+      重新載入副本資料庫。
   - Command: reloaditemdb
     Help: |
-      Reload item database.
+      重新載入物品資料庫。
   - Command: reloadmobdb
     Help: |
-      Reload monster database.
+      重新載入怪物資料庫。
   - Command: reloadmotd
     Help: |
-      Reload Message of the Day.
+      重新載入每日訊息（MOTD）。
   - Command: reloadmsgconf
     Help: |
-      Reload message configuration.
+      重新載入訊息設定。
   - Command: reloadpcdb
     Help: |
-      Reload player settings.
+      重新載入玩家設定。
   - Command: reloadquestdb
     Help: |
-      Reload quest database.
+      重新載入任務資料庫。
   - Command: reloadscript
     Help: |
-      Reload all scripts.
+      重新載入所有腳本。
   - Command: reloadskilldb
     Help: |
-      Reload skills definition database.
+      重新載入技能定義資料庫。
   - Command: reloadstatusdb
     Help: |
-      Reload status settings.
+      重新載入狀態設定。
   - Command: reload
     Help: |
       參數：<type>
-      Reload a database or configuration file.
+      重新載入資料庫或設定檔。
       itemdb                mobdb          skilldb
       atcommand       battleconf     statusdb
       pcdb                    motd             script
@@ -968,21 +968,21 @@ Body:
   - Command: langtype
     Help: |
       參數：<language>
-      Changes your language setting.
+      變更您的語言設定。
   - Command: limitedsale
     Help: |
-      Opens the limited sale window.
+      開啟限時販售視窗。
   - Command: changedress
     Aliases:
       - nocosplay
     Help: |
-      Removes all character costumes.
+      移除角色目前穿著的所有服裝外觀。
   - Command: camerainfo
     Aliases:
       - viewpointvalue
       - setcamera
     Help: |
-      Shows or updates the client's camera settings.
+      顯示或更新用戶端的鏡頭設定。
   - Command: resetstat
     Aliases:
       - streset
@@ -1028,23 +1028,23 @@ Body:
       - famepoints
   - Command: enchantgradeui
     Help: |
-      Opens the enchantgrade UI.
+      開啟裝備附魔階級介面。
   - Command: roulette
     Help: |
-      Opens the roulette UI.
+      開啟輪盤介面。
   - Command: setcard 
     Help: |
-      Adds a card or enchant to the specific slot of the equipment.
+      將卡片或附魔加入裝備的指定插槽。
   - Command: bodystyle
     Help: |
       參數：<1/0>
       參數：off. Restores default job bodystyle.
-      Changes the character's bodystyle to alternate kro sprite.
+      將角色體型造型變更為 kRO 的替代角色精靈圖。
   - Command: resetcooltime
     Aliases:
       - resetcooldown
     Help: |
-      Resets the cooldown of all skills of the player and if active also of the homunculus or the mercenary.
+      重置玩家所有技能的冷卻時間；若生命體或傭兵處於啟用狀態，也會一併重置其技能冷卻時間。
 
 Footer:
   Imports:
