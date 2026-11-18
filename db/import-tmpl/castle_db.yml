@@ -23,16 +23,16 @@
 #
 ###########################################################################
 # - Id                Unique ID of the castle.
-#   Map               Map name to be considered as the castle map.
-#   Name              Name of the castle (used by scripts and guardian name tags).
-#   Npc               NPC unique name to invoke ::OnGuildBreak on, when a occupied castle is abandoned during guild break.
-#   Type              The WoE type this castle belongs to. (Default: First_Edition)
-#   ClientId          Client side ID of the castle. (Default: 0)
-#   WarpEnabled       If the warp to the castle is enabled. (Default: false)
-#   WarpX             X coordinate to warp to. (Default: 0)
-#   WarpY             Y coordinate to warp to. (Default: 0)
-#   WarpCost          Zeny cost to use the warp. (Default: 100)
-#   WarpCostSiege     Zeny cost to use the warp during WoE. (Default: 100000)
+#   Map               作為城堡地圖的地圖名稱。
+#   Name              城堡名稱（供腳本及守護者名稱標籤使用）。
+#   Npc               公會解散期間，已佔領城堡遭到放棄時，要呼叫 ::OnGuildBreak 的 NPC 唯一名稱。
+#   Type              此城堡所屬的攻城戰類型。（預設：First_Edition）
+#   ClientId          城堡在客戶端使用的 ID。（預設：0）
+#   WarpEnabled       是否啟用傳送至城堡的功能。（預設：false）
+#   WarpX             傳送目的地的 X 座標。（預設：0）
+#   WarpY             傳送目的地的 Y 座標。（預設：0）
+#   WarpCost          使用傳送功能所需的 Zeny。（預設：100）
+#   WarpCostSiege     攻城戰期間使用傳送功能所需的 Zeny。（預設：100000）
 ###########################################################################
 
 Header:
