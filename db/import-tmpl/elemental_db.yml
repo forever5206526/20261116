@@ -6,36 +6,36 @@
 #
 ###########################################################################
 # - Id                      Elemental ID.
-#   AegisName               Server name to reference the elemental in scripts and lookups, should use no spaces.
-#   Name                    Name in English.
-#   Level                   Level.
-#   Hp                      Additional HP. Base HP depends on caster HP. (Default: 0)
-#   Sp                      Additional SP. Base SP depends on caster SP. (Default: 1)
-#   Attack                  Additional minimum attack. Base attack depends on caster attack. (Default: 0)
-#   Attack2                 Additional maximum attack. Base attack depend on caster attack. (Default: 0)
-#   Defense                 Physical defense of the elemental, reduces melee and ranged physical attack/skill damage. Base defense depends on the caster defense. (Default: 0)
-#   MagicDefense            Magic defense of the elemental, reduces magical skill damage. Base magic defense depends on the caster magic defense. (Default: 0)
-#   Str                     Strength which affects attack. (Default: 0)
-#   Agi                     Agility which affects flee. (Default: 0)
-#   Vit                     Vitality which affects defense. (Default: 0)
-#   Int                     Intelligence which affects magic attack. (Default: 0)
-#   Dex                     Dexterity which affects hit rate. (Default: 0)
-#   Luk                     Luck which affects perfect dodge/lucky flee/perfect flee/lucky dodge rate. (Default: 0)
-#   AttackRange             Attack range. (Default: 1)
-#   SkillRange              Skill cast range. (Default: 5)
-#   ChaseRange              Chase range. (Default: 12)
-#   Size                    Size.
-#   Race                    Race. (Default: Formless)
-#   Element                 Element.
-#   ElementLevel            Level of element.
-#   WalkSpeed               Walk speed. (Default: 200)
-#   AttackDelay             Attack speed. (Default: 504)
-#   AttackMotion            Attack animation speed. Base AttackMotion depends on the caster AttackMotion. (Default: 1020)
-#   DamageMotion            Damage animation speed. (Default: 360)
-#   Mode:                   List of elemental skills by mode. (Optional)
-#     <mode>:               Mode name to define the skill available. Available modes are Passive, Assist, and Aggressive.
-#       Skill               Skill name.
-#       Level               Skill level. (Default: 1)
+#   AegisName               伺服器腳本及查詢使用的元素召喚獸名稱，不可包含空格。
+#   Name                    英文名稱。
+#   Level                   等級。
+#   Hp                      額外 HP。基礎 HP 依施法者 HP 決定。（預設：0）
+#   Sp                      額外 SP。基礎 SP 依施法者 SP 決定。（預設：1）
+#   Attack                  額外最低攻擊力。基礎攻擊力依施法者攻擊力決定。（預設：0）
+#   Attack2                 額外最高攻擊力。基礎攻擊力依施法者攻擊力決定。（預設：0）
+#   Defense                 元素召喚獸的物理防禦，可降低近戰與遠距離物理攻擊／技能傷害。基礎防禦依施法者防禦決定。（預設：0）
+#   MagicDefense            元素召喚獸的魔法防禦，可降低魔法技能傷害。基礎魔法防禦依施法者魔法防禦決定。（預設：0）
+#   Str                     力量，影響攻擊力。（預設：0）
+#   Agi                     敏捷，影響迴避率。（預設：0）
+#   Vit                     體質，影響防禦力。（預設：0）
+#   Int                     智力，影響魔法攻擊力。（預設：0）
+#   Dex                     靈巧，影響命中率。（預設：0）
+#   Luk                     幸運，影響完全迴避／幸運迴避／完全閃避／幸運閃避率。（預設：0）
+#   AttackRange             攻擊距離。（預設：1）
+#   SkillRange              技能施放距離。（預設：5）
+#   ChaseRange              追擊距離。（預設：12）
+#   Size                    體型。
+#   Race                    種族。 (Default: Formless)
+#   Element                 屬性。
+#   ElementLevel            屬性等級。
+#   WalkSpeed               移動速度。（預設：200）
+#   AttackDelay             攻擊延遲。（預設：504）
+#   AttackMotion            攻擊動作速度。基礎 AttackMotion 依施法者 AttackMotion 決定。（預設：1020）
+#   DamageMotion            受傷動作速度。（預設：360）
+#   Mode:                   依模式分類的元素召喚獸技能清單。（選填）
+#     <mode>:               可使用技能的模式名稱，可選 Passive、Assist、Aggressive。
+#       Skill               技能名稱。
+#       Level               技能等級。（預設：1）
 ###########################################################################
 
 Header:
