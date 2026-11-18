@@ -4878,6 +4878,26 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 			}
 			break;
 #endif // Pandas_MapFlag_NoMerc
+#if defined(Pandas_MapFlag_HideGuildInfo) || defined(Pandas_MapFlag_HidePartyInfo)
+#ifdef Pandas_MapFlag_HideGuildInfo
+		case MF_HIDEGUILDINFO:
+#endif // Pandas_MapFlag_HideGuildInfo
+#ifdef Pandas_MapFlag_HidePartyInfo
+		case MF_HIDEPARTYINFO:
+#endif // Pandas_MapFlag_HidePartyInfo
+			mapdata->setMapFlag(mapflag, status);
+			{
+				struct s_mapiterator* iter = mapit_getallusers();
+				map_session_data* pl_sd = nullptr;
+				for (pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter)) {
+					if (!pl_sd || pl_sd->bl.m != m)
+						continue;
+					clif_refresh(pl_sd);
+				}
+				mapit_free(iter);
+			}
+			break;
+#endif // Pandas_MapFlag_HideGuildInfo || Pandas_MapFlag_HidePartyInfo
 		case MF_SPECIALPOPUP:
 			if (status) {
 				nullpo_retr(false, args);
