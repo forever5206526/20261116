@@ -981,6 +981,7 @@ uint64 InterServerDatabase::parseBodyNode( const ryml::NodeRef& node ){
 int32 inter_init_sql(const char *file)
 {
 	inter_config_read(file);
+	Sql_ConfigApply(char_server_ip, char_server_port, char_server_id, char_server_pw);
 
 	//DB connection initialized
 	sql_handle = Sql_Malloc();
