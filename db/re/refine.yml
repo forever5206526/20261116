@@ -2,43 +2,35 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Refine Database
+# 精煉資料庫
 ###########################################################################
 #
-# Refine Settings
+# 精煉設定
 #
 ###########################################################################
-# - Group                               Refine item type.
-#   Levels:                             Refinement settings per item level. (Default: null)
-#     - Level                           Item level.
-#       RefineLevels:                   Refinement settings per refine level. (Default: null)
-#         - Level                       Refine level.
-#           Bonus                       Refinement bonus. (Default: 0)
-#           RandomBonus                 Extra refinement bonus of 0~RandomBonus stacked on Bonus. (Default: 0)
-#           BlacksmithBlessingAmount    Amount of Blacksmith Blessing required. (Default: 0)
-#           BroadcastSuccess            Broadcast to the whole server when a refine attempt at this level succeeds. (Default: false)
-#           BroadcastFailure            Broadcast to the whole server when a refine attempt at this level fails. (Default: false)
-#           Chances:                    Success chance based on cost type. (Default: null)
-#             - Type                    Refinement cost type based on ore used.
-#               Rate                    Chance of success out of 0~10000. (Default: 0)
-#               Price                   Amount of zeny required to refine. (Default: 0)
-#               Material                Ore item required to refine. (Default: 0)
-#               BreakingRate            Chance of item breaking out of 0~10000. (Default: 0)
-#               DowngradeAmount         Number of refine levels reduced on failure. (Default: 0)
+# - Group                               精煉道具類型。
+#   Levels:                             各道具等級的精煉設定。（預設：null）
+#     - Level                           道具等級。
+#       RefineLevels:                   各精煉等級的精煉設定。（預設：null）
+#         - Level                       精煉等級。
+#           Bonus                       精煉加成。（預設：0）
+#           RandomBonus                 額外精煉加成，範圍為 0～RandomBonus，並累加至 Bonus。（預設：0）
+#           BlacksmithBlessingAmount    所需的鐵匠祝福數量。（預設：0）
+#           BroadcastSuccess            此等級精煉成功時是否向全伺服器公告。（預設：false）
+#           BroadcastFailure            此等級精煉失敗時是否向全伺服器公告。（預設：false）
+#           Chances:                    依成本類型設定成功機率。（預設：null）
+#             - Type                    依使用礦石決定的精煉成本類型。
+#               Rate                    成功機率，範圍為 0～10000。（預設：0）
+#               Price                   精煉所需的 Zeny 數量。（預設：0）
+#               Material                精煉所需的礦石道具。（預設：0）
+#               BreakingRate            道具損壞機率，範圍為 0～10000。（預設：0）
+#               DowngradeAmount         失敗時降低的精煉等級數。（預設：0）
 ###########################################################################
 
 Header:
