@@ -5829,7 +5829,8 @@ size_t npc_script_event( map_session_data& sd, enum npce_event type ){
 		std::vector<struct script_event_s> vector = script_event[type];
 		enum npce_event previous_event = static_cast<enum npce_event>(sd.pandas.workinevent);
 
-		for (struct script_event_s& evt : vector) {
+		for (size_t event_index = 0; event_index < vector.size(); ++event_index) {
+			struct script_event_s& evt = vector[event_index];
 			sd.pandas.workinevent = static_cast<uint8>(type);
 			pc_setreg(&sd, add_str("@interrupt_npcid"), sd.npc_id);
 			run_script(evt.event->nd->u.scr.script, evt.event->pos, sd.bl.id, evt.event->nd->bl.id);
@@ -5843,8 +5844,9 @@ size_t npc_script_event( map_session_data& sd, enum npce_event type ){
 
 	std::vector<struct script_event_s>& vector = script_event[type];
 
-	for( struct script_event_s& evt : vector ){
-		npc_event_sub( &sd, evt.event, evt.event_name );
+	for (size_t event_index = 0; event_index < vector.size(); ++event_index) {
+		struct script_event_s& evt = vector[event_index];
+		npc_event_sub(&sd, evt.event, evt.event_name);
 	}
 
 	return vector.size();
