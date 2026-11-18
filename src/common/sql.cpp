@@ -164,7 +164,17 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 
 	if( !mysql_real_connect(&self->handle, host, user, passwd, db, (uint32)port, nullptr/*unix_socket*/, 0/*clientflag*/) )
 	{
-		ShowSQL("%s\n", mysql_error(&self->handle));
+		// MySQL error 1045 (ER_ACCESS_DENIED_ERROR) means authentication was rejected.
+		const uint32 error_code = mysql_errno(&self->handle);
+		if (error_code == 1045) {
+			ShowSQL("MySQL authentication failed (error 1045 - Access denied): "
+				"the database username or password is incorrect for user '%s'. "
+				"Check sql_user and sql_password in conf/inter_athena.conf or "
+				"the corresponding legacy service settings. The connection was rejected.\n",
+				user != nullptr ? user : "(unknown)");
+		} else {
+			ShowSQL("%s\n", mysql_error(&self->handle));
+		}
 		return SQL_ERROR;
 	}
 
