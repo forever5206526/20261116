@@ -20,7 +20,7 @@ std::string log_db_username = "ragnarok";
 std::string log_db_password = "";
 std::string log_db_database = "ragnarok";
 std::string log_login_db = "loginlog";
-std::string log_codepage = "";
+
 
 static Sql* sql_handle = nullptr;
 static bool enabled = false;
@@ -101,9 +101,6 @@ bool loginlog_config_read(const char* key, const char* value) {
 	if( strcmpi(key, "log_db_db") == 0 )
 		log_db_database = value;
 	else
-	if( strcmpi(key, "log_codepage") == 0 )
-		log_codepage = value;
-	else
 	if( strcmpi(key, "log_login_db") == 0 )
 		log_login_db = value;
 	else
@@ -132,9 +129,6 @@ bool loginlog_init(void) {
 		Sql_Free(sql_handle);
 		exit(EXIT_FAILURE);
 	}
-
-	if( !log_codepage.empty() && SQL_ERROR == Sql_SetEncoding(sql_handle, log_codepage.c_str()) )
-		Sql_ShowDebug(sql_handle);
 
 	enabled = true;
 
