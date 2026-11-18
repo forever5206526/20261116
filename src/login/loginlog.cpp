@@ -122,6 +122,7 @@ bool loginlog_config_read(const char* key, const char* value) {
  */
 bool loginlog_init(void) {
 	sql_handle = Sql_Malloc();
+	Sql_ConfigApply(log_db_hostname, log_db_port, log_db_username, log_db_password);
 
 	if( SQL_ERROR == Sql_Connect(sql_handle, log_db_username.c_str(), log_db_password.c_str(), log_db_hostname.c_str(), log_db_port, log_db_database.c_str()) )
 	{

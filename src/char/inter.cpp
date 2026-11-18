@@ -17,6 +17,7 @@
 #include <common/malloc.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
+#include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 
@@ -851,6 +852,9 @@ int32 inter_config_read(const char* cfgName)
 		if (sscanf(line, "%23[^:]: %1023[^\r\n]", w1, w2) != 2)
 			continue;
 
+		if (Sql_ConfigRead(w1, w2))
+			continue;
+
 		if(!strcmpi(w1,"char_server_ip"))
 			char_server_ip = w2;
 		else if(!strcmpi(w1,"char_server_port"))
@@ -977,6 +981,7 @@ uint64 InterServerDatabase::parseBodyNode( const ryml::NodeRef& node ){
 int32 inter_init_sql(const char *file)
 {
 	inter_config_read(file);
+	Sql_ConfigApply(char_server_ip, char_server_port, char_server_id, char_server_pw);
 
 	//DB connection initialized
 	sql_handle = Sql_Malloc();

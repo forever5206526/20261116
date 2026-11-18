@@ -18,6 +18,7 @@
 #include <common/random.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp> //ip2str
+#include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
@@ -597,6 +598,9 @@ bool login_config_read(const char* cfgName, bool normal) {
 			continue;
 
 		if (sscanf(line, "%31[^:]: %1023[^\r\n]", w1, w2) < 2)
+			continue;
+
+		if (Sql_ConfigRead(w1, w2))
 			continue;
 
 		// Config that loaded only when server started, not by reloading config file
