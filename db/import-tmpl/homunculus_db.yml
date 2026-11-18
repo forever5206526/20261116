@@ -23,33 +23,33 @@
 #
 ###########################################################################
 # - BaseClass               Base class.
-#   Name                    Name of homunculus.
-#   EvolutionClass          Evolution class.
-#   Food                    Homunculus food item. (Default: Pet_Food)
-#   HungryDelay             Time interval in milliseconds after which the hunger value is altered. (Default: 60000)
-#   Race                    Race. (Default: Demihuman)
-#   Element                 Element. (Default: Neutral)
-#   Size                    Size. (Default: Small)
-#   EvolutionSize           Evolution size. (Default: Medium)
-#   AttackDelay             Base ASPD. (Default: 700)
-#   Status:                 Homunculus stats.
-#     - Type                Type of status.
-#       Base                Base value of this status. (Default: 1)
-#       GrowthMinimum       Minimum growth of this status. (Default: 0)
-#       GrowthMaximum       Maximum growth of this status. (Default: 0)
-#       EvolutionMinimum    Minimum evolution growth of this status. Only applies for homunculus that can evolve. (Default: 0)
-#       EvolutionMaximum    Maximum evolution growth of this status. Only applies for homunculus that can evolve. (Default: 0)
-#   SkillTree:              Skill tree.
-#     - Skill               Skill name.
-#       Clear               True to remove the given skill name. (Optional)
-#       MaxLevel            Maximum level of skill.
-#       RequiredLevel       Required base level of homunculus to learn. (Default: 0)
-#       RequiredIntimacy    Required intimacy of homunculus to learn. (Default: 0)
-#       RequireEvolution    Require the homunculus to be evolved to be available. (Default: false)
-#       Required:           Prerequisite skills. (Default: null)
-#         - Skill           Prerequisite skill name.
-#           Level           Level of prerequisite skill.
-#           Clear           True to remove the given prerequisite skill name. (Optional)
+#   Name                    生命體名稱。
+#   EvolutionClass          進化後職業。
+#   Food                    生命體餵食道具。（預設：Pet_Food）
+#   HungryDelay             飢餓值變更的時間間隔（毫秒）。（預設：60000）
+#   Race                    種族。（預設：Demihuman）
+#   Element                 屬性。（預設：Neutral）
+#   Size                    體型。（預設：Small）
+#   EvolutionSize           進化後體型。（預設：Medium）
+#   AttackDelay             基礎 ASPD。（預設：700）
+#   Status:                 生命體能力值。
+#     - Type                能力值類型。
+#       Base                此能力值的基礎數值。（預設：1）
+#       GrowthMinimum       此能力值的最低成長值。（預設：0）
+#       GrowthMaximum       此能力值的最高成長值。（預設：0）
+#       EvolutionMinimum    此能力值的最低進化成長值，僅適用於可進化的生命體。（預設：0）
+#       EvolutionMaximum    此能力值的最高進化成長值，僅適用於可進化的生命體。（預設：0）
+#   SkillTree:              技能樹。
+#     - Skill               技能名稱。
+#       Clear               設為 true 可移除指定技能名稱。（選填）
+#       MaxLevel            技能最高等級。
+#       RequiredLevel       學習此技能所需的生命體基礎等級。（預設：0）
+#       RequiredIntimacy    學習此技能所需的生命體親密度。（預設：0）
+#       RequireEvolution    是否必須進化後才能使用。（預設：false）
+#       Required:           前置技能。（預設：null）
+#         - Skill           前置技能名稱。
+#           Level           前置技能等級。
+#           Clear           設為 true 可移除指定前置技能名稱。（選填）
 ###########################################################################
 
 Header:
