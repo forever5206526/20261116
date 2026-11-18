@@ -24,5 +24,7 @@
 #define Pandas_MapFlag_NoSlave
 #define Pandas_MapFlag_NoAttack
 #define Pandas_MapFlag_NoUseItem
+#define Pandas_MapFlag_HideGuildInfo
+#define Pandas_MapFlag_HidePartyInfo
 
 #endif // CONFIG_PANDAS_HPP

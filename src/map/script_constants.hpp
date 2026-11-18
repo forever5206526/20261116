@@ -572,6 +572,12 @@
 #ifdef Pandas_MapFlag_NoUseItem
 	export_constant(MF_NOUSEITEM);
 #endif // Pandas_MapFlag_NoUseItem
+#ifdef Pandas_MapFlag_HideGuildInfo
+	export_constant(MF_HIDEGUILDINFO);
+#endif // Pandas_MapFlag_HideGuildInfo
+#ifdef Pandas_MapFlag_HidePartyInfo
+	export_constant(MF_HIDEPARTYINFO);
+#endif // Pandas_MapFlag_HidePartyInfo
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

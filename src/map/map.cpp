@@ -4878,6 +4878,35 @@ bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_ma
 			}
 			break;
 #endif // Pandas_MapFlag_NoMerc
+#if defined(Pandas_MapFlag_HideGuildInfo) || defined(Pandas_MapFlag_HidePartyInfo)
+#ifdef Pandas_MapFlag_HideGuildInfo
+		case MF_HIDEGUILDINFO:
+#endif // Pandas_MapFlag_HideGuildInfo
+#ifdef Pandas_MapFlag_HidePartyInfo
+		case MF_HIDEPARTYINFO:
+#endif // Pandas_MapFlag_HidePartyInfo
+			mapdata->setMapFlag(mapflag, status);
+			{
+				// Re-send only player name packets to observers on this map.
+				// A full clif_refresh() also cancels chat, vending and trading states.
+				struct s_mapiterator* observers = mapit_getallusers();
+				map_session_data* observer = nullptr;
+				for (observer = (TBL_PC*)mapit_first(observers); mapit_exists(observers); observer = (TBL_PC*)mapit_next(observers)) {
+					if (!observer || observer->bl.m != m)
+						continue;
+					struct s_mapiterator* targets = mapit_getallusers();
+					map_session_data* target = nullptr;
+					for (target = (TBL_PC*)mapit_first(targets); mapit_exists(targets); target = (TBL_PC*)mapit_next(targets)) {
+						if (!target || target->bl.m != m)
+							continue;
+						clif_name(&observer->bl, &target->bl, SELF);
+					}
+					mapit_free(targets);
+				}
+				mapit_free(observers);
+			}
+			break;
+#endif // Pandas_MapFlag_HideGuildInfo || Pandas_MapFlag_HidePartyInfo
 		case MF_SPECIALPOPUP:
 			if (status) {
 				nullpo_retr(false, args);
