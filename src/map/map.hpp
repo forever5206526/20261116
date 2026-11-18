@@ -761,6 +761,24 @@ struct s_drop_list {
 	enum e_nightmare_drop_type drop_type;
 };
 
+#ifdef Pandas_Mapflags
+struct s_mapflag_item_args {
+	int32 def_val;
+	int32 min;
+	int32 max;
+	const char* unit = nullptr;
+};
+
+struct s_mapflag_item {
+	const char* name;
+	bool turn_off_default;
+	bool block_atcmd;
+	std::vector<s_mapflag_item_args> args;
+};
+
+extern std::unordered_map<e_mapflag, s_mapflag_item> mapflag_config;
+#endif // Pandas_Mapflags
+
 /// Union for mapflag values
 union u_mapflag_args {
 	struct point nosave;
@@ -860,6 +878,9 @@ struct map_data {
 
 	struct point save;
 	std::vector<s_drop_list> drop_list;
+#ifdef Pandas_Mapflags
+	std::unordered_map<e_mapflag, std::vector<int32>> mapflag_values;
+#endif // Pandas_Mapflags
 	uint32 zone; // zone number (for item/skill restrictions)
 	struct s_skill_damage damage_adjust; // Used for overall skill damage adjustment
 	std::unordered_map<uint16, s_skill_damage> skill_damage; // Used for single skill damage adjustment
@@ -1273,6 +1294,11 @@ enum e_mapflag map_getmapflag_by_name(char* name);
 bool map_getmapflag_name(enum e_mapflag mapflag, char* output);
 int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, union u_mapflag_args *args);
 bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_mapflag_args* args);
+#ifdef Pandas_Mapflags
+int32 map_getmapflag_param(int16 m, enum e_mapflag mapflag, size_t index);
+void map_setmapflag_param(int16 m, enum e_mapflag mapflag, size_t index, int32 value);
+bool map_mapflag_valid_index(e_mapflag mapflag, size_t index);
+#endif // Pandas_Mapflags
 #define map_getmapflag(m, mapflag) map_getmapflag_sub(m, mapflag, nullptr)
 #define map_setmapflag(m, mapflag, status) map_setmapflag_sub(m, mapflag, status, nullptr)
 
