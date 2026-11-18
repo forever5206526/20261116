@@ -2,29 +2,21 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Statpoint Database
+# 能力點數資料庫
 ###########################################################################
 #
-# Statpoint Settings
+# 能力點數設定
 #
 ###########################################################################
-# - Level             BaseLevel required.
-#   Points            Total status points given from BaseLevel 1 to 'Level'.
-#   TraitPoints       Total trait points given from BaseLevel 1 to 'Level'.
+# - Level             所需基本等級。
+#   Points            從基本等級 1 到指定 Level 累計發放的能力點數。
+#   TraitPoints       從基本等級 1 到指定 Level 累計發放的特性點數。
 ###########################################################################
 
 Header:
