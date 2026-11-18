@@ -4480,6 +4480,12 @@ ACMD_FUNC(mapinfo) {
 	sprintf(atcmd_output, msg_txt(sd,1040), mapname, mapdata->users, mapdata->npc_num, chat_num, vend_num); // Map: %s | Players: %d | NPCs: %d | Chats: %d | Vendings: %d
 	clif_displaymessage(fd, atcmd_output);
 	clif_displaymessage(fd, msg_txt(sd,1041)); // ------ Map Flags ------
+#ifdef Pandas_MapFlag_MobInfo
+	if (map_getmapflag(m_id, MF_MOBINFO)) {
+		snprintf(atcmd_output, sizeof(atcmd_output), "MobInfo: %d", map_getmapflag_param(m_id, MF_MOBINFO, 1));
+		clif_displaymessage(fd, atcmd_output);
+	}
+#endif // Pandas_MapFlag_MobInfo
 	if (map_getmapflag(m_id, MF_TOWN))
 		clif_displaymessage(fd, msg_txt(sd,1042)); // Town Map
 	if (map_getmapflag(m_id, MF_RESTRICTED)){
