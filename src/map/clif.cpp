@@ -6192,6 +6192,10 @@ int32 clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tic
 	}
 	WBUFW(buf,26)=skill_lv;
 	WBUFW(buf,28)=div;
+#ifdef Pandas_MapFlag_HideDamage
+	if (map_getmapflag(src->m, MF_HIDEDAMAGE))
+		WBUFW(buf,28) = static_cast<uint16>(-div);
+#endif // Pandas_MapFlag_HideDamage
 	WBUFB(buf,30)=type;
 	if (disguised(dst)) {
 		clif_send(buf,packet_len(0x114),dst,AREA_WOS);
