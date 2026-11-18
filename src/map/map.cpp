@@ -20,6 +20,7 @@
 #include <common/random.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp> // WFIFO*()
+#include <common/sql.hpp>
 #include <common/strlib.hpp>
 #include <common/timer.hpp>
 #include <common/utilities.hpp>
@@ -4189,6 +4190,9 @@ int32 inter_config_read(const char *cfgName)
 		if(line[0] == '/' && line[1] == '/')
 			continue;
 		if( sscanf(line,"%1023[^:]: %1023[^\r\n]",w1,w2) < 2 )
+			continue;
+
+		if (Sql_ConfigRead(w1, w2))
 			continue;
 
 #define RENEWALPREFIX "renewal-"
