@@ -2,86 +2,78 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Item Database
+# 道具資料庫
 ###########################################################################
 #
-# Item Settings
+# 道具設定
 #
 ###########################################################################
-# - Id                      Item ID.
-#   AegisName               Server name to reference the item in scripts and lookups, should use no spaces.
-#   Name                    Name in English for displaying as output.
-#   Type                    Item type. (Default: Etc)
-#   SubType                 Weapon, Ammo or Card type. (Default: 0)
-#   Buy                     Buying price. When not specified, becomes double the sell price. (Default: 0)
-#   Sell                    Selling price. When not specified, becomes half the buy price. (Default: 0)
-#   Weight                  Item weight. Each 10 is 1 weight. (Default: 0)
-#   Attack                  Weapon's attack. (Default: 0)
-#   MagicAttack             Weapon's magic attack. (Default: 0)
-#   Defense                 Armor's defense. (Default: 0)
-#   Range                   Weapon's attack range. (Default: 0)
-#   Slots                   Available slots in item. (Default: 0)
-#   Jobs                    Jobs that can equip the item. (Map default is 'All: true')
-#   Classes                 Upper class types that can equip the item. (Map default is 'All: true')
-#   Gender                  Gender that can equip the item. (Default: Both)
-#   Locations               Equipment's placement. (Default: None)
-#   WeaponLevel             Weapon level. (Default: 1 for Weapons)
-#   ArmorLevel              Armor level. (Default: 1 for Armors)
-#   EquipLevelMin           Minimum required level to equip. (Default: 0)
-#   EquipLevelMax           Maximum level that can equip. (Default: 0)
-#   Refineable              If the item can be refined. (Default: false)
-#   Gradable                If the item can be graded. (Default: false)
-#   View                    View sprite of an item. (Default: 0)
-#   AliasName               Another item's AegisName that will be sent to the client instead of this item's AegisName. (Default: null)
-#   Flags:                  Item flags. (Default: null)
-#     BuyingStore           If the item is available for Buyingstores. (Default: false)
-#     DeadBranch            If the item is a Dead Branch. (Default: false)
-#     Container             If the item is part of a container. (Default: false)
-#     UniqueId              If the item is a unique stack. (Default: false)
-#     BindOnEquip           If the item is bound to the character upon equipping. (Default: false)
-#     DropAnnounce          If the item has a special announcement to self on drop. (Default: false)
-#     NoConsume             If the item is consumed on use. (Default: false)
-#     DropEffect            If the item has a special effect on the ground when dropped by a monster. (Default: None)
-#   Delay:                  Item use delay. (Default: null)
-#     Duration              Duration of delay in seconds.
-#     Status                Status Change used to track delay. (Default: None)
-#   Stack:                  Item stack amount. (Default: null)
-#     Amount                Maximum amount that can be stacked.
-#     Inventory             If the stack is applied to player's inventory. (Default: true)
-#     Cart                  If the stack is applied to the player's cart. (Default: false)
-#     Storage               If the stack is applied to the player's storage. (Default: false)
-#     GuildStorage          If the stack is applied to the player's guild storage. (Default: false)
-#   NoUse:                  Conditions when the item is unusable. (Default: null)
-#     Override              Group level to override these conditions. (Default: 100)
-#     Sitting               If the item can not be used while sitting. (Default: false)
-#   Trade:                  Trade restrictions. (Default: null)
-#     Override              Group level to override these conditions. (Default: 100)
-#     NoDrop                If the item can not be dropped. (Default: false)
-#     NoTrade               If the item can not be traded. (Default: false)
-#     TradePartner          If the item can not be traded to the player's partner. (Default: false)
-#     NoSell                If the item can not be sold. (Default: false)
-#     NoCart                If the item can not be put in a cart. (Default: false)
-#     NoStorage             If the item can not be put in a storage. (Default: false)
-#     NoGuildStorage        If the item can not be put in a guild storage. (Default: false)
-#     NoMail                If the item can not be put in a mail. (Default: false)
-#     NoAuction             If the item can not be put in an auction. (Default: false)
-#   Script                  Script to execute when the item is used/equipped. (Default: null)
-#   EquipScript             Script to execute when the item is equipped. (Default: null)
-#   UnEquipScript           Script to execute when the item is unequipped or when a rental item expires. (Default: null)
+# - Id                      道具 ID。
+#   AegisName               伺服器腳本及查詢使用的道具名稱，不可包含空格。
+#   Name                    遊戲顯示用的英文名稱。
+#   Type                    道具類型。（預設：Etc）
+#   SubType                 武器、彈藥或卡片類型。（預設：0）
+#   Buy                     購買價格。未指定時，會設為出售價格的兩倍。（預設：0）
+#   Sell                    出售價格。未指定時，會設為購買價格的一半。（預設：0）
+#   Weight                  道具重量，每 10 點代表 1 單位重量。（預設：0）
+#   Attack                  武器攻擊力。（預設：0）
+#   MagicAttack             武器魔法攻擊力。（預設：0）
+#   Defense                 防具防禦力。（預設：0）
+#   Range                   武器攻擊距離。（預設：0）
+#   Slots                   道具可用插槽數量。（預設：0）
+#   Jobs                    可裝備此道具的職業。（Map 預設為 'All: true'）
+#   Classes                 可裝備此道具的上位職業類型。（Map 預設為 'All: true'）
+#   Gender                  可裝備此道具的性別。（預設：Both）
+#   Locations               裝備穿戴位置。（預設：None）
+#   WeaponLevel             武器等級。（武器預設：1）
+#   ArmorLevel              防具等級。（防具預設：1）
+#   EquipLevelMin           裝備所需最低等級。（預設：0）
+#   EquipLevelMax           可裝備的最高等級。（預設：0）
+#   Refineable              此道具是否可精煉。（預設：false）
+#   Gradable                此道具是否可進行階級強化。（預設：false）
+#   View                    道具顯示外觀的 Sprite 編號。（預設：0）
+#   AliasName               傳送給客戶端以取代此道具 AegisName 的另一個道具 AegisName。（預設：null）
+#   Flags:                  道具旗標。（預設：null）
+#     BuyingStore           此道具是否可透過收購商店收購。（預設：false）
+#     DeadBranch            此道具是否為枯樹枝。（預設：false）
+#     Container             此道具是否屬於容器內容物。（預設：false）
+#     UniqueId              此道具堆疊是否具有唯一 ID。（預設：false）
+#     BindOnEquip           裝備此道具時是否綁定角色。（預設：false）
+#     DropAnnounce          掉落此道具時是否向持有者顯示特殊公告。（預設：false）
+#     NoConsume             使用此道具時是否消耗。（預設：false）
+#     DropEffect            魔物掉落此道具時，地面是否顯示特殊效果。（預設：None）
+#   Delay:                  道具使用延遲。（預設：null）
+#     Duration              延遲時間（秒）。
+#     Status                用於追蹤延遲的狀態變更。（預設：None）
+#   Stack:                  道具堆疊設定。（預設：null）
+#     Amount                可堆疊的最大數量。
+#     Inventory             是否允許在玩家背包中堆疊。（預設：true）
+#     Cart                  是否允許在玩家手推車中堆疊。（預設：false）
+#     Storage               是否允許在玩家倉庫中堆疊。（預設：false）
+#     GuildStorage          是否允許在公會倉庫中堆疊。（預設：false）
+#   NoUse:                  道具無法使用時的條件。（預設：null）
+#     Override              可覆寫這些條件的群組等級。（預設：100）
+#     Sitting               玩家坐下時是否禁止使用此道具。（預設：false）
+#   Trade:                  交易限制。（預設：null）
+#     Override              可覆寫這些條件的群組等級。（預設：100）
+#     NoDrop                是否禁止丟棄此道具。（預設：false）
+#     NoTrade               是否禁止交易此道具。（預設：false）
+#     TradePartner          是否禁止將此道具交易給玩家的交易對象。（預設：false）
+#     NoSell                是否禁止販售此道具。（預設：false）
+#     NoCart                是否禁止將此道具放入手推車。（預設：false）
+#     NoStorage             是否禁止將此道具存入倉庫。（預設：false）
+#     NoGuildStorage        是否禁止將此道具存入公會倉庫。（預設：false）
+#     NoMail                是否禁止透過郵件寄送此道具。（預設：false）
+#     NoAuction             是否禁止將此道具放入拍賣。（預設：false）
+#   Script                  使用或裝備此道具時執行的腳本。（預設：null）
+#   EquipScript             裝備此道具時執行的腳本。（預設：null）
+#   UnEquipScript           卸下此道具或租賃道具到期時執行的腳本。（預設：null）
 ###########################################################################
 
 Header:
@@ -89,7 +81,7 @@ Header:
   Version: 3
 
 #Body:
-# THQ Quest Items
+# THQ 任務道具
 #=============================================================
 #  - Id: 1998
 #    AegisName: Jeramiah's_Jur
@@ -120,7 +112,7 @@ Header:
 #    Weight: 10
 #    AliasName: Leather_Bag_Of_Infinity
 
-# Official Event Items that had their Effects removed after the event was completed
+# 活動結束後已移除效果的官方活動道具
 #=============================================================
 #  - Id: 585
 #    AegisName: Wurst
@@ -313,7 +305,7 @@ Header:
 #    Script: |
 #      percentheal 25,25;
 
-# Event effect: Summon monster? Probably Rice_Cake. x_x
+# 活動效果：召喚魔物？可能是 Rice_Cake。
 #=============================================================
 #  - Id: 12199
 #    AegisName: Rice_Scroll
@@ -344,7 +336,7 @@ Header:
 #    Script: |
 #      percentheal 20,15; sc_start SC_DEXFOOD,1200000,3; sc_start SC_AGIFOOD,1200000,3; sc_start SC_VITFOOD,1200000,3; sc_start SC_SPEEDUP1,5000,0;
 
-# iRO St. Patrick's Day Event 2008
+# iRO 2008 年聖派翠克節活動
 #=============================================================
 #  - Id: 7915
 #    AegisName: Copper_Coin_
@@ -367,7 +359,7 @@ Header:
 #    Script: |
 #      callfunc "F_08stpattyseventbox";
 
-# iRO Valentine's Day Event 2009
+# iRO 2009 年情人節活動
 #=============================================================
 #  - Id: 5817
 #    AegisName: Valentine_Pledge
@@ -425,7 +417,7 @@ Header:
 #    Script: |
 #      getitem 5817,1;
 
-# iRO Halloween Event 2009
+# iRO 2009 年萬聖節活動
 #=============================================================
 #  - Id: 5668
 #    AegisName: Weird_Pumpkin_Hat
@@ -448,7 +440,7 @@ Header:
 #    Name: Worn Fabric
 #    Type: Etc
 
-# Old Tuxedo and Wedding Dress, will display the outfit when worn.
+# 舊版燕尾服與婚紗，穿戴時會顯示相應服裝。
 #==================================================================
 #  - Id: 2338
 #    AegisName: Wedding_Dress
@@ -486,7 +478,7 @@ Header:
 #    UnEquipScript: |
 #      sc_end SC_WEDDING;
 
-# Non-kRO Eden Group Mark effect
+# 非韓國伺服器版本的伊甸園標誌效果
 #=============================================================
 #  - Id: 22508
 #    AegisName: Para_Team_Mark_
@@ -495,7 +487,7 @@ Header:
 #    Script: |
 #      unitskilluseid getcharid(3),"AL_TELEPORT",3;
 
-# Gender restrictions that were removed on official servers
+# 官方伺服器已移除的性別限制
 #=============================================================
 #  - Id: 2206
 #    Gender: Female
