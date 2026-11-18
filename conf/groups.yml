@@ -43,7 +43,7 @@ Header:
 Body:
   - Id: 0
     # 群組 0 是每個新帳號的預設群組。
-    Name: Player
+    Name: 玩家
     Level: 0
     Commands:
       changedress: true
@@ -54,7 +54,7 @@ Body:
       can_party: true
       attendance: true
   - Id: 1
-    Name: Super Player
+    Name: 超級玩家
     # 可執行玩家能做的所有操作，並擁有更多權限。
     Inherit:
       Player: true
@@ -94,7 +94,7 @@ Body:
     Permissions:
       attendance: false
   - Id: 2
-    Name: Support
+    Name: 支援人員
     Inherit:
       Super Player: true
     Level: 1
@@ -116,7 +116,7 @@ Body:
       receive_requests: true
       view_equipment: true
   - Id: 3
-    Name: Script Manager
+    Name: 腳本管理員
     Inherit:
       Support: true
     Level: 1
@@ -132,7 +132,7 @@ Body:
     Permissions:
       any_warp: true
   - Id: 4
-    Name: Event Manager
+    Name: 活動管理員
     Inherit:
       Support: true
     Level: 1
@@ -183,7 +183,7 @@ Body:
       rates: true
       who: true
   - Id: 10
-    Name: Law Enforcement
+    Name: 執法人員
     Inherit:
       Support: true
     Level: 2
@@ -218,7 +218,7 @@ Body:
       view_hpmeter: true
       macro_detect: true
   - Id: 99
-    Name: Admin
+    Name: 管理員
     Level: 99
     Inherit:
       Support: true
