@@ -2,30 +2,22 @@
 #   Copyright(C) 2021 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Level Penalty Database
+# 等級懲罰資料庫
 ###########################################################################
 #
-# Level Penalty Settings
+# 等級懲罰設定
 #
 ###########################################################################
-# - Type:             Type of Penalty (Exp, Drop, Mvp_Exp, Mvp_Drop)
-#   LevelDifferences: List of level difference between player and monster
-#     - Difference:   Level difference between player and monster
-#       Rate:         Rate applied to original exp or drop rate (0-10000)
+# - Type:             懲罰類型（Exp、Drop、Mvp_Exp、Mvp_Drop）。
+#   LevelDifferences: 玩家與魔物之間的等級差距清單。
+#     - Difference:   玩家與魔物之間的等級差距。
+#       Rate:         套用於原始經驗值或掉落率的比率（0～10000）。
 ###########################################################################
 
 Header:
