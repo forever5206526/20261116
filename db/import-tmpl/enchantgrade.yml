@@ -23,31 +23,31 @@
 #
 ###########################################################################
 # - Type                                Item type.
-#   Levels:                             Enchantgrade settings per item level.
-#     - Level                           Item level.
-#       Grades:                         Enchantgrade settings per grade level.
-#         - Grade                       Enchantgrade level.
-#           Chances:                    Chance settings per refine level.
-#             - Refine                  Refine level.
-#               Chance                  Base chance of success out of 0~10000.
-#           Bonus                       Enchantgrade bonus. (Default: 0)
-#           AnnounceSuccess             Announce on upgrade success. (Default: true)
-#           AnnounceFail                Announce on upgrade failure. (Default: false)
-#           Announce                    Announce on upgrade success and failure.
-#           Catalyst:                   Catalyst item to increase chance of success.
-#             Item                      The item that can be used.
-#             AmountPerStep             Amount of Item needed.
-#                                       Set to 0 to disable the catalyst.
-#             MaximumSteps              Maximum amount of times Item can be used.
-#             ChanceIncrease            Amount at which the chance increases for each Item used.
-#           Options:                    Success chance based on cost type.
-#             - Option                  Index of the client option.
-#               Item                    Required item.
-#               Amount                  Amount of required item. (Default: 1)
-#                                       Set to 0 to remove an option.
-#               Price                   Amount of zeny required. (Default: 0)
-#               BreakingRate            Chance of item breaking out of 0~10000. (Default: 0)
-#               DowngradeAmount         Number of refine levels reduced on failure. (Default: 0)
+#   Levels:                             各道具等級的附魔設定。
+#     - Level                           道具等級。
+#       Grades:                         各附魔階級的設定。
+#         - Grade                       附魔階級。
+#           Chances:                    各精煉等級的成功機率設定。
+#             - Refine                  精煉等級。
+#               Chance                  基礎成功機率，範圍為 0～10000。
+#           Bonus                       附魔階級加成。（預設：0）
+#           AnnounceSuccess             升級成功時是否公告。（預設：true）
+#           AnnounceFail                升級失敗時是否公告。（預設：false）
+#           Announce                    升級成功與失敗時是否公告。
+#           Catalyst:                   用於提高成功機率的催化道具。
+#             Item                      可使用的道具。
+#             AmountPerStep             所需道具數量。
+#                                       設為 0 可停用催化道具。
+#             MaximumSteps              道具最多可使用的次數。
+#             ChanceIncrease            每使用一個道具所增加的成功機率。
+#           Options:                    依成本類型設定成功機率。
+#             - Option                  客戶端選項索引。
+#               Item                    所需道具。
+#               Amount                  所需道具數量。（預設：1）
+#                                       設為 0 可移除此選項。
+#               Price                   所需 Zeny 數量。（預設：0）
+#               BreakingRate            道具損壞機率，範圍為 0～10000。（預設：0）
+#               DowngradeAmount         失敗時降低的精煉等級數。（預設：0）
 ###########################################################################
 
 Header:
