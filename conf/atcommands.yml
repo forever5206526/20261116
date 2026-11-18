@@ -37,137 +37,137 @@ Body:
     Aliases:
       - h
     Help: |
-      Params: <command>
-      Shows help for specified command.
+      參數：<command>
+      顯示指定指令的說明。
   - Command: noask
     Help: |
-      Auto rejects deals/invites.
+      自動拒絕交易與邀請。
   - Command: gmotd
     Help: |
-      Broadcasts the Message of The Day to all players.
+      向所有玩家廣播每日訊息（MOTD）。
   - Command: me
     Help: |
-      Params: <message>
-      Displays normal text as a message in this format: *name message* (like /me in mIRC).
+      參數：<message>
+      以「*名稱 訊息*」格式顯示一般文字（類似 mIRC 的 /me）。
   - Command: fakename
     Help: |
-      Params: <name>
-      Changes your name to your choice temporarily.
+      參數：<name>
+      暫時將您的名稱變更為指定名稱。
   - Command: npctalk
     Aliases:
       - npctalkc
     Help: |
-      Params: <NPC name> <message>
-      Forces a NPC to display a message in normal chat.
+      參數：<NPC name> <message>
+      強制 NPC 在一般聊天頻道中顯示訊息。
   - Command: broadcast
     Help: |
-      Params: <message>
-      Broadcasts a message with your name (in yellow).
+      參數：<message>
+      以您的名稱廣播訊息（黃色）。
   - Command: kami
     Help: |
-      Params: <message>
-      Broadcasts a message without your name (in yellow).
+      參數：<message>
+      不顯示您的名稱，直接廣播訊息（黃色）。
   - Command: kamib
     Help: |
-      Params: <message>
-      Broadcasts a message without your name (in blue).
+      參數：<message>
+      不顯示您的名稱，直接廣播訊息（藍色）。
   - Command: localbroadcast
     Help: |
-      Params: <message>
-      Broadcasts a message with your name (in yellow) only on your map.
+      參數：<message>
+      只在您目前所在的地圖，以您的名稱廣播訊息（黃色）。
   - Command: commands
     Help: |
-      Displays a list of commands that you can use.
+      顯示您可以使用的指令清單。
   - Command: rates
     Help: |
-      Displays the server's current rates.
+      顯示伺服器目前的倍率。
   - Command: uptime
     Help: |
-      Displays how long the server has been online.
+      顯示伺服器已運作的時間。
   - Command: showdelay
     Help: |
-      Shows/hides the "There is a delay after this skill" message.
+      顯示／隱藏「此技能使用後有延遲」訊息。
   - Command: exp
     Help: |
-      Displays current levels and % progress.
+      顯示目前等級及經驗值進度百分比。
   - Command: mobinfo
     Aliases:
       - monsterinfo
       - mi
     Help: |
-      Params: <monster name|ID>
-      Shows monster info (stats, exp, drops etc).
+      參數：<monster name|ID>
+      顯示怪物資訊（能力值、經驗值、掉落物等）。
   - Command: iteminfo
     Aliases:
       - ii
     Help: |
-      Params: <item name|ID>
-      Shows item info (type, price etc).
+      參數：<item name|ID>
+      顯示物品資訊（類型、價格等）。
   - Command: whodrops
     Help: |
-      Params: <item name|ID>
-      Shows who drops an item (monster with highest drop rates).
+      參數：<item name|ID>
+      顯示哪些怪物會掉落指定物品（依掉落率由高至低列出）。
   - Command: version
     Help: |
-      Displays SVN version of the server.
+      顯示伺服器的 SVN 版本。
   - Command: email
     Help: |
-      Params: <current email> <new email>
-      Changes your account e-mail address.
+      參數：<current email> <new email>
+      變更您帳號的電子郵件地址。
   - Command: where
     Help: |
-      Params: <char name>
-      Tells you the location of a character.
+      參數：<char name>
+      查詢指定角色所在的位置。
   - Command: time
     Aliases:
       - date
       - serverdate
       - servertime
     Help: |
-      Shows the date and time of the server.
+      顯示伺服器的日期與時間。
   - Command: showexp
     Help: |
-      Displays/hides experience gained.
+      顯示／隱藏取得的經驗值。
   - Command: showzeny
     Help: |
-      Displays/hides Zeny gained.
+      顯示／隱藏取得的 Zeny。
   - Command: mobsearch
     Help: |
-      Params: <monster name|ID>
-      Shows the location of a certain mob on the current map.
+      參數：<monster name|ID>
+      顯示指定怪物在目前地圖上的位置。
   - Command: who
     Aliases:
       - whois
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their party and guild.
+      參數：[<name>]
+      顯示線上玩家清單，以及其隊伍與公會資訊。
   - Command: who2
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their job.
+      參數：[<name>]
+      顯示線上玩家清單，以及其職業資訊。
   - Command: who3
     Help: |
-      Params: [<name>]
-      Shows a list of online players and their location.
+      參數：[<name>]
+      顯示線上玩家清單，以及其所在位置。
   - Command: whomap
     Help: |
-      @whomap/@whomap2/@whomap3 [map] - like @who/@who2/@who3 but only for specified map.
+      @whomap/@whomap2/@whomap3 [map] - 類似 @who/@who2/@who3，但只列出指定地圖上的玩家。
   - Command: whogm
     Help: |
-      Params: [match_text] - Like @who+@who2+who3, but only for GM.
+      參數：[match_text] - Like @who+@who2+who3, but only for GM.
   - Command: guildspy
     Help: |
-      Params: <guild name|id> - You will receive all messages of the guild channel (Chat logging must be enabled)
+      參數：<guild name|id> - You will receive all messages of the guild channel (Chat logging must be enabled)
   - Command: partyspy
     Help: |
-      @partyspy <party name|id> - You will receive all messages of the party channel (Chat logging must be enabled)
+      @partyspy <party name|id> - 接收隊伍頻道的所有訊息（必須啟用聊天記錄）。
   - Command: mapinfo
     Help: |
-      Params: [<0-3> [map]] - Give information about a map (general info +: 0: no more, 1: players, 2: NPC, 3: chatrooms).
+      參數：[<0-3> [map]] - Give information about a map (general info +: 0: no more, 1: players, 2: NPC, 3: chatrooms).
   - Command: go
     Help: |
-      Params: <city name|number>
-      Warps you to a city.
+      參數：<city name|number>
+      將您傳送至指定城市。
       -3: (Memo point 2)  14: louyang         31: mora
       -2: (Memo point 1)  15: start point     32: dewata
       -1: (Memo point 0)  16: prison/jail     33: malangdo island
@@ -190,11 +190,11 @@ Body:
       - goto
       - warpto
     Help: |
-      Params: <char name>
+      參數：<char name>
       Warps you to selected character.
   - Command: follow
     Help: |
-      Params: <char name>
+      參數：<char name>
       Follow a player.
   - Command: mount
     Aliases:
@@ -206,7 +206,7 @@ Body:
       Give/remove a cash mount.
   - Command: disguise
     Help: |
-      Params: <monster name|ID>
+      參數：<monster name|ID>
       Change your appearence to other players to a mob.
   - Command: undisguise
     Help: |
@@ -219,10 +219,10 @@ Body:
       Restore the normal appearance of all characters of a guild.
   - Command: model
     Help: |
-      Params:  <hair ID: 0-17> <hair color: 0-8> <clothes color: 0-4> - Changes your characters appearence.
+      參數：<hair ID: 0-17> <hair color: 0-8> <clothes color: 0-4> - Changes your characters appearence.
   - Command: size
     Help: |
-      Params:  <0-2> Changes your size (0-Normal 1-Small 2-Large)
+      參數：<0-2> Changes your size (0-Normal 1-Small 2-Large)
   - Command: sizeall
     Help: |
       Changes the size of all players.
@@ -245,17 +245,17 @@ Body:
       - rura
       - mapmove
     Help: |
-      Params: <mapname> [<x> <y>]
+      參數：<mapname> [<x> <y>]
       Warps you to the selected map and position.
   - Command: jump
     Help: |
-      Params: [<x> [<y>]]
+      參數：[<x> [<y>]]
       Randomly warps you like a flywing.
   - Command: jobchange
     Aliases:
       - job
     Help: |
-      Params: <job name|ID>
+      參數：<job name|ID>
       Changes your job.
       ----- Novice / 1st Class -----
          0 Novice              1 Swordman            2 Magician            3 Archer
@@ -315,7 +315,7 @@ Body:
       4229 Baby Rebellion   4241 Baby Star Emperor    4242 Baby Soul Reaper
   - Command: option
     Help: |
-      Params: <param1> <param2>(stackable) <param3>(stackable)
+      參數：<param1> <param2>(stackable) <param3>(stackable)
       Adds different visual effects on or around your character.
        <param1>       <param2>        <param3>
       01: Stone      01: Sight       01: Sight          512: Cart Lv. 4
@@ -329,23 +329,23 @@ Body:
       32: (Nothing) 256: Fear       256: Cart Lv. 3
   - Command: heal
     Help: |
-      Params: [<HP> <SP>]
+      參數：[<HP> <SP>]
       Heals the desired amount of HP and SP. No value specified will do a full heal.
   - Command: healap
     Help: |
-      Params: [<AP>]
+      參數：[<AP>]
       Heals the desired amount of AP. No value specified will do a full AP heal.
   - Command: dye
     Aliases:
       - ccolor
     Help: |
-      Params: <clothes palette no.>
+      參數：<clothes palette no.>
       Changes your characters clothes color.
   - Command: hairstyle
     Aliases:
       - hstyle
     Help: |
-      Params: <hairstyle no.>
+      參數：<hairstyle no.>
       Changes your hair style.
   - Command: haircolor
     Aliases:
@@ -355,19 +355,19 @@ Body:
       Changes your hair color.
   - Command: speed
     Help: |
-      Params: <1-1000>
+      參數：<1-1000>
       Changes you walking speed. 1 being the fastest and 1000 the slowest. Default is 150.
   - Command: effect
     Help: |
-      Params: <effect id> [<flag>]
+      參數：<effect id> [<flag>]
       Give an effect to your character.
   - Command: dropall
     Help: |
-      Params: [<item type>]
+      參數：[<item type>]
       Throws all your possession on the ground. No type specified will drop all items.
   - Command: stockall
     Help: |
-      Params: [<item type>]
+      參數：[<item type>]
       Transfer items from cart to your inventory. No type specified will transfer all items.
   - Command: storeall
     Help: |
@@ -377,15 +377,15 @@ Body:
       Make your character killable.
   - Command: memo
     Help: |
-      Params: [memo position]
+      參數：[memo position]
       Set/change a memo location (no position: display memo points).
   - Command: spiritball
     Help: |
-      Params: <1-100>
+      參數：<1-100>
       Gives you "spirit spheres" like from the skill "Call Spirits".
   - Command: questskill
     Help: |
-      Params: <#>
+      參數：<#>
       Gives you the specified quest skill
       Novice = 142: First Aid, 143: Act Dead
       Archer = 147: Create Arrow, 148: Charge Arrow
@@ -409,7 +409,7 @@ Body:
       Sage = 1007: Create Elemental Converter, 1008: Elemental Change (Water), 1017: Elemental Change (Earth), 1018: Elemental Change (Fire), 1019: Elemental Change (Wind)
   - Command: lostskill
     Help: |
-      Params: <#>
+      參數：<#>
       Takes away the specified quest skill from you
       Novice = 142: First Aid, 143: Act Dead
       Archer = 147: Create Arrow, 148: Charge Arrow
@@ -433,19 +433,19 @@ Body:
       Sage = 1007: Create Elemental Converter, 1008: Elemental Change (Water), 1017: Elemental Change (Earth), 1018: Elemental Change (Fire), 1019: Elemental Change (Wind)
   - Command: skillid
     Help: |
-      Params: <name>
+      參數：<name>
       Look up a skill by name
   - Command: useskill
     Help: |
-      Params: <skillid> <skillv> <target>
+      參數：<skillid> <skillv> <target>
       Use a skill on target
   - Command: skilltree
     Help: |
-      Params: <skillnum> <charname>
+      參數：<skillnum> <charname>
       Prints the skill tree needed to get a skill for the target player.
   - Command: marry
     Help: |
-      Params: <player name>
+      參數：<player name>
       Marry another player.
   - Command: divorce
     Help: |
@@ -462,7 +462,7 @@ Body:
       - baselevel
       - baselvlup
     Help: |
-      Params: <number of levels>
+      參數：<number of levels>
       Raises your base level the desired number of levels.
   - Command: jlvl
     Aliases:
@@ -472,7 +472,7 @@ Body:
       - joblevel
       - joblvlup
     Help: |
-      Params: <number of levels>
+      參數：<number of levels>
       Raises your job level the desired number of levels.
   - Command: allskill
     Aliases:
@@ -483,69 +483,69 @@ Body:
       Give you all skills.
   - Command: stpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of stat points.
+      參數：<number of points> - Gives you the desired number of stat points.
   - Command: trpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of trait stat points.
+      參數：<number of points> - Gives you the desired number of trait stat points.
   - Command: skpoint
     Help: |
-      Params: <number of points> - Gives you the desired number of skill points.
+      參數：<number of points> - Gives you the desired number of skill points.
   - Command: zeny
     Help: |
-      Params: <amount> - Gives you desired amount of Zeny.
+      參數：<amount> - Gives you desired amount of Zeny.
   - Command: cash
     Help: |
-      Params: <amount> - Gives you the specified amount of cash points.
+      參數：<amount> - Gives you the specified amount of cash points.
   - Command: points
     Help: |
-      Params: <amount> - Gives you the specified amount of Kafra Points.
+      參數：<amount> - Gives you the specified amount of Kafra Points.
   - Command: str
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises STR by given amount.
   - Command: agi
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises AGI by given amount.
   - Command: dex
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises DEX by given amount.
   - Command: vit
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises VIT by given amount.
   - Command: int
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises INT by given amount.
   - Command: luk
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises LUK by given amount.
   - Command: pow
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises POW by given amount.
   - Command: sta
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises STA by given amount.
   - Command: wis
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises WIS by given amount.
   - Command: spl
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises SPL by given amount.
   - Command: con
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises CON by given amount.
   - Command: crt
     Help: |
-      Params: <amount>
+      參數：<amount>
       Raises CRT by given amount.
   - Command: allstats
     Aliases:
@@ -553,7 +553,7 @@ Body:
       - statall
       - statsall
     Help: |
-      Params: <value>
+      參數：<value>
       Adds value in all stats (maximum if no value).
   - Command: alltraits
     Aliases:
@@ -561,11 +561,11 @@ Body:
       - traitall
       - traitsall
     Help: |
-      Params: <value>
+      參數：<value>
       Adds value in all traits (maximum if no value).
   - Command: addwarp
     Help: |
-      Params: <map name> <x coord> <y coord> <NPC name>
+      參數：<map name> <x coord> <y coord> <NPC name>
   - Command: killmonster2
     Help: |
       Kills all monsters of your map (without drops).
@@ -573,26 +573,26 @@ Body:
     Aliases:
       - spawn
     Help: |
-      Params: <monster name|ID> [<number to spawn> [<desired_monster_name> [<x coord> [<y coord>]]]]
+      參數：<monster name|ID> [<number to spawn> [<desired_monster_name> [<x coord> [<y coord>]]]]
       @monster2 <desired_monster_name> <monster name|ID> [<number to spawn> [<x coord> [<y coord>]]]
       @spawn/@monster/@summon/@monster2 "desired monster name" <monster name|ID> [<number to spawn> [<x coord> [<y coord>]]]
       @spawn/@monster/@summon/@monster2 <monster name|ID> "desired monster name" [<number to spawn> [<x coord> [<y coord>]]]
       Spawns the desired monster with any desired name.
   - Command: monstersmall
     Help: |
-      Params: <monster name|ID>
+      參數：<monster name|ID>
       Spawns a smaller version of a monster.
   - Command: monsterbig
     Help: |
-      Params: <monster name|ID>
+      參數：<monster name|ID>
       Spawns a larger version of a monster.
   - Command: killmonster
     Help: |
-      Params: <map>
+      參數：<map>
       Kill all monsters of the map (they drop)
   - Command: autoloot
     Help: |
-      Params: <on|off|#>
+      參數：<on|off|#>
       Makes items go straight into your inventory.
   - Command: autotrade
     Aliases:
@@ -601,31 +601,31 @@ Body:
       Allows you to vend while you are offline.
   - Command: changegm
     Help: |
-      Params: <charname>
+      參數：<charname>
       Changes the leader of your guild (You must be guild leader)
   - Command: changeleader
     Help: |
-      Params: <charname>
+      參數：<charname>
       Changes the leader of your party (You must be party leader)
   - Command: request
     Help: |
-      Params: <message>
+      參數：<message>
       Sends a message to all connected GMs (via the gm whisper system)
   - Command: sound
     Help: |
-      Params: <path to file in data folder or GRF file>
+      參數：<path to file in data folder or GRF file>
       Plays a sound from the data folder or GRF file located on the client.
   - Command: clone
     Help: |
-      Params: <charname>
+      參數：<charname>
       Spawns a supportive clone of the given player.
   - Command: slaveclone
     Help: |
-      Params: <charname>
+      參數：<charname>
       Spawns a supportive clone of the given player that follows the creator around.
   - Command: evilclone
     Help: |
-      Params: <charname>
+      參數：<charname>
       Spawns an aggressive clone of the given player.
   - Command: changesex
     Help: |
@@ -663,17 +663,17 @@ Body:
       Opens guild storage.
   - Command: idsearch
     Help: |
-      Params: <part_of_item_name>
+      參數：<part_of_item_name>
       Search all items that name have part_of_item_name
   - Command: refine
     Help: |
-      Params: <equip position> <+/- amount>
+      參數：<equip position> <+/- amount>
   - Command: grade
     Help: |
-      Params: <equip position> <+/- amount>
+      參數：<equip position> <+/- amount>
   - Command: produce
     Help: |
-      Params: <equip name or equip ID> <element> <# of very's>
+      參數：<equip name or equip ID> <element> <# of very's>
       Element: 0=None 1=Ice 2=Earth 3=Fire 4=Wind
       You can add up to 3 Star Crumbs and 1 element
   - Command: repairall
@@ -681,11 +681,11 @@ Body:
       Repair all items of your inventory
   - Command: item
     Help: |
-      Params: <item name or ID> <quantity>
+      參數：<item name or ID> <quantity>
       Gives you the desired item.
   - Command: item2
     Help: |
-      Params: <item name or ID> <quantity> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
+      參數：<item name or ID> <quantity> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
       Gives you the desired item.
   - Command: pvpon
     Help: |
@@ -711,11 +711,11 @@ Body:
       End War of Emperium
   - Command: party
     Help: |
-      Params: <party_name>
+      參數：<party_name>
       Create a party.
   - Command: guild
     Help: |
-      Params: <guild_name>
+      參數：<guild_name>
       Create a guild.
   - Command: glvl
     Aliases:
@@ -725,47 +725,47 @@ Body:
       - guildlevel
       - guildlvlup
     Help: |
-      Params: <# of levels>
+      參數：<# of levels>
       Raise Guild by desired number of levels
   - Command: guildrecall
     Help: |
-      Params: <guild name|ID>
+      參數：<guild name|ID>
       Warps all online characters of a guild to you.
   - Command: partyrecall
     Help: |
-      Params: <party name|ID>
+      參數：<party name|ID>
       Warps all online characters of a party to you.
   - Command: petrename
     Help: |
       Re-enable pet rename
   - Command: pettalk
     Help: |
-      Params: <message>
+      參數：<message>
       Makes your pet say a message.
   - Command: petfriendly
     Help: |
-      Params: <#>
+      參數：<#>
       Set pet friendly amount (0-1000) 1000 = Max
   - Command: pethungry
     Help: |
-      Params: <#>
+      參數：<#>
       Set pet hungry amount (0-100) 100 = Max
   - Command: hatch
     Help: |
       Create a pet from your inventory eggs list.
   - Command: makeegg
     Help: |
-      Params: <pet_id>
+      參數：<pet_id>
       Gives pet egg for monster number in pet DB
   - Command: kick
     Help: |
-      Params: <char name>
+      參數：<char name>
       Kicks specified character off the server
   - Command: unjail
     Aliases:
       - discharge
     Help: |
-      Params: <char name>
+      參數：<char name>
       Discharges specified character/prisoner
   - Command: kill
     Aliases:
@@ -774,40 +774,40 @@ Body:
       Kills player.
   - Command: recall
     Help: |
-      Params: <char name>
+      參數：<char name>
       Warps target character to you.
   - Command: raise
     Aliases:
       - revive
     Help: |
-      Params: <char name>
+      參數：<char name>
       Revives target character.
   - Command: block
     Help: |
-      Params: <char name>
+      參數：<char name>
       Permanently blocks an account.
   - Command: unblock
     Help: |
-      Params: <char name>
+      參數：<char name>
       Unblocks an account.
   - Command: ban
     Aliases:
       - banish
     Help: |
-      Params: <time> <name>\n" "Temporarily ban an account.
+      參數：<time> <name>\n" "Temporarily ban an account.
       time usage: adjustment (+/- value) and element (y/a, m, d/j, h, mn, s)
       Example: @ban +1m-2mn1s-6y testplayer
   - Command: unban
     Aliases:
       - unbanish
     Help: |
-      Params: <name> - Unban a account
+      參數：<name> - Unban a account
   - Command: jail
     Help: |
-      Params: <char name> - Sends specified character in jails
+      參數：<char name> - Sends specified character in jails
   - Command: trade
     Help: |
-      Params: <char name> - Open a trade window with a another player
+      參數：<char name> - Open a trade window with a another player
   - Command: recallall
     Help: |
       Warps every character online to you.
@@ -858,39 +858,39 @@ Body:
       Makes all maps to have the leaves weather effect.
   - Command: shownpc
     Help: |
-      Params: <NPC name>
+      參數：<NPC name>
       Enable a NPC.
   - Command: hidenpc
     Help: |
-      Params: <NPC name>
+      參數：<NPC name>
       Disable a NPC.
   - Command: npcmove
     Help: |
-      Params: <x coord> <y coord> <NPC name>
+      參數：<x coord> <y coord> <NPC name>
       Move a NPC.
   - Command: loadnpc
     Help: |
-      Params: <path to script>
+      參數：<path to script>
       Load the specified script file path.
   - Command: unloadnpc
     Help: |
-      Params: <NPC name>
+      參數：<NPC name>
       Unload the specified NPC according to name.
   - Command: unloadnpcfile
     Help: |
-      Params: <path>
+      參數：<path>
       Unload the specified script file path.
   - Command: adjgroup
     Help: |
-      Params: <level> <char name>
+      參數：<level> <char name>
       Do a temporary adjustment of the group level of a player.
   - Command: addperm
     Help: |
-      Params: <permission_name>
+      參數：<permission_name>
       Temporarily add a permission to a player.
   - Command: rmvperm
     Help: |
-      Params: <permission_name>
+      參數：<permission_name>
       Temporarily remove a permission from a player.
   - Command: kickall
     Help: |
@@ -903,11 +903,11 @@ Body:
       For debugging (you inspect around gat)
   - Command: send
     Help: |
-      Params: <Hex Number> [<value>]
+      參數：<Hex Number> [<value>]
       For debugging (packet variety)
   - Command: nuke
     Help: |
-      Params: <char name>
+      參數：<char name>
       Blow somebody up, including those surrounding them.
   - Command: reloadachievementdb
     Help: |
@@ -958,7 +958,7 @@ Body:
       Reload status settings.
   - Command: reload
     Help: |
-      Params: <type>
+      參數：<type>
       Reload a database or configuration file.
       itemdb                mobdb          skilldb
       atcommand       battleconf     statusdb
@@ -967,7 +967,7 @@ Body:
       cashdb
   - Command: langtype
     Help: |
-      Params: <language>
+      參數：<language>
       Changes your language setting.
   - Command: limitedsale
     Help: |
@@ -1037,8 +1037,8 @@ Body:
       Adds a card or enchant to the specific slot of the equipment.
   - Command: bodystyle
     Help: |
-      Params: <1/0>
-      Params: off. Restores default job bodystyle.
+      參數：<1/0>
+      參數：off. Restores default job bodystyle.
       Changes the character's bodystyle to alternate kro sprite.
   - Command: resetcooltime
     Aliases:
