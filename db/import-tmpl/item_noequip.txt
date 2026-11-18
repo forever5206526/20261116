@@ -1,30 +1,30 @@
-// Forbidden Items Database
-// Defines restrictions on equipment, items, and cards in map types and zones.
+// 禁止裝備道具資料庫
+// 定義不同地圖類型與區域中的裝備、道具及卡片限制。
 //
-// Structure of Database:
+// 資料庫格式：
 // ItemID,Flag
 //
-// Legend for 'Flag' field (bitmask):
-// 1    - restricted in normal maps
-// 2    - restricted in PVP
-// 4    - restricted in GVG
-// 8    - restricted in Battlegrounds
-// Restricted zones - configured by 'restricted <number>' mapflag
-// 32   - restricted in zone 1
-// 64   - restricted in zone 2
-// 128  - restricted in zone 3
-// 256  - restricted in zone 4
-// 512  - restricted in zone 5
-// 1024 - restricted in zone 6
-// 2048 - restricted in zone 7
+// 「Flag」欄位說明（位元遮罩）：
+// 1    - 一般地圖中受限制
+// 2    - PVP 地圖中受限制
+// 4    - GVG 地圖中受限制
+// 8    - 戰場地圖中受限制
+// 限制區域：透過 'restricted <number>' 地圖旗標設定
+// 32   - 限制區域 1
+// 64   - 限制區域 2
+// 128  - 限制區域 3
+// 256  - 限制區域 4
+// 512  - 限制區域 5
+// 1024 - 限制區域 6
+// 2048 - 限制區域 7
 //
-// Passing negative value as flag will unset the flag instead.
+// Flag 設為負值時，會取消對應限制。
 //
-// Examples:
-// 1201,1   // Knife can't be worn on normal maps
-// 608,4    // Yggdrasil Seed can't be consumed in both GvG and WoE Castles
-// 4174,6   // Deviling Card has no effect in every PVP or GVG map, and during WoE
-// 501,32   // Red Potion can't be consumed on maps marked as 'restricted zone 1'
-// 519,322  // Milk can't be consumed in PVP and maps marked as 'restricted zone 2' or 'restricted zone 4' (256+64+2)
-// 519,-2   // Unset `restricted in PVP` flag from Milk. Making it usable in PVP again.
+// 範例：
+// 1201,1   // 一般地圖禁止裝備小刀
+// 608,4    // 在 GvG 與攻城戰城堡中禁止使用世界樹種子
+// 4174,6   // 在所有 PVP、GVG 地圖及攻城戰期間，幽靈波利卡片效果無效
+// 501,32   // 標記為「限制區域 1」的地圖禁止使用紅色藥水
+// 519,322  // PVP 地圖及標記為「限制區域 2」或「限制區域 4」的地圖禁止使用牛奶（256+64+2）
+// 519,-2   // Unset `PVP 地圖中受限制` flag from Milk. Making it usable in PVP again.
 
