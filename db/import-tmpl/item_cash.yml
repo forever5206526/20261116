@@ -23,9 +23,9 @@
 #
 ###########################################################################
 # - Tab                     Cash shop tab. Available tabs are New, Hot, Limited, Rental, Permanent, Scrolls, Consumables, Other, Sale.
-#   Items:                  List of possible items.
-#     - Item                Item name.
-#       Price               Item cost in cash points (#CASHPOINTS).
+#   Items:                  可購買道具清單。
+#     - Item                道具名稱。
+#       Price               道具所需的商城點數（#CASHPOINTS）。
 ###########################################################################
 
 Header:
