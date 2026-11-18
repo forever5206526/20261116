@@ -1,8 +1,8 @@
 name: Visual Studio MSBuild build (VS2019 16.11 / VS2022 / VS2026)
 
 concurrency:
-  group: \${{ github.repository }}-\${{ github.workflow }}-\${{ github.ref }}
-  cancel-in-progress: \${{ github.ref != 'refs/heads/main' }}
+  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ on:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
-    runs-on: \${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 90
     strategy:
       fail-fast: false
@@ -43,7 +43,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $vswhere = Join-Path \${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
           if (-not (Test-Path $vswhere)) { throw '找不到 Visual Studio Installer。' }
           $vsVersionText = & $vswhere -latest -products '*' -version '[16.11,)' -property installationVersion
           if (-not $vsVersionText) { throw '需要 Visual Studio 2019 16.11 或更新版本。' }
@@ -60,15 +60,15 @@ jobs:
           $solution = Join-Path $env:GITHUB_WORKSPACE 'brHades.sln'
           if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
           $defines = 'BUILDBOT'
-          if ('\${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
-          Write-Host "Configuration: \${{ matrix.configuration }}"
-          Write-Host "Platform: \${{ matrix.platform }}"
-          Write-Host "Mode: \${{ matrix.mode }}"
-          & msbuild.exe $solution /m /t:Rebuild "/p:Configuration=\${{ matrix.configuration }}" "/p:Platform=\${{ matrix.platform }}" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
+          if ('${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
+          Write-Host "Configuration: ${{ matrix.configuration }}"
+          Write-Host "Platform: ${{ matrix.platform }}"
+          Write-Host "Mode: ${{ matrix.mode }}"
+          & msbuild.exe $solution /m /t:Rebuild "/p:Configuration=${{ matrix.configuration }}" "/p:Platform=${{ matrix.platform }}" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
   build_vs2019:
-    name: VS2019 16.11 - \${{ matrix.configuration }} / \${{ matrix.mode }} / x64
+    name: VS2019 16.11 - ${{ matrix.configuration }} / ${{ matrix.mode }} / x64
     runs-on: windows-2022
     timeout-minutes: 120
     strategy:
@@ -104,7 +104,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $vswhere = Join-Path \${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
           $installationPath = & $vswhere -products '*' -version '[16.11,17.0)' -property installationPath | Select-Object -First 1
           if (-not $installationPath) { throw '找不到 Visual Studio 2019 16.11 安裝。' }
           $version = & $vswhere -products '*' -version '[16.11,17.0)' -property installationVersion | Select-Object -First 1
@@ -125,12 +125,12 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $solution = Join-Path $env:GITHUB_WORKSPACE 'brHades.sln'
-          $msbuild = '\${{ steps.vs2019.outputs.msbuild }}'
+          $msbuild = '${{ steps.vs2019.outputs.msbuild }}'
           if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
           $defines = 'BUILDBOT'
-          if ('\${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
-          Write-Host "Configuration: \${{ matrix.configuration }}"
+          if ('${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
+          Write-Host "Configuration: ${{ matrix.configuration }}"
           Write-Host "Platform: x64"
-          Write-Host "Mode: \${{ matrix.mode }}"
-          & $msbuild $solution /m /t:Rebuild "/p:Configuration=\${{ matrix.configuration }}" "/p:Platform=x64" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
+          Write-Host "Mode: ${{ matrix.mode }}"
+          & $msbuild $solution /m /t:Rebuild "/p:Configuration=${{ matrix.configuration }}" "/p:Platform=x64" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
