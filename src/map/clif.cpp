@@ -10246,24 +10246,35 @@ void clif_name( struct block_list* src, struct block_list *bl, send_target targe
 				safestrncpy( packet.position_name, md->guardian_data->castle->castle_name, NAME_LENGTH );
 
 				clif_send(&packet, sizeof(packet), src, target);
-			}else if( battle_config.show_mob_info ){
+			}else if( battle_config.show_mob_info
+#ifdef Pandas_MapFlag_MobInfo
+				|| (md->bl.m >= 0 && map_getmapflag(md->bl.m, MF_MOBINFO))
+#endif // Pandas_MapFlag_MobInfo
+				){
 				PACKET_ZC_ACK_REQNAMEALL packet = { 0 };
 
 				packet.packet_id = HEADER_ZC_ACK_REQNAMEALL;
 				packet.gid = bl->id;
 				safestrncpy( packet.name, md->name, NAME_LENGTH );
+#ifdef Pandas_MapFlag_MobInfo
+				int mob_info_option = battle_config.show_mob_info;
+				if (md->bl.m >= 0 && map_getmapflag(md->bl.m, MF_MOBINFO))
+					mob_info_option = map_getmapflag_param(md->bl.m, MF_MOBINFO, 1);
+#else
+				int mob_info_option = battle_config.show_mob_info;
+#endif // Pandas_MapFlag_MobInfo
 
 				char mobhp[50], *str_p = mobhp;
 
-				if( battle_config.show_mob_info&4 ){
+				if( mob_info_option&4 ){
 					str_p += sprintf( str_p, "Lv. %d | ", md->level );
 				}
 
-				if( battle_config.show_mob_info&1 ){
+				if( mob_info_option&1 ){
 					str_p += sprintf( str_p, "HP: %u/%u | ", md->status.hp, md->status.max_hp );
 				}
 
-				if( battle_config.show_mob_info&2 ){
+				if( mob_info_option&2 ){
 					str_p += sprintf( str_p, "HP: %u%% | ", get_percentage( md->status.hp, md->status.max_hp ) );
 				}
 

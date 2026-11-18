@@ -13589,6 +13589,12 @@ BUILDIN_FUNC(setmapflag)
 			break;
 	}
 
+#ifdef Pandas_MapFlag_MobInfo
+	if (mf == MF_MOBINFO) {
+		const int32 mob_info_option = script_hasdata(st, 4) ? script_getnum(st, 4) : 0;
+		map_setmapflag_param(m, MF_MOBINFO, 1, mob_info_option);
+	}
+#endif // Pandas_MapFlag_MobInfo
 	map_setmapflag_sub(m, static_cast<e_mapflag>(mf), true, &args);
 
 	return SCRIPT_CMD_SUCCESS;
@@ -13618,6 +13624,10 @@ BUILDIN_FUNC(removemapflag)
 
 	FETCH(4, args.flag_val);
 
+#ifdef Pandas_MapFlag_MobInfo
+	if (mf == MF_MOBINFO)
+		map_setmapflag_param(m, MF_MOBINFO, 1, 0);
+#endif // Pandas_MapFlag_MobInfo
 	map_setmapflag_sub(m, static_cast<e_mapflag>(mf), false, &args);
 
 	return SCRIPT_CMD_SUCCESS;
