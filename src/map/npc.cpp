@@ -5630,8 +5630,8 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 #ifdef Pandas_MapFlag_MobInfo
 		if (mapflag == MF_MOBINFO && state) {
 			int32 mob_info_option = 0;
-			if (w4[0] != '\\0' && sscanf(w4, "%11d", &mob_info_option) != 1) {
-				ShowError("npc_parse_mapflag: Invalid MobInfo parameter '%s'. Skipping (file '%s', line '%d').\\n",
+			if (w4[0] != '\0' && sscanf(w4, "%11d", &mob_info_option) != 1) {
+				ShowError("npc_parse_mapflag: Invalid MobInfo parameter '%s'. Skipping (file '%s', line '%d').\n",
 					w4, filepath, strline(buffer, start - buffer));
 				break;
 			}
@@ -5642,7 +5642,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 		break;
 	}
 
-	return strchr(start, '\\n');// continue
+	return strchr(start, '\n');// continue
 }
 
 /**
