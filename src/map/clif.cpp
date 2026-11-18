@@ -5313,6 +5313,14 @@ int32 clif_damage(block_list& src, block_list& dst, t_tick tick, int32 sdelay, i
 	} else {
 		p.damage = static_cast<decltype(p.damage)>( std::min( damage, static_cast<decltype(damage)>( std::numeric_limits<decltype(p.damage)>::max() ) ) );
 		p.damage2 = static_cast<decltype(p.damage2)>( std::min( damage2, static_cast<decltype(damage2)>( std::numeric_limits<decltype(p.damage2)>::max() ) ) );
+#ifdef Pandas_MapFlag_HideDamage
+		if (map_getmapflag(src.m, MF_HIDEDAMAGE)) {
+			// A negative per-hit value suppresses the damage number on the client.
+			// Keep the hit count so the animation still plays; this also hides misses.
+			p.damage = -div;
+			p.damage2 = -div;
+		}
+#endif // Pandas_MapFlag_HideDamage
 	}
 
 #if PACKETVER >= 20131223
