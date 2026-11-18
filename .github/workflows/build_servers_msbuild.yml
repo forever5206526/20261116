@@ -1,8 +1,8 @@
-name: Visual Studio MSBuild build (VS2019 16.11+ / VS2022 / VS2026)
+name: Visual Studio MSBuild build (VS2019 16.11 / VS2022 / VS2026)
 
 concurrency:
-  group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  group: \${{ github.repository }}-\${{ github.workflow }}-\${{ github.ref }}
+  cancel-in-progress: \${{ github.ref != 'refs/heads/main' }}
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ on:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, 'ci-skip')"
-    runs-on: ${{ matrix.runner }}
+    runs-on: \${{ matrix.runner }}
     timeout-minutes: 90
     strategy:
       fail-fast: false
@@ -39,11 +39,11 @@ jobs:
       - name: 設定 Visual Studio MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: 驗證 Visual Studio 2019 16.11 以上與 C++ 工具鏈
+      - name: 驗證 Visual Studio 版本與 C++ 工具鏈
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $vswhere = Join-Path \${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
           if (-not (Test-Path $vswhere)) { throw '找不到 Visual Studio Installer。' }
           $vsVersionText = & $vswhere -latest -products '*' -version '[16.11,)' -property installationVersion
           if (-not $vsVersionText) { throw '需要 Visual Studio 2019 16.11 或更新版本。' }
@@ -60,9 +60,77 @@ jobs:
           $solution = Join-Path $env:GITHUB_WORKSPACE 'brHades.sln'
           if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
           $defines = 'BUILDBOT'
-          if ('${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
-          Write-Host "Configuration: ${{ matrix.configuration }}"
-          Write-Host "Platform: ${{ matrix.platform }}"
-          Write-Host "Mode: ${{ matrix.mode }}"
-          & msbuild.exe $solution /m /t:Rebuild "/p:Configuration=${{ matrix.configuration }}" "/p:Platform=${{ matrix.platform }}" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
+          if ('\${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
+          Write-Host "Configuration: \${{ matrix.configuration }}"
+          Write-Host "Platform: \${{ matrix.platform }}"
+          Write-Host "Mode: \${{ matrix.mode }}"
+          & msbuild.exe $solution /m /t:Rebuild "/p:Configuration=\${{ matrix.configuration }}" "/p:Platform=\${{ matrix.platform }}" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+  build_vs2019:
+    name: VS2019 16.11 - \${{ matrix.configuration }} / \${{ matrix.mode }} / x64
+    runs-on: windows-2022
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+        mode: [PRE, RE]
+
+    steps:
+      - name: 取得原始碼
+        uses: actions/checkout@v4
+
+      - name: 安裝 Visual Studio 2019 16.11 C++ Build Tools
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $installer = Join-Path $env:RUNNER_TEMP 'vs_buildtools_2019.exe'
+          Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile $installer
+          $arguments = @(
+            '--quiet', '--wait', '--norestart', '--nocache',
+            '--installPath', 'C:\VS2019BuildTools',
+            '--add', 'Microsoft.VisualStudio.Workload.VCTools',
+            '--includeRecommended',
+            '--add', 'Microsoft.VisualStudio.Component.Windows10SDK.19041'
+          )
+          $process = Start-Process -FilePath $installer -ArgumentList $arguments -Wait -PassThru
+          if ($process.ExitCode -notin @(0, 3010)) {
+            throw "Visual Studio 2019 Build Tools 安裝失敗，ExitCode=$($process.ExitCode)"
+          }
+
+      - name: 驗證 VS2019 16.11 與 MSVC v142
+        id: vs2019
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $vswhere = Join-Path \${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $installationPath = & $vswhere -products '*' -version '[16.11,17.0)' -property installationPath | Select-Object -First 1
+          if (-not $installationPath) { throw '找不到 Visual Studio 2019 16.11 安裝。' }
+          $version = & $vswhere -products '*' -version '[16.11,17.0)' -property installationVersion | Select-Object -First 1
+          Write-Host "Visual Studio version: $version"
+          $msbuild = Join-Path $installationPath 'MSBuild/Current/Bin/MSBuild.exe'
+          if (-not (Test-Path $msbuild)) { throw "找不到 VS2019 MSBuild：$msbuild" }
+          $compiler = Get-ChildItem (Join-Path $installationPath 'VC/Tools/MSVC') -Filter cl.exe -Recurse |
+            Where-Object { $_.FullName -match 'Hostx64\\x64\\cl\.exe$' } |
+            Sort-Object FullName -Descending |
+            Select-Object -First 1
+          if (-not $compiler) { throw '找不到 VS2019 x64 MSVC 編譯器。' }
+          Write-Host "MSVC compiler: $($compiler.FullName)"
+          & $msbuild -version -nologo
+          "msbuild=$msbuild" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+      - name: 使用 VS2019 MSBuild 完整重建解決方案
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $solution = Join-Path $env:GITHUB_WORKSPACE 'brHades.sln'
+          $msbuild = '\${{ steps.vs2019.outputs.msbuild }}'
+          if (-not (Test-Path $solution)) { throw "找不到解決方案：$solution" }
+          $defines = 'BUILDBOT'
+          if ('\${{ matrix.mode }}' -eq 'PRE') { $defines = 'BUILDBOT%3BPRERE' }
+          Write-Host "Configuration: \${{ matrix.configuration }}"
+          Write-Host "Platform: x64"
+          Write-Host "Mode: \${{ matrix.mode }}"
+          & $msbuild $solution /m /t:Rebuild "/p:Configuration=\${{ matrix.configuration }}" "/p:Platform=x64" "/p:DefineConstants=$defines" /p:CppLanguageStandard=stdcpp20 /warnaserror /v:minimal
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
