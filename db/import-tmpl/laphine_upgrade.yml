@@ -2,37 +2,29 @@
 #   Copyright(C) 2022 rAthena Development Team
 #   https://rathena.org - https://github.com/rathena
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# 本程式為自由軟體，你可以依照自由軟體基金會發布的 GNU 通用公共授權條款
+# 第 3 版或（由你選擇）任何更新版本重新散布及／或修改本程式。
+# 本程式不提供任何明示或默示的保證，包括但不限於適售性或特定用途適用性。
+# 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Laphine Upgrade Database
+# 拉菲內升級資料庫
 ###########################################################################
 #
-# Laphine Upgrade Settings
+# 拉菲內升級設定
 #
 ###########################################################################
-# - Item                       Item that triggers Laphine Upgrade.
-#   RandomOptionGroup          Name of the random option group that will be applied. (Default: none)
-#   ResultRefine               Absolute refine level after the upgrade. (Default: none)
-#   ResultRefineMinimum        Minimum refine level after the upgrade. (Default: none)
-#   ResultRefineMaximum        Maximum refine level after the upgrade. (Default: none)
-#   MinimumRefine              Minimum refine level of the required items. (Default: 0)
-#   MaximumRefine              Maximum refine level of the required items. (Default: MAX_REFINE)
-#   RequiredRandomOptions      How many random options have to be in the item? (Default: 0)
-#   CardsAllowed               Are cards allowed in the target item? (Default: no)
-#   TargetItems:               List of possible target item(s)
-#     - Item                   Item name of the possible target item
+# - Item                       觸發拉菲內升級的道具。
+#   RandomOptionGroup          要套用的隨機附加能力群組名稱。（預設：none）
+#   ResultRefine               升級後的指定精煉等級。（預設：none）
+#   ResultRefineMinimum        升級後的最低精煉等級。（預設：none）
+#   ResultRefineMaximum        升級後的最高精煉等級。（預設：none）
+#   MinimumRefine              需求道具的最低精煉等級。（預設：0）
+#   MaximumRefine              需求道具的最高精煉等級。（預設：MAX_REFINE）
+#   RequiredRandomOptions      道具必須具有多少個隨機附加能力？（預設：0）
+#   CardsAllowed               目標道具是否允許附有卡片？（預設：no）
+#   TargetItems:               可選擇的目標道具清單。
+#     - Item                   可選擇的目標道具名稱。
 ###########################################################################
 
 Header:
