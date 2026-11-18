@@ -664,7 +664,7 @@ Body:
   - Command: idsearch
     Help: |
       參數：<part_of_item_name>
-      Search all items that name have part_of_item_name
+      搜尋名稱包含指定文字的所有物品。
   - Command: refine
     Help: |
       參數：<equip position> <+/- amount>
@@ -674,8 +674,8 @@ Body:
   - Command: produce
     Help: |
       參數：<equip name or equip ID> <element> <# of very's>
-      Element: 0=None 1=Ice 2=Earth 3=Fire 4=Wind
-      You can add up to 3 Star Crumbs and 1 element
+      屬性：0=無、1=水、2=地、3=火、4=風
+      最多可加入 3 個星星的角及 1 種屬性。
   - Command: repairall
     Help: |
       修理您背包中的所有物品。
@@ -689,26 +689,26 @@ Body:
       給予您指定的物品。
   - Command: pvpon
     Help: |
-      Enables PvP on the current map
+      在目前地圖啟用 PvP。
   - Command: pvpoff
     Help: |
-      Disables PvP on the current map
+      在目前地圖停用 PvP。
   - Command: gvgon
     Aliases:
       - gpvpon
     Help: |
-      Enables GvG on the current map
+      在目前地圖啟用 GvG。
   - Command: gvgoff
     Aliases:
       - gpvpoff
     Help: |
-      Disables GvG on the current map
+      在目前地圖停用 GvG。
   - Command: agitstart
     Help: |
-      Starts War of Emperium
+      開始 WoE（攻城戰）。
   - Command: agitend
     Help: |
-      End War of Emperium
+      結束 WoE（攻城戰）。
   - Command: party
     Help: |
       參數：<party_name>
