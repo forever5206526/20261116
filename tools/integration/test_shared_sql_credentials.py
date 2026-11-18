@@ -87,12 +87,12 @@ def main() -> None:
         if expected == 1:
             require(bool(apply_positions) and bool(connect_positions) and apply_positions[0] < connect_positions[0],
                     f"{path} {start}: shared credentials are not applied before Sql_Connect", failures)
-        require("return false" in section or "exit(EXIT_FAILURE)" in section,
-                f"{path} {start}: failed SQL authentication must block service initialization", failures)
         elif path == "src/web/web.cpp":
             require(len(apply_positions) == len(connect_positions) and
                     all(a < c for a, c in zip(apply_positions, connect_positions)),
                     "Web DB connections must each apply the shared credentials before connecting", failures)
+        require("return false" in section or "exit(EXIT_FAILURE)" in section,
+                f"{path} {start}: failed SQL authentication must block service initialization", failures)
 
     config = read("conf/inter_athena.conf")
     configured_keys = re.findall(r"^\s*(sql_(?:host|port|user|password))\s*:", config, re.MULTILINE)
