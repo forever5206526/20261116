@@ -17,7 +17,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
-| `Pandas_MapFlag_MobInfo` | mobinfo 地圖魔物資訊顯示 | 待核對；依賴 MobInfomation 拓展 |
+| `Pandas_MapFlag_MobInfo` | mobinfo 地圖魔物資訊顯示 | 待移植；依賴 Pandas_Mapflags 參數框架與 MobInfomation_Extend；brHades 目前僅有全域 show_mob_info |
 | `Pandas_MapFlag_NoAutoLoot` | 禁止地圖自動拾取 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoToken` | 禁止原地復活之證 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoCapture` | 禁止寵物捕捉 | 已移植相容別名；轉接 brHades 原生 MF_NOPETCAPTURE |
@@ -69,3 +69,13 @@ Release x64 編譯成品由 Actions artifact 保存；這些驗證不等同完�
 - PRE/RE NPC 與資料庫啟動驗證成功；HideInfo 與既有功能回歸測試成功；PRE/RE CodeQL 成功。
 - 合併後針對 main 新提交啟動的 GitHub Actions 驗證仍需另外確認，不能以合併前結果代替。
 - 13 項 HideInfo source-contract regression checks 已納入 Windows validation workflow；不等同完整遊戲客戶端實測。
+
+## MobInfo 相依盤點（2026-11-18）
+
+已核對 Pandas `develop` 與 brHades `main`：
+
+- brHades 有原生全域 `show_mob_info` 設定及魔物名稱封包顯示，但沒有 `MF_MOBINFO`、`mapflag_config`、`mapflag_values`、`map_getmapflag_param()` 或 `map_setmapflag_param()`。
+- Pandas 的 `MF_MOBINFO` 依賴 `Pandas_Mapflags` 共用參數框架；此框架涉及 `map_data` 參數儲存、參數範圍/預設值設定、地圖旗標解析、NPC mapflag 參數解析、腳本 `setmapflag` 參數、查詢/設定 API，以及相關管理指令與地圖資訊顯示。
+- Pandas 同時預設啟用 `Pandas_MobInfomation_Extend`；其 `clif_name()` 會按地圖的 `MF_MOBINFO` 參數覆寫全域 `show_mob_info`，並支援額外魔物資訊欄位。brHades 目前未找到此擴充宏。
+- 因此 MobInfo 不是單一 enum/handler 移植。應先設計並驗證共用 mapflag 參數框架，再移植 MobInfomation_Extend 與 MF_MOBINFO，最後驗證 mapflag/NPC/script/atcommand/封包路徑及 PRE/RE 建置。
+- 本次僅完成相依盤點，未修改任何 MobInfo 程式碼，亦未將其標記為完成。
