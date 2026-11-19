@@ -113,21 +113,21 @@
 #     ItemCost:               施放技能所需的道具。（預設：0）
 #       - Item                道具名稱。
 #         Amount              道具數量。
-#         Level               技能等級。 Makes the skill item check become level dependent if supplied. (Default: applies to all levels)
+#         Level               技能等級。若有提供此欄位，道具需求檢查會依技能等級判定。（預設：套用於所有等級）
 #     Equipment:              施放技能所需裝備的道具。（預設：nullptr）
 #   Unit:                     技能單位數值。（選填）
 #     Id                      技能單位 ID。
 #     AlternateId:            替代技能單位 ID。（預設：0）
 #     Layout:                 技能單位配置。（預設：0）
 #       - Level               技能等級。
-#         Size                Unit layout at specific skill level.
-#     Range:                  Skill unit range. (Default: 0)
+#         Size                指定技能等級的單位配置。
+#     Range:                  技能單位的作用範圍。（預設：0）
 #       - Level               技能等級。
-#         Size                Unit range at specific skill level.
-#     Interval                Skill unit interval in milliseconds. (Default: 0)
-#     Target                  Skill unit target type. (Default: All)
-#     Flag:                   Skill unit flags. (Default: None)
-#   Status                    Status Change that is associated to the skill. (Optional)
+#         Size                指定技能等級的作用範圍。
+#     Interval                技能單位的作用間隔，單位為毫秒。（預設：0）
+#     Target                  技能單位的目標類型。（預設：All）
+#     Flag:                   技能單位旗標。（預設：None）
+#   Status                    與此技能關聯的狀態變更。（選填）
 ###########################################################################
 
 Header:
