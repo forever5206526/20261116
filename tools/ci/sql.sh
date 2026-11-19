@@ -8,11 +8,21 @@ function aborterror {
 # Github Actions default login data
 DB_ROOT=root
 DB_ROOTPW=root
-# rAthena default MySQL data
-DB_HOST=localhost
+# Dedicated temporary MySQL account for the CI startup test.
+# Never use the public ragnarok/ragnarok defaults in automated validation.
+DB_HOST=127.0.0.1
 DB_NAME=ragnarok
-DB_USER=ragnarok
-DB_PASS=ragnarok
+DB_USER=brhades_ci
+DB_PASS="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')" || aborterror "Unable to generate a temporary SQL password."
+
+# Pass the generated credentials to the later server-startup step without
+# printing the password into the workflow log.
+if [[ -n "${GITHUB_ENV:-}" ]]; then
+	{
+		printf 'BRHADES_SQL_USER=%s\\n' "$DB_USER"
+		printf 'BRHADES_SQL_PASSWORD=%s\\n' "$DB_PASS"
+	} >> "$GITHUB_ENV" || aborterror "Unable to export temporary SQL credentials to GitHub Actions."
+fi
 
 mysql -u "$DB_ROOT" -p"$DB_ROOTPW" -e "CREATE DATABASE $DB_NAME;" || aborterror "Unable to create database."
 mysql -u "$DB_ROOT" -p"$DB_ROOTPW" "$DB_NAME" < sql-files/main.sql || aborterror "Unable to import main database."
