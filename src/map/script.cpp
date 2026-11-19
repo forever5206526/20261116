@@ -13595,7 +13595,7 @@ BUILDIN_FUNC(setmapflag)
 		if (conf != nullptr) {
 			const size_t args_count = conf->args.size();
 			if (args_count > 4) {
-				ShowError("buildin_setmapflag: Unsupported mapflag '%s' with %d arguments.\n", conf->name, args_count);
+				ShowError("buildin_setmapflag: Unsupported mapflag '%s' with %zu arguments.\n", conf->name, args_count);
 				return SCRIPT_CMD_FAILURE;
 			}
 			args.input.resize(args_count);
