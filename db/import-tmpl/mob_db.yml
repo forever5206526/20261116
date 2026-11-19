@@ -464,7 +464,7 @@ Header:
 #        StealProtected: true
 
 # 2008 年農曆新年活動魔物覆寫設定
-# Uncomment if event is enabled, as these drops modifications are nessecary.
+# 若啟用此活動，請取消此行註解；這些掉落設定的變更為必要項目。
 #=============================================================
 #  - Id: 1145
 #    AegisName: MARTIN
@@ -607,7 +607,7 @@ Header:
 #        StealProtected: true
 
 # iRO St. Patricks Day 2008 Event Monster overrides
-# Uncomment if event is enabled, as these drops modifications are nessecary.
+# 若啟用此活動，請取消此行註解；這些掉落設定的變更為必要項目。
 #=============================================================
 #  - Id: 1841
 #    AegisName: G_SNAKE_
@@ -757,7 +757,7 @@ Header:
 #        Rate: 8
 
 # iRO 2008 年聖誕節活動
-# Uncomment if event is enabled, as these drops modifications are nessecary.
+# 若啟用此活動，請取消此行註解；這些掉落設定的變更為必要項目。
 #=============================================================
 #  - Id: 1244
 #    AegisName: JAKK_XMAS
@@ -943,7 +943,7 @@ Header:
 #        StealProtected: true
 
 # iRO 2009 年萬聖節活動
-# 若啟用此活動，請取消此行註解。 Uncomment the skills for Halloween Whisper in mob_skill_db2.
+# 若啟用此活動，請取消此行註解，並在 mob_skill_db2 中取消 Halloween Whisper 的技能設定註解。
 #=============================================================
 #  - Id: 3014
 #    AegisName: HALLOWEEN_WHISPER
