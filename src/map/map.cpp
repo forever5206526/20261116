@@ -3681,6 +3681,22 @@ void map_flags_init(void) {
 		{{0, 0, 127, nullptr}}
 	});
 #endif // Pandas_MapFlag_MobInfo
+#ifdef Pandas_MapFlag_MobDroprate
+	mapflag_config.emplace(MF_MOBDROPRATE, s_mapflag_item{
+		"MobDroprate",
+		true,
+		true,
+		{{100, 0, INT_MAX, "%"}}
+	});
+#endif // Pandas_MapFlag_MobDroprate
+#ifdef Pandas_MapFlag_MvpDroprate
+	mapflag_config.emplace(MF_MVPDROPRATE, s_mapflag_item{
+		"MvpDroprate",
+		true,
+		true,
+		{{100, 0, INT_MAX, "%"}}
+	});
+#endif // Pandas_MapFlag_MvpDroprate
 #ifdef Pandas_MapFlag_HideDamage
 	mapflag_config.emplace(MF_HIDEDAMAGE, s_mapflag_item{
 		"HideDamage",
