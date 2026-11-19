@@ -4645,7 +4645,7 @@ void map_setmapflag_param(int16 m, enum e_mapflag mapflag, size_t index, int32 v
 
 	const auto& arg = conf->args[index - 1];
 	if (value < arg.min || value > arg.max) {
-		ShowWarning("map_setmapflag_param: value %d outside %d..%d for %s on %s; using default %d.\\n",
+		ShowWarning("map_setmapflag_param: value %d outside %d..%d for %s on %s; using default %d.\n",
 			value, arg.min, arg.max, conf->name, map[m].name, arg.def_val);
 		value = arg.def_val;
 	}
@@ -4688,7 +4688,7 @@ void map_setmapflag_param_reset(int16 m, enum e_mapflag mapflag)
 }
 #endif // Pandas_Mapflags
 
-int32 map_getmapflag_subint32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, pds_mapflag_args *args)
+int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, pds_mapflag_args *args)
 {
 	if (m < 0 || m >= MAX_MAP_PER_SERVER) {
 		ShowWarning("map_getmapflag: Invalid map ID %d.\n", m);
