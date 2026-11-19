@@ -46,7 +46,31 @@ CHECKS = (
 )
 
 
-def check_drop_rate_behavior(failures: list[str]) -> None:
+def check_drop_rate_configuration(failures):
+    map_source = (ROOT / "src/map/map.cpp").read_text(encoding="utf-8")
+    cases = (
+        ("Pandas_MapFlag_MobDroprate", "MF_MOBDROPRATE", "MobDroprate"),
+        ("Pandas_MapFlag_MvpDroprate", "MF_MVPDROPRATE", "MvpDroprate"),
+    )
+    for macro, mapflag, display_name in cases:
+        start = map_source.find(f"#ifdef {macro}")
+        end = map_source.find("#endif", start)
+        if start < 0 or end < 0:
+            failures.append(f"{macro}: mapflag configuration block missing")
+            continue
+        block = map_source[start:end]
+        expected_values = (
+            f"mapflag_config.emplace({mapflag}, s_mapflag_item{{",
+            f'"{display_name}"',
+            "\\n\\t\\ttrue,\\n\\t\\ttrue,",
+            '{{100, 0, INT_MAX, "%"}}',
+        )
+        for expected in expected_values:
+            if expected not in block:
+                failures.append(f"{macro}: configuration mismatch ({expected!r})")
+
+
+def check_drop_rate_behavior(failures):
     mob_source = (ROOT / "src/map/mob.cpp").read_text(encoding="utf-8")
     start = mob_source.find("int32 mob_getdroprate(")
     end = mob_source.find("\n}\n", start)
@@ -101,12 +125,13 @@ def main() -> None:
         if expected not in content:
             failures.append(f"{label}: missing {expected!r} in {relative_path}")
 
+    check_drop_rate_configuration(failures)
     check_drop_rate_behavior(failures)
 
     if failures:
         raise SystemExit("\n".join(failures))
 
-    print(f"PASS: {len(CHECKS) + 7} generic mapflag parameter, MobInfo, and MobDroprate/MvpDroprate source-contract checks")
+    print("PASS: generic mapflag parameter, MobInfo, and MobDroprate/MvpDroprate source-contract checks")
 
 
 if __name__ == "__main__":
