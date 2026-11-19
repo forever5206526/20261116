@@ -19,8 +19,8 @@ DB_PASS="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')" || abo
 # printing the password into the workflow log.
 if [[ -n "${GITHUB_ENV:-}" ]]; then
 	{
-		printf 'BRHADES_SQL_USER=%s\\n' "$DB_USER"
-		printf 'BRHADES_SQL_PASSWORD=%s\\n' "$DB_PASS"
+		echo "BRHADES_SQL_USER=$DB_USER"
+		echo "BRHADES_SQL_PASSWORD=$DB_PASS"
 	} >> "$GITHUB_ENV" || aborterror "Unable to export temporary SQL credentials to GitHub Actions."
 fi
 
