@@ -1,55 +1,11 @@
 # SQL Imports
 
-## 啟動端 SQL 憑證安全設定（必讀）
+## 啟動端 SQL 憑證安全設定
 
-本專案不再提供可直接登入的 MySQL 預設帳密。請勿使用遊戲玩家帳號作為資料庫帳號，也不要使用 MySQL 管理員帳號（例如 root）執行遊戲伺服器。
-
-- `conf/inter_athena.conf` 的 `sql_user` 與 `sql_password` 預設留白，必須自行設定。
-- 伺服器會拒絕空白帳密，以及公開的預設組合 `ragnarok/ragnarok`；舊設定檔即使仍保留該組合也無法通過連線檢查。
-- 請使用專用資料庫帳號、唯一且足夠長的隨機密碼，並限制帳號只能從資料庫主機本機或指定的應用程式主機連線。
-- 不要將真實密碼提交到 Git，也不要將 MySQL 帳號授權給任意來源主機（例如 `%`）。
-
-### 建立專用資料庫帳號
-
-以下範例假設遊戲資料庫名稱為 `ragnarok`，資料庫與遊戲伺服器位於同一台主機。請先以 MySQL 管理員執行，並將範例密碼換成自行產生的唯一隨機密碼（不可直接使用範例字串）：
-
-```sql
-CREATE USER 'brhades_srv'@'127.0.0.1'
-  IDENTIFIED BY 'REPLACE_WITH_A_UNIQUE_RANDOM_PASSWORD';
-
-GRANT SELECT, INSERT, UPDATE, DELETE
-  ON `ragnarok`.*
-  TO 'brhades_srv'@'127.0.0.1';
-```
-
-若 `log_db_db` 使用另一個資料庫（例如 `log`），也只對該資料庫授予伺服器實際需要的權限：
-
-```sql
-GRANT SELECT, INSERT, UPDATE, DELETE
-  ON `log`.*
-  TO 'brhades_srv'@'127.0.0.1';
-```
-
-接著將 `conf/inter_athena.conf` 設定為：
-
-```ini
-sql_user: brhades_srv
-sql_password: 你自行產生的唯一隨機密碼
-```
-
-如果資料庫位於另一台主機，請將 MySQL 帳號的 Host 限制為該應用程式主機的固定 IP，並同步調整 `sql_host`；不要使用萬用 Host。資料表初次建立與升級需要的 DDL 權限，應由管理員另行執行，不應長期授予遊戲伺服器帳號。
-
-### 處理舊的公開預設帳號
-
-若曾經使用 `ragnarok/ragnarok`，請先查看資料庫實際存在的帳號與 Host：
-
-```sql
-SELECT User, Host
-FROM mysql.user
-WHERE User = 'ragnarok';
-```
-
-將查出的每個相關帳號逐一確認。若仍有服務使用，先替該帳號更換唯一密碼並收回不必要的全域權限；若已無服務使用，應在確認無相依服務後刪除該帳號。不要假設 Host 一定是 `localhost` 或 `127.0.0.1`，也不要在未檢查授權前直接刪除共用帳號。
+- 啟動端不再內建 `ragnarok` 作為 SQL 使用者名稱；登入、角色、地圖及記錄服務均不會自動套用公開預設帳密。
+- `conf/inter_athena.conf` 的 `sql_user` 與 `sql_password` 留白時，不會被解讀為可用的預設憑證；若沒有有效的共用或舊版服務專用設定，SQL 連線會在連線前被拒絕並提示設定憑證。
+- 公開組合 `ragnarok/ragnarok` 會在啟動端被拒絕，即使舊設定檔仍保留這組帳密也不會拿來連線。
+- 真正的資料庫帳號、密碼及授權仍由管理者自行管理；本程式修正不會自行建立、刪除或修改 MySQL 使用者。
 
 ## Explanation of SQL import files
 
