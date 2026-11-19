@@ -551,6 +551,12 @@
 #ifdef Pandas_MapFlag_NoMerc
 	export_constant(MF_NOMERC);
 #endif // Pandas_MapFlag_NoMerc
+#ifdef Pandas_MapFlag_MobDroprate
+	export_constant(MF_MOBDROPRATE);
+#endif // Pandas_MapFlag_MobDroprate
+#ifdef Pandas_MapFlag_MvpDroprate
+	export_constant(MF_MVPDROPRATE);
+#endif // Pandas_MapFlag_MvpDroprate
 #ifdef Pandas_MapFlag_NoAutoLoot
 	export_constant(MF_NOAUTOLOOT);
 #endif // Pandas_MapFlag_NoAutoLoot
