@@ -5313,6 +5313,12 @@ int32 clif_damage(block_list& src, block_list& dst, t_tick tick, int32 sdelay, i
 	} else {
 		p.damage = static_cast<decltype(p.damage)>( std::min( damage, static_cast<decltype(damage)>( std::numeric_limits<decltype(p.damage)>::max() ) ) );
 		p.damage2 = static_cast<decltype(p.damage2)>( std::min( damage2, static_cast<decltype(damage2)>( std::numeric_limits<decltype(p.damage2)>::max() ) ) );
+#ifdef Pandas_MapFlag_HideDamage
+		if (map_getmapflag(src.m, MF_HIDEDAMAGE)) {
+			p.damage = -div;
+			p.damage2 = -div;
+		}
+#endif // Pandas_MapFlag_HideDamage
 	}
 
 #if PACKETVER >= 20131223
@@ -6184,6 +6190,10 @@ int32 clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tic
 	}
 	WBUFW(buf,26)=skill_lv;
 	WBUFW(buf,28)=div;
+#ifdef Pandas_MapFlag_HideDamage
+	if (map_getmapflag(src->m, MF_HIDEDAMAGE))
+		WBUFW(buf,28) = static_cast<uint16>(-div);
+#endif // Pandas_MapFlag_HideDamage
 	WBUFB(buf,30)=type;
 	if (disguised(dst)) {
 		clif_send(buf,packet_len(0x114),dst,AREA_WOS);
@@ -6215,6 +6225,10 @@ int32 clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tic
 	}
 	WBUFW(buf,28)=skill_lv;
 	WBUFW(buf,30)=div;
+#ifdef Pandas_MapFlag_HideDamage
+	if (map_getmapflag(src->m, MF_HIDEDAMAGE))
+		WBUFW(buf,30) = static_cast<uint16>(-div);
+#endif // Pandas_MapFlag_HideDamage
 	// For some reason, late 2013 and newer clients have
 	// a issue that causes players and monsters to endure
 	// type 6 (ACTION_SKILL) skills. So we have to do a small

@@ -67,3 +67,6 @@ jobs:
 
       - name: MobInfo mapflag regression test
         run: python tools/integration/test_mobinfo_mapflag.py
+
+      - name: HideDamage mapflag regression test
+        run: python tools/integration/test_hidedamage_mapflag.py

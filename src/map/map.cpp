@@ -3681,6 +3681,14 @@ void map_flags_init(void) {
 		{{0, 0, 127, nullptr}}
 	});
 #endif // Pandas_MapFlag_MobInfo
+#ifdef Pandas_MapFlag_HideDamage
+	mapflag_config.emplace(MF_HIDEDAMAGE, s_mapflag_item{
+		"HideDamage",
+		false,
+		false,
+		{}
+	});
+#endif // Pandas_MapFlag_HideDamage
 #endif // Pandas_Mapflags
 	for (int i = 0; i < map_num; i++) {
 		struct map_data* mapdata = &map[i];
