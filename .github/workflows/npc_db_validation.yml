@@ -120,7 +120,7 @@ jobs:
             & mysql.exe -h 127.0.0.1 -u brhades_batch_ci ragnarok_batch_test -e 'SELECT COUNT(*) FROM login;'
             if ($LASTEXITCODE -ne 0) { throw 'The generated database account could not read the imported login table.' }
             $env:MYSQL_PWD = 'root'
-            $grants = & mysql.exe -h 127.0.0.1 -u root -e "SHOW GRANTS FOR 'brhades_batch_ci'@'127.0.0.1';"
+            $grants = & mysql.exe -u root -e "SHOW GRANTS FOR 'brhades_batch_ci'@'127.0.0.1';"
             if ($LASTEXITCODE -ne 0) { throw 'Unable to inspect the Windows batch helper database grants.' }
             $grantText = $grants -join "`n"
             if ($grantText -notmatch 'SELECT, INSERT, UPDATE, DELETE') { throw 'The batch helper did not grant the expected database permissions.' }
@@ -128,7 +128,7 @@ jobs:
             Write-Host 'PASS: Windows sql.bat imported the schema, created a usable account and granted only the expected permissions.'
           } finally {
             $env:MYSQL_PWD = 'root'
-            & mysql.exe -h 127.0.0.1 -u root -e "DROP USER IF EXISTS 'brhades_batch_ci'@'127.0.0.1'; DROP DATABASE IF EXISTS ragnarok_batch_test;"
+            & mysql.exe -u root -e "DROP USER IF EXISTS 'brhades_batch_ci'@'127.0.0.1'; DROP DATABASE IF EXISTS ragnarok_batch_test;"
             if ($LASTEXITCODE -ne 0) { Write-Warning 'Windows SQL helper test cleanup reported a database cleanup error.' }
           }
 
