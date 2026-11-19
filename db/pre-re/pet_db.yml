@@ -38,7 +38,7 @@
 #   Evolution:               寵物進化設定。（選填；預設：null）
 #     - Target               此寵物可進化成的魔物。
 #       ItemRequirements:      此寵物進化所需的道具。
-#         - Item               Self-explanatory
+#         - Item               道具欄位，其用途由欄位名稱即可辨識。
 #           Amount
 ###########################################################################
 
@@ -516,8 +516,8 @@ Body:
         bonus2 bSubRace,RC_DemiHuman,1;
         bonus2 bSubRace,RC_Player_Human,1;
       }
-# On official pre-renewal servers, only CHUNG_E (1519) was tameable.
-# Uncomment the following lines to enable CHUNG_E_ (1631) too.
+# 官方 Pre-Renewal 伺服器中，只有 CHUNG_E（1519）可被馴服。
+# 取消以下各行的註解，也可啟用 CHUNG_E_（1631）。
 #  - Mob: CHUNG_E_
 #    TameItem: Tantanmen
 #    EggItem: Chung_E_Egg

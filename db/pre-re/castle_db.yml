@@ -8,13 +8,13 @@
 # 詳情請參閱 GNU 通用公共授權條款：<http://www.gnu.org/licenses/>。
 #
 ###########################################################################
-# Guild Castles Database
+# 公會城堡資料庫
 ###########################################################################
 #
-# Guild Castles Settings
+# 公會城堡設定
 #
 ###########################################################################
-# - Id                Unique ID of the castle.
+# - Id                城堡的唯一識別碼。
 #   Map               作為城堡地圖的地圖名稱。
 #   Name              城堡名稱（供腳本及守護者名稱標籤使用）。
 #   Npc               公會解散期間，已佔領城堡遭到放棄時，要呼叫 ::OnGuildBreak 的 NPC 唯一名稱。
@@ -32,7 +32,7 @@ Header:
   Version: 2
 
 Body:
-# WOE FE castle
+# WoE FE 城堡
   - Id: 0
     Map: aldeg_cas01
     Name: Neuschwanstein
@@ -174,7 +174,7 @@ Body:
     Type: First_Edition
     ClientId: 5
 
-# WOE NGuild castle
+# WoE NGuild 城堡
   - Id: 20
     Map: nguild_alde
     Name: Earth
@@ -196,7 +196,7 @@ Body:
     Npc: Agit_N04
     Type: First_Edition
 
-# WOE SE castle
+# WoE SE 城堡
   - Id: 24
     Map: schg_cas01
     Name: Himinn

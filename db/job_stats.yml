@@ -74,30 +74,30 @@ Header:
 
 Footer:
   Imports:
-  # Load base information first
+  # 先載入基礎資料。
   - Path: db/pre-re/job_stats.yml
     Mode: Prerenewal
   - Path: db/re/job_stats.yml
     Mode: Renewal
 
-  # Next, populate with ASPD information
-  # If RENEWAL is defined and RENEWAL_ASPD is not defined then the pre-renewal file is loaded
+  # 接著載入 ASPD 相關資料。
+  # 若已定義 RENEWAL 且未定義 RENEWAL_ASPD，則載入 Pre-Renewal 檔案。
   - Path: db/pre-re/job_aspd.yml
     Mode: Prerenewal
   - Path: db/re/job_aspd.yml
     Mode: Renewal
 
-  # Next, populate with experience information
+  # 接著載入經驗值相關資料。
   - Path: db/pre-re/job_exp.yml
     Mode: Prerenewal
   - Path: db/re/job_exp.yml
     Mode: Renewal
 
-  # Next, populate HP/SP/AP information
+  # 接著載入 HP／SP／AP 相關資料。
   - Path: db/pre-re/job_basepoints.yml
     Mode: Prerenewal
   - Path: db/re/job_basepoints.yml
     Mode: Renewal
 
-  # Finally, import custom information
+  # 最後載入自訂資料。
   - Path: db/import/job_stats.yml
