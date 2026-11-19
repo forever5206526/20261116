@@ -13473,7 +13473,7 @@ BUILDIN_FUNC(setmapflagnosave)
 	int16 m,x,y;
 	unsigned short mapindex;
 	const char *str,*str2;
-	union u_mapflag_args args = {};
+	pds_mapflag_args args = {};
 
 	str=script_getstr(st,2);
 	str2=script_getstr(st,3);
@@ -13516,7 +13516,7 @@ BUILDIN_FUNC(getmapflag)
 		return SCRIPT_CMD_FAILURE;
 	}
 
-	union u_mapflag_args args = {};
+	pds_mapflag_args args = {};
 
 	if (mf == MF_SKILL_DAMAGE && !script_hasdata(st, 4))
 		args.flag_val = SKILLDMG_MAX;
@@ -13549,7 +13549,7 @@ BUILDIN_FUNC(setmapflag)
 		return SCRIPT_CMD_FAILURE;
 	}
 
-	union u_mapflag_args args = {};
+	pds_mapflag_args args = {};
 
 	switch(mf) {
 		case MF_SKILL_DAMAGE:
@@ -13589,12 +13589,29 @@ BUILDIN_FUNC(setmapflag)
 			break;
 	}
 
-#ifdef Pandas_MapFlag_MobInfo
-	if (mf == MF_MOBINFO) {
-		const int32 mob_info_option = script_hasdata(st, 4) ? script_getnum(st, 4) : 0;
-		map_setmapflag_param(m, MF_MOBINFO, 1, mob_info_option);
+#ifdef Pandas_Mapflags
+	{
+		const auto* conf = util::umap_find(mapflag_config, static_cast<e_mapflag>(mf));
+		if (conf != nullptr) {
+			const size_t args_count = conf->args.size();
+			if (args_count > 4) {
+				ShowError("buildin_setmapflag: Unsupported mapflag '%s' with %zu arguments.\n", conf->name, args_count);
+				return SCRIPT_CMD_FAILURE;
+			}
+			args.input.resize(args_count);
+			for (size_t i = 0; i < args_count; ++i)
+				args.input[i] = conf->args[i].def_val;
+			if (args_count > 0 && script_hasdata(st, 4))
+				args.input[0] = script_getnum(st, 4);
+			if (args_count > 1 && script_hasdata(st, 5))
+				args.input[1] = script_getnum(st, 5);
+			if (args_count > 2 && script_hasdata(st, 6))
+				args.input[2] = script_getnum(st, 6);
+			if (args_count > 3 && script_hasdata(st, 7))
+				args.input[3] = script_getnum(st, 7);
+		}
 	}
-#endif // Pandas_MapFlag_MobInfo
+#endif // Pandas_Mapflags
 	map_setmapflag_sub(m, static_cast<e_mapflag>(mf), true, &args);
 
 	return SCRIPT_CMD_SUCCESS;
@@ -13605,7 +13622,7 @@ BUILDIN_FUNC(removemapflag)
 	int16 m;
 	int32 mf;
 	const char *str;
-	union u_mapflag_args args = {};
+	pds_mapflag_args args = {};
 
 	str = script_getstr(st, 2);
 	m = map_mapname2mapid(str);
@@ -13624,10 +13641,7 @@ BUILDIN_FUNC(removemapflag)
 
 	FETCH(4, args.flag_val);
 
-#ifdef Pandas_MapFlag_MobInfo
-	if (mf == MF_MOBINFO)
-		map_setmapflag_param(m, MF_MOBINFO, 1, 0);
-#endif // Pandas_MapFlag_MobInfo
+
 	map_setmapflag_sub(m, static_cast<e_mapflag>(mf), false, &args);
 
 	return SCRIPT_CMD_SUCCESS;
