@@ -49,7 +49,7 @@ Sql* sql_handle = nullptr;	///Link to mysql db, connection FD
 
 int32 char_server_port = 3306;
 std::string char_server_ip = "127.0.0.1";
-std::string char_server_id = "ragnarok";
+std::string char_server_id = "";
 std::string char_server_pw = ""; // Allow user to send empty password (bugreport:7787)
 std::string char_server_db = "ragnarok";
 uint32 party_share_level = 10;
@@ -848,8 +848,15 @@ int32 inter_config_read(const char* cfgName)
 		if (line[0] == '/' && line[1] == '/')
 			continue;
 
-		if (sscanf(line, "%23[^:]: %1023[^\r\n]", w1, w2) != 2)
+		const int parsed = sscanf(line, "%23[^:]: %1023[^\r\n]", w1, w2);
+		if (parsed < 1)
 			continue;
+		if (parsed == 1) {
+			// Preserve explicitly empty shared SQL keys without treating them as missing.
+			if (Sql_ConfigRead(w1, ""))
+				continue;
+			continue;
+		}
 
 		if (Sql_ConfigRead(w1, w2))
 			continue;
