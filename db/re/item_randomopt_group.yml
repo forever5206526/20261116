@@ -4292,7 +4292,7 @@ Body:
             MinValue: 3
             MaxValue: 5
             Chance: 4500
-          # Rand (1)
+          # 隨機選項 (1)
           - Option: VAR_ATKPERCENT
             MinValue: 2
             MaxValue: 3
