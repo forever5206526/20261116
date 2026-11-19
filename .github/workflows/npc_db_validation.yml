@@ -97,6 +97,329 @@ jobs:
         shell: bash
         run: bash tools/ci/sql.sh
 
+      - name: Configure temporary SQL credentials for server startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $user = $env:BRHADES_SQL_USER
+          $password = $env:BRHADES_SQL_PASSWORD
+          if ([string]::IsNullOrWhiteSpace($user) -or [string]::IsNullOrWhiteSpace($password)) {
+            throw 'The temporary CI SQL account was not exported by tools/ci/sql.sh.'
+          }
+          if ($user -eq 'ragnarok' -and $password -eq 'ragnarok') {
+            throw 'The public default SQL credentials must never be used in startup validation.'
+          }
+
+          $configPath = Join-Path $PWD 'conf/inter_athena.conf'
+          $content = [System.IO.File]::ReadAllText($configPath)
+          foreach ($key in @('sql_user', 'sql_password')) {
+            $pattern = '(?m)^' + [regex]::Escape($key) + ':[^\\r\\n]*
+        shell: bash
+        run: bash tools/ci/npc.sh
+
+      - name: Verify and stage map-server runtime DLL dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $runtimeDlls = @(
+            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' },
+            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' },
+            @{ Name = 'zlib.dll'; Source = '3rdparty/zlib/lib/x64/zlib.dll' }
+          )
+          foreach ($dll in $runtimeDlls) {
+            if (-not (Test-Path $dll.Source)) {
+              throw "Required runtime DLL source is missing: $($dll.Source)"
+            }
+            Copy-Item -LiteralPath $dll.Source -Destination (Join-Path $PWD $dll.Name) -Force
+            if (-not (Test-Path (Join-Path $PWD $dll.Name))) {
+              throw "Failed to stage runtime DLL: $($dll.Name)"
+            }
+            Write-Host "Staged $($dll.Name)"
+          }
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe was not found on the Visual Studio runner.' }
+          $vsPath = & $vswhere -latest -property installationPath
+          if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Could not locate the Visual Studio installation.' }
+          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe') -ErrorAction Stop |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
+          foreach ($binary in @('map-server.exe', 'libmysql.dll', 'pcre8.dll', 'zlib.dll')) {
+            Write-Host "===== Native dependencies: $binary ====="
+            & $dumpbin.FullName /dependents $binary
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $mysqlBin = 'C:/Program Files/MySQL/MySQL Server 8.0/bin'
+          if (Test-Path $mysqlBin) {
+            Write-Host 'MySQL server runtime DLL inventory:'
+            Get-ChildItem -Path $mysqlBin -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+          }
+          Write-Host 'Application runtime DLL inventory:'
+          Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+
+      - name: Run map-server NPC and database startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $processes = @()
+          $loginOut = Join-Path $env:RUNNER_TEMP 'login-server.stdout.log'
+          $loginErr = Join-Path $env:RUNNER_TEMP 'login-server.stderr.log'
+          $charOut = Join-Path $env:RUNNER_TEMP 'char-server.stdout.log'
+          $charErr = Join-Path $env:RUNNER_TEMP 'char-server.stderr.log'
+          $mapOut = Join-Path $env:RUNNER_TEMP 'map-server.stdout.log'
+          $mapErr = Join-Path $env:RUNNER_TEMP 'map-server.stderr.log'
+
+          function Wait-ForServerPort([int]$port, $process, [string]$serverName) {
+            $deadline = (Get-Date).AddSeconds(45)
+            while ((Get-Date) -lt $deadline) {
+              if ($process.HasExited) {
+                throw "$serverName exited early with code $($process.ExitCode)."
+              }
+              if (Test-NetConnection -ComputerName 127.0.0.1 -Port $port -InformationLevel Quiet -WarningAction SilentlyContinue) {
+                return
+              }
+              Start-Sleep -Seconds 1
+            }
+            throw "$serverName did not open TCP port $port within 45 seconds."
+          }
+
+          try {
+            $login = Start-Process -FilePath '.\\login-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $loginOut -RedirectStandardError $loginErr
+            $processes += $login
+            Wait-ForServerPort 6900 $login 'login-server'
+
+            $char = Start-Process -FilePath '.\\char-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $charOut -RedirectStandardError $charErr
+            $processes += $char
+            Wait-ForServerPort 6121 $char 'char-server'
+
+            $map = Start-Process -FilePath '.\\map-server.exe' -ArgumentList '--run-once' -PassThru -Wait -NoNewWindow -RedirectStandardOutput $mapOut -RedirectStandardError $mapErr
+            if (Test-Path $mapOut) { Get-Content $mapOut }
+            if (Test-Path $mapErr) { Get-Content $mapErr }
+            if ($map.ExitCode -ne 0) { throw "map-server --run-once exited with code $($map.ExitCode)." }
+          }
+          catch {
+            foreach ($log in @($loginOut, $loginErr, $charOut, $charErr, $mapOut, $mapErr)) {
+              if (Test-Path $log) {
+                Write-Host "===== $log ====="
+                Get-Content $log
+              }
+            }
+            throw
+          }
+          finally {
+            foreach ($process in $processes) {
+              if (-not $process.HasExited) {
+                Stop-Process -Id $process.Id -Force
+              }
+            }
+          }
+
+            if ([regex]::Matches($content, $pattern).Count -ne 1) {
+              throw "Expected exactly one $key setting in conf/inter_athena.conf."
+            }
+          }
+          $content = [regex]::Replace($content, '(?m)^sql_user:[^\\r\\n]*
+        shell: bash
+        run: bash tools/ci/npc.sh
+
+      - name: Verify and stage map-server runtime DLL dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $runtimeDlls = @(
+            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' },
+            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' },
+            @{ Name = 'zlib.dll'; Source = '3rdparty/zlib/lib/x64/zlib.dll' }
+          )
+          foreach ($dll in $runtimeDlls) {
+            if (-not (Test-Path $dll.Source)) {
+              throw "Required runtime DLL source is missing: $($dll.Source)"
+            }
+            Copy-Item -LiteralPath $dll.Source -Destination (Join-Path $PWD $dll.Name) -Force
+            if (-not (Test-Path (Join-Path $PWD $dll.Name))) {
+              throw "Failed to stage runtime DLL: $($dll.Name)"
+            }
+            Write-Host "Staged $($dll.Name)"
+          }
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe was not found on the Visual Studio runner.' }
+          $vsPath = & $vswhere -latest -property installationPath
+          if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Could not locate the Visual Studio installation.' }
+          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe') -ErrorAction Stop |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
+          foreach ($binary in @('map-server.exe', 'libmysql.dll', 'pcre8.dll', 'zlib.dll')) {
+            Write-Host "===== Native dependencies: $binary ====="
+            & $dumpbin.FullName /dependents $binary
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $mysqlBin = 'C:/Program Files/MySQL/MySQL Server 8.0/bin'
+          if (Test-Path $mysqlBin) {
+            Write-Host 'MySQL server runtime DLL inventory:'
+            Get-ChildItem -Path $mysqlBin -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+          }
+          Write-Host 'Application runtime DLL inventory:'
+          Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+
+      - name: Run map-server NPC and database startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $processes = @()
+          $loginOut = Join-Path $env:RUNNER_TEMP 'login-server.stdout.log'
+          $loginErr = Join-Path $env:RUNNER_TEMP 'login-server.stderr.log'
+          $charOut = Join-Path $env:RUNNER_TEMP 'char-server.stdout.log'
+          $charErr = Join-Path $env:RUNNER_TEMP 'char-server.stderr.log'
+          $mapOut = Join-Path $env:RUNNER_TEMP 'map-server.stdout.log'
+          $mapErr = Join-Path $env:RUNNER_TEMP 'map-server.stderr.log'
+
+          function Wait-ForServerPort([int]$port, $process, [string]$serverName) {
+            $deadline = (Get-Date).AddSeconds(45)
+            while ((Get-Date) -lt $deadline) {
+              if ($process.HasExited) {
+                throw "$serverName exited early with code $($process.ExitCode)."
+              }
+              if (Test-NetConnection -ComputerName 127.0.0.1 -Port $port -InformationLevel Quiet -WarningAction SilentlyContinue) {
+                return
+              }
+              Start-Sleep -Seconds 1
+            }
+            throw "$serverName did not open TCP port $port within 45 seconds."
+          }
+
+          try {
+            $login = Start-Process -FilePath '.\\login-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $loginOut -RedirectStandardError $loginErr
+            $processes += $login
+            Wait-ForServerPort 6900 $login 'login-server'
+
+            $char = Start-Process -FilePath '.\\char-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $charOut -RedirectStandardError $charErr
+            $processes += $char
+            Wait-ForServerPort 6121 $char 'char-server'
+
+            $map = Start-Process -FilePath '.\\map-server.exe' -ArgumentList '--run-once' -PassThru -Wait -NoNewWindow -RedirectStandardOutput $mapOut -RedirectStandardError $mapErr
+            if (Test-Path $mapOut) { Get-Content $mapOut }
+            if (Test-Path $mapErr) { Get-Content $mapErr }
+            if ($map.ExitCode -ne 0) { throw "map-server --run-once exited with code $($map.ExitCode)." }
+          }
+          catch {
+            foreach ($log in @($loginOut, $loginErr, $charOut, $charErr, $mapOut, $mapErr)) {
+              if (Test-Path $log) {
+                Write-Host "===== $log ====="
+                Get-Content $log
+              }
+            }
+            throw
+          }
+          finally {
+            foreach ($process in $processes) {
+              if (-not $process.HasExited) {
+                Stop-Process -Id $process.Id -Force
+              }
+            }
+          }
+, ('sql_user: ' + $user))
+          $content = [regex]::Replace($content, '(?m)^sql_password:[^\\r\\n]*
+        shell: bash
+        run: bash tools/ci/npc.sh
+
+      - name: Verify and stage map-server runtime DLL dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $runtimeDlls = @(
+            @{ Name = 'libmysql.dll'; Source = '3rdparty/mysql/lib/x64/libmysql.dll' },
+            @{ Name = 'pcre8.dll'; Source = '3rdparty/pcre/lib/x64/pcre8.dll' },
+            @{ Name = 'zlib.dll'; Source = '3rdparty/zlib/lib/x64/zlib.dll' }
+          )
+          foreach ($dll in $runtimeDlls) {
+            if (-not (Test-Path $dll.Source)) {
+              throw "Required runtime DLL source is missing: $($dll.Source)"
+            }
+            Copy-Item -LiteralPath $dll.Source -Destination (Join-Path $PWD $dll.Name) -Force
+            if (-not (Test-Path (Join-Path $PWD $dll.Name))) {
+              throw "Failed to stage runtime DLL: $($dll.Name)"
+            }
+            Write-Host "Staged $($dll.Name)"
+          }
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe was not found on the Visual Studio runner.' }
+          $vsPath = & $vswhere -latest -property installationPath
+          if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Could not locate the Visual Studio installation.' }
+          $dumpbin = Get-ChildItem -Path (Join-Path $vsPath 'VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe') -ErrorAction Stop |
+            Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $dumpbin) { throw 'Visual C++ dumpbin.exe was not found.' }
+          foreach ($binary in @('map-server.exe', 'libmysql.dll', 'pcre8.dll', 'zlib.dll')) {
+            Write-Host "===== Native dependencies: $binary ====="
+            & $dumpbin.FullName /dependents $binary
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          $mysqlBin = 'C:/Program Files/MySQL/MySQL Server 8.0/bin'
+          if (Test-Path $mysqlBin) {
+            Write-Host 'MySQL server runtime DLL inventory:'
+            Get-ChildItem -Path $mysqlBin -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+          }
+          Write-Host 'Application runtime DLL inventory:'
+          Get-ChildItem -Path . -Filter '*.dll' | Select-Object Name,Length | Format-Table -AutoSize
+
+      - name: Run map-server NPC and database startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $processes = @()
+          $loginOut = Join-Path $env:RUNNER_TEMP 'login-server.stdout.log'
+          $loginErr = Join-Path $env:RUNNER_TEMP 'login-server.stderr.log'
+          $charOut = Join-Path $env:RUNNER_TEMP 'char-server.stdout.log'
+          $charErr = Join-Path $env:RUNNER_TEMP 'char-server.stderr.log'
+          $mapOut = Join-Path $env:RUNNER_TEMP 'map-server.stdout.log'
+          $mapErr = Join-Path $env:RUNNER_TEMP 'map-server.stderr.log'
+
+          function Wait-ForServerPort([int]$port, $process, [string]$serverName) {
+            $deadline = (Get-Date).AddSeconds(45)
+            while ((Get-Date) -lt $deadline) {
+              if ($process.HasExited) {
+                throw "$serverName exited early with code $($process.ExitCode)."
+              }
+              if (Test-NetConnection -ComputerName 127.0.0.1 -Port $port -InformationLevel Quiet -WarningAction SilentlyContinue) {
+                return
+              }
+              Start-Sleep -Seconds 1
+            }
+            throw "$serverName did not open TCP port $port within 45 seconds."
+          }
+
+          try {
+            $login = Start-Process -FilePath '.\\login-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $loginOut -RedirectStandardError $loginErr
+            $processes += $login
+            Wait-ForServerPort 6900 $login 'login-server'
+
+            $char = Start-Process -FilePath '.\\char-server.exe' -PassThru -NoNewWindow -RedirectStandardOutput $charOut -RedirectStandardError $charErr
+            $processes += $char
+            Wait-ForServerPort 6121 $char 'char-server'
+
+            $map = Start-Process -FilePath '.\\map-server.exe' -ArgumentList '--run-once' -PassThru -Wait -NoNewWindow -RedirectStandardOutput $mapOut -RedirectStandardError $mapErr
+            if (Test-Path $mapOut) { Get-Content $mapOut }
+            if (Test-Path $mapErr) { Get-Content $mapErr }
+            if ($map.ExitCode -ne 0) { throw "map-server --run-once exited with code $($map.ExitCode)." }
+          }
+          catch {
+            foreach ($log in @($loginOut, $loginErr, $charOut, $charErr, $mapOut, $mapErr)) {
+              if (Test-Path $log) {
+                Write-Host "===== $log ====="
+                Get-Content $log
+              }
+            }
+            throw
+          }
+          finally {
+            foreach ($process in $processes) {
+              if (-not $process.HasExited) {
+                Stop-Process -Id $process.Id -Force
+              }
+            }
+          }
+, ('sql_password: ' + $password))
+          [System.IO.File]::WriteAllText($configPath, $content, [System.Text.UTF8Encoding]::new($false))
+          Write-Host 'Configured the dedicated temporary CI SQL account without exposing its password.'
+
       - name: Enable custom and test NPC scripts
         shell: bash
         run: bash tools/ci/npc.sh
