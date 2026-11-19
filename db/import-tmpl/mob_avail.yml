@@ -35,22 +35,22 @@ Header:
   Type: MOB_AVAIL_DB
   Version: 1
 
-#Body:
-  # Examples
+# 資料內容：
+  # 範例
 #  - Mob: PORING
 #    Sprite: BAPHOMET
 #  - Mob: E_OBEAUNE
 #    Sprite: PORING
 #    PetEquip: Backpack
 
-  # Easter Event Monsters
+  # 復活節活動魔物
 #  - Mob: MOROCC_3
 #    Sprite: DOPPELGANGER
 #  - Mob: MOROCC_4
 #    Sprite: ECLIPSE
 
   # rAthena Dev Team
-  # Valaris
+  # Valaris 範例設定
 #  - Mob: BOW_GUARDIAN_
 #    Sprite: JOB_ASSASSIN_CROSS
 #    Sex: Male
@@ -64,7 +64,7 @@ Header:
 #    Robe: Archangel_Wing
 #    Options:
 #      Falcon: true
-  # Valaris Worshiper
+  # Valaris 範例設定 Worshiper
 #  - Mob: E_CONDOR
 #    Sprite: JOB_THIEF
 #    Sex: Male
