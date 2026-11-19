@@ -46,7 +46,7 @@ Header:
   Type: PET_DB
   Version: 1
 
-#Body:
+# 資料內容：
 #  - Mob: PORING
 #    AttackRate: 350
 #    RetaliateRate: 400
