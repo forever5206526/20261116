@@ -59,6 +59,9 @@ jobs:
       - name: Shared MySQL credentials regression test
         run: python tools/integration/test_shared_sql_credentials.py
 
+      - name: CI SQL startup credentials regression test
+        run: python tools/integration/test_ci_sql_startup_credentials.py
+
       - name: NoMerc mapflag regression test
         run: python tools/integration/test_nomerc_mapflag.py
 

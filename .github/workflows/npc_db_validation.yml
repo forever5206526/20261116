@@ -97,6 +97,32 @@ jobs:
         shell: bash
         run: bash tools/ci/sql.sh
 
+      - name: Configure temporary SQL credentials for server startup validation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $user = $env:BRHADES_SQL_USER
+          $password = $env:BRHADES_SQL_PASSWORD
+          if ([string]::IsNullOrWhiteSpace($user) -or [string]::IsNullOrWhiteSpace($password)) {
+            throw 'The temporary CI SQL account was not exported by tools/ci/sql.sh.'
+          }
+          if ($user -eq 'ragnarok' -and $password -eq 'ragnarok') {
+            throw 'The public default SQL credentials must never be used in startup validation.'
+          }
+
+          $configPath = Join-Path $PWD 'conf/inter_athena.conf'
+          $content = [System.IO.File]::ReadAllText($configPath)
+          if ([regex]::Matches($content, '(?m)^sql_user:').Count -ne 1) {
+            throw 'Expected exactly one sql_user setting in conf/inter_athena.conf.'
+          }
+          if ([regex]::Matches($content, '(?m)^sql_password:').Count -ne 1) {
+            throw 'Expected exactly one sql_password setting in conf/inter_athena.conf.'
+          }
+          $content = [regex]::Replace($content, '(?m)^sql_user:.*$', ('sql_user: ' + $user))
+          $content = [regex]::Replace($content, '(?m)^sql_password:.*$', ('sql_password: ' + $password))
+          [System.IO.File]::WriteAllText($configPath, $content, [System.Text.UTF8Encoding]::new($false))
+          Write-Host 'Configured the dedicated temporary CI SQL account without exposing its password.'
+
       - name: Enable custom and test NPC scripts
         shell: bash
         run: bash tools/ci/npc.sh
