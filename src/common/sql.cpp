@@ -167,6 +167,20 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 	if( self == nullptr )
 		return SQL_ERROR;
 
+	// Never allow empty or publicly known default SQL credentials.
+	// This also protects installations that still have an older config file.
+	if (user == nullptr || user[0] == '\0' || passwd == nullptr || passwd[0] == '\0') {
+		ShowSQL("Refusing MySQL connection: SQL username and password must both be configured. "
+			"Set a dedicated database account in conf/inter_athena.conf or the legacy service settings.\\n");
+		return SQL_ERROR;
+	}
+
+	if (strcmpi(passwd, "ragnarok") == 0) {
+		ShowSQL("Refusing MySQL connection: the public default SQL password 'ragnarok' is blocked. "
+			"Set a unique password and update the matching MySQL account.\\n");
+		return SQL_ERROR;
+	}
+
 	StringBuf_Clear(&self->buf);
 
 #if !defined(MARIADB_BASE_VERSION) && !defined(MARIADB_VERSION_ID) && MYSQL_VERSION_ID >= 50710
