@@ -1313,7 +1313,7 @@ void map_skill_duration_add(struct map_data* mapd, uint16 skill_id, uint16 per);
 enum e_mapflag map_getmapflag_by_name(char* name);
 bool map_getmapflag_name(enum e_mapflag mapflag, char* output);
 int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, pds_mapflag_args *args);
-bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_mapflag_args* args);
+bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, pds_mapflag_args* args);
 #ifdef Pandas_Mapflags
 int32 map_getmapflag_param(int16 m, enum e_mapflag mapflag, size_t index);
 void map_setmapflag_param(int16 m, enum e_mapflag mapflag, size_t index, int32 value);
