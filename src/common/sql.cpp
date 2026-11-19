@@ -171,13 +171,13 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 	// This also protects installations that still have an older config file.
 	if (user == nullptr || user[0] == '\0' || passwd == nullptr || passwd[0] == '\0') {
 		ShowSQL("Refusing MySQL connection: SQL username and password must both be configured. "
-			"Set a dedicated database account in conf/inter_athena.conf or the legacy service settings.\\n");
+			"Set a dedicated database account in conf/inter_athena.conf or the legacy service settings.\n");
 		return SQL_ERROR;
 	}
 
 	if (strcmpi(passwd, "ragnarok") == 0) {
 		ShowSQL("Refusing MySQL connection: the public default SQL password 'ragnarok' is blocked. "
-			"Set a unique password and update the matching MySQL account.\\n");
+			"Set a unique password and update the matching MySQL account.\n");
 		return SQL_ERROR;
 	}
 
