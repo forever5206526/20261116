@@ -2315,11 +2315,11 @@ Body:
 #  - Mob: PHREEONI2
 #    EggItem: Phreeoni_Egg
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2387,20 +2387,20 @@ Body:
 #  - Mob: BLUE_UNICORN
 #    EggItem: Blue_Unicorn_Egg
 #    FoodItem: Blue_Herb
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #  - Mob: SCATLETON
 #    EggItem: Scatletoncarrier
 #    EquipItem: Red_Chorker_Bell
 #    FoodItem: Delicious_Fish
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      if (getpetinfo(PETINFO_INTIMATE) >= PET_INTIMATE_LOYAL) {
 #         bonus bMatk,10;
@@ -2419,11 +2419,11 @@ Body:
   - Mob: WILOW
     EggItem: Wilow_Egg
     FoodItem: Tree_Of_Archer_1
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
 
@@ -2436,11 +2436,11 @@ Body:
   - Mob: ROWEEN
     EggItem: Roween_Egg
     FoodItem: Rotten_Meat
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
 
@@ -2454,11 +2454,11 @@ Body:
 #    EggItem: Roost_Of_Skelion
 #    EquipItem: Dark_Mane
 #    FoodItem: Yummy_Meat
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      if (getpetinfo(PETINFO_INTIMATE) >= PET_INTIMATE_LOYAL) {
@@ -2469,11 +2469,11 @@ Body:
 #  - Mob: GLOOMUNDERNIGHT2
 #    EggItem: Gloom_Under_Egg
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2500,11 +2500,11 @@ Body:
 #    EggItem: E_Duckling_Egg
 #    EquipItem: C_Twinkle_Star_Button
 #    FoodItem: Wad_Of_Cotton
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
 #
@@ -2518,11 +2518,11 @@ Body:
 #  - Mob: KIEL_D_01_2
 #    EggItem: Kiel_Egg
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2550,11 +2550,11 @@ Body:
   - Mob: DARK_PRIEST
     EggItem: Dark_Priest_Egg
     FoodItem: Evil_Water
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
 
@@ -2580,11 +2580,11 @@ Body:
   - Mob: DESERT_WOLF
     EggItem: Desert_Wolf_Egg
     FoodItem: Pet_Food
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     AllowAutoFeed: true
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2610,11 +2610,11 @@ Body:
 #  - Mob: ILL_BAPHOMET_J
 #    EggItem: Chaos_Bapho_Jr_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2647,11 +2647,11 @@ Body:
   - Mob: FIRE_GOLEM
     EggItem: Fire_Golem_Egg
     FoodItem: Pet_Food
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     AllowAutoFeed: true
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2673,11 +2673,11 @@ Body:
 #  - Mob: KNIGHT_OF_ABYSS2
 #    EggItem: Abyss_Knight_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2702,11 +2702,11 @@ Body:
 #  - Mob: CWHITEKNIGHT
 #    EggItem: Change_W_Knight_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
 #
@@ -2743,11 +2743,11 @@ Body:
 #  - Mob: GH_WHITEKNIGHT
 #    EggItem: White_Knight_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2772,11 +2772,11 @@ Body:
 #  - Mob: BAPHOMET2
 #    EggItem: Baphomet_Egg
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2805,11 +2805,11 @@ Body:
     TameItem: Fruits_Set_Trap
     EggItem: Farmiliar_Egg
     FoodItem: Mixed_Fruits_Juice
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 2000   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 2000   # 未知
+    SpecialPerformance: false   # 未知
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
 
@@ -2824,11 +2824,11 @@ Body:
 #  - Mob: DARK_ILLUSION2
 #    EggItem: Dark_Illusion_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2862,11 +2862,11 @@ Body:
 #  - Mob: BLUEMOON_LOLI_RURI2
 #    EggItem: Blue_Moon_Loli_Ruri_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2891,11 +2891,11 @@ Body:
 #  - Mob: WILD_ROSE3
 #    EggItem: Wild_Rose_Egg2
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2929,11 +2929,11 @@ Body:
 #  - Mob: EDDGA3
 #    EggItem: Eddga_Egg2
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -2956,11 +2956,11 @@ Body:
 #  - Mob: LARVA_VIOLET
 #    EggItem: Larva_Violet_Egg
 #    FoodItem: Green_Herb
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
 #
@@ -2977,11 +2977,11 @@ Body:
     TameItem: Ep20_Fatty_Icegangu
     EggItem: Copo_Egg
     FoodItem: Pet_Food
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 10000   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 10000   # 未知
+    SpecialPerformance: false   # 未知
     Script: >
       .@intimate = getpetinfo(PETINFO_INTIMATE);
       if (.@intimate == PET_INTIMATE_CORDIAL) {
@@ -3016,11 +3016,11 @@ Body:
   - Mob: EP20_ICEWIND1
     EggItem: Grey_Icewind_Egg
     FoodItem: Pet_Food
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     AllowAutoFeed: true
     Script: >
       .@intimate = getpetinfo(PETINFO_INTIMATE);
@@ -3041,11 +3041,11 @@ Body:
   - Mob: EP20_ICEWIND2
     EggItem: Icewind_Egg
     FoodItem: Pet_Food
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     AllowAutoFeed: true
     Script: >
       .@intimate = getpetinfo(PETINFO_INTIMATE);
@@ -3067,11 +3067,11 @@ Body:
 #  - Mob: DARK_LORD2
 #    EggItem: Dark_Lord_Egg
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -3093,11 +3093,11 @@ Body:
 #  - Mob: VR_CHAO
 #    EggItem: Sonic_Chao_Egg
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
 #
@@ -3115,7 +3115,7 @@ Body:
     EggItem: ICESEAHORSE_Egg
     FoodItem: Pet_Food
     Fullness: 3
-    HungryDelay: 120   # unknown
+    HungryDelay: 120   # 未知
     IntimacyFed: 10
     CaptureRate: 500
     SpecialPerformance: false
@@ -3135,11 +3135,11 @@ Body:
   - Mob: HORNET
     EggItem: aegis_9155
     FoodItem: Apple_Pudding
-    Fullness: 2   # unknown
-    HungryDelay: 120   # unknown
-    IntimacyFed: 15   # unknown
-    CaptureRate: 0   # unknown
-    SpecialPerformance: false   # unknown
+    Fullness: 2   # 未知
+    HungryDelay: 120   # 未知
+    IntimacyFed: 15   # 未知
+    CaptureRate: 0   # 未知
+    SpecialPerformance: false   # 未知
     Script: >
       .@i = getpetinfo(PETINFO_INTIMATE);
 
@@ -3167,11 +3167,11 @@ Body:
 #  - Mob: CLB_SS_FC
 #    EggItem: CLB_SS_Egg01
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
 #
@@ -3187,11 +3187,11 @@ Body:
 #  - Mob: CLB_SS_TZ
 #    EggItem: CLB_SS_Egg02
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
 #
@@ -3207,11 +3207,11 @@ Body:
 #  - Mob: GIANT_HONET2
 #    EggItem: aegis_9192
 #    FoodItem: Pet_Food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
@@ -3245,11 +3245,11 @@ Body:
 #  - Mob: MISTRESS3
 #    EggItem: aegis_9193
 #    FoodItem: High_Class_Pet_food
-#    Fullness: 2   # unknown
-#    HungryDelay: 120   # unknown
-#    IntimacyFed: 15   # unknown
-#    CaptureRate: 0   # unknown
-#    SpecialPerformance: false   # unknown
+#    Fullness: 2   # 未知
+#    HungryDelay: 120   # 未知
+#    IntimacyFed: 15   # 未知
+#    CaptureRate: 0   # 未知
+#    SpecialPerformance: false   # 未知
 #    AllowAutoFeed: true
 #    Script: >
 #      .@i = getpetinfo(PETINFO_INTIMATE);
