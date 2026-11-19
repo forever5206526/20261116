@@ -25,7 +25,7 @@ def main() -> None:
     require("DB_PASS=\"$(python -c 'import secrets; print(secrets.token_urlsafe(32))')\"" in sql,
             "CI database password must be randomly generated", failures)
     require('echo "BRHADES_SQL_USER=$DB_USER"' in sql and
-            'echo "BRHADES_SQL_USER=$DB_USER"' in sql,
+            '>> "$GITHUB_ENV"' in sql,
             "CI SQL username is not exported to the startup job", failures)
     require('echo "BRHADES_SQL_PASSWORD=$DB_PASS"' in sql,
             "CI SQL password is not exported to the startup job", failures)
