@@ -72,7 +72,7 @@ Header:
   Type: MOB_DB
   Version: 4
 
-#Body:
+# 資料內容：
 # eAthena Dev Team
 #=============================================================
 #  - Id: 1900
@@ -104,7 +104,7 @@ Header:
 #    AttackMotion: 768
 #    DamageMotion: 576
 #    Ai: 25
-#    Modes:
+#    模式：
 #      NoCast: true
 #      Looter: true
 #      NoRandomWalk: true
@@ -163,7 +163,7 @@ Header:
 #    AttackMotion: 480
 #    DamageMotion: 120
 #    Ai: 10
-#    Modes:
+#    模式：
 #      CanMove: true
 #      CastSensorChase: true
 #      ChangeChase: true
@@ -215,7 +215,7 @@ Header:
 #    AttackMotion: 768
 #    DamageMotion: 576
 #    Ai: 25
-#    Modes:
+#    模式：
 #      NoCast: true
 #      Looter: true
 #      NoRandomWalk: true
@@ -276,7 +276,7 @@ Header:
 #    AttackMotion: 672
 #    DamageMotion: 480
 #    Ai: 25
-#    Modes:
+#    模式：
 #      NoCast: true
 #      Looter: true
 #      NoRandomWalk: true
@@ -337,7 +337,7 @@ Header:
 #    AttackMotion: 768
 #    DamageMotion: 576
 #    Ai: 25
-#    Modes:
+#    模式：
 #      NoCast: true
 #      Looter: true
 #      NoRandomWalk: true
@@ -370,7 +370,7 @@ Header:
 #        Rate: 1
 #        StealProtected: true
 
-# Custom Hollow Poring (overrrides/collides with META_ANDRE)
+# 自訂空洞波利（會覆寫／與 META_ANDRE 設定衝突）
 #=============================================================
 #  - Id: 1237
 #    AegisName: HOLLOW_PORING
@@ -415,7 +415,7 @@ Header:
 #        Rate: 10
 #        StealProtected: true
 
-# Custom Fire Poring. Warning, Colides with META_DENIRO
+# 自訂火焰波利。注意：會與 META_DENIRO 設定衝突。
 #=============================================================
 #  - Id: 1239
 #    AegisName: FIRE_PORING
@@ -441,7 +441,7 @@ Header:
 #    AttackMotion: 672
 #    DamageMotion: 480
 #    Ai: 25
-#    Modes:
+#    模式：
 #      NoRandomWalk: true
 #      CastSensorIdle: true
 #    Drops:
@@ -463,7 +463,7 @@ Header:
 #        Rate: 20
 #        StealProtected: true
 
-# Lunar New Year 2008 Event Monster overrides
+# 2008 年農曆新年活動魔物覆寫設定
 # Uncomment if event is enabled, as these drops modifications are nessecary.
 #=============================================================
 #  - Id: 1145
@@ -756,7 +756,7 @@ Header:
 #      - Item: Black_Treasure_Box
 #        Rate: 8
 
-# iRO Christmas 2008 Event
+# iRO 2008 年聖誕節活動
 # Uncomment if event is enabled, as these drops modifications are nessecary.
 #=============================================================
 #  - Id: 1244
@@ -921,7 +921,7 @@ Header:
 #    AttackMotion: 720
 #    DamageMotion: 432
 #    Ai: 01
-#    Modes:
+#    模式：
 #      NoCast: true
 #    Drops:
 #      - Item: Branch_Of_Dead_Tree
@@ -942,8 +942,8 @@ Header:
 #        Rate: 1
 #        StealProtected: true
 
-# iRO Halloween 2009 Event
-# Uncomment if event is enabled. Uncomment the skills for Halloween Whisper in mob_skill_db2.
+# iRO 2009 年萬聖節活動
+# 若啟用此活動，請取消此行註解。 Uncomment the skills for Halloween Whisper in mob_skill_db2.
 #=============================================================
 #  - Id: 3014
 #    AegisName: HALLOWEEN_WHISPER
@@ -1002,8 +1002,8 @@ Header:
 #      - Item: Fools_Day_Box2
 #        Rate: 5335
 
-# iRO Halloween 2008 Event
-# Uncomment if event is enabled.
+# iRO 2008 年萬聖節活動
+# 若啟用此活動，請取消此行註解。
 #=============================================================
 #  - Id: 3000
 #    AegisName: ZOMBIE
