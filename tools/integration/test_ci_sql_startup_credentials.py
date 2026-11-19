@@ -66,6 +66,11 @@ def main() -> None:
             ":sql_error" in batch and "endlocal & exit /b 1" in batch,
             "Windows SQL helper must stop at the first SQL error and return a failure code", failures)
 
+    require("Validate Windows SQL batch helper against MySQL 8" in workflow and
+            "call tools\\ci\\sql.bat" in workflow and
+            "ragnarok_batch_test" in workflow and "SHOW GRANTS FOR" in workflow,
+            "The Windows SQL batch helper must be exercised against a live MySQL instance", failures)
+
     if failures:
         raise SystemExit("\n".join(failures))
     print("PASS: startup CI uses a temporary non-default MySQL account without storing credentials in the repository")
