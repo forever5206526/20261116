@@ -43,13 +43,33 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          choco install vcredist2012 --yes --no-progress
-          if ($LASTEXITCODE -notin @(0, 3010)) { exit $LASTEXITCODE }
+          $installer = Join-Path $env:RUNNER_TEMP 'vcredist_x64.exe'
+          $downloadUrl = 'https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe'
+          $downloaded = $false
+          for ($attempt = 1; $attempt -le 3; $attempt++) {
+            try {
+              Invoke-WebRequest -Uri $downloadUrl -OutFile $installer
+              $downloaded = $true
+              break
+            } catch {
+              if ($attempt -eq 3) { throw }
+              Start-Sleep -Seconds 5
+            }
+          }
+          if (-not $downloaded) { throw 'Unable to download the Microsoft Visual C++ 2012 x64 runtime.' }
+          $signature = Get-AuthenticodeSignature -FilePath $installer
+          if ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch 'Microsoft Corporation') {
+            throw "The Visual C++ 2012 installer signature is invalid or not from Microsoft: $($signature.Status)"
+          }
+          $process = Start-Process -FilePath $installer -ArgumentList '/install', '/quiet', '/norestart' -Wait -PassThru
+          if ($process.ExitCode -notin @(0, 3010, 1638)) {
+            throw "Visual C++ 2012 runtime installer failed with exit code $($process.ExitCode)"
+          }
           $runtime = Join-Path $env:WINDIR 'System32/msvcr110.dll'
           if (-not (Test-Path $runtime)) {
             throw "Visual C++ 2012 x64 runtime was not installed: $runtime"
           }
-          Write-Host "Verified required runtime: $runtime"
+          Write-Host "Verified Microsoft-signed Visual C++ 2012 runtime: $runtime"
 
       - name: Set up MySQL
         uses: ankane/setup-mysql@v1
