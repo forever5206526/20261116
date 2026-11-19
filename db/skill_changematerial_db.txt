@@ -7,7 +7,7 @@
 // - ID 用於識別道具順序，以便在 db/import 中覆寫對應資料。
 //   數值範圍為 0 至 74（MAX_SKILL_CHANGEMATERIAL_DB-1）。在匯入檔中使用相同 ID，即可覆寫原始結果與需求。
 // - 最多可指定 5 組 ID／Amount 配對。
-// - Rate = n/10%。
+// - 機率 = n/10%。
 
 0,703,1000,4,800,2,200	// Hinalle 
 1,958,800,9,1000		// Horrendous_Mouth
