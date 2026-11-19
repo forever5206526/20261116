@@ -6575,7 +6575,7 @@ Body:
       NoClearance: true
       SendVal1: true
       NoForcedEnd: true
-   # deprecated
+   # 已棄用。
    #- Status: Cloud_Kill
   - Status: Ljosalfar
     Icon: EFST_LJOSALFAR
