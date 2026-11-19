@@ -62,12 +62,13 @@ def check_drop_rate_configuration(failures):
         expected_values = (
             f"mapflag_config.emplace({mapflag}, s_mapflag_item{{",
             f'"{display_name}"',
-            "\\n\\t\\ttrue,\\n\\t\\ttrue,",
             '{{100, 0, INT_MAX, "%"}}',
         )
         for expected in expected_values:
             if expected not in block:
                 failures.append(f"{macro}: configuration mismatch ({expected!r})")
+        if block.count("true,") != 2:
+            failures.append(f"{macro}: both turn_off_default and block_atcmd must be enabled")
 
 
 def check_drop_rate_behavior(failures):
