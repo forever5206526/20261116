@@ -13,11 +13,11 @@ Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`
 
 ## Pandas MapFlag 完整清單
 
-Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 12 項；其餘 12 項仍待逐項比對及移植。
+Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 13 項；其餘 11 項仍待逐項比對及移植。
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
-| `Pandas_MapFlag_MobInfo` | mobinfo 地圖魔物資訊顯示 | 待移植；依賴 Pandas_Mapflags 參數框架與 MobInfomation_Extend；brHades 目前僅有全域 show_mob_info |
+| `Pandas_MapFlag_MobInfo` | mobinfo 地圖魔物資訊顯示 | 已移植 MobInfo 專用單參數版本；通用多參數 Mapflags 框架仍待補齊，不能視為框架完整 |
 | `Pandas_MapFlag_NoAutoLoot` | 禁止地圖自動拾取 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoToken` | 禁止原地復活之證 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoCapture` | 禁止寵物捕捉 | 已移植相容別名；轉接 brHades 原生 MF_NOPETCAPTURE |
@@ -38,13 +38,13 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_NoSlave` | 禁止魔物召喚隨從 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoBank` | 禁止銀行操作體驗調整 | 待核對 brHades 原生實作與體驗差異 |
 | `Pandas_MapFlag_NoUseItem` | 禁止使用消耗型道具 | 已移植／回歸測試通過 |
-| `Pandas_MapFlag_HideDamage` | 隱藏地圖傷害數值 | 待核對及移植 |
+| `Pandas_MapFlag_HideDamage` | 隱藏地圖傷害數值 | 已移植／PR #9 合併；合併後 VS、PRE/RE NPC/DB、回歸測試及 CodeQL 全部通過 |
 | `Pandas_MapFlag_NoAttack` | 禁止普通攻擊 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoAttack2` | 依單位類型禁止普通攻擊 | 待核對及移植 |
 
 ## 下一批執行順序
 
-1. 先對剩餘 12 項待辦逐項搜尋 brHades 原生同等功能，確認是否已存在及行為差異。
+1. 先完成 Pandas_Mapflags 通用多參數框架，補齊 NPC mapflag、setmapflag/removemapflag、@mapinfo、@mapflag 的共用處理；再以此框架移植剩餘參數型地圖標記。
 2. 對不存在的功能追蹤 Pandas 實作、相依資料結構、封包、腳本常量、設定、訊息與資料庫。
 3. 依相依關係排序，先處理可獨立驗證且不需大幅改動核心結構的功能。
 4. 每個功能獨立修改、回歸測試、Debug/Release x64/Win32 雲端建置，再更新本表狀態。
@@ -61,6 +61,12 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 Release x64 編譯成品由 Actions artifact 保存；這些驗證不等同完整伺服器載入、資料庫遷移或遊戲客戶端實測。
 
+
+## 2026-11-19 HideDamage 驗收紀錄
+
+- PR #9 已合併至正式 `main`：`adb104471b2123fa44164e5afacf5c4b41458231`。
+- 合併後正式 main 的 Visual Studio MSBuild（VS2019 16.11／VS2022／VS2026）、PRE／RE NPC 與資料庫驗證、功能回歸測試及 PRE／RE CodeQL 全部成功。
+- HideDamage 支援普通攻擊與新舊技能傷害封包；隱藏數字不改變伺服器實際傷害。
 
 ## 2026-11-18 HideInfo 驗收紀錄
 
