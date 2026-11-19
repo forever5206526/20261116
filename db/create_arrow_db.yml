@@ -14,7 +14,7 @@
 # 箭矢製作設定
 #
 ###########################################################################
-# - Source              AegisName of the item that is consumed.
+# - Source              被消耗道具的 AegisName。
 #   Make:               玩家可取得的道具清單。
 #     - Item            取得道具的 AegisName。
 #       Amount          取得的道具數量。（匯入時設為 0 可移除此道具）

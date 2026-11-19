@@ -37,16 +37,16 @@ Body:
         Items:
           - Item: Cotton_Shirt
             Refine: 7
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Shoes
             Refine: 5
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Muffler
             Refine: 3
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Event_Pierrot_Nose
             RentalHours: 24
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
       - Group: 1
         Items:
           - Item: Red_Potion
@@ -71,34 +71,34 @@ Body:
         Items:
           - Item: Knife
             Refine: 4
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Cotton_Shirt
             Refine: 4
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Red_Potion
             Amount: 100
           - Item: Ring
             RentalHours: 24
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
       - Group: 1
         Items:
           - Item: Tsurugi
             Refine: 5
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Padded_Armor
             Refine: 5
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Yellow_Potion
             Amount: 50
       - Group: 2
         Items:
           - Item: Sword
             Refine: 20
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: Guard
             RentalHours: 168
             Refine: 5
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: White_Herb
             Amount: 100
       - Group: 3
@@ -133,9 +133,9 @@ Body:
       - Group: 6
         Items:
           - Item: C_Hair_Of_The_Strong
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
           - Item: C_Imp_Hat
-#            RandomOptionGroup: TODO <insert random option group name>
+#            RandomOptionGroup: TODO <填入隨機選項群組名稱>
       - Group: 7
         Items:
           - Item: C_Classical_Fhat
