@@ -1,7 +1,7 @@
 // 自訂魔物技能資料庫
 //
 // 資料庫格式：
-// MobID,Dummy value (info only),State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
+// MobID,Dummy value（僅供資訊參考）,State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
 //
 // RATE：符合條件時施放技能的機率（10000 = 100%）。
 // DELAY：再次嘗試施放相同技能前的等待時間（毫秒）。
