@@ -66,7 +66,7 @@ std::unordered_map<e_mapflag, s_mapflag_item> mapflag_config;
 
 int32 map_server_port = 3306;
 std::string map_server_ip = "127.0.0.1";
-std::string map_server_id = "ragnarok";
+std::string map_server_id = "";
 std::string map_server_pw = "";
 std::string map_server_db = "ragnarok";
 Sql* mmysql_handle;
@@ -102,7 +102,7 @@ char guild_storage_log_table[32] = "guild_storage_log";
 // log database
 std::string log_db_ip = "127.0.0.1";
 uint16 log_db_port = 3306;
-std::string log_db_id = "ragnarok";
+std::string log_db_id = "";
 std::string log_db_pw = "";
 std::string log_db_db = "log";
 Sql* logmysql_handle;
@@ -4211,8 +4211,15 @@ int32 inter_config_read(const char *cfgName)
 	{
 		if(line[0] == '/' && line[1] == '/')
 			continue;
-		if( sscanf(line,"%1023[^:]: %1023[^\r\n]",w1,w2) < 2 )
+		const int parsed = sscanf(line, "%1023[^:]: %1023[^\r\n]", w1, w2);
+		if (parsed < 1)
 			continue;
+		if (parsed == 1) {
+			// Preserve explicitly empty shared SQL keys; never infer default credentials.
+			if (Sql_ConfigRead(w1, ""))
+				continue;
+			continue;
+		}
 
 		if (Sql_ConfigRead(w1, w2))
 			continue;
