@@ -1,7 +1,6 @@
 """Regression checks for temporary database credentials used by Windows startup CI."""
 
 from pathlib import Path
-import re
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -17,13 +16,15 @@ def main() -> None:
     workflow = (ROOT / ".github/workflows/npc_db_validation.yml").read_text(encoding="utf-8")
     config = (ROOT / "conf/inter_athena.conf").read_text(encoding="utf-8")
 
-    require(re.search(r"^DB_HOST=127\\.0\\.0\\.1$", sql, re.MULTILINE) is not None,
+    sql_lines = sql.splitlines()
+    config_lines = config.splitlines()
+    require("DB_HOST=127.0.0.1" in sql_lines,
             "CI database user host must match sql_host 127.0.0.1", failures)
-    require(re.search(r"^DB_USER=brhades_ci$", sql, re.MULTILINE) is not None,
+    require("DB_USER=brhades_ci" in sql_lines,
             "CI must use a dedicated account instead of the blocked ragnarok default", failures)
     require("DB_PASS=\"$(python -c 'import secrets; print(secrets.token_urlsafe(32))')\"" in sql,
             "CI database password must be randomly generated", failures)
-    require('echo "BRHADES_SQL_USER=$DB_USER" >> "$GITHUB_ENV"' in sql or
+    require('echo "BRHADES_SQL_USER=$DB_USER"' in sql and
             'echo "BRHADES_SQL_USER=$DB_USER"' in sql,
             "CI SQL username is not exported to the startup job", failures)
     require('echo "BRHADES_SQL_PASSWORD=$DB_PASS"' in sql,
@@ -40,17 +41,17 @@ def main() -> None:
             "Temporary credentials must be injected after DB creation and before server startup", failures)
     require("$env:BRHADES_SQL_USER" in workflow and "$env:BRHADES_SQL_PASSWORD" in workflow,
             "Startup workflow does not consume the generated CI credentials", failures)
-    require("sql_user:" in workflow and "sql_password:" in workflow and
+    require("(?m)^sql_user:" in workflow and "(?m)^sql_password:" in workflow and
             "[System.IO.File]::WriteAllText($configPath, $content" in workflow,
             "Startup workflow does not write both shared SQL values to the test config", failures)
     require("ragnarok/ragnarok" not in workflow,
             "The blocked public default credentials must not be used in startup CI", failures)
-    require(re.search(r"^sql_user:\\s*$", config, re.MULTILINE) is not None and
-            re.search(r"^sql_password:\\s*$", config, re.MULTILINE) is not None,
+    require(any(line.startswith("sql_user:") and line == "sql_user:" for line in config_lines) and
+            any(line.startswith("sql_password:") and line == "sql_password:" for line in config_lines),
             "The tracked sample config must remain free of CI credentials", failures)
 
     if failures:
-        raise SystemExit("\\n".join(failures))
+        raise SystemExit("\n".join(failures))
     print("PASS: startup CI uses a temporary non-default MySQL account without storing credentials in the repository")
 
 
