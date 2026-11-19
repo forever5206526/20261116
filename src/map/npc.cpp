@@ -5450,7 +5450,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 		break;
 	case MF_NOSAVE: {
 		char savemap[MAP_NAME_LENGTH_EXT];
-		union u_mapflag_args args = {};
+		pds_mapflag_args args = {};
 
 		if (state && !strcmpi(w4, "SavePoint")) {
 			args.nosave.map = 0;
@@ -5471,7 +5471,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	case MF_PVP_NIGHTMAREDROP: {
 		char drop_arg1[16], drop_arg2[16];
-		union u_mapflag_args args = {};
+		pds_mapflag_args args = {};
 
 		if (sscanf(w4, "%15[^,],%15[^,],%11d", drop_arg1, drop_arg2, &args.nightmaredrop.drop_per) == 3) {
 
@@ -5499,7 +5499,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	case MF_BATTLEGROUND:
 		if (state) {
-			union u_mapflag_args args = {};
+			pds_mapflag_args args = {};
 
 			if (sscanf(w4, "%11d", &args.flag_val) < 1)
 				args.flag_val = 1; // Default value
@@ -5512,7 +5512,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	case MF_NOCOMMAND:
 		if (state) {
-			union u_mapflag_args args = {};
+			pds_mapflag_args args = {};
 
 			if (sscanf(w4, "%11d", &args.flag_val) < 1)
 				args.flag_val = 100; // No level specified, block everyone.
@@ -5525,7 +5525,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	case MF_RESTRICTED:
 		if (state) {
-			union u_mapflag_args args = {};
+			pds_mapflag_args args = {};
 
 			if (sscanf(w4, "%11d", &args.flag_val) == 1)
 				map_setmapflag_sub(m, MF_RESTRICTED, true, &args);
@@ -5538,7 +5538,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
 	case MF_JEXP:
 	case MF_BEXP: {
-		union u_mapflag_args args = {};
+		pds_mapflag_args args = {};
 
 		if (sscanf(w4, "%11d", &args.flag_val) < 1)
 			args.flag_val = 0;
@@ -5548,7 +5548,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 				break;
 
 	case MF_SPECIALPOPUP: {
-		union u_mapflag_args args = {};
+		pds_mapflag_args args = {};
 
 		if (sscanf(w4, "%11d", &args.flag_val) < 1)
 			args.flag_val = 0;
@@ -5560,7 +5560,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 	case MF_SKILL_DAMAGE: {
 		char skill_name[SKILL_NAME_LENGTH];
 		char caster_constant[NAME_LENGTH];
-		union u_mapflag_args args = {};
+		pds_mapflag_args args = {};
 
 		memset(skill_name, 0, sizeof(skill_name));
 
@@ -5604,7 +5604,7 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 	}
 
 	case MF_SKILL_DURATION: {
-		union u_mapflag_args args = {};
+		pds_mapflag_args args = {};
 
 		if (!state)
 			map_setmapflag_sub(m, MF_SKILL_DURATION, false, &args);
@@ -5627,18 +5627,45 @@ static const char* npc_parse_mapflag(char* w1, char* w2, char* w3, char* w4, con
 
    // All others do not need special treatment
 	default:
-#ifdef Pandas_MapFlag_MobInfo
-		if (mapflag == MF_MOBINFO && state) {
-			int32 mob_info_option = 0;
-			if (w4[0] != '\0' && sscanf(w4, "%11d", &mob_info_option) != 1) {
-				ShowError("npc_parse_mapflag: Invalid MobInfo parameter '%s'. Skipping (file '%s', line '%d').\n",
-					w4, filepath, strline(buffer, start - buffer));
+#ifdef Pandas_Mapflags
+	{
+		const auto* conf = util::umap_find(mapflag_config, mapflag);
+		if (conf != nullptr) {
+			pds_mapflag_args args = {};
+			const size_t args_count = conf->args.size();
+			if (args_count > 4) {
+				ShowError("npc_parse_mapflag: Unsupported parameter count for mapflag '%s'. Skipping (file '%s', line '%d').\\n",
+					conf->name, filepath, strline(buffer, start - buffer));
 				break;
 			}
-			map_setmapflag_param(m, MF_MOBINFO, 1, mob_info_option);
+			args.input.resize(args_count);
+			for (size_t i = 0; i < args_count; ++i)
+				args.input[i] = conf->args[i].def_val;
+
+			if (state && w4 != nullptr && w4[0] != '\0') {
+				int parsed = 0;
+				switch (args_count) {
+				case 0: parsed = 0; break;
+				case 1: parsed = sscanf(w4, "%11d", &args.input[0]); break;
+				case 2: parsed = sscanf(w4, "%11d,%11d", &args.input[0], &args.input[1]); break;
+				case 3: parsed = sscanf(w4, "%11d,%11d,%11d", &args.input[0], &args.input[1], &args.input[2]); break;
+				case 4: parsed = sscanf(w4, "%11d,%11d,%11d,%11d", &args.input[0], &args.input[1], &args.input[2], &args.input[3]); break;
+				}
+				if (parsed < static_cast<int>(args_count)) {
+					for (size_t i = 0; i < args_count; ++i)
+						args.input[i] = conf->args[i].def_val;
+					ShowError("npc_parse_mapflag: Invalid parameter list for mapflag '%s'. Using defaults (file '%s', line '%d').\\n",
+						conf->name, filepath, strline(buffer, start - buffer));
+				}
+			}
+			map_setmapflag_sub(m, mapflag, state, &args);
+		} else {
+			map_setmapflag(m, mapflag, state);
 		}
-#endif // Pandas_MapFlag_MobInfo
+	}
+#else
 		map_setmapflag(m, mapflag, state);
+#endif // Pandas_Mapflags
 		break;
 	}
 
