@@ -13836,7 +13836,7 @@ Body:
   - Id: 62238
     Title: Midgardian Mercenary timer
     TimeLimit: +3h
-# ÀÎÄÚµùÀ» EUC-KR·Î À¯ÁöÇÏ±â À§ÇÑ ÇÑ±¹¾î ¹®Àå.
+# 為了維持 EUC-KR 編碼而保留的韓文句子。
 
 Header:
   Type: QUEST_DB
