@@ -8901,7 +8901,7 @@ ACMD_FUNC(mapflag) {
 		clif_displaymessage(sd->fd,msg_txt(sd,1311)); // Enabled Mapflags in this map:
 		clif_displaymessage(sd->fd,"----------------------------------");
 		for( i = MF_MIN; i < MF_MAX; i++ ){
-			union u_mapflag_args args = {};
+			pds_mapflag_args args = {};
 
 			if( map_getmapflag_name(static_cast<e_mapflag>(i), flag_name) && map_getmapflag_sub( sd->bl.m, static_cast<e_mapflag>(i), &args ) ){
 				clif_displaymessage(sd->fd, flag_name);
