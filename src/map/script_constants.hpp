@@ -581,6 +581,9 @@
 #ifdef Pandas_MapFlag_HidePartyInfo
 	export_constant(MF_HIDEPARTYINFO);
 #endif // Pandas_MapFlag_HidePartyInfo
+#ifdef Pandas_MapFlag_HideDamage
+	export_constant(MF_HIDEDAMAGE);
+#endif // Pandas_MapFlag_HideDamage
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);
