@@ -597,8 +597,15 @@ bool login_config_read(const char* cfgName, bool normal) {
 		if (line[0] == '/' && line[1] == '/')
 			continue;
 
-		if (sscanf(line, "%31[^:]: %1023[^\r\n]", w1, w2) < 2)
+		const int parsed = sscanf(line, "%31[^:]: %1023[^\r\n]", w1, w2);
+		if (parsed < 1)
 			continue;
+		if (parsed == 1) {
+			// Preserve explicitly empty shared SQL keys so startup cannot use hidden defaults.
+			if (Sql_ConfigRead(w1, ""))
+				continue;
+			continue;
+		}
 
 		if (Sql_ConfigRead(w1, w2))
 			continue;
