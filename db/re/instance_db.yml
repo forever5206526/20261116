@@ -14,7 +14,7 @@
 # 副本設定
 #
 ###########################################################################
-# - Id                Instance ID.
+# - Id                副本 ID。
 #   Name              副本名稱。
 #   TimeLimit         副本總存續時間（秒）。設為 0 表示不限制時間。（預設：3600）
 #   IdleTimeOut       閒置副本被銷毀前的等待時間（秒）。設為 0 表示不限制閒置時間。（預設：300）
@@ -282,7 +282,7 @@ Body:
       Map: 1@swat
       X: 73
       Y: 118
-# There is officially only one (buggy) instance 'Werner Laboratory central room'
+# 官方版本僅有一個（但存在錯誤的）副本「Werner Laboratory central room」。
   - Id: 36
     Name: Werner Laboratory central room#1
     Enter:

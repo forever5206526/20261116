@@ -14,7 +14,7 @@
 # 商城道具設定
 #
 ###########################################################################
-# - Tab                     Cash shop tab. Available tabs are New, Hot, Limited, Rental, Permanent, Scrolls, Consumables, Other, Sale.
+# - Tab                     現金商店分頁。可用分頁值為 New、Hot、Limited、Rental、Permanent、Scrolls、Consumables、Other、Sale。
 #   Items:                  可購買道具清單。
 #     - Item                道具名稱。
 #       Price               道具所需的商城點數（#CASHPOINTS）。

@@ -44,17 +44,17 @@
 #           Items:             指定附魔階級可使用的一般附魔選項。（預設：null）
 #             - Item           可用附魔道具的名稱。
 #               Chance         取得此指定附魔道具的機率。
-#       PerfectEnchants:       Available perfect enchants (100% chance + selectable) for this slot. (Default: null)
+#       PerfectEnchants:       此插槽可用的完美附魔（成功率 100%，且可供選擇）。（預設：null）
 #         - Item               可用附魔道具的名稱。
-#           Price              Price required for this perfect enchant. (Default: 0)
-#           Materials:         Items required for this perfect enchant. (Default: null)
+#           Price              此完美附魔所需價格。（預設：0）
+#           Materials:         此完美附魔所需材料。（預設：null）
 #             - Material       需求道具名稱。
 #               Amount         需求道具數量。（預設：1）
-#       Upgrades:              Available enchant upgrades for this slot. (Default: null)
-#         - Enchant            Item name of the enchant item available for upgrade.
-#           Upgrade            Item name of the enchant it can be upgrade to.
-#           Price              Price required for this enchant upgrade. (Default: 0)
-#           Materials:         Items required for this enchant upgrade (Default: null)
+#       Upgrades:              此插槽可用的附魔升級項目。（預設：null）
+#         - Enchant            可用於升級的附魔道具名稱。
+#           Upgrade            升級後會成為的附魔名稱。
+#           Price              此附魔升級所需價格。（預設：0）
+#           Materials:         此附魔升級所需材料。（預設：null）
 #             - Material       需求道具名稱。
 #               Amount         需求道具數量。（預設：1）
 ###########################################################################

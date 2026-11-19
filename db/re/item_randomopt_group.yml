@@ -19,14 +19,14 @@
 #   Slots:              保證套用道具隨機附加能力的欄位。最多為 MAX_ITEM_RDM_OPT。
 #     - Slot            欄位編號。
 #       Options:        此欄位可套用的道具隨機附加能力清單。
-#         - Option      Item Random Option constant.
+#         - Option      道具隨機選項常數。
 #           MinValue    最小值。（預設：0）
 #           MaxValue    最大值。（預設：0）
 #           Param       參數值。（預設：0）
 #           Chance      此道具隨機附加能力的套用機率（1 = 0.01%，10000 = 100%）。（預設：0）
 #   MaxRandom           最多套用的隨機附加能力數量。這些選項不保證一定套用，最大值為 MAX_ITEM_RDM_OPT 減去 Slots 總數。（預設：0）
 #   Random:             剩餘欄位可套用的道具隨機附加能力清單。（選填）
-#     - Option          Item Random Option constant.
+#     - Option          道具隨機選項常數。
 #       MinValue        最小值。（預設：0）
 #       MaxValue        最大值。（預設：0）
 #       Param           參數值。（預設：0）
@@ -7418,7 +7418,7 @@ Body:
         MinValue: 1
         MaxValue: 5
         Chance: 625
-  # TODO: Confirm official rates
+  # TODO：確認官方機率。
   - Id: 100
     Group: GUNSLINGER_ENCHANT
     Slots:
@@ -12279,7 +12279,7 @@ Body:
             Chance: 769
   - Id: 145
     Group: Group_0    # Note: this group is left empty. It can be used to remove the current options, when applied.
-# Abyss ogh enchants. Source: https://ro.gnjoy.in.th/abyss-glastheim-1st-floor/
+# Abyss OGH 附魔。來源：https://ro.gnjoy.in.th/abyss-glastheim-1st-floor/
   - Id: 146
     Group: AGW1
     Slots:
