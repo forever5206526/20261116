@@ -32,7 +32,91 @@ CHECKS = (
     ("@mapinfo lists configured mapflag parameters", "src/map/atcommand.cpp", "Pandas MapFlags:"),
     ("@mapflag honors generic block_atcmd configuration", "src/map/atcommand.cpp", "if (entry.second.block_atcmd)"),
     ("map-specific MobInfo can enable display", "src/map/clif.cpp", "|| (md->bl.m >= 0 && map_getmapflag(md->bl.m, MF_MOBINFO))"),
+    ("ordinary drop-rate feature switch", "src/config/pandas.hpp", "#define Pandas_MapFlag_MobDroprate"),
+    ("MVP drop-rate feature switch", "src/config/pandas.hpp", "#define Pandas_MapFlag_MvpDroprate"),
+    ("ordinary drop-rate mapflag enum", "src/map/map.hpp", "MF_MOBDROPRATE,"),
+    ("MVP drop-rate mapflag enum", "src/map/map.hpp", "MF_MVPDROPRATE,"),
+    ("ordinary drop-rate script constant", "src/map/script_constants.hpp", "export_constant(MF_MOBDROPRATE);"),
+    ("MVP drop-rate script constant", "src/map/script_constants.hpp", "export_constant(MF_MVPDROPRATE);"),
+    ("ordinary drop-rate mapflag configuration", "src/map/map.cpp", '"MobDroprate"'),
+    ("MVP drop-rate mapflag configuration", "src/map/map.cpp", '"MvpDroprate"'),
+    ("drop-rate mapflag default/range/unit", "src/map/map.cpp", '{{100, 0, INT_MAX, "%"}}'),
+    ("ordinary mob map-specific rate application", "src/map/mob.cpp", "map_getmapflag_param(md->bl.m, MF_MOBDROPRATE, 1)"),
+    ("MVP map-specific rate application", "src/map/mob.cpp", "map_getmapflag_param(md->bl.m, MF_MVPDROPRATE, 1)"),
 )
+
+
+def check_drop_rate_configuration(failures):
+    map_source = (ROOT / "src/map/map.cpp").read_text(encoding="utf-8")
+    cases = (
+        ("Pandas_MapFlag_MobDroprate", "MF_MOBDROPRATE", "MobDroprate"),
+        ("Pandas_MapFlag_MvpDroprate", "MF_MVPDROPRATE", "MvpDroprate"),
+    )
+    for macro, mapflag, display_name in cases:
+        start = map_source.find(f"#ifdef {macro}")
+        end = map_source.find("#endif", start)
+        if start < 0 or end < 0:
+            failures.append(f"{macro}: mapflag configuration block missing")
+            continue
+        block = map_source[start:end]
+        expected_values = (
+            f"mapflag_config.emplace({mapflag}, s_mapflag_item{{",
+            f'"{display_name}"',
+            '{{100, 0, INT_MAX, "%"}}',
+        )
+        for expected in expected_values:
+            if expected not in block:
+                failures.append(f"{macro}: configuration mismatch ({expected!r})")
+        if block.count("true,") != 2:
+            failures.append(f"{macro}: both turn_off_default and block_atcmd must be enabled")
+
+
+def check_drop_rate_behavior(failures):
+    mob_source = (ROOT / "src/map/mob.cpp").read_text(encoding="utf-8")
+    start = mob_source.find("int32 mob_getdroprate(")
+    end = mob_source.find("\n}\n", start)
+    if start < 0 or end < 0:
+        failures.append("mob_getdroprate function: not found")
+        return
+    function = mob_source[start:end]
+
+    cases = (
+        (
+            "Pandas_MapFlag_MobDroprate",
+            "if (md && !status_has_mode(&md->status, MD_MVP))",
+            "MF_MOBDROPRATE",
+        ),
+        (
+            "Pandas_MapFlag_MvpDroprate",
+            "if (md && status_has_mode(&md->status, MD_MVP))",
+            "MF_MVPDROPRATE",
+        ),
+    )
+    for macro, condition, mapflag in cases:
+        marker = f"#ifdef {macro}"
+        block_start = function.find(marker)
+        block_end = function.find("#endif", block_start)
+        if block_start < 0 or block_end < 0:
+            failures.append(f"{macro}: conditional block missing in mob_getdroprate")
+            continue
+        block = function[block_start:block_end]
+        for label, expected in (
+            ("monster type guard", condition),
+            ("matching mapflag", mapflag),
+            ("rate application", "apply_rate(drop_rate, map_getmapflag_param"),
+        ):
+            if expected not in block:
+                failures.append(f"{macro}: missing {label} ({expected!r})")
+
+    ordered_markers = (
+        "#ifdef Pandas_MapFlag_MobDroprate",
+        "#ifdef Pandas_MapFlag_MvpDroprate",
+        "#ifdef RENEWAL_DROP",
+        "// Cap it to 100%",
+    )
+    positions = [function.find(marker) for marker in ordered_markers]
+    if any(position < 0 for position in positions) or positions != sorted(positions):
+        failures.append("drop-rate order: ordinary/MVP map modifiers must precede RENEWAL_DROP and the 100% cap")
 
 
 def main() -> None:
@@ -42,10 +126,13 @@ def main() -> None:
         if expected not in content:
             failures.append(f"{label}: missing {expected!r} in {relative_path}")
 
+    check_drop_rate_configuration(failures)
+    check_drop_rate_behavior(failures)
+
     if failures:
         raise SystemExit("\n".join(failures))
 
-    print(f"PASS: {len(CHECKS)} generic mapflag parameter and MobInfo source-contract checks")
+    print("PASS: generic mapflag parameter, MobInfo, and MobDroprate/MvpDroprate source-contract checks")
 
 
 if __name__ == "__main__":
