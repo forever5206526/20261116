@@ -24,7 +24,7 @@ typedef struct AccountDB_SQL {
 	Sql* accounts;       // SQL handle accounts storage
 	std::string db_hostname = "127.0.0.1";
 	uint16 db_port = 3306;
-	std::string db_username = "ragnarok";
+	std::string db_username = "";
 	std::string db_password = "";
 	std::string db_database = "ragnarok";
 	// other settings
