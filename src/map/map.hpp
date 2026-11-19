@@ -694,6 +694,12 @@ enum e_mapflag : int16 {
 #ifdef Pandas_MapFlag_NoMerc
 	MF_NOMERC,
 #endif // Pandas_MapFlag_NoMerc
+#ifdef Pandas_MapFlag_MobDroprate
+	MF_MOBDROPRATE,
+#endif // Pandas_MapFlag_MobDroprate
+#ifdef Pandas_MapFlag_MvpDroprate
+	MF_MVPDROPRATE,
+#endif // Pandas_MapFlag_MvpDroprate
 #ifdef Pandas_MapFlag_NoAutoLoot
 	MF_NOAUTOLOOT,
 #endif // Pandas_MapFlag_NoAutoLoot
