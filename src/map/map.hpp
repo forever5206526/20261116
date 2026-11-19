@@ -785,7 +785,19 @@ struct s_mapflag_item {
 extern std::unordered_map<e_mapflag, s_mapflag_item> mapflag_config;
 #endif // Pandas_Mapflags
 
-/// Union for mapflag values
+/// Mapflag arguments. Pandas parameterized mapflags need independent fields
+/// because their argument vector cannot be stored in a C++ union.
+#ifdef Pandas_Mapflags
+struct u_mapflag_args {
+	struct point nosave;
+	struct s_drop_list nightmaredrop;
+	struct s_skill_damage skill_damage;
+	struct s_skill_duration skill_duration;
+	std::vector<int32> input;
+	int32 flag_val;
+};
+typedef struct u_mapflag_args pds_mapflag_args;
+#else
 union u_mapflag_args {
 	struct point nosave;
 	struct s_drop_list nightmaredrop;
@@ -793,6 +805,8 @@ union u_mapflag_args {
 	struct s_skill_duration skill_duration;
 	int32 flag_val;
 };
+typedef union u_mapflag_args pds_mapflag_args;
+#endif // Pandas_Mapflags
 
 // used by map_setcell()
 enum cell_t {
@@ -1293,16 +1307,18 @@ void map_removemobs(int16 m); // [Wizputer]
 void map_addmap2db(struct map_data* m);
 void map_removemapdb(struct map_data* m);
 
-void map_skill_damage_add(struct map_data* m, uint16 skill_id, union u_mapflag_args* args);
+void map_skill_damage_add(struct map_data* m, uint16 skill_id, pds_mapflag_args* args);
 void map_skill_duration_add(struct map_data* mapd, uint16 skill_id, uint16 per);
 
 enum e_mapflag map_getmapflag_by_name(char* name);
 bool map_getmapflag_name(enum e_mapflag mapflag, char* output);
-int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, union u_mapflag_args *args);
+int32 map_getmapflag_sub(int16 m, enum e_mapflag mapflag, pds_mapflag_args *args);
 bool map_setmapflag_sub(int16 m, enum e_mapflag mapflag, bool status, union u_mapflag_args* args);
 #ifdef Pandas_Mapflags
 int32 map_getmapflag_param(int16 m, enum e_mapflag mapflag, size_t index);
 void map_setmapflag_param(int16 m, enum e_mapflag mapflag, size_t index, int32 value);
+void map_setmapflag_param(int16 m, enum e_mapflag mapflag, const std::vector<int32>& values);
+void map_setmapflag_param_reset(int16 m, enum e_mapflag mapflag);
 bool map_mapflag_valid_index(e_mapflag mapflag, size_t index);
 #endif // Pandas_Mapflags
 #define map_getmapflag(m, mapflag) map_getmapflag_sub(m, mapflag, nullptr)
