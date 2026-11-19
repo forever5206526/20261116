@@ -201,3 +201,22 @@ setmapflag "prontera", MF_NOMERC;
 ```text
 removemapflag "prontera", MF_NOMERC;
 ```
+
+
+### HideDamage 地圖標記
+
+- 新增 `MF_HIDEDAMAGE`／`hidedamage` 地圖標記。
+- 啟用後隱藏該地圖上的普通攻擊與技能傷害數字；不改變實際傷害、命中或戰鬥結果。
+- 已合併至正式 `main`（PR #9），合併後 Visual Studio 編譯、PRE／RE NPC／資料庫驗證、功能回歸測試及 CodeQL 全部通過。
+
+設定：
+
+```text
+setmapflag "prontera", MF_HIDEDAMAGE;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_HIDEDAMAGE;
+```
