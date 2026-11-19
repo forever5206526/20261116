@@ -1,7 +1,7 @@
 // 技能傷害調整資料庫
 //
 // 資料庫格式：
-// SkillName,Caster,Map,Damage against Players{,Damage against Mobs{,Damage against Bosses{,Damage against Other}}}
+// SkillName,Caster,Map,對玩家傷害{,對魔物傷害{,對首領傷害{,對其他目標傷害}}}
 //
 // Caster：套用調整效果的對象群組（位元遮罩）。
 //		BL_PC = 玩家
