@@ -91,9 +91,12 @@ static void Sql_ConfigApplyInternal(std::string& host, PortType& port, std::stri
 		host = sql_config_host;
 	if (sql_config_port_set)
 		port = static_cast<PortType>(sql_config_port);
-	if (sql_config_user_set)
+	// Empty shared values do not erase legacy per-service credentials.
+	// With no legacy value either, the connection guard below rejects startup
+	// instead of silently falling back to a public/default account.
+	if (sql_config_user_set && !sql_config_user.empty())
 		user = sql_config_user;
-	if (sql_config_password_set)
+	if (sql_config_password_set && !sql_config_password.empty())
 		password = sql_config_password;
 }
 
@@ -175,9 +178,9 @@ int32 Sql_Connect(Sql* self, const char* user, const char* passwd, const char* h
 		return SQL_ERROR;
 	}
 
-	if (strcmpi(passwd, "ragnarok") == 0) {
-		ShowSQL("Refusing MySQL connection: the public default SQL password 'ragnarok' is blocked. "
-			"Set a unique password and update the matching MySQL account.\n");
+	if (strcmpi(user, "ragnarok") == 0 && strcmpi(passwd, "ragnarok") == 0) {
+		ShowSQL("Refusing MySQL connection: the public default SQL credentials 'ragnarok/ragnarok' are blocked. "
+			"Configure a dedicated SQL account and a unique password.\n");
 		return SQL_ERROR;
 	}
 
