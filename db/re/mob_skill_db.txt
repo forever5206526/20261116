@@ -1,61 +1,61 @@
 // Mob Skill Database
 // Based on Aegis Episode 11.3
 //
-// Structure of Database:
+// 資料庫格式：
 // MobID,Dummy value (info only),State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
 //
-// RATE: the chance of the skill being casted when the condition is fulfilled (10000 = 100%).
-// DELAY: the time (in milliseconds) before attempting to recast the same skill.
+// RATE：符合條件時施放技能的機率（10000 = 100%）。
+// DELAY：再次嘗試施放相同技能前的等待時間（毫秒）。
 //
-// STATE:
-//	any (except dead) / idle (in standby) / walk (in movement) / dead (on killed) /
-//	loot /attack / angry (like attack, except player has not attacked mob yet) /
-//	chase (following target, after being attacked) / follow (following target,
-//	without being attacked) / anytarget (attack+angry+chase+follow)
+// 狀態：
+//	any（除死亡外的任何狀態）／idle（待機）／walk（移動）／dead（死亡時）／
+//	loot（撿取）／attack（攻擊）／angry（類似攻擊，但玩家尚未攻擊魔物）／
+//	chase（受到攻擊後追擊目標）／follow（跟隨目標，
+//	未受到攻擊）／anytarget（attack+angry+chase+follow）
 //
-// TARGET:
-//	target (current target) / self / friend / master / randomtarget (any enemy within skill's range)
+// 目標：
+//	target（目前目標）／self（自身）／friend（友方）／master（主人）／randomtarget（技能範圍內的任意敵人）
 //
-//	The following are for ground-skills, a random target tile is selected from the specified area:
-//	    around1 (3x3 area around self) / around2 (5x5 area around self) /
-//	    around3 (7x7 area around self) / around4 (9x9 area around self) /
-//	    around5 (3x3 area around target) / around6 (5x5 area around target) /
-//	    around7 (7x7 area around target) / around8 (9x9 area around target) /
+//	以下項目適用於地面技能，系統會從指定範圍中隨機選擇目標格：
+//	    around1（自身周圍 3x3 範圍）／around2（自身周圍 5x5 範圍）／
+//	    around3（自身周圍 7x7 範圍）／around4（自身周圍 9x9 範圍）／
+//	    around5（目標周圍 3x3 範圍）／around6（目標周圍 5x5 範圍）／
+//	    around7（目標周圍 7x7 範圍）／around8（目標周圍 9x9 範圍）／
 //	    around = around4
 //
-// CONDITION:
-//	always			Unconditional (no condition value).
-//	onspawn			When mob spawns/respawns (no condition value).
-//	myhpltmaxrate		When mob's HP drops to the specified %.
-//	myhpinrate		When mob's HP is in a certain % range (condition value = lower bound, val1 = upper bound).
-//	mystatuson		If mob has the specified abnormality in status.
-//	mystatusoff		If mob has ended the specified abnormality in status.
-//	friendhpltmaxrate	When mob's friend's HP drops to the specified %.
-//	friendhpinrate		When mob's friend's HP is in a certain % range (condition value = lower bound, val1 = upper bound).
-//	friendstatuson		If friend has the specified abnormality in status.
-//	friendstatusoff		If friend has ended the specified abnormality in status.
-//	attackpcgt		When attack PCs become greater than specified number.
-//	attackpcge		When attack PCs become greater than or equal to the specified number.
-//	slavelt			When number of slaves is less than the original specified number.
-//	slavele			When number of slaves is less than or equal to the original specified number.
-//	closedattacked		When close range melee attacked (no condition value).
-//	longrangeattacked	When long range attacked, ex. bows, guns, ranged skills (no condition value).
-//	skillused		When the specified skill is used on the mob.
-//	afterskill		After mob casts the specified skill.
-//	casttargeted		When a target is in cast range (no condition value).
-//	rudeattacked		When mob is rude attacked (no condition value).
-//	mobnearbygt		When monsters in range become greater than specified number.
-//	groundattacked		When mob is hit by ground targeted skill (no condition value).
-//	damagedgt		When single attack deals greater damage than specified number.
+// 條件：
+//	always			無條件觸發（不需要條件值）。
+//	onspawn			魔物生成／重生時觸發（不需要條件值）。
+//	myhpltmaxrate		魔物 HP 降至指定百分比時觸發。
+//	myhpinrate		魔物 HP 落在指定百分比範圍時觸發（condition value = 下限，val1 = 上限）。
+//	mystatuson		魔物具有指定異常狀態時觸發。
+//	mystatusoff		魔物的指定異常狀態結束時觸發。
+//	friendhpltmaxrate	魔物友方的 HP 降至指定百分比時觸發。
+//	friendhpinrate		魔物友方的 HP 落在指定百分比範圍時觸發（condition value = 下限，val1 = 上限）。
+//	friendstatuson		友方具有指定異常狀態時觸發。
+//	friendstatusoff		友方的指定異常狀態結束時觸發。
+//	attackpcgt		攻擊魔物的玩家數量大於指定數值時觸發。
+//	attackpcge		攻擊魔物的玩家數量大於或等於指定數值時觸發。
+//	slavelt			從屬魔物數量低於原先指定數量時觸發。
+//	slavele			從屬魔物數量小於或等於原先指定數量時觸發。
+//	closedattacked		受到近距離近戰攻擊時觸發（不需要條件值）。
+//	longrangeattacked	受到遠距離攻擊時觸發，例如弓、槍及遠距離技能（不需要條件值）。
+//	skillused		指定技能對魔物施放時觸發。
+//	afterskill		魔物施放指定技能後觸發。
+//	casttargeted		目標進入技能施放範圍時觸發（不需要條件值）。
+//	rudeattacked		魔物受到 rude attack 條件觸發時執行（不需要條件值）。
+//	mobnearbygt		指定範圍內的魔物數量大於設定值時觸發。
+//	groundattacked		魔物受到指定地面技能攻擊時觸發（不需要條件值）。
+//	damagedgt		單次攻擊造成的傷害高於指定數值時觸發。
 //
-//	Status abnormalities specified through the statuson/statusoff system:
+//	透過 statuson/statusoff 系統指定的異常狀態：
 //	    anybad (any type of state change) / stone / freeze / stun / sleep /
 //	    poison / curse / silence / confusion / blind / hiding / sight (unhidden)
 //
-// Note: if a negative MobID is provided, the skill will be treated as 'global':
-//	-1: added for all boss types.
-//	-2: added for all normal types.
-//	-3: added for all mobs.
+// 注意：若提供負數 MobID，該技能將視為「全域」技能：
+//	-1：套用至所有 Boss 類型魔物。
+//	-2：套用至所有一般類型魔物。
+//	-3：套用至所有魔物。
 
 1001,Scorpion@NPC_FIREATTACK,attack,186,1,2000,0,5000,yes,target,always,0,,,,,,,
 1001,Scorpion@NPC_POISON,attack,176,3,500,800,5000,no,target,always,0,,,,,,,
