@@ -98,6 +98,42 @@ jobs:
         shell: bash
         run: bash tools/ci/sql.sh
 
+      - name: Reject missing Windows SQL root password before running MySQL
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $stubDir = Join-Path $env:RUNNER_TEMP 'brhades-mysql-negative-test'
+          New-Item -ItemType Directory -Path $stubDir -Force | Out-Null
+          $stub = Join-Path $stubDir 'mysql.cmd'
+          $marker = Join-Path $stubDir 'mysql-was-invoked.txt'
+          @(
+            '@echo off'
+            "echo invoked>""$marker"""
+            'exit /b 99'
+          ) | Set-Content -LiteralPath $stub -Encoding ascii
+
+          $env:MYSQL = '"' + $stub + '"'
+          $env:DB_ROOT = 'root'
+          Remove-Item Env:DB_ROOTPW -ErrorAction SilentlyContinue
+          $env:DB_NAME = 'missing_password_test'
+          $env:DB_USER = 'brhades_missing_password_test'
+          $env:DB_HOST = '127.0.0.1'
+          $env:DB_USERPW = 'unused-test-password'
+
+          $output = & $env:ComSpec /d /c 'call tools\ci\sql.bat' 2>&1
+          $exitCode = $LASTEXITCODE
+          $joined = [string]::Join([Environment]::NewLine, $output)
+          if ($exitCode -ne 1) {
+            throw "sql.bat must fail with exit code 1 when DB_ROOTPW is missing. Exit: $exitCode. Output: $joined"
+          }
+          if ($joined -notmatch 'DB_ROOTPW') {
+            throw "sql.bat did not identify the missing DB_ROOTPW variable. Output: $joined"
+          }
+          if (Test-Path -LiteralPath $marker) {
+            throw 'sql.bat invoked mysql despite the missing DB_ROOTPW variable.'
+          }
+          Write-Host 'PASS: missing DB_ROOTPW is rejected before any MySQL command is executed.'
+
       - name: Validate Windows SQL batch helper against MySQL 8
         shell: pwsh
         run: |
