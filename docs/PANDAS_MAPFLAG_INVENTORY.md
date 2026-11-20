@@ -13,11 +13,11 @@ Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`
 
 ## Pandas MapFlag 完整清單
 
-Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 13 項；其餘 11 項仍待逐項比對及移植。
+Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 16 項；其餘 8 項仍待逐項比對及移植。
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
-| `Pandas_MapFlag_MobInfo` | mobinfo 地圖魔物資訊顯示 | 已移植 MobInfo 專用單參數版本；通用多參數 Mapflags 框架仍待補齊，不能視為框架完整 |
+| `Pandas_MapFlag_MobInfo` | mobinfo 地圖魔物資訊顯示 | 已整合共用多參數 MapFlag 框架、地圖參數設定／查詢、NPC mapflag、腳本 setmapflag/removemapflag 與 @mapinfo/@mapflag；仍待實際遊戲客戶端驗收 |
 | `Pandas_MapFlag_NoAutoLoot` | 禁止地圖自動拾取 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoToken` | 禁止原地復活之證 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_NoCapture` | 禁止寵物捕捉 | 已移植相容別名；轉接 brHades 原生 MF_NOPETCAPTURE |
@@ -27,8 +27,8 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_NoPet` | 禁止地圖使用寵物（啟用時退回寵物蛋） | 已移植／PR #5 的 35 項 CI checks 全部成功 |
 | `Pandas_MapFlag_NoHomun` | 禁止召喚人工生命體 | brHades 原生等價實作；PR #5 的 NoHomun 回歸測試隨 CI 通過 |
 | `Pandas_MapFlag_NoMerc` | 禁止召喚佣兵 | 已移植並合併至 main；39 項 CI checks 全部成功（含 VS Debug/Release、Win32/x64、PRE/RE、NPC/DB、CodeQL） |
-| `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 待核對及移植 |
-| `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 待核對及移植 |
+| `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及魔物掉落倍率套用 |
+| `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及 MVP 掉落倍率套用 |
 | `Pandas_MapFlag_MaxHeal` | 限制地圖最大治癒量 | 待核對及移植 |
 | `Pandas_MapFlag_MaxDmg_Skill` | 限制地圖最大技能傷害 | 待核對及移植 |
 | `Pandas_MapFlag_MaxDmg_Normal` | 限制地圖最大普通攻擊傷害 | 待核對及移植 |
@@ -44,7 +44,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 ## 下一批執行順序
 
-1. 先完成 Pandas_Mapflags 通用多參數框架，補齊 NPC mapflag、setmapflag/removemapflag、@mapinfo、@mapflag 的共用處理；再以此框架移植剩餘參數型地圖標記。
+1. 共用多參數 MapFlag 框架已整合至 main；下一步逐項移植剩餘參數型地圖標記：MaxHeal、MaxDmg_Skill、MaxDmg_Normal、MaxASPD，並補齊 NoSkill2、NoAttack2、NoAura、NoBank 的相依核對。
 2. 對不存在的功能追蹤 Pandas 實作、相依資料結構、封包、腳本常量、設定、訊息與資料庫。
 3. 依相依關係排序，先處理可獨立驗證且不需大幅改動核心結構的功能。
 4. 每個功能獨立修改、回歸測試、Debug/Release x64/Win32 雲端建置，再更新本表狀態。
