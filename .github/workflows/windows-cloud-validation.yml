@@ -80,5 +80,8 @@ jobs:
       - name: MaxDmg mapflag regression test
         run: python tools/integration/test_maxdmg_mapflags.py
 
+      - name: NoBank mapflag regression test
+        run: python tools/integration/test_nobank_mapflag.py
+
       - name: HideDamage mapflag regression test
         run: python tools/integration/test_hidedamage_mapflag.py
