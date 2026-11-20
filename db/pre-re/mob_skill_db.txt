@@ -1,8 +1,8 @@
 // Mob Skill Database
-// Based on Aegis Episode 11.3
+// 依據 Aegis 第 11.3 章資料。
 //
 // 資料庫格式：
-// MobID,Dummy value (info only),State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
+// MobID,Dummy value（僅供資訊參考）,State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
 //
 // RATE：符合條件時施放技能的機率（10000 = 100%）。
 // DELAY：再次嘗試施放相同技能前的等待時間（毫秒）。
@@ -41,21 +41,21 @@
 //	closedattacked		受到近距離近戰攻擊時觸發（不需要條件值）。
 //	longrangeattacked	受到遠距離攻擊時觸發，例如弓、槍及遠距離技能（不需要條件值）。
 //	skillused		指定技能對魔物施放時觸發。
-//	afterskill		After mob casts the specified skill.
-//	casttargeted		When a target is in cast range (no condition value).
-//	rudeattacked		When mob is rude attacked (no condition value).
+//	afterskill		魔物施放指定技能後觸發。
+//	casttargeted		目標進入詠唱範圍時觸發（不需要條件值）。
+//	rudeattacked		魔物受到挑釁攻擊時觸發（不需要條件值）。
 //	mobnearbygt		指定範圍內的魔物數量大於設定值時觸發。
-//	groundattacked		When mob is hit by ground targeted skill (no condition value).
-//	damagedgt		When single attack deals greater damage than specified number.
+//	groundattacked		魔物受到指定地面範圍技能攻擊時觸發（不需要條件值）。
+//	damagedgt		單次攻擊造成的傷害大於指定數值時觸發。
 //
 //	透過 statuson/statusoff 系統指定的異常狀態：
-//	    anybad (any type of state change) / stone / freeze / stun / sleep /
+//	    anybad（任何狀態變更）／stone／freeze／stun／sleep／
 //	    poison / curse / silence / confusion / blind / hiding / sight (unhidden)
 //
-// Note: if a negative MobID is provided, the skill will be treated as 'global':
-//	-1: added for all boss types.
-//	-2: added for all normal types.
-//	-3: added for all mobs.
+// 注意：若提供負數 MobID，該技能將視為「全域」設定：
+//	-1：套用至所有頭目類型。
+//	-2：套用至所有一般魔物類型。
+//	-3：套用至所有魔物。
 
 1001,Scorpion@NPC_FIREATTACK,attack,186,1,2000,0,5000,yes,target,always,0,,,,,,,
 1001,Scorpion@NPC_POISON,attack,176,3,500,800,5000,no,target,always,0,,,,,,,
@@ -5319,7 +5319,7 @@
 1979,Zukadam@NPC_RANDOMATTACK,attack,183,5,1000,500,5000,no,target,always,0,,,,,,,
 1979,Zukadam@NPC_SUMMONSLAVE,idle,196,2,10000,0,0,no,self,onspawn,0,1668,,,,,,
 
-// Memory of Orc Dungeon (13.1)
+// 獸人地下洞窟記憶（13.1）
 1981,Safeguard Chief@SM_BASH,attack,5,10,500,1000,5000,no,target,always,0,,,,,,,
 1981,Safeguard Chief@SM_BASH,chase,5,10,500,1000,5000,no,target,always,0,,,,,,,
 1981,Safeguard Chief@NPC_DARKNESSATTACK,attack,190,3,500,500,5000,no,target,always,0,,,,,,6,
@@ -5338,7 +5338,7 @@
 1984,Shaman Cargalache@NPC_EMOTION,chase,197,1,2000,0,5000,yes,self,always,0,3,,,,,,
 1984,Shaman Cargalache@NPC_EVILLAND,attack,670,1,500,0,5000,yes,target,always,0,,,,,,,
 
-//The New World Mob Skill (13.1)
+//新世界魔物技能（13.1）
 1985,Dandelion@NPC_CHANGEUNDEAD,attack,348,1,3000,500,600000,no,target,myhpltmaxrate,80,,,,,,,
 1985,Dandelion@NPC_CHANGEUNDEAD,chase,348,1,3000,500,600000,no,target,myhpltmaxrate,80,,,,,,,
 1985,Dandelion@NPC_COMBOATTACK,attack,171,1,3000,0,5000,yes,target,always,0,,,,,,,
@@ -5556,7 +5556,7 @@
 2010,Majoruros@WZ_HEAVENDRIVE,attack,91,5,500,1200,5000,yes,target,always,0,,,,,,2,
 2010,Majoruros@WZ_HEAVENDRIVE,chase,91,5,500,1200,5000,yes,target,always,0,,,,,,2,
 
-// Into the Unknown (13.2)
+// 探索未知（13.2）
 2013,Draco@NPC_EMOTION,chase,197,1,2000,0,5000,yes,self,always,0,32,,,,,,
 2013,Draco@SM_PROVOKE,chase,6,10,2000,600,5000,no,target,always,0,,,,,,44,
 2013,Draco@TF_THROWSTONE,chase,152,1,2000,0,5000,no,target,always,0,,,,,,,
