@@ -13,7 +13,7 @@ Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`
 
 ## Pandas MapFlag 完整清單
 
-Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 17 項；其餘 7 項仍待逐項比對及移植。
+Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 19 項；其餘 5 項仍待逐項比對及移植。
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
@@ -30,13 +30,13 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及魔物掉落倍率套用 |
 | `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及 MVP 掉落倍率套用 |
 | `Pandas_MapFlag_MaxHeal` | 限制地圖最大治癒量 | 已移植／PR #27 已合併；26 項 CI checks 全部成功，僅限制治療分支，不影響傷害計算 |
-| `Pandas_MapFlag_MaxDmg_Skill` | 限制地圖最大技能傷害 | 已建立移植分支；程式碼與回歸測試待 CI／PRE／RE 驗證，尚未計入完成數 |
-| `Pandas_MapFlag_MaxDmg_Normal` | 限制地圖最大普通攻擊傷害 | 已建立移植分支；程式碼與回歸測試待 CI／PRE／RE 驗證，尚未計入完成數 |
+| `Pandas_MapFlag_MaxDmg_Skill` | 限制地圖最大技能傷害 | 已移植／PR #40 已合併；20 組 VS2019／VS2022／VS2026 × Debug／Release × Win32／x64 × PRE／RE 全數成功，PRE／RE NPC／DB、CodeQL 與回歸測試通過 |
+| `Pandas_MapFlag_MaxDmg_Normal` | 限制地圖最大普通攻擊傷害 | 已移植／PR #40 已合併；技能與普通攻擊分流，主副手合計限傷，20 組 VS 建置、PRE／RE NPC／DB、CodeQL 與回歸測試通過 |
 | `Pandas_MapFlag_NoSkill2` | 依單位類型禁止技能 | 待核對及移植 |
 | `Pandas_MapFlag_NoAura` | 禁用地圖光環效果 | 待核對；依賴 Aura 機制 |
 | `Pandas_MapFlag_MaxASPD` | 限制地圖最大攻速 | 待核對及移植 |
 | `Pandas_MapFlag_NoSlave` | 禁止魔物召喚隨從 | 已移植／回歸測試通過 |
-| `Pandas_MapFlag_NoBank` | 禁止銀行操作體驗調整 | 待核對 brHades 原生實作與體驗差異 |
+| `Pandas_MapFlag_NoBank` | 禁止銀行操作體驗調整 | 已確認原生 MF_NOBANK 等價；Pandas 唯一差異為禁止銀行時顯示紅色訊息框，PR #41 補齊此體驗，待 CI 驗收 |
 | `Pandas_MapFlag_NoUseItem` | 禁止使用消耗型道具 | 已移植／回歸測試通過 |
 | `Pandas_MapFlag_HideDamage` | 隱藏地圖傷害數值 | 已移植／PR #9 合併；合併後 VS、PRE/RE NPC/DB、回歸測試及 CodeQL 全部通過 |
 | `Pandas_MapFlag_NoAttack` | 禁止普通攻擊 | 已移植／回歸測試通過 |
@@ -44,7 +44,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 ## 下一批執行順序
 
-1. MaxDmg_Skill／MaxDmg_Normal 已建立獨立移植分支，須通過 CI、Visual Studio、PRE／RE 驗證後才計入完成數；其後接續 MaxASPD、NoSkill2、NoAttack2、NoAura、NoBank。
+1. MaxDmg_Skill／MaxDmg_Normal 已由 PR #40 合併驗收。NoBank 的原生功能已存在，PR #41 補齊紅色提示樣式；其後依序處理 NoSkill2、NoAttack2、MaxASPD，最後處理依賴 Aura 機制的 NoAura。
 2. 對不存在的功能追蹤 Pandas 實作、相依資料結構、封包、腳本常量、設定、訊息與資料庫。
 3. 依相依關係排序，先處理可獨立驗證且不需大幅改動核心結構的功能。
 4. 每個功能獨立修改、回歸測試、Debug/Release x64/Win32 雲端建置，再更新本表狀態。
