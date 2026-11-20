@@ -35,13 +35,12 @@ PING -n 15 127.0.0.1 > NUL
 
 :START_RA
 %1
-set "server_exit_code=%ERRORLEVEL%"
 ECHO.
+REM IF ERRORLEVEL n matches any exit code greater than or equal to n; test 2 before 1.
 REM EXIT_FAILURE (1) means the service rejected startup or stopped normally with an error.
 REM Do not restart a service that reports a normal failure (for example, invalid SQL credentials).
-if "%server_exit_code%"=="1" GOTO EXIT1
-REM Any other non-zero result indicates an unexpected crash and may be restarted.
-if not "%server_exit_code%"=="0" GOTO CRASHED
+IF ERRORLEVEL 2 GOTO CRASHED
+IF ERRORLEVEL 1 GOTO EXIT1
 REM Return value 0 is EXIT_SUCCESS
 ECHO %2 has shutdown successfully.
 GOTO RESTART_NT
@@ -51,7 +50,7 @@ ECHO %2 has terminated with EXIT_FAILURE (exit code 1); automatic restart is sup
 GOTO END
 
 :CRASHED
-ECHO %2 has crashed (exit code %server_exit_code%)!
+ECHO %2 has crashed or returned an unexpected non-zero exit code!
 GOTO RESTART_NT
 
 :DIRECT
