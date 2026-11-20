@@ -63,6 +63,12 @@ def main() -> None:
                 f" {executable} {title}".casefold() in script,
                 f"{filename} must run its service helper from the binary directory", failures)
 
+    workflow = (ROOT / ".github/workflows/windows-server-launcher.yml").read_text(encoding="utf-8").casefold()
+    require("stop retry loop after normal startup failure" in workflow and
+            "waitforexit(5000)" in workflow and
+            "(echo exit 1& echo.)|call serv.bat cmd.exe fakeserver on" in workflow,
+            "Windows CI must execute and time-limit the EXIT_FAILURE restart-loop regression test", failures)
+
     # Batch IF ERRORLEVEL checks are ranges, not exact equality checks.
     # Capture the process code and distinguish EXIT_FAILURE from crashes.
     supervisor = (ROOT / "tools/serv.bat").read_text(encoding="utf-8").casefold()
