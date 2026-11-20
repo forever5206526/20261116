@@ -1,0 +1,152 @@
+name: Cleanup merged working branches
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: cleanup-merged-working-branches
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    name: Remove only safely merged branches
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove merged and inactive branches
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const repository = owner + "/" + repo;
+            // Only main is permanently protected. Any other branch with
+            // commits not contained in main is preserved by the ancestry check below.
+            const protectedNames = new Set(["main"]);
+
+            const [branches, openPullRequests, closedPullRequests] = await Promise.all([
+              github.paginate(github.rest.repos.listBranches, {
+                owner,
+                repo,
+                per_page: 100,
+              }),
+              github.paginate(github.rest.pulls.list, {
+                owner,
+                repo,
+                state: "open",
+                per_page: 100,
+              }),
+              github.paginate(github.rest.pulls.list, {
+                owner,
+                repo,
+                state: "closed",
+                per_page: 100,
+              }),
+            ]);
+
+            const activeRefs = new Set();
+            for (const pr of openPullRequests) {
+              if (pr.head.repo?.full_name === repository) {
+                activeRefs.add(pr.head.ref);
+              }
+              if (pr.base.repo?.full_name === repository) {
+                activeRefs.add(pr.base.ref);
+              }
+            }
+
+            const mainBranch = branches.find((branch) => branch.name === "main");
+            if (!mainBranch) {
+              throw new Error("The main branch could not be found; refusing all branch cleanup.");
+            }
+            const mainCommit = await github.rest.git.getCommit({
+              owner,
+              repo,
+              commit_sha: mainBranch.commit.sha,
+            });
+            const mainTreeSha = mainCommit.data.tree.sha;
+
+            const mergedHeadShas = new Map();
+            for (const pr of closedPullRequests) {
+              if (!pr.merged_at || pr.base.ref !== "main" ||
+                  pr.head.repo?.full_name !== repository) {
+                continue;
+              }
+              const shas = mergedHeadShas.get(pr.head.ref) ?? new Set();
+              shas.add(pr.head.sha);
+              mergedHeadShas.set(pr.head.ref, shas);
+            }
+
+            let deleted = 0;
+            let kept = 0;
+            for (const branch of branches) {
+              const name = branch.name;
+              if (protectedNames.has(name) || branch.protected || activeRefs.has(name)) {
+                core.info("Keep " + name + ": protected or used by an open pull request.");
+                kept++;
+                continue;
+              }
+
+              let safeToDelete = mergedHeadShas.get(name)?.has(branch.commit.sha) ?? false;
+              if (!safeToDelete) {
+                try {
+                  const comparison = await github.rest.repos.compareCommitsWithBasehead({
+                    owner,
+                    repo,
+                    basehead: "main..." + name,
+                  });
+                  safeToDelete = comparison.data.ahead_by === 0;
+                } catch (error) {
+                  core.warning("Commit-history comparison failed for " + name + ": " + error.message);
+                }
+              }
+
+              // Different commit histories can still have identical file trees.
+              // Delete only when the complete branch tree is byte-for-byte the same as main.
+              if (!safeToDelete) {
+                try {
+                  const branchCommit = await github.rest.git.getCommit({
+                    owner,
+                    repo,
+                    commit_sha: branch.commit.sha,
+                  });
+                  safeToDelete = branchCommit.data.tree.sha === mainTreeSha;
+                  if (safeToDelete) {
+                    core.info("Delete " + name + ": its complete Git tree is identical to main.");
+                  }
+                } catch (error) {
+                  core.warning("Keep " + name + ": unable to verify its Git tree (" + error.message + ").");
+                }
+              }
+
+              if (!safeToDelete) {
+                core.info("Keep " + name + ": it still contains commits not merged into main.");
+                kept++;
+                continue;
+              }
+
+              try {
+                await github.rest.git.deleteRef({
+                  owner,
+                  repo,
+                  ref: "heads/" + name,
+                });
+                core.info("Deleted " + name + ": its current tip is included in main or matches a merged PR head.");
+                deleted++;
+              } catch (error) {
+                core.warning("Could not delete " + name + ": " + error.message);
+                kept++;
+              }
+            }
+
+            core.notice("Branch cleanup complete. Deleted " + deleted + "; kept " + kept + ".");
