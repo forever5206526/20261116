@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 import shlex
 import subprocess
@@ -38,7 +39,10 @@ def production_condition() -> str:
 def source_contract() -> None:
     header = (ROOT / "src/map/map.hpp").read_text(encoding="utf-8-sig")
     enum_start = header.index("enum e_mapflag")
-    enum_end = header.index("MF_MAX", enum_start)
+    enum_sentinel = re.search(r"(?m)^[\\t ]*MF_MAX[\\t ]*$", header[enum_start:])
+    if enum_sentinel is None:
+        raise AssertionError("e_mapflag 的 MF_MAX 結尾標記不存在")
+    enum_end = enum_start + enum_sentinel.start()
     enum_body = header[enum_start:enum_end]
     if enum_body.count("MF_NOAUTOLOOT") != 1:
         raise AssertionError("MF_NOAUTOLOOT 必須在 e_mapflag 中、MF_MAX 之前且只出現一次")
