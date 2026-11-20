@@ -3721,6 +3721,22 @@ void map_flags_init(void) {
 		{{0, 0, INT_MAX, nullptr}}
 	});
 #endif // Pandas_MapFlag_MaxDmg_Normal
+#ifdef Pandas_MapFlag_NoSkill2
+	mapflag_config.emplace(MF_NOSKILL2, s_mapflag_item{
+		"NoSkill2",
+		true,
+		true,
+		{{0, 0, BL_ALL, nullptr}}
+	});
+#endif // Pandas_MapFlag_NoSkill2
+#ifdef Pandas_MapFlag_NoAttack2
+	mapflag_config.emplace(MF_NOATTACK2, s_mapflag_item{
+		"NoAttack2",
+		false,
+		false,
+		{{0, 0, BL_ALL, nullptr}}
+	});
+#endif // Pandas_MapFlag_NoAttack2
 #ifdef Pandas_MapFlag_HideDamage
 	mapflag_config.emplace(MF_HIDEDAMAGE, s_mapflag_item{
 		"HideDamage",
