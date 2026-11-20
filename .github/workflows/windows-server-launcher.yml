@@ -1,0 +1,64 @@
+name: Windows server launcher validation
+
+on:
+  push:
+    branches:
+      - main
+      - work/brhades-pandas-full-port
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  launcher-paths:
+    name: Launcher path compatibility
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Exercise root and tools launchers from a path containing spaces and another working directory
+        shell: pwsh
+        run: |
+          $testRoot = Join-Path $env:RUNNER_TEMP 'brHades server launcher path with spaces'
+          $toolsDir = Join-Path $testRoot 'tools'
+          New-Item -ItemType Directory -Path $toolsDir -Force | Out-Null
+
+          Copy-Item -Path 'tools/*.bat' -Destination $toolsDir
+          $toolsLauncher = Join-Path $toolsDir 'runserver.bat'
+          $rootLauncher = Join-Path $testRoot 'runserver.bat'
+          Copy-Item -LiteralPath 'tools/runserver.bat' -Destination $rootLauncher
+
+          function Test-Launcher([string]$launcherPath, [string]$expectedDirectory) {
+            Push-Location $env:RUNNER_TEMP
+            try {
+              $command = 'call "{0}" status' -f $launcherPath
+              $output = & $env:ComSpec /d /c $command 2>&1
+              $exitCode = $LASTEXITCODE
+              $joined = [string]::Join([Environment]::NewLine, $output)
+
+              if ($exitCode -ne 0) {
+                throw ("runserver.bat returned exit code " + $exitCode + ". Output: " + $joined)
+              }
+              if ($joined -notmatch 'Getting status of all servers') {
+                throw ("runserver.bat did not execute its status handler. Output: " + $joined)
+              }
+              if ($joined -notmatch 'login-server is (not running|running)') {
+                throw ("runserver.bat did not report login-server process state. Output: " + $joined)
+              }
+              if ($joined.IndexOf($expectedDirectory, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
+                throw ("runserver.bat resolved the wrong server directory. Expected: " + $expectedDirectory + ". Output: " + $joined)
+              }
+              Write-Host $joined
+            }
+            finally {
+              Pop-Location
+            }
+          }
+
+          Test-Launcher $toolsLauncher $testRoot
+          Test-Launcher $rootLauncher $testRoot
