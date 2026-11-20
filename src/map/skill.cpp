@@ -781,7 +781,7 @@ int32 skill_calc_heal(struct block_list *src, struct block_list *target, uint16 
 	// Limit healing only; leave the damage component unchanged.
 	if (heal && src && map_getmapflag(src->m, MF_MAXHEAL)) {
 		int32 limit = map_getmapflag_param(src->m, MF_MAXHEAL, 1);
-		return (limit > 0) ? cap_value(hp, 1, limit) : max(1, hp);
+		return (limit > 0 && hp > limit) ? limit : hp;
 	}
 #endif // Pandas_MapFlag_MaxHeal
 	return hp;
