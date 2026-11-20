@@ -172,6 +172,10 @@ echo(%MapServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul && set "map_r
 goto :EOF
 
 :cleanup
-set "RESULT=%ERRORLEVEL%"
+if "%target%"=="status" (
+    set "RESULT=0"
+) else (
+    set "RESULT=%ERRORLEVEL%"
+)
 popd
 endlocal & exit /b %RESULT%
