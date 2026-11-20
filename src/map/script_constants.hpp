@@ -566,6 +566,9 @@
 #ifdef Pandas_MapFlag_MaxDmg_Normal
 	export_constant(MF_MAXDMG_NORMAL);
 #endif // Pandas_MapFlag_MaxDmg_Normal
+#ifdef Pandas_MapFlag_NoSkill2
+	export_constant(MF_NOSKILL2);
+#endif // Pandas_MapFlag_NoSkill2
 #ifdef Pandas_MapFlag_NoAutoLoot
 	export_constant(MF_NOAUTOLOOT);
 #endif // Pandas_MapFlag_NoAutoLoot
@@ -587,6 +590,9 @@
 #ifdef Pandas_MapFlag_NoAttack
 	export_constant(MF_NOATTACK);
 #endif // Pandas_MapFlag_NoAttack
+#ifdef Pandas_MapFlag_NoAttack2
+	export_constant(MF_NOATTACK2);
+#endif // Pandas_MapFlag_NoAttack2
 #ifdef Pandas_MapFlag_NoUseItem
 	export_constant(MF_NOUSEITEM);
 #endif // Pandas_MapFlag_NoUseItem
