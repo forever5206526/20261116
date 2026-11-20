@@ -1,40 +1,40 @@
 @echo off
-rem This is and auto-restart script for the brHades Ragnarok Online Server Emulator.
-rem It will also keep the map server OPEN after it crashes to that errors may be
-rem more easily identified
-rem Writen by Jbain
-rem modified by lighta
+setlocal EnableExtensions DisableDelayedExpansion
 
-set SOURCE_DIR=%~dp0
-cd %SOURCE_DIR%
+set "TOOLS_DIR=%~dp0"
+for %%I in ("%~dp0..") do set "SERVER_DIR=%%~fI"
 
-if ["%~1"]==[""] (
- REM this is for backward compatibility
- set "target=watch"
-) else set target=%~1
-echo "target=%target%"
+pushd "%SERVER_DIR%" >nul
+if errorlevel 1 (
+    echo ERROR: Unable to enter the server directory "%SERVER_DIR%".
+    endlocal & exit /b 1
+)
 
-REM to avoid any localization issue
+if "%~1"=="" (set "target=watch") else set "target=%~1"
+echo target=%target%
+
+REM Keep service state variables independent from localized tasklist output.
 set "login_running=false"
 set "char_running=false"
 set "web_running=false"
 set "map_running=false"
 
-
-if "%target%" == "status" (
- call :getStatus
-) else if "%target%" == "watch" (
- call :Watch
-) else if "%target%" == "stop" (
- call :Stop
-) else if "%target%" == "start" (
- call :Start
+if "%target%"=="status" (
+    call :getStatus
+) else if "%target%"=="watch" (
+    call :Watch
+) else if "%target%"=="stop" (
+    call :Stop
+) else if "%target%"=="start" (
+    call :Start
+) else (
+    echo Usage: runserver.bat [start^|watch^|stop^|status]
 )
-goto :EOF
 
+goto :cleanup
 
 :Stop
-echo "Stoping all serv"
+echo Stopping all servers.
 call :stopLogin
 call :stopChar
 call :stopWeb
@@ -42,8 +42,7 @@ call :stopMap
 goto :EOF
 
 :Watch
-REM this is to align terminology with athena-start, (start with restart mode)
-echo "Starting all serv"
+echo Starting all servers in restart mode.
 set "restart_mode=on"
 call :startLogin
 call :startChar
@@ -52,7 +51,7 @@ call :startMap
 goto :EOF
 
 :Start
-echo "Starting all serv"
+echo Starting all servers without automatic restart.
 set "restart_mode=off"
 call :startLogin
 call :startChar
@@ -61,93 +60,118 @@ call :startMap
 goto :EOF
 
 :getStatus
-echo "Getting status of all serv"
+echo Getting status of all servers.
 call :getLoginStatus
 call :getCharStatus
 call :getWebStatus
 call :getMapStatus
 
-if "%login_running%" == "false" ( echo "login_serv is not running"
-) else echo "login_serv is running pid=%LoginServPID%"
-if "%char_running%" == "false" ( echo "char_serv is not running"
-) else echo "char_serv is running pid=%CharServPID%"
-if "%web_running%" == "false" ( echo "web_serv is not running"
-) else echo "web_serv is running pid=%WebServPID%"
-if "%map_running%" == "false" ( echo "map_serv is not running"
-) else echo "map_serv is running pid=%MapServPID%"
-
+if "%login_running%"=="false" (
+    echo login-server is not running.
+) else (
+    echo login-server is running. PID=%LoginServPID%
+)
+if "%char_running%"=="false" (
+    echo char-server is not running.
+) else (
+    echo char-server is running. PID=%CharServPID%
+)
+if "%web_running%"=="false" (
+    echo web-server is not running.
+) else (
+    echo web-server is running. PID=%WebServPID%
+)
+if "%map_running%"=="false" (
+    echo map-server is not running.
+) else (
+    echo map-server is running. PID=%MapServPID%
+)
 goto :EOF
 
-
-
-REM ====
-REM sub targets (a target per serv)
-REM ====
-
-REM stop sub targets
+REM Stop service helpers.
 :stopLogin
 call :getLoginStatus
-if "%login_running%" == "true" Taskkill /PID %LoginServPID% /F
+if "%login_running%"=="true" taskkill /PID %LoginServPID% /F
 goto :EOF
 
 :stopChar
 call :getCharStatus
-if "%char_running%" == "true"  Taskkill /PID %CharServPID% /F
+if "%char_running%"=="true" taskkill /PID %CharServPID% /F
 goto :EOF
 
 :stopWeb
 call :getWebStatus
-if "%web_running%" == "true" Taskkill /PID %WebServPID% /F
+if "%web_running%"=="true" taskkill /PID %WebServPID% /F
 goto :EOF
 
 :stopMap
 call :getMapStatus
-if "%map_running%" == "true" Taskkill /PID %MapServPID% /F
+if "%map_running%"=="true" taskkill /PID %MapServPID% /F
 goto :EOF
 
-REM start sub targets
+REM Start helpers always use the executable directory as their working directory.
 :startLogin
 call :getLoginStatus
-if "%login_running%" == "false" ( start cmd /k logserv.bat %restart_mode%
-) else echo "Login serv is already running pid=%LoginServPID%"
+if "%login_running%"=="false" (
+    start "Login Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%logserv.bat" %restart_mode%
+) else (
+    echo Login server is already running. PID=%LoginServPID%
+)
 goto :EOF
 
 :startChar
 call :getCharStatus
-if "%char_running%" == "false" ( start cmd /k charserv.bat %restart_mode%
-) else echo "Char serv is already running, pid=%CharServPID%"
+if "%char_running%"=="false" (
+    start "Char Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%charserv.bat" %restart_mode%
+) else (
+    echo Char server is already running. PID=%CharServPID%
+)
 goto :EOF
 
 :startWeb
 call :getWebStatus
-if "%web_running%" == "false" ( start cmd /k webserv.bat %restart_mode%
-) else echo "Web serv is already running, pid=%WebServPID%"
+if "%web_running%"=="false" (
+    start "Web Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%webserv.bat" %restart_mode%
+) else (
+    echo Web server is already running. PID=%WebServPID%
+)
 goto :EOF
 
 :startMap
 call :getMapStatus
-if "%map_running%" == "false" ( start cmd /k mapserv.bat %restart_mode%
-) else echo "Map serv is already running, pid=%MapServPID%"
+if "%map_running%"=="false" (
+    start "Map Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%mapserv.bat" %restart_mode%
+) else (
+    echo Map server is already running. PID=%MapServPID%
+)
 goto :EOF
 
-REM status sub targets
-
+REM Process status helpers.
 :getLoginStatus
-for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq login-server.exe"') do set LoginServPID=%%b
-echo(%LoginServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul&& set "login_running=true" || set "login_running=false"
+set "LoginServPID="
+for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq login-server.exe"') do set "LoginServPID=%%b"
+echo(%LoginServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul && set "login_running=true" || set "login_running=false"
 goto :EOF
 
 :getCharStatus
-for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq char-server.exe"') do set CharServPID=%%b
-echo(%CharServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul&& set "char_running=true" || set "char_running=false"
+set "CharServPID="
+for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq char-server.exe"') do set "CharServPID=%%b"
+echo(%CharServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul && set "char_running=true" || set "char_running=false"
 goto :EOF
 
 :getWebStatus
-for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq web-server.exe"') do set WebServPID=%%b
-echo(%WebServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul&& set "Web_running=true" || set "web_running=false"
+set "WebServPID="
+for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq web-server.exe"') do set "WebServPID=%%b"
+echo(%WebServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul && set "web_running=true" || set "web_running=false"
 goto :EOF
 
 :getMapStatus
-for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq map-server.exe"') do set MapServPID=%%b
-echo(%MapServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul&& set "map_running=true" || set "map_running=false"
+set "MapServPID="
+for /F "TOKENS=1,2,*" %%a in ('tasklist /FI "IMAGENAME eq map-server.exe"') do set "MapServPID=%%b"
+echo(%MapServPID%|findstr "^[-][1-9][0-9]*$ ^[1-9][0-9]*$ ^0$">nul && set "map_running=true" || set "map_running=false"
 goto :EOF
+
+:cleanup
+set "RESULT=%ERRORLEVEL%"
+popd
+endlocal & exit /b %RESULT%
