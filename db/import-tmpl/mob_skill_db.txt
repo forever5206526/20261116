@@ -40,18 +40,18 @@
 //	closedattacked		受到近距離近戰攻擊時觸發（不需要條件值）。
 //	longrangeattacked	受到遠距離攻擊時觸發，例如弓、槍及遠距離技能（不需要條件值）。
 //	skillused		指定技能對魔物施放時觸發。
-//	afterskill		After mob casts the specified skill.
-//	casttargeted		When a target is in cast range (no condition value).
-//	rudeattacked		When mob is rude attacked (no condition value).
+//	afterskill		魔物施放指定技能後觸發。
+//	casttargeted		目標進入詠唱範圍時觸發（不需要條件值）。
+//	rudeattacked		魔物受到挑釁攻擊時觸發（不需要條件值）。
 //	mobnearbygt		指定範圍內的魔物數量大於設定值時觸發。
-//	groundattacked		When mob is hit by ground targeted skill (no condition value).
-//	damagedgt		When single attack deals greater damage than specified number.
+//	groundattacked		魔物受到指定地面範圍技能攻擊時觸發（不需要條件值）。
+//	damagedgt		單次攻擊造成的傷害大於指定數值時觸發。
 //
 //	透過 statuson/statusoff 系統指定的異常狀態：
 //	    anybad（任何狀態變更）／stone（石化）／freeze（冰凍）／stun（暈眩）／sleep（睡眠）／
 //	    poison（中毒）／curse（詛咒）／silence（沉默）／confusion（混亂）／blind（黑暗）／hiding（隱匿）／sight（解除隱匿）
 //
-// Note: if a negative MobID is provided, the skill will be treated as 'global':
+// 注意：若提供負數 MobID，該技能將視為「全域」設定：
 //	-1: 套用至所有首領類型。
 //	-2: 套用至所有一般類型。
 //	-3: 套用至所有魔物。

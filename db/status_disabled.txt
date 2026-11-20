@@ -12,7 +12,7 @@
 // 4    - GVG 地圖中受限制
 // 8    - 戰場地圖中受限制
 // 16   - restricted in WOE:TE castles
-// 限制區域：透過 'restricted <number>' 地圖旗標設定
+// 限制區域：透過 'restricted <數字>' 地圖旗標設定
 // 32   - 限制區域 1
 // 64   - 限制區域 2
 // 128  - 限制區域 3

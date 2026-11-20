@@ -25,7 +25,7 @@
 #   SkillRange              技能施放距離。（預設：5）
 #   ChaseRange              追擊距離。（預設：12）
 #   Size                    體型。
-#   Race                    種族。 (Default: Formless)
+#   Race                    種族。 （預設：Formless）
 #   Element                 屬性。
 #   ElementLevel            屬性等級。
 #   WalkSpeed               移動速度。（預設：200）
