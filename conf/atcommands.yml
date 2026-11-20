@@ -685,7 +685,7 @@ Body:
       給予您指定的物品。
   - Command: item2
     Help: |
-      參數：<物品名稱或 ID> <數量> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
+      參數：<物品名稱或 ID> <數量> <是否已鑑定（0／1）> <精鍊等級> <是否損壞（0／1）> <卡片1> <卡片2> <卡片3> <卡片4>
       給予您指定的物品。
   - Command: pvpon
     Help: |
