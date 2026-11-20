@@ -24,7 +24,7 @@
 ###########################################################################
 # - Command                  指令名稱。
 #   Aliases:                 指令別名。（選填）
-#     - <AliasName>
+#     - <指令別名>
 #   Help                     指令說明文字。（選填）
 ###########################################################################
 
@@ -37,7 +37,7 @@ Body:
     Aliases:
       - h
     Help: |
-      參數：<command>
+      參數：<指令>
       顯示指定指令的說明。
   - Command: noask
     Help: |
@@ -47,33 +47,33 @@ Body:
       向所有玩家廣播每日訊息（MOTD）。
   - Command: me
     Help: |
-      參數：<message>
+      參數：<訊息>
       以「*名稱 訊息*」格式顯示一般文字（類似 mIRC 的 /me）。
   - Command: fakename
     Help: |
-      參數：<name>
+      參數：<名稱>
       暫時將您的名稱變更為指定名稱。
   - Command: npctalk
     Aliases:
       - npctalkc
     Help: |
-      參數：<NPC name> <message>
+      參數：<NPC 名稱> <訊息>
       強制 NPC 在一般聊天頻道中顯示訊息。
   - Command: broadcast
     Help: |
-      參數：<message>
+      參數：<訊息>
       以您的名稱廣播訊息（黃色）。
   - Command: kami
     Help: |
-      參數：<message>
+      參數：<訊息>
       不顯示您的名稱，直接廣播訊息（黃色）。
   - Command: kamib
     Help: |
-      參數：<message>
+      參數：<訊息>
       不顯示您的名稱，直接廣播訊息（藍色）。
   - Command: localbroadcast
     Help: |
-      參數：<message>
+      參數：<訊息>
       只在您目前所在的地圖，以您的名稱廣播訊息（黃色）。
   - Command: commands
     Help: |
@@ -95,28 +95,28 @@ Body:
       - monsterinfo
       - mi
     Help: |
-      參數：<monster name|ID>
+      參數：<怪物名稱|ID>
       顯示怪物資訊（能力值、經驗值、掉落物等）。
   - Command: iteminfo
     Aliases:
       - ii
     Help: |
-      參數：<item name|ID>
+      參數：<物品名稱|ID>
       顯示物品資訊（類型、價格等）。
   - Command: whodrops
     Help: |
-      參數：<item name|ID>
+      參數：<物品名稱|ID>
       顯示哪些怪物會掉落指定物品（依掉落率由高至低列出）。
   - Command: version
     Help: |
       顯示伺服器的 SVN 版本。
   - Command: email
     Help: |
-      參數：<current email> <new email>
+      參數：<目前電子郵件> <新電子郵件>
       變更您帳號的電子郵件地址。
   - Command: where
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       查詢指定角色所在的位置。
   - Command: time
     Aliases:
@@ -133,40 +133,40 @@ Body:
       顯示／隱藏取得的 Zeny。
   - Command: mobsearch
     Help: |
-      參數：<monster name|ID>
+      參數：<怪物名稱|ID>
       顯示指定怪物在目前地圖上的位置。
   - Command: who
     Aliases:
       - whois
     Help: |
-      參數：[<name>]
+      參數：[<名稱>]
       顯示線上玩家清單，以及其隊伍與公會資訊。
   - Command: who2
     Help: |
-      參數：[<name>]
+      參數：[<名稱>]
       顯示線上玩家清單，以及其職業資訊。
   - Command: who3
     Help: |
-      參數：[<name>]
+      參數：[<名稱>]
       顯示線上玩家清單，以及其所在位置。
   - Command: whomap
     Help: |
-      @whomap/@whomap2/@whomap3 [map] - 類似 @who/@who2/@who3，但只列出指定地圖上的玩家。
+      @whomap/@whomap2/@whomap3 [地圖] - 類似 @who/@who2/@who3，但只列出指定地圖上的玩家。
   - Command: whogm
     Help: |
-      參數：[match_text] - Like @who+@who2+who3, but only for GM.
+      參數：[比對文字] - 只列出符合文字的管理員角色，效果類似 @who、@who2 與 @who3。
   - Command: guildspy
     Help: |
-      參數：<guild name|id> - You will receive all messages of the guild channel (Chat logging must be enabled)
+      參數：<公會名稱|ID> - 接收指定公會頻道的所有訊息（必須啟用聊天記錄）。
   - Command: partyspy
     Help: |
-      @partyspy <party name|id> - 接收隊伍頻道的所有訊息（必須啟用聊天記錄）。
+      @partyspy <隊伍名稱|ID> - 接收隊伍頻道的所有訊息（必須啟用聊天記錄）。
   - Command: mapinfo
     Help: |
-      參數：[<0-3> [map]] - Give information about a map (general info +: 0: no more, 1: players, 2: NPC, 3: chatrooms).
+      參數：[<0-3> [地圖]] - 顯示地圖資訊：0：僅顯示一般資訊；1：玩家；2：NPC；3：聊天室。
   - Command: go
     Help: |
-      參數：<city name|number>
+      參數：<城市名稱|編號>
       將您傳送至指定城市。
       -3：記憶點 2　14：louyang　31：mora
       -2：記憶點 1　15：出生點　32：dewata
@@ -190,11 +190,11 @@ Body:
       - goto
       - warpto
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       將您傳送至指定角色所在位置。
   - Command: follow
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       跟隨指定玩家。
   - Command: mount
     Aliases:
@@ -206,7 +206,7 @@ Body:
       給予／移除商城坐騎。
   - Command: disguise
     Help: |
-      參數：<monster name|ID>
+      參數：<怪物名稱|ID>
       將您在其他玩家眼中的外觀變更為指定怪物。
   - Command: undisguise
     Help: |
@@ -219,10 +219,10 @@ Body:
       恢復指定公會所有角色的正常外觀。
   - Command: model
     Help: |
-      參數：<hair ID: 0-17> <hair color: 0-8> <clothes color: 0-4> - Changes your characters appearence.
+      參數：<髮型 ID：0-17> <髮色：0-8> <服裝顏色：0-4> - 變更角色的髮型、髮色及服裝顏色。
   - Command: size
     Help: |
-      參數：<0-2> Changes your size (0-Normal 1-Small 2-Large)
+      參數：<0-2> 變更角色體型（0：一般；1：小型；2：大型）。
   - Command: sizeall
     Help: |
       變更所有玩家的體型。
@@ -245,17 +245,17 @@ Body:
       - rura
       - mapmove
     Help: |
-      參數：<mapname> [<x> <y>]
+      參數：<地圖名稱> [<X 座標> <Y 座標>]
       將您傳送至指定地圖與座標。
   - Command: jump
     Help: |
-      參數：[<x> [<y>]]
+      參數：[<X 座標> [<Y 座標>]]
       如同使用蒼蠅翅膀般隨機傳送。
   - Command: jobchange
     Aliases:
       - job
     Help: |
-      參數：<job name|ID>
+      參數：<職業名稱|ID>
       變更您的職業。
       ----- 初心者／一轉職業 -----
          0 初心者　1 劍士　2 魔法師　3 弓箭手
@@ -315,7 +315,7 @@ Body:
       4229 幼年叛亂者　4241 幼年星帝　4242 幼年靈魂收割者
   - Command: option
     Help: |
-      參數：<param1> <param2>(stackable) <param3>(stackable)
+      參數：<參數1> <參數2>(stackable) <參數3>(stackable)
       在您的角色身上或周圍加入不同的視覺效果。
        <參數1>       <參數2>        <參數3>
       01：石化　01：視界探知　01：視界探知　512：手推車等級 4
@@ -339,13 +339,13 @@ Body:
     Aliases:
       - ccolor
     Help: |
-      參數：<clothes palette no.>
+      參數：<服裝調色盤編號>
       變更您角色的服裝顏色。
   - Command: hairstyle
     Aliases:
       - hstyle
     Help: |
-      參數：<hairstyle no.>
+      參數：<髮型編號>
       變更您的髮型。
   - Command: haircolor
     Aliases:
@@ -359,15 +359,15 @@ Body:
       變更您的移動速度。1 為最快，1000 為最慢，預設值為 150。
   - Command: effect
     Help: |
-      參數：<effect id> [<flag>]
+      參數：<效果 ID> [<旗標>]
       讓您的角色獲得指定效果。
   - Command: dropall
     Help: |
-      參數：[<item type>]
+      參數：[<物品類型>]
       將您持有的物品全部丟在地上。未指定類型時會丟棄所有物品。
   - Command: stockall
     Help: |
-      參數：[<item type>]
+      參數：[<物品類型>]
       將物品從手推車移至背包。未指定類型時會移動所有物品。
   - Command: storeall
     Help: |
@@ -377,7 +377,7 @@ Body:
       讓您的角色可以被擊殺。
   - Command: memo
     Help: |
-      參數：[memo position]
+      參數：[記憶點位置]
       設定／變更記憶點位置（未指定位置時顯示目前記憶點）。
   - Command: spiritball
     Help: |
@@ -433,19 +433,19 @@ Body:
       賢者 = 1007：製作屬性轉換器、1008：屬性變化（水）、1017：屬性變化（地）、1018：屬性變化（火）、1019：屬性變化（風）
   - Command: skillid
     Help: |
-      參數：<name>
+      參數：<名稱>
       依技能名稱查詢技能。
   - Command: useskill
     Help: |
-      參數：<skillid> <skillv> <target>
+      參數：<技能 ID> <技能等級> <目標>
       對指定目標使用技能。
   - Command: skilltree
     Help: |
-      參數：<skillnum> <charname>
+      參數：<技能數量> <角色名稱>
       列出指定玩家要學會某技能所需的技能樹。
   - Command: marry
     Help: |
-      參數：<player name>
+      參數：<玩家名稱>
       與另一名玩家結婚。
   - Command: divorce
     Help: |
@@ -462,7 +462,7 @@ Body:
       - baselevel
       - baselvlup
     Help: |
-      參數：<number of levels>
+      參數：<等級數量>
       依指定數量提高您的 Base Level。
   - Command: jlvl
     Aliases:
@@ -472,7 +472,7 @@ Body:
       - joblevel
       - joblvlup
     Help: |
-      參數：<number of levels>
+      參數：<等級數量>
       依指定數量提高您的 Job Level。
   - Command: allskill
     Aliases:
@@ -483,69 +483,69 @@ Body:
       讓您學會所有技能。
   - Command: stpoint
     Help: |
-      參數：<number of points> - Gives you the desired number of stat points.
+      參數：<點數> - 給予您指定數量的能力點數。
   - Command: trpoint
     Help: |
-      參數：<number of points> - Gives you the desired number of trait stat points.
+      參數：<點數> - 給予您指定數量的特性點數。
   - Command: skpoint
     Help: |
-      參數：<number of points> - Gives you the desired number of skill points.
+      參數：<點數> - 給予您指定數量的技能點數。
   - Command: zeny
     Help: |
-      參數：<amount> - Gives you desired amount of Zeny.
+      參數：<數量> - 給予您指定數量的 Zeny。
   - Command: cash
     Help: |
-      參數：<amount> - Gives you the specified amount of cash points.
+      參數：<數量> - 給予您指定數量的商城點數。
   - Command: points
     Help: |
-      參數：<amount> - Gives you the specified amount of Kafra Points.
+      參數：<數量> - 給予您指定數量的卡普拉點數。
   - Command: str
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 STR。
   - Command: agi
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 AGI。
   - Command: dex
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 DEX。
   - Command: vit
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 VIT。
   - Command: int
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 INT。
   - Command: luk
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 LUK。
   - Command: pow
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 POW。
   - Command: sta
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 STA。
   - Command: wis
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 WIS。
   - Command: spl
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 SPL。
   - Command: con
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 CON。
   - Command: crt
     Help: |
-      參數：<amount>
+      參數：<數量>
       依指定數值提高 CRT。
   - Command: allstats
     Aliases:
@@ -553,7 +553,7 @@ Body:
       - statall
       - statsall
     Help: |
-      參數：<value>
+      參數：<數值>
       將所有能力值增加指定數值（未指定時提高至上限）。
   - Command: alltraits
     Aliases:
@@ -561,11 +561,11 @@ Body:
       - traitall
       - traitsall
     Help: |
-      參數：<value>
+      參數：<數值>
       將所有特性能力值增加指定數值（未指定時提高至上限）。
   - Command: addwarp
     Help: |
-      參數：<map name> <x coord> <y coord> <NPC name>
+      參數：<地圖名稱> <X 座標> <Y 座標> <NPC 名稱>
   - Command: killmonster2
     Help: |
       擊殺您所在地圖的所有怪物（不會掉落物品）。
@@ -573,22 +573,22 @@ Body:
     Aliases:
       - spawn
     Help: |
-      參數：<monster name|ID> [<number to spawn> [<desired_monster_name> [<x coord> [<y coord>]]]]
+      參數：<怪物名稱|ID> [<生成數量> [<指定怪物名稱> [<X 座標> [<Y 座標>]]]]
       @monster2 <自訂怪物名稱> <怪物名稱|ID> [<生成數量> [<X 座標> [<Y 座標>]]]
       @spawn/@monster/@summon/@monster2 "自訂怪物名稱" <怪物名稱|ID> [<生成數量> [<X 座標> [<Y 座標>]]]
       @spawn/@monster/@summon/@monster2 <怪物名稱|ID> "自訂怪物名稱" [<生成數量> [<X 座標> [<Y 座標>]]]
       生成指定怪物，並可自訂怪物名稱。
   - Command: monstersmall
     Help: |
-      參數：<monster name|ID>
+      參數：<怪物名稱|ID>
       生成指定怪物的小型版本。
   - Command: monsterbig
     Help: |
-      參數：<monster name|ID>
+      參數：<怪物名稱|ID>
       生成指定怪物的大型版本。
   - Command: killmonster
     Help: |
-      參數：<map>
+      參數：<地圖>
       擊殺指定地圖上的所有怪物（會掉落物品）。
   - Command: autoloot
     Help: |
@@ -601,31 +601,31 @@ Body:
       允許您離線時繼續擺設露天商店。
   - Command: changegm
     Help: |
-      參數：<charname>
+      參數：<角色名稱>
       變更公會會長（您必須是公會會長）。
   - Command: changeleader
     Help: |
-      參數：<charname>
+      參數：<角色名稱>
       變更隊伍隊長（您必須是隊伍隊長）。
   - Command: request
     Help: |
-      參數：<message>
+      參數：<訊息>
       透過 GM 密語系統向所有已連線的 GM 傳送訊息。
   - Command: sound
     Help: |
-      參數：<path to file in data folder or GRF file>
+      參數：<data 資料夾或 GRF 檔案路徑>
       播放用戶端 data 資料夾或 GRF 檔案中的音效。
   - Command: clone
     Help: |
-      參數：<charname>
+      參數：<角色名稱>
       生成指定玩家的輔助型分身。
   - Command: slaveclone
     Help: |
-      參數：<charname>
+      參數：<角色名稱>
       生成指定玩家的輔助型分身，並跟隨建立者移動。
   - Command: evilclone
     Help: |
-      參數：<charname>
+      參數：<角色名稱>
       生成指定玩家的攻擊型分身。
   - Command: changesex
     Help: |
@@ -663,17 +663,17 @@ Body:
       開啟公會倉庫。
   - Command: idsearch
     Help: |
-      參數：<part_of_item_name>
+      參數：<物品名稱片段>
       搜尋名稱包含指定文字的所有物品。
   - Command: refine
     Help: |
-      參數：<equip position> <+/- amount>
+      參數：<裝備位置> <+/- 數量>
   - Command: grade
     Help: |
-      參數：<equip position> <+/- amount>
+      參數：<裝備位置> <+/- 數量>
   - Command: produce
     Help: |
-      參數：<equip name or equip ID> <element> <# of very's>
+      參數：<裝備名稱或 ID> <屬性> <星星數量>
       屬性：0=無、1=水、2=地、3=火、4=風
       最多可加入 3 個星星的角及 1 種屬性。
   - Command: repairall
@@ -681,11 +681,11 @@ Body:
       修理您背包中的所有物品。
   - Command: item
     Help: |
-      參數：<item name or ID> <quantity>
+      參數：<物品名稱或 ID> <數量>
       給予您指定的物品。
   - Command: item2
     Help: |
-      參數：<item name or ID> <quantity> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
+      參數：<物品名稱或 ID> <數量> <identified_flag> <refine> <broken_flag> <Card1> <Card2> <Card3> <Card4>
       給予您指定的物品。
   - Command: pvpon
     Help: |
@@ -711,11 +711,11 @@ Body:
       結束 WoE（攻城戰）。
   - Command: party
     Help: |
-      參數：<party_name>
+      參數：<隊伍名稱>
       建立隊伍。
   - Command: guild
     Help: |
-      參數：<guild_name>
+      參數：<公會名稱>
       建立公會。
   - Command: glvl
     Aliases:
@@ -725,22 +725,22 @@ Body:
       - guildlevel
       - guildlvlup
     Help: |
-      參數：<# of levels>
+      參數：<等級數量>
       依指定數量提升公會等級。
   - Command: guildrecall
     Help: |
-      參數：<guild name|ID>
+      參數：<公會名稱|ID>
       將指定公會所有線上角色傳送到您身邊。
   - Command: partyrecall
     Help: |
-      參數：<party name|ID>
+      參數：<隊伍名稱|ID>
       將指定隊伍所有線上角色傳送到您身邊。
   - Command: petrename
     Help: |
       重新啟用寵物改名功能。
   - Command: pettalk
     Help: |
-      參數：<message>
+      參數：<訊息>
       讓您的寵物說出指定訊息。
   - Command: petfriendly
     Help: |
@@ -755,17 +755,17 @@ Body:
       從您背包中的寵物蛋清單孵化寵物。
   - Command: makeegg
     Help: |
-      參數：<pet_id>
+      參數：<寵物 ID>
       依 pet DB 中的怪物編號給予寵物蛋。
   - Command: kick
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       將指定角色踢出伺服器。
   - Command: unjail
     Aliases:
       - discharge
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       釋放指定角色／囚犯。
   - Command: kill
     Aliases:
@@ -774,40 +774,41 @@ Body:
       擊殺指定玩家。
   - Command: recall
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       將指定角色傳送到您身邊。
   - Command: raise
     Aliases:
       - revive
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       復活指定角色。
   - Command: block
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       永久封鎖指定帳號。
   - Command: unblock
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       解除帳號封鎖。
   - Command: ban
     Aliases:
       - banish
     Help: |
-      參數：<time> <name>\n" "Temporarily ban an account.
+      參數：<時間> <名稱>
+      暫時封鎖指定帳號。
       時間格式：調整量（+/- 數值）及時間單位（y/a：年、m：月、d/j：日、h：小時、mn：分鐘、s：秒）
       範例：@ban +1m-2mn1s-6y testplayer
   - Command: unban
     Aliases:
       - unbanish
     Help: |
-      參數：<name> - Unban a account
+      參數：<名稱> - 解除帳號封鎖。
   - Command: jail
     Help: |
-      參數：<char name> - Sends specified character in jails
+      參數：<角色名稱> - 將指定角色關入監獄。
   - Command: trade
     Help: |
-      參數：<char name> - Open a trade window with a another player
+      參數：<角色名稱> - 與指定玩家開啟交易視窗。
   - Command: recallall
     Help: |
       將所有線上角色傳送到您身邊。
@@ -858,39 +859,39 @@ Body:
       讓所有地圖套用落葉效果。
   - Command: shownpc
     Help: |
-      參數：<NPC name>
+      參數：<NPC 名稱>
       啟用指定 NPC。
   - Command: hidenpc
     Help: |
-      參數：<NPC name>
+      參數：<NPC 名稱>
       停用指定 NPC。
   - Command: npcmove
     Help: |
-      參數：<x coord> <y coord> <NPC name>
+      參數：<X 座標> <Y 座標> <NPC 名稱>
       移動指定 NPC。
   - Command: loadnpc
     Help: |
-      參數：<path to script>
+      參數：<腳本路徑>
       載入指定路徑的腳本檔案。
   - Command: unloadnpc
     Help: |
-      參數：<NPC name>
+      參數：<NPC 名稱>
       依 NPC 名稱卸載指定 NPC。
   - Command: unloadnpcfile
     Help: |
-      參數：<path>
+      參數：<路徑>
       卸載指定路徑的腳本檔案。
   - Command: adjgroup
     Help: |
-      參數：<level> <char name>
+      參數：<等級> <角色名稱>
       暫時調整玩家的群組等級。
   - Command: addperm
     Help: |
-      參數：<permission_name>
+      參數：<權限名稱>
       暫時授予玩家指定權限。
   - Command: rmvperm
     Help: |
-      參數：<permission_name>
+      參數：<權限名稱>
       暫時移除玩家的指定權限。
   - Command: kickall
     Help: |
@@ -903,11 +904,11 @@ Body:
       除錯用途（檢查 gat 周圍的資訊）。
   - Command: send
     Help: |
-      參數：<Hex Number> [<value>]
+      參數：<十六進位數值> [<數值>]
       除錯用途（封包測試）。
   - Command: nuke
     Help: |
-      參數：<char name>
+      參數：<角色名稱>
       引爆指定玩家及其周圍的單位。
   - Command: reloadachievementdb
     Help: |
@@ -958,7 +959,7 @@ Body:
       重新載入狀態設定。
   - Command: reload
     Help: |
-      參數：<type>
+      參數：<類型>
       重新載入資料庫或設定檔。
       itemdb（物品資料庫）　mobdb（怪物資料庫）　skilldb（技能資料庫）
       atcommand（指令設定）　battleconf（戰鬥設定）　statusdb（狀態資料庫）
@@ -967,7 +968,7 @@ Body:
       cashdb（商城資料庫）
   - Command: langtype
     Help: |
-      參數：<language>
+      參數：<語言>
       變更您的語言設定。
   - Command: limitedsale
     Help: |
@@ -1038,7 +1039,7 @@ Body:
   - Command: bodystyle
     Help: |
       參數：<1/0>
-      參數：off. Restores default job bodystyle.
+      參數：off - 恢復職業預設的體型造型。
       將角色體型造型變更為 kRO 的替代角色精靈圖。
   - Command: resetcooltime
     Aliases:
