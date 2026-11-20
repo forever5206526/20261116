@@ -133,6 +133,7 @@ jobs:
             throw 'sql.bat invoked mysql despite the missing DB_ROOTPW variable.'
           }
           Write-Host 'PASS: missing DB_ROOTPW is rejected before any MySQL command is executed.'
+          exit 0
 
       - name: Validate Windows SQL batch helper against MySQL 8
         shell: pwsh
