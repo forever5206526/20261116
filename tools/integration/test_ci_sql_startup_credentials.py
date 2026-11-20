@@ -34,11 +34,17 @@ def main() -> None:
             "CI SQL account is not created and granted database access", failures)
 
     import_step = workflow.find("- name: Import database schema and seed data")
+    negative_test_step = workflow.find("- name: Reject missing Windows SQL root password before running MySQL")
+    live_test_step = workflow.find("- name: Validate Windows SQL batch helper against MySQL 8")
     configure_step = workflow.find("- name: Configure temporary SQL credentials for server startup validation")
     startup_step = workflow.find("- name: Run map-server NPC and database startup validation")
-    require(-1 not in (import_step, configure_step, startup_step) and
-            import_step < configure_step < startup_step,
-            "Temporary credentials must be injected after DB creation and before server startup", failures)
+    require(-1 not in (import_step, negative_test_step, live_test_step, configure_step, startup_step) and
+            import_step < negative_test_step < live_test_step < configure_step < startup_step,
+            "SQL helper negative/live tests and credential setup must run before server startup", failures)
+    require("$env:DB_ROOTPW -ErrorAction SilentlyContinue" in workflow and
+            "mysql-was-invoked.txt" in workflow and
+            "sql.bat invoked mysql despite the missing DB_ROOTPW variable" in workflow,
+            "Windows SQL negative test must remove DB_ROOTPW and prove MySQL was not invoked", failures)
     require("$env:BRHADES_SQL_USER" in workflow and "$env:BRHADES_SQL_PASSWORD" in workflow,
             "Startup workflow does not consume the generated CI credentials", failures)
     require("(?m)^sql_user:" in workflow and "(?m)^sql_password:" in workflow and
