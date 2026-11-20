@@ -45,17 +45,17 @@
 #           Items:             指定附魔階級可使用的一般附魔選項。（預設：null）
 #             - Item           可用附魔道具的名稱。
 #               Chance         取得此指定附魔道具的機率。
-#       PerfectEnchants:       Available perfect enchants (100% chance + selectable) for this slot. (Default: null)
+#       PerfectEnchants:       此欄位可用的完美附魔（100% 成功率，且可供選擇）。（預設：null）
 #         - Item               可用附魔道具的名稱。
-#           Price              Price required for this perfect enchant. (Default: 0)
-#           Materials:         Items required for this perfect enchant. (Default: null)
+#           Price              此完美附魔所需的費用。（預設：0）
+#           Materials:         此完美附魔所需的材料。（預設：null）
 #             - Material       需求道具名稱。
 #               Amount         需求道具數量。（預設：1）
-#       Upgrades:              Available enchant upgrades for this slot. (Default: null)
-#         - Enchant            Item name of the enchant item available for upgrade.
-#           Upgrade            Item name of the enchant it can be upgrade to.
-#           Price              Price required for this enchant upgrade. (Default: 0)
-#           Materials:         Items required for this enchant upgrade (Default: null)
+#       Upgrades:              此欄位可用的附魔升級。（預設：null）
+#         - Enchant            可用於升級的附魔道具名稱。
+#           Upgrade            可升級至的附魔名稱。
+#           Price              此附魔升級所需的費用。（預設：0）
+#           Materials:         此附魔升級所需的材料。（預設：null）
 #             - Material       需求道具名稱。
 #               Amount         需求道具數量。（預設：1）
 ###########################################################################
@@ -4767,7 +4767,7 @@ Body:
                 Chance: 300
               - Item: Star_Cluster_Of_Wis3
                 Chance: 900
-#  - Id: 13  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 13  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Signet_Of_Pow_Star: true
 #      Signet_Of_Sta_Star: true
@@ -28171,7 +28171,7 @@ Body:
               - Material: GH_Cursed_Crystal
                 Amount: 50
               - Material: Enchant_Ticket
-#  - Id: 117  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 117  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Season_Hood_Spring: true
 #    Order:
@@ -28215,7 +28215,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Spring
 #                Amount: 140
-#  - Id: 118  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 118  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Circul_Of_Life_Spring: true
 #    Order:
@@ -28259,7 +28259,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Spring
 #                Amount: 140
-#  - Id: 119  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 119  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Season_Hood_Summer: true
 #    Order:
@@ -28303,7 +28303,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Summer
 #                Amount: 140
-#  - Id: 120  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 120  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Circul_Of_Life_Summer: true
 #    Order:
@@ -28347,7 +28347,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Summer
 #                Amount: 140
-#  - Id: 121  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 121  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Season_Hood_Autumn: true
 #    Order:
@@ -28391,7 +28391,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Autumn
 #                Amount: 140
-#  - Id: 122  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 122  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Circul_Of_Life_Autumn: true
 #    Order:
@@ -28435,7 +28435,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Autumn
 #                Amount: 140
-#  - Id: 123  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 123  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Season_Hood_Winter: true
 #    Order:
@@ -28479,7 +28479,7 @@ Body:
 #                Amount: 25
 #              - Material: Energy_Of_Winter
 #                Amount: 140
-#  - Id: 124  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 124  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Circul_Of_Life_Winter: true
 #    Order:
@@ -28949,7 +28949,7 @@ Body:
               - Material: GH_Cursed_Crystal
                 Amount: 50
               - Material: Enchant_Ticket
-#  - Id: 128  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 128  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      S_Full_Power_Armor: true
 #      S_Full_Power_Shoes: true
@@ -29447,7 +29447,7 @@ Body:
               - Material: GH_Cursed_Crystal
                 Amount: 50
               - Material: Enchant_Ticket
-#  - Id: 132  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 132  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Time_DM_R_Crown_DK: true
 #      Time_DM_R_Crown_IG: true
@@ -31303,7 +31303,7 @@ Body:
           - Item: Wolf_Orb_Spell_4
             Materials:
               - Material: Sp_Amethyst_Fragment
-#  - Id: 142  # Skipped (some fields are not supported on rAthena for now)
+#  - Id: 142  # 已略過（目前 rAthena 尚不支援部分欄位）
 #    TargetItems:
 #      Signet_Of_Spring: true
 #      Signet_Of_Summer: true
