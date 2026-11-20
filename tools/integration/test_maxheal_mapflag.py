@@ -33,6 +33,8 @@ def main() -> None:
             skill.count("map_getmapflag_param(src->m, MF_MAXHEAL, 1)") == 2 and
             skill.count("cap_value(") >= 2,
             "MaxHeal must cap final healing in both Renewal and non-Renewal formulas", failures)
+    require(skill.count("if (heal && src && map_getmapflag(src->m, MF_MAXHEAL))") == 2,
+            "MaxHeal must not alter the damage component returned by skill_calc_heal", failures)
     require('setmapflag "prontera", MF_MAXHEAL, 5000;' in readme and
             'removemapflag "prontera", MF_MAXHEAL;' in readme,
             "README must document setting and removing MaxHeal", failures)
