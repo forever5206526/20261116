@@ -3,7 +3,7 @@ setlocal EnableExtensions DisableDelayedExpansion
 
 rem MySQL database setup
 if not defined MYSQL set "MYSQL=mysql"
-for %%V in (DB_ROOT DB_NAME DB_USER DB_HOST DB_USERPW) do (
+for %%V in (DB_ROOT DB_ROOTPW DB_NAME DB_USER DB_HOST DB_USERPW) do (
     if not defined %%V (
         echo ERROR: Required environment variable %%V is not set.
         endlocal & exit /b 1
