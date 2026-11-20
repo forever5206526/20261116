@@ -1,4 +1,4 @@
-"""Regression checks for Windows server launcher path resolution."""
+"""Regression checks for Windows server launcher and service supervision."""
 
 from pathlib import Path
 
@@ -52,7 +52,7 @@ def main() -> None:
         script = (ROOT / "tools" / filename).read_text(encoding="utf-8").casefold()
         require('set "server_dir=%~dp0"' in script,
                 f"{filename} must support execution beside the binaries", failures)
-        require(f'"%server_dir%\\{executable}"' in script,
+        require(f'"%server_dir%\\{executable}' in script,
                 f"{filename} must check for {executable} beside the launcher", failures)
         require('for %%i in ("%~dp0..") do set "server_dir=%%~fi"' in script,
                 f"{filename} must also resolve binaries in the parent solution directory", failures)
@@ -63,9 +63,24 @@ def main() -> None:
                 f" {executable} {title}".casefold() in script,
                 f"{filename} must run its service helper from the binary directory", failures)
 
+    # Batch IF ERRORLEVEL checks are ranges, not exact equality checks.
+    # Capture the process code and distinguish EXIT_FAILURE from crashes.
+    supervisor = (ROOT / "tools/serv.bat").read_text(encoding="utf-8").casefold()
+    require('set "server_exit_code=%errorlevel%"' in supervisor,
+            "serv.bat must capture the service exit code before branching", failures)
+    require('if "%server_exit_code%"=="1" goto exit1' in supervisor and
+            'if not "%server_exit_code%"=="0" goto crashed' in supervisor,
+            "serv.bat must distinguish EXIT_FAILURE from unexpected non-zero crash codes", failures)
+    exit1_section = supervisor.split(":exit1", 1)[1].split(":crashed", 1)[0]
+    crashed_section = supervisor.split(":crashed", 1)[1].split(":direct", 1)[0]
+    require("goto end" in exit1_section and "goto restart_nt" not in exit1_section,
+            "A normal EXIT_FAILURE must stop instead of entering the automatic restart loop", failures)
+    require("goto restart_nt" in crashed_section,
+            "Unexpected crashes must retain the configured automatic restart behavior", failures)
+
     if failures:
         raise SystemExit("\n".join(failures))
-    print("PASS: both root and tools launchers resolve helpers and server directories")
+    print("PASS: Windows launchers resolve paths; normal startup failures stop; unexpected crashes may restart")
 
 
 if __name__ == "__main__":
