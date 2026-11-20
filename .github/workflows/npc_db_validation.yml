@@ -97,6 +97,41 @@ jobs:
         shell: bash
         run: bash tools/ci/sql.sh
 
+      - name: Validate Windows SQL batch helper against MySQL 8
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not (Get-Command mysql.exe -ErrorAction SilentlyContinue)) { throw 'mysql.exe was not found on PATH.' }
+          $bytes = New-Object byte[] 32
+          $rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+          try { $rng.GetBytes($bytes) } finally { $rng.Dispose() }
+          $password = [Convert]::ToBase64String($bytes).TrimEnd('=').Replace('+', '-').Replace('/', '_')
+          $env:MYSQL = 'mysql.exe'
+          $env:DB_ROOT = 'root'
+          $env:DB_ROOTPW = 'root'
+          $env:DB_NAME = 'ragnarok_batch_test'
+          $env:DB_USER = 'brhades_batch_ci'
+          $env:DB_HOST = '127.0.0.1'
+          $env:DB_USERPW = $password
+          try {
+            & cmd.exe /d /c 'call tools\ci\sql.bat'
+            if ($LASTEXITCODE -ne 0) { throw "Windows SQL batch helper failed with exit code $LASTEXITCODE." }
+            $env:MYSQL_PWD = $password
+            & mysql.exe -h 127.0.0.1 -u brhades_batch_ci ragnarok_batch_test -e 'SELECT COUNT(*) FROM login;'
+            if ($LASTEXITCODE -ne 0) { throw 'The generated database account could not read the imported login table.' }
+            $env:MYSQL_PWD = 'root'
+            $grants = & mysql.exe -u root -e "SHOW GRANTS FOR 'brhades_batch_ci'@'127.0.0.1';"
+            if ($LASTEXITCODE -ne 0) { throw 'Unable to inspect the Windows batch helper database grants.' }
+            $grantText = $grants -join "`n"
+            if ($grantText -notmatch 'SELECT, INSERT, UPDATE, DELETE') { throw 'The batch helper did not grant the expected database permissions.' }
+            if ($grantText -match 'ALL PRIVILEGES') { throw 'The batch helper granted excessive database permissions.' }
+            Write-Host 'PASS: Windows sql.bat imported the schema, created a usable account and granted only the expected permissions.'
+          } finally {
+            $env:MYSQL_PWD = 'root'
+            & mysql.exe -u root -e "DROP USER IF EXISTS 'brhades_batch_ci'@'127.0.0.1'; DROP DATABASE IF EXISTS ragnarok_batch_test;"
+            if ($LASTEXITCODE -ne 0) { Write-Warning 'Windows SQL helper test cleanup reported a database cleanup error.' }
+          }
+
       - name: Configure temporary SQL credentials for server startup validation
         shell: pwsh
         run: |

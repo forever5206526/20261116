@@ -50,6 +50,27 @@ def main() -> None:
             any(line.startswith("sql_password:") and line == "sql_password:" for line in config_lines),
             "The tracked sample config must remain free of CI credentials", failures)
 
+    # Keep the Windows helper aligned with the supported CREATE USER then GRANT flow.
+    batch = (ROOT / "tools/ci/sql.bat").read_text(encoding="utf-8")
+    batch_create = batch.find("CREATE USER IF NOT EXISTS")
+    batch_grant = batch.find("GRANT SELECT,INSERT,UPDATE,DELETE")
+    grant_line = next((line for line in batch.splitlines() if "GRANT SELECT,INSERT,UPDATE,DELETE" in line), "")
+    require(batch_create >= 0 and batch_grant > batch_create,
+            "Windows SQL helper must create the account before granting privileges", failures)
+    require("IDENTIFIED BY" not in grant_line,
+            "Windows SQL helper must not use removed GRANT ... IDENTIFIED BY syntax", failures)
+    require("ALTER USER" in batch and "IDENTIFIED WITH mysql_native_password BY" in batch and
+            "SET old_passwords=0" in batch,
+            "Windows SQL helper must update existing accounts with MySQL/MariaDB-compatible syntax", failures)
+    require(batch.count("if errorlevel 1 goto :sql_error") >= 24 and
+            ":sql_error" in batch and "endlocal & exit /b 1" in batch,
+            "Windows SQL helper must stop at the first SQL error and return a failure code", failures)
+
+    require("Validate Windows SQL batch helper against MySQL 8" in workflow and
+            "call tools\\ci\\sql.bat" in workflow and
+            "ragnarok_batch_test" in workflow and "SHOW GRANTS FOR" in workflow,
+            "The Windows SQL batch helper must be exercised against a live MySQL instance", failures)
+
     if failures:
         raise SystemExit("\n".join(failures))
     print("PASS: startup CI uses a temporary non-default MySQL account without storing credentials in the repository")
