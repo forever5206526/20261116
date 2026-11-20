@@ -13,7 +13,7 @@ Pandas 基準：`PandasWS/Pandas@0aefda40dc55e7cc1f6f9174f96b2314b0de7899`
 
 ## Pandas MapFlag 完整清單
 
-Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 16 項；其餘 8 項仍待逐項比對及移植。
+Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移植或確認原生等價實作 17 項；其餘 7 項仍待逐項比對及移植。
 
 | Pandas 功能開關 | 功能 | 目前狀態 |
 |---|---|---|
@@ -29,7 +29,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_NoMerc` | 禁止召喚佣兵 | 已移植並合併至 main；39 項 CI checks 全部成功（含 VS Debug/Release、Win32/x64、PRE/RE、NPC/DB、CodeQL） |
 | `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及魔物掉落倍率套用 |
 | `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及 MVP 掉落倍率套用 |
-| `Pandas_MapFlag_MaxHeal` | 限制地圖最大治癒量 | 待核對及移植 |
+| `Pandas_MapFlag_MaxHeal` | 限制地圖最大治癒量 | 已移植／PR #27 已合併；26 項 CI checks 全部成功，僅限制治療分支，不影響傷害計算 |
 | `Pandas_MapFlag_MaxDmg_Skill` | 限制地圖最大技能傷害 | 待核對及移植 |
 | `Pandas_MapFlag_MaxDmg_Normal` | 限制地圖最大普通攻擊傷害 | 待核對及移植 |
 | `Pandas_MapFlag_NoSkill2` | 依單位類型禁止技能 | 待核對及移植 |
@@ -44,7 +44,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 ## 下一批執行順序
 
-1. 共用多參數 MapFlag 框架已整合至 main；下一步逐項移植剩餘參數型地圖標記：MaxHeal、MaxDmg_Skill、MaxDmg_Normal、MaxASPD，並補齊 NoSkill2、NoAttack2、NoAura、NoBank 的相依核對。
+1. 共用多參數 MapFlag 框架已整合至 main；下一步逐項移植剩餘參數型地圖標記：MaxDmg_Skill、MaxDmg_Normal、MaxASPD，並補齊 NoSkill2、NoAttack2、NoAura、NoBank 的相依核對。
 2. 對不存在的功能追蹤 Pandas 實作、相依資料結構、封包、腳本常量、設定、訊息與資料庫。
 3. 依相依關係排序，先處理可獨立驗證且不需大幅改動核心結構的功能。
 4. 每個功能獨立修改、回歸測試、Debug/Release x64/Win32 雲端建置，再更新本表狀態。
@@ -86,3 +86,10 @@ Release x64 編譯成品由 Actions artifact 保存；這些驗證不等同完�
 - Pandas 的參數值存放在每張地圖的 `mapflag_values`，並由 `map_data::copyFlags()` 複製到 instance map；重新載入地圖旗標時也要清除舊參數。移植時必須同步處理 map data 初始化、instance 複製及 reloadscript，不能只新增 getter/setter。
 - 因此 MobInfo 不是單一 enum/handler 移植。應先設計並驗證共用 mapflag 參數框架，再移植 MobInfomation_Extend 與 MF_MOBINFO，最後驗證 mapflag/NPC/script/atcommand/封包路徑及 PRE/RE 建置。
 - 本次僅完成相依盤點，未修改任何 MobInfo 程式碼，亦未將其標記為完成。
+
+
+## 2026-11-20 MaxHeal 驗收紀錄
+
+- PR #27 已合併至正式 `main`；合併後的 26 項 GitHub Actions checks 全部成功。
+- Renewal 與 non-Renewal 治療計算均受 MaxHeal 上限控制；只在 `heal=true` 套用，`heal=false` 的傷害計算不受影響。
+- `MF_MAXHEAL` 已匯出供 NPC 腳本使用，README 已補上設定及移除範例。
