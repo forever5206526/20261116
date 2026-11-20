@@ -27,13 +27,13 @@
 #   Level                 用於群組排序的 GM 等級。（預設：0）
 #   LogCommands           是否記錄 AtCommand 指令。（預設：false）
 #   Commands:             此群組可使用的 AtCommand 清單。（預設：無）
-#     <atcommand name>    設定此群組是否可使用指定的 AtCommand。
+#     <AtCommand 指令名稱>    設定此群組是否可使用指定的 AtCommand。
 #   CharCommands:         此群組可使用的 CharCommand 清單。（預設：無）
-#     <charcommand name>  設定此群組是否可使用指定的 CharCommand。
+#     <CharCommand 指令名稱>  設定此群組是否可使用指定的 CharCommand。
 #   Permissions:          此群組擁有的權限清單。（預設：無）
-#     <permission name>   設定此群組是否擁有指定權限。
+#     <權限名稱>   設定此群組是否擁有指定權限。
 #   Inherit:              要繼承的群組清單。（預設：無）
-#     <group name>        設定是否繼承指定群組。
+#     <群組名稱>        設定是否繼承指定群組。
 ###########################################################################
 
 Header:
