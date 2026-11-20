@@ -50,8 +50,13 @@ def main() -> None:
             any(line.startswith("sql_password:") and line == "sql_password:" for line in config_lines),
             "The tracked sample config must remain free of CI credentials", failures)
 
-    # Keep the Windows helper aligned with the supported CREATE USER then GRANT flow.
+    # The root password is consumed through MYSQL_PWD and must never silently default to empty.
     batch = (ROOT / "tools/ci/sql.bat").read_text(encoding="utf-8")
+    require("for %%V in (DB_ROOT DB_ROOTPW DB_NAME DB_USER DB_HOST DB_USERPW) do (" in batch,
+            "Windows SQL helper must reject a missing DB_ROOTPW before trying root authentication", failures)
+    require('set "MYSQL_PWD=%DB_ROOTPW%"' in batch,
+            "Windows SQL helper must pass the required root password through MYSQL_PWD", failures)
+
     batch_create = batch.find("CREATE USER IF NOT EXISTS")
     batch_grant = batch.find("GRANT SELECT,INSERT,UPDATE,DELETE")
     grant_line = next((line for line in batch.splitlines() if "GRANT SELECT,INSERT,UPDATE,DELETE" in line), "")
