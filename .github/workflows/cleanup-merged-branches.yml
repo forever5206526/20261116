@@ -89,11 +89,10 @@ jobs:
               let safeToDelete = mergedHeadShas.get(name)?.has(branch.commit.sha) ?? false;
               if (!safeToDelete) {
                 try {
-                  const comparison = await github.rest.repos.compareCommits({
+                  const comparison = await github.rest.repos.compareCommitsWithBasehead({
                     owner,
                     repo,
-                    base: "main",
-                    head: name,
+                    basehead: "main..." + name,
                   });
                   safeToDelete = comparison.data.ahead_by === 0;
                 } catch (error) {
