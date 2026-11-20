@@ -3705,6 +3705,22 @@ void map_flags_init(void) {
 		{{0, 0, INT_MAX, nullptr}}
 	});
 #endif // Pandas_MapFlag_MaxHeal
+#ifdef Pandas_MapFlag_MaxDmg_Skill
+	mapflag_config.emplace(MF_MAXDMG_SKILL, s_mapflag_item{
+		"MaxDmg_Skill",
+		true,
+		true,
+		{{0, 0, INT_MAX, nullptr}}
+	});
+#endif // Pandas_MapFlag_MaxDmg_Skill
+#ifdef Pandas_MapFlag_MaxDmg_Normal
+	mapflag_config.emplace(MF_MAXDMG_NORMAL, s_mapflag_item{
+		"MaxDmg_Normal",
+		true,
+		true,
+		{{0, 0, INT_MAX, nullptr}}
+	});
+#endif // Pandas_MapFlag_MaxDmg_Normal
 #ifdef Pandas_MapFlag_HideDamage
 	mapflag_config.emplace(MF_HIDEDAMAGE, s_mapflag_item{
 		"HideDamage",

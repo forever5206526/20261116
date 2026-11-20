@@ -142,6 +142,28 @@ setmapflag "prontera", MF_MAXHEAL, 5000;
 removemapflag "prontera", MF_MAXHEAL;
 ```
 
+### MaxDmg_Skill／MaxDmg_Normal 地圖標記
+
+- `MF_MAXDMG_SKILL`：限制使用技能時計算出的單次攻擊傷害。
+- `MF_MAXDMG_NORMAL`：限制普通攻擊時計算出的單次攻擊傷害。
+- 上限以攻擊者所在地圖為準，主手與副手傷害合計不得超過設定值；兩個旗標彼此獨立。
+- 參數設為 0 時依共用 MapFlag 規則關閉；正整數為傷害上限。
+- 透過 NPC 腳本設定，不允許使用 `@mapflag` 直接開啟。
+
+設定範例：
+
+```text
+setmapflag "prontera", MF_MAXDMG_SKILL, 50000;
+setmapflag "prontera", MF_MAXDMG_NORMAL, 10000;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_MAXDMG_SKILL;
+removemapflag "prontera", MF_MAXDMG_NORMAL;
+```
+
 ### NoUseItem 地圖標記
 
 - 新增 `MF_NOUSEITEM`／`nouseitem` 地圖標記。

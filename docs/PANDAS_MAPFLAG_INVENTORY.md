@@ -30,8 +30,8 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 | `Pandas_MapFlag_MobDroprate` | 地圖普通魔物掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及魔物掉落倍率套用 |
 | `Pandas_MapFlag_MvpDroprate` | 地圖 MVP 掉落倍率 | 已移植／PR #21 已合併；已加入地圖參數設定及 MVP 掉落倍率套用 |
 | `Pandas_MapFlag_MaxHeal` | 限制地圖最大治癒量 | 已移植／PR #27 已合併；26 項 CI checks 全部成功，僅限制治療分支，不影響傷害計算 |
-| `Pandas_MapFlag_MaxDmg_Skill` | 限制地圖最大技能傷害 | 待核對及移植 |
-| `Pandas_MapFlag_MaxDmg_Normal` | 限制地圖最大普通攻擊傷害 | 待核對及移植 |
+| `Pandas_MapFlag_MaxDmg_Skill` | 限制地圖最大技能傷害 | 已建立移植分支；程式碼與回歸測試待 CI／PRE／RE 驗證，尚未計入完成數 |
+| `Pandas_MapFlag_MaxDmg_Normal` | 限制地圖最大普通攻擊傷害 | 已建立移植分支；程式碼與回歸測試待 CI／PRE／RE 驗證，尚未計入完成數 |
 | `Pandas_MapFlag_NoSkill2` | 依單位類型禁止技能 | 待核對及移植 |
 | `Pandas_MapFlag_NoAura` | 禁用地圖光環效果 | 待核對；依賴 Aura 機制 |
 | `Pandas_MapFlag_MaxASPD` | 限制地圖最大攻速 | 待核對及移植 |
@@ -44,7 +44,7 @@ Pandas 基準中的 `Pandas_MapFlag_*` 開關共 24 項。已完成程式碼移�
 
 ## 下一批執行順序
 
-1. 共用多參數 MapFlag 框架已整合至 main；下一步逐項移植剩餘參數型地圖標記：MaxDmg_Skill、MaxDmg_Normal、MaxASPD，並補齊 NoSkill2、NoAttack2、NoAura、NoBank 的相依核對。
+1. MaxDmg_Skill／MaxDmg_Normal 已建立獨立移植分支，須通過 CI、Visual Studio、PRE／RE 驗證後才計入完成數；其後接續 MaxASPD、NoSkill2、NoAttack2、NoAura、NoBank。
 2. 對不存在的功能追蹤 Pandas 實作、相依資料結構、封包、腳本常量、設定、訊息與資料庫。
 3. 依相依關係排序，先處理可獨立驗證且不需大幅改動核心結構的功能。
 4. 每個功能獨立修改、回歸測試、Debug/Release x64/Win32 雲端建置，再更新本表狀態。
