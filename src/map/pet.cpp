@@ -714,6 +714,13 @@ int32 pet_attackskill(struct pet_data *pd, int32 target_id)
 	if (DIFF_TICK(pd->ud.canact_tick, gettick()) > 0)
 		return 0;
 
+#ifdef Pandas_MapFlag_NoSkill2
+	if (map_getmapflag(pd->bl.m, MF_NOSKILL2)) {
+		if ((map_getmapflag_param(pd->bl.m, MF_NOSKILL2, 1) & BL_PET) == BL_PET)
+			return 0;
+	}
+#endif // Pandas_MapFlag_NoSkill2
+
 	if (rnd_chance((pd->a_skill->rate +pd->pet.intimate*pd->a_skill->bonusrate/1000), 100)) { // Skotlex: Use pet's skill
 		int32 inf;
 		struct block_list *bl;
