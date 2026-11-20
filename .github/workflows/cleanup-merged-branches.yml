@@ -31,19 +31,9 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const repository = owner + "/" + repo;
-            const protectedNames = new Set([
-              "main",
-              "work/brhades-pandas-full-port",
-            ]);
-
-            // Reviewed on 2026-11-20: these old branches contain no unique
-            // functionality or documentation beyond main. Their tips are
-            // pinned so any new commit automatically disables this exception.
-            const reviewedSupersededBranches = new Map([
-              ["archive/pre-consolidation-2026-11-17", "79c5da17204d948310b8c49397260f2840cf626a"],
-              ["work/mapflag-parameter-framework-2026-11-18", "d6b4104c84cfc0a31180e8d1eee9993a8fa6627c"],
-              ["work/pandas-mapflag-parameter-framework-2026-11-19", "7ac7e3c149d0d36c2a12c7e1131468dbddf62de9"],
-            ]);
+            // Only main is permanently protected. Any other branch with
+            // commits not contained in main is preserved by the ancestry check below.
+            const protectedNames = new Set(["main"]);
 
             const [branches, openPullRequests, closedPullRequests] = await Promise.all([
               github.paginate(github.rest.repos.listBranches, {
@@ -97,16 +87,6 @@ jobs:
               }
 
               let safeToDelete = mergedHeadShas.get(name)?.has(branch.commit.sha) ?? false;
-              const reviewedSha = reviewedSupersededBranches.get(name);
-              if (!safeToDelete && reviewedSha && branch.commit.sha === reviewedSha) {
-                safeToDelete = true;
-                core.info("Delete " + name + ": exact branch tip was manually reviewed as superseded by main.");
-              }
-              if (!safeToDelete && reviewedSha && branch.commit.sha !== reviewedSha) {
-                core.warning("Keep " + name + ": branch tip changed after its review; manual review is required.");
-                kept++;
-                continue;
-              }
               if (!safeToDelete) {
                 try {
                   const comparison = await github.rest.repos.compareCommits({
