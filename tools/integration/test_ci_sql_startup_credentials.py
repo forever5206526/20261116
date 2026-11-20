@@ -41,7 +41,7 @@ def main() -> None:
     require(-1 not in (import_step, negative_test_step, live_test_step, configure_step, startup_step) and
             import_step < negative_test_step < live_test_step < configure_step < startup_step,
             "SQL helper negative/live tests and credential setup must run before server startup", failures)
-    require("$env:DB_ROOTPW -ErrorAction SilentlyContinue" in workflow and
+    require("Remove-Item Env:DB_ROOTPW -ErrorAction SilentlyContinue" in workflow and
             "mysql-was-invoked.txt" in workflow and
             "sql.bat invoked mysql despite the missing DB_ROOTPW variable" in workflow,
             "Windows SQL negative test must remove DB_ROOTPW and prove MySQL was not invoked", failures)
