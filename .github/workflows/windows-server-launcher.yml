@@ -62,3 +62,33 @@ jobs:
 
           Test-Launcher $toolsLauncher $testRoot
           Test-Launcher $rootLauncher $testRoot
+
+      - name: Stop retry loop after normal startup failure
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $testRoot = Join-Path $env:RUNNER_TEMP 'brHades service exit failure test'
+          New-Item -ItemType Directory -Path $testRoot -Force | Out-Null
+          Copy-Item -LiteralPath 'tools/serv.bat' -Destination (Join-Path $testRoot 'serv.bat')
+          Copy-Item -LiteralPath $env:ComSpec -Destination (Join-Path $testRoot 'cmd.exe')
+
+          $stdout = Join-Path $env:RUNNER_TEMP 'serv-exit-failure.stdout.log'
+          $stderr = Join-Path $env:RUNNER_TEMP 'serv-exit-failure.stderr.log'
+          $command = '(echo exit 1& echo.)|call serv.bat cmd.exe FakeServer on'
+          $process = Start-Process -FilePath $env:ComSpec -ArgumentList @('/d', '/c', $command) -WorkingDirectory $testRoot -PassThru -NoNewWindow -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+
+          if (-not $process.WaitForExit(5000)) {
+            Stop-Process -Id $process.Id -Force
+            throw 'serv.bat restarted a normal EXIT_FAILURE instead of stopping promptly.'
+          }
+
+          $joined = ''
+          if (Test-Path $stdout) { $joined += [System.IO.File]::ReadAllText($stdout) }
+          if (Test-Path $stderr) { $joined += [System.IO.File]::ReadAllText($stderr) }
+          if ($joined -notmatch 'EXIT_FAILURE') {
+            throw "serv.bat did not report the normal startup failure. Output: $joined"
+          }
+          if ($joined -match 'Restarting in 15 seconds') {
+            throw "serv.bat entered the restart loop after EXIT_FAILURE. Output: $joined"
+          }
+          Write-Host 'PASS: exit code 1 stops the restart loop; unexpected crash codes remain restartable.'
