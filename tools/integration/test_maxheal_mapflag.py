@@ -31,8 +31,9 @@ def main() -> None:
             "MF_MAXHEAL must be available to NPC scripts", failures)
     require(skill.count("#ifdef Pandas_MapFlag_MaxHeal") == 2 and
             skill.count("map_getmapflag_param(src->m, MF_MAXHEAL, 1)") == 2 and
-            skill.count("cap_value(") >= 2,
-            "MaxHeal must cap final healing in both Renewal and non-Renewal formulas", failures)
+            "return (limit > 0) ? cap_value(result, 1, limit) : result;" in skill and
+            "return (limit > 0 && hp > limit) ? limit : hp;" in skill,
+            "MaxHeal must cap healing in both Renewal and non-Renewal formulas without changing lower values", failures)
     require(skill.count("if (heal && src && map_getmapflag(src->m, MF_MAXHEAL))") == 2,
             "MaxHeal must not alter the damage component returned by skill_calc_heal", failures)
     require('setmapflag "prontera", MF_MAXHEAL, 5000;' in readme and
