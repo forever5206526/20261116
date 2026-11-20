@@ -70,12 +70,11 @@ jobs:
           $testRoot = Join-Path $env:RUNNER_TEMP 'brHades service exit failure test'
           New-Item -ItemType Directory -Path $testRoot -Force | Out-Null
           Copy-Item -LiteralPath 'tools/serv.bat' -Destination (Join-Path $testRoot 'serv.bat')
-          $fakeServer = Join-Path $testRoot 'fake-server.cmd'
-          @('@echo off', 'exit /b 1') | Set-Content -LiteralPath $fakeServer -Encoding ascii
+          Copy-Item -LiteralPath $env:ComSpec -Destination (Join-Path $testRoot 'cmd.exe')
 
           $stdout = Join-Path $env:RUNNER_TEMP 'serv-exit-failure.stdout.log'
           $stderr = Join-Path $env:RUNNER_TEMP 'serv-exit-failure.stderr.log'
-          $command = 'echo.|call serv.bat fake-server.cmd FakeServer on'
+          $command = '(echo exit 1& echo.)|call serv.bat cmd.exe FakeServer on'
           $process = Start-Process -FilePath $env:ComSpec -ArgumentList @('/d', '/c', $command) -WorkingDirectory $testRoot -PassThru -NoNewWindow -RedirectStandardOutput $stdout -RedirectStandardError $stderr
 
           if (-not $process.WaitForExit(5000)) {
