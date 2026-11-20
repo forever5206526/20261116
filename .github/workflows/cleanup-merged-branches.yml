@@ -1,6 +1,9 @@
 name: Cleanup merged working branches
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -19,7 +22,7 @@ concurrency:
 jobs:
   cleanup:
     name: Remove only safely merged branches
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Remove merged and inactive branches
