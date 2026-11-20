@@ -31,8 +31,8 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const repository = owner + "/" + repo;
-            // Only main is permanently protected. Any other branch with
-            // commits not contained in main is preserved by the ancestry check below.
+            // Keep main and the core Pandas integration branch permanently.
+            // Other branches are deleted only when their tips are proven merged.
             const protectedNames = new Set(["main", "work/brhades-pandas-full-port"]);
 
             const [branches, openPullRequests, closedPullRequests] = await Promise.all([
