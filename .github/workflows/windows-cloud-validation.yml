@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Windows server launcher regression test
+        run: python tools/integration/test_windows_server_launcher.py
+
       - name: Merged branch cleanup safety test
         run: python tools/integration/test_cleanup_merged_branches_safety.py
 
