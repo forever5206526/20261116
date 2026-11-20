@@ -3697,6 +3697,14 @@ void map_flags_init(void) {
 		{{100, 0, INT_MAX, "%"}}
 	});
 #endif // Pandas_MapFlag_MvpDroprate
+#ifdef Pandas_MapFlag_MaxHeal
+	mapflag_config.emplace(MF_MAXHEAL, s_mapflag_item{
+		"MaxHeal",
+		true,
+		true,
+		{{0, 0, INT_MAX, nullptr}}
+	});
+#endif // Pandas_MapFlag_MaxHeal
 #ifdef Pandas_MapFlag_HideDamage
 	mapflag_config.emplace(MF_HIDEDAMAGE, s_mapflag_item{
 		"HideDamage",

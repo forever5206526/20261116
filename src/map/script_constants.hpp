@@ -557,6 +557,9 @@
 #ifdef Pandas_MapFlag_MvpDroprate
 	export_constant(MF_MVPDROPRATE);
 #endif // Pandas_MapFlag_MvpDroprate
+#ifdef Pandas_MapFlag_MaxHeal
+	export_constant(MF_MAXHEAL);
+#endif // Pandas_MapFlag_MaxHeal
 #ifdef Pandas_MapFlag_NoAutoLoot
 	export_constant(MF_NOAUTOLOOT);
 #endif // Pandas_MapFlag_NoAutoLoot

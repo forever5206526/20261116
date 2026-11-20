@@ -700,6 +700,9 @@ enum e_mapflag : int16 {
 #ifdef Pandas_MapFlag_MvpDroprate
 	MF_MVPDROPRATE,
 #endif // Pandas_MapFlag_MvpDroprate
+#ifdef Pandas_MapFlag_MaxHeal
+	MF_MAXHEAL,
+#endif // Pandas_MapFlag_MaxHeal
 #ifdef Pandas_MapFlag_NoAutoLoot
 	MF_NOAUTOLOOT,
 #endif // Pandas_MapFlag_NoAutoLoot

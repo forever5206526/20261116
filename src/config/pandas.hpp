@@ -25,6 +25,7 @@
 #define Pandas_MapFlag_NoMerc
 #define Pandas_MapFlag_MobDroprate
 #define Pandas_MapFlag_MvpDroprate
+#define Pandas_MapFlag_MaxHeal
 #define Pandas_MapFlag_NoCapture
 #define Pandas_MapFlag_NoSlave
 #define Pandas_MapFlag_NoAttack
