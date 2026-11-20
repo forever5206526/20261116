@@ -69,14 +69,12 @@ def main() -> None:
             "(echo exit 1& echo.)|call serv.bat cmd.exe fakeserver on" in workflow,
             "Windows CI must execute and time-limit the EXIT_FAILURE restart-loop regression test", failures)
 
-    # Batch IF ERRORLEVEL checks are ranges, not exact equality checks.
-    # Capture the process code and distinguish EXIT_FAILURE from crashes.
+    # IF ERRORLEVEL n matches exit codes >= n, so check 2 before checking 1.
     supervisor = (ROOT / "tools/serv.bat").read_text(encoding="utf-8").casefold()
-    require('set "server_exit_code=%errorlevel%"' in supervisor,
-            "serv.bat must capture the service exit code before branching", failures)
-    require('if "%server_exit_code%"=="1" goto exit1' in supervisor and
-            'if not "%server_exit_code%"=="0" goto crashed' in supervisor,
-            "serv.bat must distinguish EXIT_FAILURE from unexpected non-zero crash codes", failures)
+    crash_check = supervisor.find("if errorlevel 2 goto crashed")
+    failure_check = supervisor.find("if errorlevel 1 goto exit1")
+    require(crash_check >= 0 and failure_check > crash_check,
+            "serv.bat must check unexpected exit codes >= 2 before EXIT_FAILURE code 1", failures)
     exit1_section = supervisor.split(":exit1", 1)[1].split(":crashed", 1)[0]
     crashed_section = supervisor.split(":crashed", 1)[1].split(":direct", 1)[0]
     require("goto end" in exit1_section and "goto restart_nt" not in exit1_section,
