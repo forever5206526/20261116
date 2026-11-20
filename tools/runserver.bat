@@ -1,10 +1,10 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 
-set "TOOLS_DIR=%~dp0"
+for %%I in ("%~dp0.") do set "TOOLS_DIR=%%~fI"
 if exist "%~dp0tools\serv.bat" (
-    set "SERVER_DIR=%~dp0"
-    set "TOOLS_DIR=%~dp0tools\\"
+    for %%I in ("%~dp0.") do set "SERVER_DIR=%%~fI"
+    for %%I in ("%~dp0tools") do set "TOOLS_DIR=%%~fI"
 ) else (
     for %%I in ("%~dp0..") do set "SERVER_DIR=%%~fI"
 )
@@ -119,7 +119,7 @@ REM Start helpers always use the executable directory as their working directory
 :startLogin
 call :getLoginStatus
 if "%login_running%"=="false" (
-    start "Login Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%logserv.bat" %restart_mode%
+    start "Login Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%\logserv.bat" %restart_mode%
 ) else (
     echo Login server is already running. PID=%LoginServPID%
 )
@@ -128,7 +128,7 @@ goto :EOF
 :startChar
 call :getCharStatus
 if "%char_running%"=="false" (
-    start "Char Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%charserv.bat" %restart_mode%
+    start "Char Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%\charserv.bat" %restart_mode%
 ) else (
     echo Char server is already running. PID=%CharServPID%
 )
@@ -137,7 +137,7 @@ goto :EOF
 :startWeb
 call :getWebStatus
 if "%web_running%"=="false" (
-    start "Web Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%webserv.bat" %restart_mode%
+    start "Web Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%\webserv.bat" %restart_mode%
 ) else (
     echo Web server is already running. PID=%WebServPID%
 )
@@ -146,7 +146,7 @@ goto :EOF
 :startMap
 call :getMapStatus
 if "%map_running%"=="false" (
-    start "Map Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%mapserv.bat" %restart_mode%
+    start "Map Server" /D "%SERVER_DIR%" "%ComSpec%" /D /K call "%TOOLS_DIR%\mapserv.bat" %restart_mode%
 ) else (
     echo Map server is already running. PID=%MapServPID%
 )
