@@ -1,8 +1,8 @@
-// Mob Skill Database
-// Based on Aegis Episode 11.3
+// 魔物技能資料庫
+// 依據 Aegis 第 11.3 章資料。
 //
 // 資料庫格式：
-// MobID,Dummy value (info only),State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
+// MobID,Dummy value（僅供資訊參考）,State,SkillID,SkillLv,Rate,CastTime,Delay,Cancelable,Target,Condition type,Condition value,val1,val2,val3,val4,val5,Emotion,Chat
 //
 // RATE：符合條件時施放技能的機率（10000 = 100%）。
 // DELAY：再次嘗試施放相同技能前的等待時間（毫秒）。
@@ -42,19 +42,19 @@
 //	longrangeattacked	受到遠距離攻擊時觸發，例如弓、槍及遠距離技能（不需要條件值）。
 //	skillused		指定技能對魔物施放時觸發。
 //	afterskill		魔物施放指定技能後觸發。
-//	casttargeted		目標進入技能施放範圍時觸發（不需要條件值）。
-//	rudeattacked		魔物受到 rude attack 條件觸發時執行（不需要條件值）。
+//	casttargeted		目標進入詠唱範圍時觸發（不需要條件值）。
+//	rudeattacked		魔物受到挑釁攻擊時觸發（不需要條件值）。
 //	mobnearbygt		指定範圍內的魔物數量大於設定值時觸發。
-//	groundattacked		魔物受到指定地面技能攻擊時觸發（不需要條件值）。
-//	damagedgt		單次攻擊造成的傷害高於指定數值時觸發。
+//	groundattacked		魔物受到指定地面範圍技能攻擊時觸發（不需要條件值）。
+//	damagedgt		單次攻擊造成的傷害大於指定數值時觸發。
 //
 //	透過 statuson/statusoff 系統指定的異常狀態：
-//	    anybad (any type of state change) / stone / freeze / stun / sleep /
-//	    poison / curse / silence / confusion / blind / hiding / sight (unhidden)
+//	    anybad（任何狀態變更）／stone／freeze／stun／sleep／
+//	    poison / curse / silence / confusion / blind / hiding / sight（解除隱匿）
 //
-// 注意：若提供負數 MobID，該技能將視為「全域」技能：
-//	-1：套用至所有 Boss 類型魔物。
-//	-2：套用至所有一般類型魔物。
+// 注意：若提供負數 MobID，該技能將視為「全域」設定：
+//	-1：套用至所有頭目類型。
+//	-2：套用至所有一般魔物類型。
 //	-3：套用至所有魔物。
 
 1001,Scorpion@NPC_FIREATTACK,attack,186,1,2000,0,5000,yes,target,always,0,,,,,,,
@@ -3599,7 +3599,7 @@
 1697,Plasma@WZ_WATERBALL,attack,86,3,500,1500,5000,no,target,always,0,,,,,,,
 1697,Plasma@NPC_WATERATTACK,attack,184,3,1000,0,5000,yes,target,always,0,,,,,,21,
 
-// Thanatos Tower Mobs
+// 塔納托斯之塔魔物
 1698,Deathword@NPC_SPLASHATTACK,attack,174,1,1000,0,5000,yes,target,attackpcge,2,,,,,,,
 1698,Deathword@NPC_BLOODDRAIN,attack,199,1,500,0,5000,yes,target,always,0,,,,,,2,
 1698,Deathword@NPC_PIERCINGATT,attack,158,3,500,0,5000,yes,target,always,0,,,,,,36,
@@ -3751,7 +3751,7 @@
 1712,Thanatos Dolor@AL_HEAL,chase,28,9,1000,0,5000,yes,friend,friendhpltmaxrate,70,,,,,,3,
 1712,Thanatos Dolor@AL_HEAL,chase,28,9,1000,0,5000,yes,self,myhpltmaxrate,70,,,,,,3,
 
-// Abyss Lake
+// 深淵湖
 1713,Acidus@NPC_FIREATTACK,attack,186,6,500,500,5000,no,target,always,0,,,,,,,
 1713,Acidus@NPC_CRITICALSLASH,attack,170,1,1000,500,5000,no,target,always,0,,,,,,,
 1713,Acidus@NPC_STUNATTACK,attack,179,5,1000,1500,5000,no,target,always,0,,,,,,,
@@ -3841,7 +3841,7 @@
 1720,Hydro@NPC_CALLSLAVE,chase,352,1,10000,0,30000,yes,self,always,0,,,,,,,
 1721,Dragon Egg@NPC_METAMORPHOSIS,idle,193,1,100,2000,5000,no,self,myhpltmaxrate,99,1715,1718,,,,,
 
-// Kiel dungeon
+// 基爾地下城
 1733,Kiel@SM_MAGNUM,chase,7,5,2500,0,3000,yes,self,always,0,,,,,,,
 1733,Kiel@SM_MAGNUM,attack,7,5,2500,0,3000,yes,self,always,0,,,,,,,
 1733,Kiel@MG_SAFETYWALL,idle,12,10,1000,0,5000,yes,self,always,0,,,,,,,
@@ -4335,7 +4335,7 @@
 1795,Bloody Knight@WZ_STORMGUST,attack,89,10,10000,1000,20000,no,target,always,,,,,,,,
 1795,Bloody Knight@WZ_VERMILION,attack,85,21,10000,1000,20000,no,target,always,,,,,,,,
 1795,Bloody Knight@WZ_METEOR,attack,83,11,10000,1000,20000,no,target,always,,,,,,,,
-// Guild Dungeon SE (13.1)
+// 公會地下城 SE（13.1）
 1796,Aunoe@MG_THUNDERSTORM,attack,21,5,500,1500,10000,no,target,always,0,,,,,,,
 1796,Aunoe@MG_THUNDERSTORM,chase,21,5,500,1500,10000,no,target,always,0,,,,,,,
 1796,Aunoe@NPC_HOLYATTACK,attack,189,2,500,0,5000,yes,target,always,0,,,,,,,
@@ -4465,7 +4465,7 @@
 1827,Sasquatch@NPC_EMOTION,idle,197,1,2000,0,5000,yes,self,always,0,6,0x3095,,,,,
 1827,Sasquatch@SM_ENDURE,chase,8,1,5000,0,10000,yes,self,longrangeattacked,,,,,,,6,
 
-// Thor Volcano (11.2)
+// 托爾火山（11.2）
 1829,Sword Guardian@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 1829,Sword Guardian@CR_REFLECTSHIELD,idle,252,10,10000,0,300000,yes,self,always,0,,,,,,,
 1829,Sword Guardian@KN_SPEARBOOMERANG,chase,59,5,10000,0,5000,yes,target,always,0,,,,,,,
@@ -4613,7 +4613,7 @@
 1840,Golden Savage@WZ_QUAGMIRE,chase,92,2,2000,0,5000,yes,target,always,0,,,,,,,
 1840,Golden Savage@NPC_PULSESTRIKE,attack,661,1,500,0,10000,yes,self,always,0,,,,,,32,
 
-// Cursed Abbey (11.3)
+// 詛咒修道院（11.3）
 1864,Zombie Slaughter@NPC_BLINDATTACK,attack,177,5,500,0,5000,yes,target,always,0,,,,,,,
 1864,Zombie Slaughter@NPC_POISON,attack,176,5,500,800,5000,no,target,always,0,,,,,,,
 1864,Zombie Slaughter@AS_SONICBLOW,attack,136,5,1000,800,5000,no,target,always,0,,,,,,,
@@ -4775,7 +4775,7 @@
 1874,Beelzebub@NPC_WIDESOULDRAIN,attack,680,7,1000,500,5000,no,self,myhpltmaxrate,50,,,,,,42,
 //1875,Tristan@NPC_BLOODDRAIN,attack,199,1,2000,0,5000,yes,target,always,0,,,,,,,
 
-// Moscovia (12.1)
+// 莫斯科比亞（12.1）
 1880,Wood Goblin@AL_HEAL,idle,28,9,10000,3000,5000,yes,friend,friendhpltmaxrate,50,,,,,,,
 1880,Wood Goblin@AL_HEAL,idle,28,9,5000,500,5000,yes,self,myhpltmaxrate,40,,,,,,19,
 1880,Wood Goblin@NPC_SPLASHATTACK,attack,174,1,3000,0,5000,yes,target,attackpcge,2,,,,,,0,
@@ -4864,42 +4864,42 @@
 
 1904,Bomb Poring@NPC_SELFDESTRUCTION,any,173,1,10000,3000,0,no,self,always,0,,,,,,,
 
-// Satan Morocc (12.1)
-//5% HP - Dragon Fear
+// 撒旦夢羅克（12.1）
+// 5% HP－龍之恐懼
 1916,Satan Morocc@NPC_DRAGONFEAR,chase,659,10,10000,0,600000,no,self,myhpltmaxrate,5,,,,,,,17
 1916,Satan Morocc@NPC_DRAGONFEAR,attack,659,10,10000,0,600000,no,self,myhpltmaxrate,5,,,,,,,17
-//10% HP - Talk
+// 10% HP－對話
 1916,Satan Morocc@NPC_TALK,chase,682,10,10000,0,600000,no,self,myhpltmaxrate,10,,,,,,,16
 1916,Satan Morocc@NPC_TALK,attack,682,10,10000,0,600000,no,self,myhpltmaxrate,10,,,,,,,16
-//30% HP - Earthquake Combo
+// 30% HP－地震連擊
 1916,Satan Morocc@NPC_WIDEHELLDIGNITY,chase,684,1,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,6
 1916,Satan Morocc@NPC_WIDEHELLDIGNITY,attack,684,1,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,6
 1916,Satan Morocc@NPC_WIDESTUN,chase,678,5,10000,1300,180000,no,self,myhpltmaxrate,30,,,,,,,
 1916,Satan Morocc@NPC_WIDESTUN,attack,678,5,10000,1300,180000,no,self,myhpltmaxrate,30,,,,,,,
 1916,Satan Morocc@NPC_EARTHQUAKE,chase,653,10,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,
 1916,Satan Morocc@NPC_EARTHQUAKE,attack,653,10,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,
-//40% HP - Mixed Combo
+// 40% HP－混合連擊
 1916,Satan Morocc@NPC_PULSESTRIKE,chase,661,5,10000,800,60000,no,self,myhpltmaxrate,40,,,,,,,14
 1916,Satan Morocc@NPC_PULSESTRIKE,attack,661,5,10000,800,60000,no,self,myhpltmaxrate,40,,,,,,,14
 1916,Satan Morocc@NPC_WIDESTONE,chase,666,5,10000,0,60000,no,self,myhpltmaxrate,40,,,,,,,
 1916,Satan Morocc@NPC_WIDESTONE,attack,666,5,10000,0,60000,no,self,myhpltmaxrate,40,,,,,,,
 1916,Satan Morocc@WZ_METEOR,chase,83,5,10000,800,60000,no,target,myhpltmaxrate,40,,,,,,,
 1916,Satan Morocc@WZ_METEOR,attack,83,5,10000,800,60000,no,target,myhpltmaxrate,40,,,,,,,
-//50% HP - Vampire Combo
+// 50% HP－吸血鬼連擊
 1916,Satan Morocc@NPC_VAMPIRE_GIFT,chase,679,9,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,15
 1916,Satan Morocc@NPC_VAMPIRE_GIFT,attack,679,9,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,15
 1916,Satan Morocc@NPC_WIDESOULDRAIN,chase,680,10,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,
 1916,Satan Morocc@NPC_WIDESOULDRAIN,attack,680,10,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,
 1916,Satan Morocc@NPC_EVILLAND,chase,670,10,10000,1000,50000,no,target,myhpltmaxrate,50,,,,,,,
 1916,Satan Morocc@NPC_EVILLAND,attack,670,10,10000,1000,50000,no,target,myhpltmaxrate,50,,,,,,,
-//60% HP - Hell Combo
+// 60% HP－地獄連擊
 1916,Satan Morocc@NPC_WIDESLEEP,chase,668,5,10000,700,35000,no,self,myhpltmaxrate,60,,,,,,,3
 1916,Satan Morocc@NPC_WIDESLEEP,attack,668,5,10000,700,35000,no,self,myhpltmaxrate,60,,,,,,,3
 1916,Satan Morocc@NPC_HELLPOWER,chase,683,1,10000,800,35000,no,target,myhpltmaxrate,60,,,,,,,
 1916,Satan Morocc@NPC_HELLPOWER,attack,683,1,10000,800,35000,no,target,myhpltmaxrate,60,,,,,,,
 1916,Satan Morocc@NPC_HELLJUDGEMENT,chase,662,5,10000,800,35000,no,self,myhpltmaxrate,60,,,,,,,
 1916,Satan Morocc@NPC_HELLJUDGEMENT,attack,662,5,10000,800,35000,no,self,myhpltmaxrate,60,,,,,,,
-//80% HP - Magic Combo
+// 80% HP－魔法連擊
 1916,Satan Morocc@MG_STONECURSE,chase,16,10,10000,1000,20000,no,target,myhpltmaxrate,80,,,,,,,2
 1916,Satan Morocc@MG_STONECURSE,attack,16,10,10000,1000,20000,no,target,myhpltmaxrate,80,,,,,,,2
 1916,Satan Morocc@MG_FIREBOLT,chase,19,10,10000,300,20000,no,target,myhpltmaxrate,80,,,,,,,
@@ -4920,41 +4920,41 @@
 1916,Satan Morocc@NPC_SUMMONSLAVE,chase,196,4,10000,0,30000,yes,self,slavele,1,1922,1923,1924,1925,,,4
 1916,Satan Morocc@SA_LANDPROTECTOR,attack,288,1,10000,0,15000,yes,target,always,0,,,,,,,
 1916,Satan Morocc@NPC_SHIELDBRAKE,attack,346,10,10000,0,15000,yes,target,always,0,,,,,,,
-//5% HP - Dragon Fear
+// 5% HP－龍之恐懼
 1917,Wounded Morocc@NPC_DRAGONFEAR,chase,659,10,10000,0,600000,no,self,myhpltmaxrate,5,,,,,,,17
 1917,Wounded Morocc@NPC_DRAGONFEAR,attack,659,10,10000,0,600000,no,self,myhpltmaxrate,5,,,,,,,17
-//10% HP - Talk
+// 10% HP－對話
 1917,Wounded Morocc@NPC_TALK,chase,682,10,10000,0,600000,no,self,myhpltmaxrate,10,,,,,,,16
 1917,Wounded Morocc@NPC_TALK,attack,682,10,10000,0,600000,no,self,myhpltmaxrate,10,,,,,,,16
-//30% HP - Earthquake Combo
+// 30% HP－地震連擊
 1917,Wounded Morocc@NPC_WIDEHELLDIGNITY,chase,684,1,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,6
 1917,Wounded Morocc@NPC_WIDEHELLDIGNITY,attack,684,1,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,6
 1917,Wounded Morocc@NPC_WIDESTUN,chase,678,5,10000,1300,180000,no,self,myhpltmaxrate,30,,,,,,,
 1917,Wounded Morocc@NPC_WIDESTUN,attack,678,5,10000,1300,180000,no,self,myhpltmaxrate,30,,,,,,,
 1917,Wounded Morocc@NPC_EARTHQUAKE,chase,653,10,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,
 1917,Wounded Morocc@NPC_EARTHQUAKE,attack,653,10,10000,2000,180000,no,self,myhpltmaxrate,30,,,,,,,
-//40% HP - Mixed Combo
+// 40% HP－混合連擊
 1917,Wounded Morocc@NPC_PULSESTRIKE,chase,661,5,10000,800,60000,no,self,myhpltmaxrate,40,,,,,,,14
 1917,Wounded Morocc@NPC_PULSESTRIKE,attack,661,5,10000,800,60000,no,self,myhpltmaxrate,40,,,,,,,14
 1917,Wounded Morocc@NPC_WIDESTONE,chase,666,5,10000,0,60000,no,self,myhpltmaxrate,40,,,,,,,
 1917,Wounded Morocc@NPC_WIDESTONE,attack,666,5,10000,0,60000,no,self,myhpltmaxrate,40,,,,,,,
 1917,Wounded Morocc@WZ_METEOR,chase,83,5,10000,800,60000,no,target,myhpltmaxrate,40,,,,,,,
 1917,Wounded Morocc@WZ_METEOR,attack,83,5,10000,800,60000,no,target,myhpltmaxrate,40,,,,,,,
-//50% HP - Vampire Combo
+// 50% HP－吸血鬼連擊
 1917,Wounded Morocc@NPC_VAMPIRE_GIFT,chase,679,9,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,15
 1917,Wounded Morocc@NPC_VAMPIRE_GIFT,attack,679,9,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,15
 1917,Wounded Morocc@NPC_WIDESOULDRAIN,chase,680,10,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,
 1917,Wounded Morocc@NPC_WIDESOULDRAIN,attack,680,10,10000,1000,50000,no,self,myhpltmaxrate,50,,,,,,,
 1917,Wounded Morocc@NPC_EVILLAND,chase,670,10,10000,1000,50000,no,target,myhpltmaxrate,50,,,,,,,
 1917,Wounded Morocc@NPC_EVILLAND,attack,670,10,10000,1000,50000,no,target,myhpltmaxrate,50,,,,,,,
-//60% HP - Hell Combo
+// 60% HP－地獄連擊
 1917,Wounded Morocc@NPC_WIDESLEEP,chase,668,5,10000,700,35000,no,self,myhpltmaxrate,60,,,,,,,3
 1917,Wounded Morocc@NPC_WIDESLEEP,attack,668,5,10000,700,35000,no,self,myhpltmaxrate,60,,,,,,,3
 1917,Wounded Morocc@NPC_HELLPOWER,chase,683,1,10000,800,35000,no,target,myhpltmaxrate,60,,,,,,,
 1917,Wounded Morocc@NPC_HELLPOWER,attack,683,1,10000,800,35000,no,target,myhpltmaxrate,60,,,,,,,
 1917,Wounded Morocc@NPC_HELLJUDGEMENT,chase,662,5,10000,800,35000,no,self,myhpltmaxrate,60,,,,,,,
 1917,Wounded Morocc@NPC_HELLJUDGEMENT,attack,662,5,10000,800,35000,no,self,myhpltmaxrate,60,,,,,,,
-//80% HP - Magic Combo
+// 80% HP－魔法連擊
 1917,Wounded Morocc@MG_STONECURSE,chase,16,10,10000,1000,20000,no,target,myhpltmaxrate,80,,,,,,,2
 1917,Wounded Morocc@MG_STONECURSE,attack,16,10,10000,1000,20000,no,target,myhpltmaxrate,80,,,,,,,2
 1917,Wounded Morocc@MG_FIREBOLT,chase,19,10,10000,300,20000,no,target,myhpltmaxrate,80,,,,,,,
@@ -5069,7 +5069,7 @@
 1927,Whisper@AS_CLOAKING,chase,135,1,2000,200,5000,yes,self,always,0,,,,,,,
 1927,Whisper@MO_BODYRELOCATION,chase,264,1,2000,500,5000,no,target,always,0,,,,,,28,
 
-// Sealed Shrine (12.1)
+// 封印神殿（12.1）
 1929,Great Demon Baphomet@NPC_TALK,chase,682,1,10000,0,6000000,yes,target,myhpltmaxrate,2,,,,,,,25
 1929,Great Demon Baphomet@NPC_TALK,attack,682,1,10000,0,6000000,yes,target,myhpltmaxrate,2,,,,,,,25
 1929,Great Demon Baphomet@NPC_TALK,chase,682,1,10000,0,6000000,yes,target,always,0,,,,,,,19
@@ -5102,7 +5102,7 @@
 1929,Great Demon Baphomet@WZ_VERMILION,chase,85,21,2000,500,10000,no,target,always,0,,,,,,29,
 1929,Great Demon Baphomet@NPC_ALLHEAL,idle,687,1,10000,30000,30000,yes,self,myhpltmaxrate,60,,,,,,,23
 
-// Fallacious Okolnir (12.1)
+// 虛偽奧克林納（12.1）
 1930,Piamette@WZ_METEOR,idle,83,11,10000,300,0,yes,target,rudeattacked,,,,,,,,
 1930,Piamette@NPC_WIDECURSE,chase,677,5,10000,700,35000,no,self,myhpltmaxrate,20,,,,,,,
 1930,Piamette@NPC_WIDECURSE,attack,677,5,10000,700,35000,no,self,myhpltmaxrate,20,,,,,,,
@@ -5196,7 +5196,7 @@
 1947,Piamette@NPC_WIDESILENCE,chase,663,5,3000,1000,20000,no,self,always,0,,,,,,36,
 1947,Piamette@NPC_WIDESILENCE,attack,663,5,3000,1000,20000,no,self,always,0,,,,,,36,
 
-// Endless Tower (12.1)
+// 無限塔（12.1）
 1956,Naght Sieger@KN_BRANDISHSPEAR,attack,57,3,2000,500,5000,no,target,always,0,,,,,,,
 1956,Naght Sieger@NPC_AGIUP,attack,350,5,10000,0,25000,yes,self,always,0,,,,,,9,
 1956,Naght Sieger@KN_TWOHANDQUICKEN,attack,60,30,10000,0,120000,no,self,myhpltmaxrate,50,,,,,,6,
@@ -5275,7 +5275,7 @@
 1961,Thorn of Purification@NPC_DEFENDER,idle,205,5,10000,0,180000,no,self,always,0,,,,,,29,
 1961,Thorn of Purification@NPC_DEFENDER,attack,205,5,10000,0,180000,no,self,always,0,,,,,,29,
 
-// Guild Dungeon SE (13.1)
+// 公會地下城 SE（13.1）
 1974,Banshee Master@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 1974,Banshee Master@NPC_CURSEATTACK,chase,181,1,1000,800,5000,yes,target,always,0,,,,,,6,
 1974,Banshee Master@NPC_WIDECURSE,attack,677,1,500,800,5000,no,self,always,0,,,,,,,
@@ -5327,7 +5327,7 @@
 1979,Zukadam@NPC_RANDOMATTACK,attack,183,5,1000,500,5000,no,target,always,0,,,,,,,
 1979,Zukadam@NPC_SUMMONSLAVE,idle,196,2,10000,0,0,no,self,onspawn,0,1668,,,,,,
 
-// Memory of Orc Dungeon (13.1)
+// 獸人地下洞窟記憶（13.1）
 1981,Safeguard Chief@SM_BASH,attack,5,10,500,1000,5000,no,target,always,0,,,,,,,
 1981,Safeguard Chief@SM_BASH,chase,5,10,500,1000,5000,no,target,always,0,,,,,,,
 1981,Safeguard Chief@NPC_DARKNESSATTACK,attack,190,3,500,500,5000,no,target,always,0,,,,,,6,
@@ -5346,7 +5346,7 @@
 1984,Shaman Cargalache@NPC_EMOTION,chase,197,1,2000,0,5000,yes,self,always,0,3,,,,,,
 1984,Shaman Cargalache@NPC_EVILLAND,attack,670,1,500,0,5000,yes,target,always,0,,,,,,,
 
-// New World (13.1)
+// 新世界（13.1）
 1985,Dandelion@NPC_CHANGEUNDEAD,attack,348,1,3000,500,600000,no,target,myhpltmaxrate,80,,,,,,,
 1985,Dandelion@NPC_CHANGEUNDEAD,chase,348,1,3000,500,600000,no,target,myhpltmaxrate,80,,,,,,,
 1985,Dandelion@NPC_COMBOATTACK,attack,171,1,3000,0,5000,yes,target,always,0,,,,,,,
@@ -5564,7 +5564,7 @@
 2010,Majoruros@WZ_HEAVENDRIVE,attack,91,5,500,1200,5000,yes,target,always,0,,,,,,2,
 2010,Majoruros@WZ_HEAVENDRIVE,chase,91,5,500,1200,5000,yes,target,always,0,,,,,,2,
 
-// Into the Unknown (13.2)
+// 探索未知（13.2）
 2013,Draco@NPC_EMOTION,chase,197,1,2000,0,5000,yes,self,always,0,32,,,,,,
 2013,Draco@SM_PROVOKE,chase,6,10,2000,600,5000,no,target,always,0,,,,,,44,
 2013,Draco@TF_THROWSTONE,chase,152,1,2000,0,5000,no,target,always,0,,,,,,,
@@ -5703,7 +5703,7 @@
 2027,Dark Shadow@NPC_DARKNESSBREATH,attack,658,1,500,1000,5000,no,target,always,0,,,,,,,
 
 //****
-// NC Mechanic Summons
+// 機械工匠召喚物
 2042,Silver Sniper@NPC_REVENGE,idle,333,1,10000,0,0,yes,self,masterattacked,0,,,,,,,
 2043,Magic Decoy Fire@MG_FIREBOLT,idle,19,10,10000,800,3500,no,randomtarget,always,0,,,,,,,
 2044,Magic Decoy Water@MG_COLDBOLT,idle,14,10,10000,800,3500,no,randomtarget,always,0,,,,,,,
@@ -5759,7 +5759,7 @@
 2052,Dark Lord@WZ_METEOR,chase,83,11,5000,500,2000,no,target,skillused,18,,,,,,,
 2052,Dark Lord@WZ_METEOR,chase,83,11,5000,500,2000,no,target,always,0,,,,,,,
 
-// Brasilis
+// 巴西利斯
 2068,Boitata@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,0,,,,,,,
 2068,Boitata@MG_FIREBALL,idle,17,5,10000,0,5000,yes,randomtarget,always,0,,,,,,,
 2068,Boitata@MG_FIREBALL,chase,17,5,10000,0,5000,yes,target,always,0,,,,,,,
@@ -5837,7 +5837,7 @@
 2082,Piranha@WZ_WATERBALL,attack,86,3,500,1000,5000,yes,target,always,0,,,,,,6,
 2082,Piranha@NPC_BLOODDRAIN,attack,199,1,500,0,5000,yes,target,always,0,,,,,,,
 
-// El Dicastes (13.3)
+// 艾爾迪卡斯特（13.3）
 2083,Scaraba@NPC_PIERCINGATT,attack,158,3,1000,0,5000,yes,target,always,0,,,,,,,
 2083,Scaraba@CR_AUTOGUARD,chase,249,5,2000,0,300000,yes,self,longrangeattacked,0,,,,,,,
 2083,Scaraba@CR_AUTOGUARD,attack,249,5,500,0,300000,yes,self,always,0,,,,,,,
@@ -6328,7 +6328,7 @@
 2113,Assassin Cross Eremes@NPC_CHANGEHOLY,attack,167,1,10000,500,6000000,no,self,myhpltmaxrate,40,,,,,,9,
 2113,Assassin Cross Eremes@NPC_CHANGETELEKINESIS,attack,169,1,10000,500,6000000,no,self,myhpltmaxrate,10,,,,,,9,
 
-// Bifrost (14.1)
+// 彩虹橋（14.1）
 2131,Lost Dragon@NPC_ALLHEAL,idle,687,1,3000,20000,20000,yes,self,rudeattacked,0,,,,,,,
 2131,Lost Dragon@NPC_ALLHEAL,walk,687,1,3000,20000,20000,yes,self,rudeattacked,0,,,,,,,
 2131,Lost Dragon@NPC_MAGICMIRROR,chase,671,1,10000,0,120000,yes,self,always,0,,,,,,,
@@ -6428,7 +6428,7 @@
 2143,Nydhogg's Memory@NPC_TALK,idle,682,10,2500,0,10000,yes,self,always,0,,,,,,,40
 2143,Nydhogg's Memory@NPC_TALK,attack,682,10,10000,0,30000,yes,self,always,0,,,,,,,40
 
-// Queen Scaraba Slaves
+// 女王甲蟲從屬魔物
 2144,Antler Scaraba@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,0,,,,,,,
 2144,Antler Scaraba@BS_ADRENALINE,attack,111,10,500,1500,300000,no,self,always,0,,,,,,6,
 2144,Antler Scaraba@BS_ADRENALINE,chase,111,10,500,1500,300000,no,self,always,0,,,,,,6,
@@ -6465,7 +6465,7 @@
 2146,G_S_NYDHOG@SA_DISPELL,attack,289,1,500,0,30000,yes,target,always,0,,,,,,,
 2146,G_S_NYDHOG@NPC_PULSESTRIKE,attack,661,1,500,10000,40000,no,self,always,0,,,,,,,
 
-// Dewata
+// 德瓦塔
 2151,Alnoldi@AL_HEAL,idle,28,5,10000,500,5000,yes,self,myhpltmaxrate,50,,,,,,,
 2151,Alnoldi@AL_HEAL,chase,28,5,10000,500,5000,yes,self,myhpltmaxrate,50,,,,,,,
 2151,Alnoldi@AL_HEAL,attack,28,5,10000,500,5000,yes,self,myhpltmaxrate,50,,,,,,,
@@ -6545,7 +6545,7 @@
 2157,Banaspaty@WZ_SIGHTRASHER,attack,81,7,1000,500,5000,no,target,always,0,,,,,,,
 2157,Banaspaty@NPC_FIREATTACK,attack,186,3,500,500,5000,no,target,always,0,,,,,,,
 
-// Scaraba Hole Nightmare Mode
+// 甲蟲洞穴惡夢模式
 2161,Gold One-Horn Scaraba@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 2161,Gold One-Horn Scaraba@RG_STRIPHELM,attack,218,5,10000,0,15000,yes,target,always,0,,,,,,,
 2161,Gold One-Horn Scaraba@NPC_HELMBRAKE,attack,345,10,500,0,15000,yes,target,always,0,,,,,,19,
@@ -6752,7 +6752,7 @@
 2173,Gold Two-Horn Scaraba@NPC_STONESKIN,chase,675,3,10000,0,30000,yes,self,always,0,,,,,,,
 2173,Gold Two-Horn Scaraba@NPC_STONESKIN,attack,675,3,10000,0,30000,yes,self,always,0,,,,,,,
 
-// Malangdo Island
+// 馬蘭島
 2174,Deep Sea Vadon@ST_FULLSTRIP,attack,476,5,1000,0,5000,yes,target,always,0,,,,,,6,
 2174,Deep Sea Vadon@NPC_STUNATTACK,attack,179,2,500,1500,5000,no,target,always,0,,,,,,6,
 2174,Deep Sea Vadon@NPC_WATERATTACK,attack,184,1,2000,0,5000,yes,target,always,0,,,,,,,
@@ -7049,7 +7049,7 @@
 2198,King Dramoh@NPC_STUNATTACK,attack,179,4,500,1500,5000,no,target,always,0,,,,,,,
 2199,Siorava@NPC_WATERATTACK,attack,184,1,2000,0,5000,yes,target,always,0,,,,,,,
 
-// Izlude Dungeon F6
+// 伊斯魯德地下城 F6
 2201,Sropho@NPC_WATERATTACK,attack,184,1,2000,0,5000,yes,target,always,0,,,,,,,
 2201,Sropho@MG_FROSTDIVER,chase,15,9,2000,800,5000,yes,target,always,0,,,,,,,
 2201,Sropho@MG_FROSTDIVER,attack,15,9,2000,800,5000,yes,target,always,0,,,,,,,
@@ -7122,7 +7122,7 @@
 2208,Wild Rider@WZ_WATERBALL,chase,86,7,2000,1000,5000,yes,target,always,0,,,,,,,
 2208,Wild Rider@WZ_WATERBALL,attack,86,7,2000,1000,5000,yes,target,always,0,,,,,,,
 
-// Bio 4
+// 生化研究所 4F
 2221,Randel@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 2221,Randel@AL_TELEPORT,walk,26,1,5000,0,5000,yes,self,rudeattacked,,,,,,,,
 2221,Randel@CR_REFLECTSHIELD,idle,252,10,10000,0,300000,yes,self,always,0,,,,,,,
@@ -7269,7 +7269,7 @@
 2226,Alphoccio@WZ_FROSTNOVA,attack,88,10,5000,0,10000,yes,self,always,0,,,,,,,
 2226,Alphoccio@BA_MUSICALSTRIKE,chase,316,5,10000,0,10000,no,target,always,0,,,,,,,
 2226,Alphoccio@BA_MUSICALSTRIKE,attack,316,5,10000,0,10000,no,target,always,0,,,,,,,
-// currently not working properly
+// 目前無法正常運作
 // 2226,Alphoccio@BA_DISSONANCE,chase,317,5,500,0,30000,no,self,always,0,,,,,,,
 // 2226,Alphoccio@BA_DISSONANCE,attack,317,5,500,0,30000,no,self,always,0,,,,,,,
 2226,Alphoccio@AC_DOUBLE,attack,46,10,2000,0,3000,yes,target,always,0,,,,,,6,
@@ -7293,7 +7293,7 @@
 2227,Trentini@NPC_WIDESTUN,attack,678,5,5000,0,10000,no,self,always,0,,,,,,,
 2227,Trentini@DC_THROWARROW,chase,324,5,10000,0,10000,no,target,always,0,,,,,,,
 2227,Trentini@DC_THROWARROW,attack,324,5,10000,0,10000,no,target,always,0,,,,,,,
-// currently not working properly
+// 目前無法正常運作
 // 2227,Trentini@DC_UGLYDANCE,chase,325,5,500,0,30000,no,self,always,0,,,,,,,
 // 2227,Trentini@DC_UGLYDANCE,attack,325,5,500,0,30000,no,self,always,0,,,,,,,
 2227,Trentini@AC_DOUBLE,attack,46,10,2000,0,3000,yes,target,always,0,,,,,,6,
@@ -7468,7 +7468,7 @@
 2233,Clown Alphoccio@WZ_FROSTNOVA,attack,88,10,5000,0,10000,yes,self,always,0,,,,,,,
 2233,Clown Alphoccio@BA_MUSICALSTRIKE,chase,316,5,10000,0,10000,no,target,always,0,,,,,,,
 2233,Clown Alphoccio@BA_MUSICALSTRIKE,attack,316,5,10000,0,10000,no,target,always,0,,,,,,,
-// currently not working properly
+// 目前無法正常運作
 // 2233,Clown Alphoccio@BA_DISSONANCE,chase,317,5,500,0,30000,no,self,always,0,,,,,,,
 // 2233,Clown Alphoccio@BA_DISSONANCE,attack,317,5,500,0,30000,no,self,always,0,,,,,,,
 2233,Clown Alphoccio@AC_DOUBLE,attack,46,10,2000,0,3000,yes,target,always,0,,,,,,6,
@@ -7495,7 +7495,7 @@
 2234,Gypsy Trentini@NPC_WIDESTUN,attack,678,5,5000,0,10000,no,self,always,0,,,,,,,
 2234,Gypsy Trentini@DC_THROWARROW,chase,324,5,10000,0,10000,no,target,always,0,,,,,,,
 2234,Gypsy Trentini@DC_THROWARROW,attack,324,5,10000,0,10000,no,target,always,0,,,,,,,
-// currently not working properly
+// 目前無法正常運作
 // 2234,Gypsy Trentini@DC_UGLYDANCE,chase,325,5,500,0,30000,no,self,always,0,,,,,,,
 // 2234,Gypsy Trentini@DC_UGLYDANCE,attack,325,5,500,0,30000,no,self,always,0,,,,,,,
 2234,Gypsy Trentini@AC_DOUBLE,attack,46,10,2000,0,3000,yes,target,always,0,,,,,,6,
@@ -7695,7 +7695,7 @@
 2240,Clown Alphoccio@WZ_FROSTNOVA,attack,88,10,5000,0,10000,yes,self,always,0,,,,,,,
 2240,Clown Alphoccio@BA_MUSICALSTRIKE,chase,316,5,10000,0,10000,no,target,always,0,,,,,,,
 2240,Clown Alphoccio@BA_MUSICALSTRIKE,attack,316,5,10000,0,10000,no,target,always,0,,,,,,,
-// currently not working properly
+// 目前無法正常運作
 // 2240,Clown Alphoccio@BA_DISSONANCE,chase,317,5,500,0,30000,no,self,always,0,,,,,,,
 // 2240,Clown Alphoccio@BA_DISSONANCE,attack,317,5,500,0,30000,no,self,always,0,,,,,,,
 2240,Clown Alphoccio@AC_DOUBLE,attack,46,10,2000,0,3000,yes,target,always,0,,,,,,6,
@@ -7726,7 +7726,7 @@
 2241,Gypsy Trentini@NPC_WIDESTUN,attack,678,5,5000,0,10000,no,self,always,0,,,,,,,
 2241,Gypsy Trentini@DC_THROWARROW,chase,324,5,10000,0,10000,no,target,always,0,,,,,,,
 2241,Gypsy Trentini@DC_THROWARROW,attack,324,5,10000,0,10000,no,target,always,0,,,,,,,
-// currently not working properly
+// 目前無法正常運作
 // 2241,Gypsy Trentini@DC_UGLYDANCE,chase,325,5,500,0,30000,no,self,always,0,,,,,,,
 // 2241,Gypsy Trentini@DC_UGLYDANCE,attack,325,5,500,0,30000,no,self,always,0,,,,,,,
 2241,Gypsy Trentini@AC_DOUBLE,attack,46,10,2000,0,3000,yes,target,always,0,,,,,,6,
@@ -7750,7 +7750,7 @@
 2243,Desert Wolf B@CR_AUTOGUARD,attack,249,2,500,0,300000,yes,self,always,0,,,,,,,
 2243,Desert Wolf B@NPC_CRITICALSLASH,attack,170,1,500,500,5000,no,target,always,0,,,,,,6,
 
-// Guild Dungeon F2
+// 公會地下城 F2
 2249,Pyuriel@NPC_SUMMONSLAVE,attack,196,1,10000,2000,5000,no,self,slavele,1,2277,,,,,,
 2249,Pyuriel@NPC_SUMMONSLAVE,idle,196,1,10000,2000,5000,no,self,slavele,1,2277,,,,,,
 2249,Pyuriel@NPC_SUMMONSLAVE,chase,196,1,10000,2000,5000,no,self,slavele,1,2277,,,,,,
@@ -7944,7 +7944,7 @@
 
 2306,Golden Thief Bug@NPC_AGIUP,loot,350,1,1000,0,10000,yes,self,always,0,,,,,,,
 
-// Malaya Port
+// 馬來港
 2309,Bungisngis@BS_HAMMERFALL,attack,110,5,1000,1500,5000,no,target,always,0,,,,,,,
 2309,Bungisngis@CR_AUTOGUARD,chase,249,10,2000,0,300000,yes,self,longrangeattacked,,,,,,,,
 2309,Bungisngis@CR_AUTOGUARD,attack,249,10,500,0,300000,yes,self,always,0,,,,,,,
@@ -8145,7 +8145,7 @@
 2343,Hidden Mob@NPC_INVISIBLE,attack,353,1,10000,0,30000,yes,self,always,0,,,,,,,
 2343,Hidden Mob@WZ_STORMGUST,attack,89,5,10000,0,1000,yes,target,always,0,,,,,,,
 
-// Nightmare Pyramids
+// 惡夢金字塔
 2353,Nightmare Minorous@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 2353,Nightmare Minorous@BS_HAMMERFALL,attack,110,3,500,1500,5000,no,self,always,0,,,,,,,
 2353,Nightmare Minorous@NPC_FIREATTACK,attack,186,3,500,500,5000,no,target,always,0,,,,,,6,
@@ -8210,7 +8210,7 @@
 2362,Nightmare Amon Ra@AL_HEAL,idle,28,11,10000,0,10000,yes,self,myhpltmaxrate,50,,,,,,,
 2362,Nightmare Amon Ra@WZ_STORMGUST,idle,89,10,3000,0,0,yes,target,groundattacked,0,,,,,,9,
 
-// Eclage
+// 艾克拉珠
 2363,Menblatt@KN_PIERCE,attack,56,10,500,700,5000,no,target,always,0,,,,,,6,
 2363,Menblatt@NPC_DARKSTRIKE,chase,340,5,2000,700,5000,no,target,always,0,,,,,,6,
 2363,Menblatt@NPC_SLEEPATTACK,attack,182,5,500,0,5000,yes,target,always,0,,,,,,7,
@@ -8722,7 +8722,7 @@
 2449,Nasarin@RG_CLOSECONFINE,attack,1005,1,1000,0,30000,no,target,always,0,,,,,,,
 2449,Nasarin@NPC_POISONATTACK,attack,188,5,1000,0,5000,no,target,always,0,,,,,,,
 
-// Old Glast Heim
+// 舊古城
 2464,Corrupted Steward@NPC_UNDEADATTACK,chase,347,3,5000,0,5000,no,target,always,0,,,,,,,
 2464,Corrupted Steward@AL_HEAL,idle,28,1,5000,1000,3000,no,self,always,0,,,,,,26,
 2464,Corrupted Steward@NPC_UNDEADATTACK,attack,347,3,5000,500,3000,no,target,always,0,,,,,,28,
@@ -8802,7 +8802,7 @@
 2476,Amdarias@NPC_STUNATTACK,attack,179,5,2000,0,3000,no,target,always,0,,,,,,,
 2476,Amdarias@SM_MAGNUM,attack,7,25,10000,500,5000,yes,self,always,0,,,,,,,
 
-// Nightmare Glast Heim
+// 惡夢古城
 2477,Wanderer (Nightmare)@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 2477,Wanderer (Nightmare)@KN_AUTOCOUNTER,attack,61,5,500,0,5000,yes,self,always,,,,,,,,
 2477,Wanderer (Nightmare)@NPC_SPLASHATTACK,attack,174,1,2000,0,5000,yes,target,attackpcge,2,,,,,,,
@@ -8955,13 +8955,13 @@
 2541,Faceworm Larva@NPC_POISON,attack,176,5,500,800,5000,no,target,always,,,,,,,,
 2541,Faceworm Larva@NPC_POISONATTACK,attack,188,10,2000,2000,2000,yes,target,always,,,,,,,,
 
-// Heroes' Trail Part 1 - Sara's Memory
-// Not Yet Implemented skill
+// 英雄旅程第一章－莎拉的回憶
+// 尚未實作的技能
 2542,Irene Elder@NPC_MILLENNIUMSHIELD,idle,707,1,5000,1000,30000,no,self,always,0,,,,,,,
 2542,Irene Elder@NPC_MILLENNIUMSHIELD,attack,707,1,5000,1000,30000,no,self,always,0,,,,,,,
 2542,Irene Elder@NPC_MILLENNIUMSHIELD,chase,707,1,5000,1000,30000,no,self,always,0,,,,,,,
 
-//Geffen Magic Tournament
+// 吉芬魔法大賽
 2549,Arhi@MG_FIREBOLT,attack,19,5,3000,1000,3000,yes,target,always,0,,,,,,,
 2549,Arhi@MG_FIREWALL,attack,18,1,3000,2000,3000,yes,target,always,0,,,,,,,
 2550,Dio Anemos@MG_FROSTDIVER,attack,15,5,3000,1000,3000,yes,target,always,0,,,,,,,
@@ -9018,7 +9018,7 @@
 2566,Alphonse Jr@PR_LEXDIVINA,attack,76,1,1000,2000,60000,yes,target,always,0,,,,,,,
 2566,Alphonse Jr@PR_LEXAETERNA,attack,78,1,1000,500,10000,yes,target,always,0,,,,,,,
 
-// Champion Monsters
+// 冠軍魔物
 2603,Swift Zombie Slaughter@AL_TELEPORT,attack,26,1,500,0,5000,yes,self,myhpltmaxrate,50,,,,,,,
 2603,Swift Zombie Slaughter@AL_HEAL,attack,28,5,10000,500,5000,yes,self,myhpltmaxrate,50,,,,,,,
 2603,Swift Zombie Slaughter@AS_SONICBLOW,attack,136,5,1000,800,5000,no,target,always,,,,,,,,
@@ -10915,7 +10915,7 @@
 2913,Acidus Ringleader@NPC_WINDATTACK,attack,187,6,500,500,5000,no,target,always,,,,,,,,
 2913,Acidus Ringleader@NPC_SUMMONSLAVE,idle,196,2,10000,700,30000,no,self,slavele,0,1716,,,,,,
 
-// Nightmare Clock Tower Dungeon
+// 惡夢鐘塔地下城
 2916,Big Ben@NPC_CURSEATTACK,attack,181,3,500,800,5000,no,target,always,0,,,,,,6,
 2916,Big Ben@NPC_GROUNDATTACK,attack,185,3,500,500,5000,no,target,always,0,,,,,,6,
 2916,Big Ben@NPC_STUNATTACK,attack,179,3,500,1500,5000,no,target,always,0,,,,,,6,
@@ -10974,7 +10974,7 @@
 2923,Owl Marquees@NPC_EMOTION,idle,197,1,2000,0,5000,yes,self,always,0,6,0x3695,,,,,
 2923,Owl Marquees@NPC_SUMMONSLAVE,idle,196,2,10000,2000,60000,no,self,slavele,0,2922,,,,,,
 
-// Devil Tower Memorial
+// 惡魔塔紀念副本
 2939,Evil Shadow@NPC_PIERCINGATT,chase,158,1,4000,0,5000,yes,target,always,0,,,,,,,
 2939,Evil Shadow@NPC_CURSEATTACK,attack,181,5,3500,0,20000,yes,target,always,0,,,,,,,
 2940,Evil Shadow@NPC_DARKSTRIKE,attack,340,1,3000,0,5000,yes,target,always,0,,,,,,,
@@ -10991,7 +10991,7 @@
 2942,Evil Fanatics@NPC_INVINCIBLE,attack,685,1,10000,0,20000,yes,self,myhpltmaxrate,30,,,,,,,
 2942,Evil Fanatics@NPC_INVINCIBLE,attack,685,1,10000,0,20000,yes,self,myhpltmaxrate,20,,,,,,,
 2942,Evil Fanatics@NPC_INVINCIBLE,attack,685,1,10000,0,20000,yes,self,myhpltmaxrate,10,,,,,,,
-// unknown monster chat
+// 未知魔物對話
 // 2942,Evil Fanatics@NPC_INVINCIBLE,idle,685,1,10000,0,20000,yes,self,myhpltmaxrate,100,,,,,,,42
 // 2942,Evil Fanatics@NPC_INVINCIBLE,attack,685,1,10000,0,20000,yes,self,myhpltmaxrate,100,,,,,,,42
 // 2942,Evil Fanatics@NPC_INVINCIBLE,attack,685,1,10000,0,20000,yes,self,myhpltmaxrate,90,,,,,,,42
@@ -11011,7 +11011,7 @@
 2960,Flamecross@NPC_INVISIBLE,idle,353,1,10000,0,300000,no,self,always,0,,,,,,,
 2960,Flamecross@NPC_FLAMECROSS,idle,711,1,10000,0,300000,no,self,always,,,,,,,,
 
-// Ghost Palace Memorial
+// 幽靈皇宮紀念副本
 2948,Cursed Soldier@NPC_BLINDATTACK,attack,177,5,500,0,5000,no,target,always,0,,,,,,,
 2948,Cursed Soldier@AC_DOUBLE,attack,46,5,500,0,5000,no,target,always,0,,,,,,,
 2948,Cursed Soldier@NPC_MAGICALATTACK,attack,192,1,500,800,5000,yes,target,always,0,,,,,,,
@@ -11059,7 +11059,7 @@
 2959,Torturous Redeemer@WZ_FIREPILLAR,attack,80,5,500,0,10000,no,around2,always,0,,,,,,,
 2959,Torturous Redeemer@SM_BASH,attack,5,5,500,0,5000,no,target,always,0,,,,,,,
 
-// Horror Toy Factory
+// 恐怖玩具工廠
 2987,Decorated Evil Tree@AS_GRIMTOOTH,chase,137,5,2000,0,5000,yes,target,always,0,,,,,,,
 2987,Decorated Evil Tree@NPC_CURSEATTACK,attack,181,3,1000,0,5000,yes,target,always,0,,,,,,6,
 2987,Decorated Evil Tree@NPC_UNDEADATTACK,attack,347,3,500,0,5000,yes,target,always,0,,,,,,6,
@@ -11134,7 +11134,7 @@
 2997,Kimi's Phantom@NPC_MAXPAIN,attack,716,3,10000,3000,50000,no,self,myhpltmaxrate,10,,,,,,,
 2997,Kimi's Phantom@NPC_POWERUP,attack,349,1,10000,0,50000,no,self,myhpltmaxrate,5,,,,,,6,
 
-// Episode 14.3: Morse cave
+// 第 14.3 章：莫爾斯洞窟
 2999,Morocc Necromancer@MG_SIGHT,idle,10,1,2000,0,5000,no,self,always,0,,,,,,,
 2999,Morocc Necromancer@MG_SIGHT,idle,10,1,10000,0,5000,no,self,skillused,137,,,,,,,
 2999,Morocc Necromancer@AL_TELEPORT,idle,26,1,10000,0,0,no,self,rudeattacked,,,,,,,,
@@ -11210,7 +11210,7 @@
 
 3026,Fire Pit@NPC_DEATHSUMMON,dead,718,3,10000,0,10000,no,self,always,0,3027,3027,3027,,,,
 
-// Episode 14.3: Isle of Bios
+// 第 14.3 章：生化島
 3029,Grim Reaper Ankou@NPC_COMET,attack,708,3,1000,10000,75000,no,self,always,0,,,,,,,
 3029,Grim Reaper Ankou@NPC_DARKCROSS,attack,338,10,500,2000,12000,no,target,always,0,,,,,,,
 3029,Grim Reaper Ankou@NPC_DRAGONFEAR,attack,659,5,1000,3000,30000,no,self,always,0,,,,,,,
@@ -11220,7 +11220,7 @@
 3038,Hidden Mob 7@NPC_HELLBURNING,idle,719,1,10000,0,3000,yes,self,always,0,,,,,,,
 3038,Hidden Mob 7@NPC_HELLBURNING,attack,719,1,10000,0,3000,yes,self,always,0,,,,,,,
 
-// Jitterbug instance
+// 跳舞甲蟲副本
 3069,Ferre@NPC_GROUNDATTACK,attack,185,5,1000,0,5000,no,target,always,0,,,,,,,
 3069,Ferre@NPC_EMOTION,idle,197,1,2000,0,5000,no,self,always,0,44,0x3885,,,,,
 3070,Ferre@NPC_MAGICALATTACK,attack,192,1,500,0,10000,no,target,always,0,,,,,,,
@@ -11253,7 +11253,7 @@
 3074,Time Holder@NPC_SUMMONSLAVE,attack,196,5,1000,700,10000,no,self,slavele,0,2917,,,,,,
 3074,Time Holder@NPC_SUMMONSLAVE,idle,196,5,1000,700,10000,no,self,slavele,0,2917,,,,,,
 
-// Temple demon god instance
+// 魔神殿副本
 3088,MM_BRINARANEA_BABY@NPC_WATERATTACK,attack,184,1,5000,0,10000,yes,target,always,0,,,,,,,
 3088,MM_BRINARANEA_BABY@MG_COLDBOLT,chase,14,1,1000,0,3000,yes,target,always,0,,,,,,,
 3088,MM_BRINARANEA_BABY@NPC_WIDEWEB,attack,721,1,3000,0,20000,yes,self,always,0,,,,,,,
@@ -11331,7 +11331,7 @@
 3099,MM_MOROCC_REST@NPC_EVILLAND,chase,670,10,10000,1000,50000,yes,self,myhpltmaxrate,50,,,,,,,
 3099,MM_MOROCC_REST@NPC_EVILLAND,attack,670,10,10000,1000,50000,yes,self,myhpltmaxrate,50,,,,,,,
 
-// Jitterbug instance
+// 跳舞甲蟲副本
 3108,Jitterbug@NPC_WIDESILENCE,attack,663,5,3000,1000,10000,yes,self,always,0,,,,,,,
 3108,Jitterbug@NPC_LEX_AETERNA,attack,727,3,2000,2000,10000,yes,self,always,0,,,,,,,
 3108,Jitterbug@NPC_DARKNESSBREATH,attack,658,5,1000,2000,5000,yes,target,always,0,,,,,,,
@@ -11344,7 +11344,7 @@
 3200,Wicked Chimera@CR_AUTOGUARD,attack,249,5,500,0,300000,yes,self,always,0,,,,,,,
 3200,Wicked Chimera@CR_AUTOGUARD,chase,249,5,2000,0,300000,yes,self,longrangeattacked,,,,,,,,
 
-// Nightmare Biolab
+// 惡夢研究所
 3208,V_EREMES@AS_VENOMDUST,idle,140,1,200,0,50000,yes,target,always,,,,,,,29,
 3208,V_EREMES@AL_TELEPORT,idle,26,1,1000,0,0,yes,self,rudeattacked,,,,,,,,
 3208,V_EREMES@AS_GRIMTOOTH,chase,137,5,200,0,0,yes,target,always,,,,,,,,
@@ -11982,7 +11982,7 @@
 3246,V_B_TRENTINI@NPC_WIDESLEEP,attack,668,5,100,1000,20000,no,self,always,,,,,,,,
 3246,V_B_TRENTINI@NPC_WIDECONFUSE,attack,667,5,100,1000,20000,no,target,always,,,,,,,,
 
-// Phantasmagorika 15.2
+// 幻影都市（15.2）
 3124,CHARLESTON3@NPC_AGIUP,idle,350,1,2000,0,10000,yes,self,always,0,,,,,,,
 3124,CHARLESTON3@AL_HEAL,idle,28,11,10000,0,3000,yes,self,always,0,,,,,,,
 3124,CHARLESTON3@HW_NAPALMVULCAN,chase,400,5,3000,500,10000,no,target,always,0,,,,,,,
@@ -12008,7 +12008,7 @@
 3254,T_W_O@NPC_WIDESOULDRAIN,attack,680,10,10000,0,60000,no,self,always,0,,,,,,,
 3254,T_W_O@NPC_CRITICALWOUND,attack,673,5,1500,500,45000,no,target,always,,,,,,,,
 
-// Episode 15.2 - Infinite Space
+// 第 15.2 章－無限空間
 3384,MIN_PORING@NPC_EMOTION,loot,197,1,2000,0,5000,yes,self,always,0,2,,,,,,
 3386,MIN_FABRE@NPC_GROUNDATTACK,attack,185,1,2000,0,5000,yes,target,always,0,,,,,,,
 3387,MIN_PICKY@NPC_EMOTION,walk,197,1,2000,0,5000,yes,self,always,0,2,,,,,,
@@ -12297,7 +12297,7 @@
 3452,ZOMBIE_GUARD@NPC_POISONATTACK,attack,188,3,500,800,5000,no,target,always,0,,,,,,,
 3452,ZOMBIE_GUARD@NPC_BLOODDRAIN,attack,199,1,500,0,5000,yes,target,always,0,,,,,,2,
 
-// Sky Fortress Invasion Instance
+// 天空要塞入侵副本
 3473,AS_RAGGED_GOLEM@NPC_ELECTRICWALK,attack,744,5,2000,0,5000,yes,self,always,,,,,,,,
 3473,AS_RAGGED_GOLEM@NPC_FIREWALK,attack,745,5,2000,0,5000,yes,self,always,,,,,,,,
 3473,AS_RAGGED_GOLEM@NPC_HALLUCINATIONWALK,attack,743,5,10000,800,500000,yes,self,always,,,,,,,,
@@ -12375,7 +12375,7 @@
 3490,IMMORTAL_CO_CMDER@SA_DISPELL,chase,289,5,1000,0,10000,yes,target,always,0,,,,,,,
 3490,IMMORTAL_CO_CMDER@SA_DISPELL,attack,289,5,1000,0,10000,yes,target,always,0,,,,,,,
 
-// Episode 16.1 - Infinite Space Update
+// 第 16.1 章－無限空間更新
 3494,Shining Poring@NPC_RUN,attack,354,1,10000,0,0,yes,self,myhpltmaxrate,99,,,,,,29,
 3494,Shining Poring@NPC_RUN,chase,354,1,10000,0,0,yes,self,myhpltmaxrate,99,,,,,,29,
 3494,Shining Poring@MG_SAFETYWALL,attack,12,1,1000,1000,10000,no,self,always,0,,,,,,18,
@@ -12384,7 +12384,7 @@
 3505,DR_BIG_EGGRING@NPC_SUMMONSLAVE,attack,196,4,10000,2000,10000,no,self,slavele,3,3508,,,,,,
 3505,DR_BIG_EGGRING@NPC_SUMMONSLAVE,idle,196,4,10000,2000,10000,no,self,slavele,3,3508,,,,,,
 
-// Episode 16.1 - EDDA Half Moon In The Daylight
+// 第 16.1 章－EDDA：白晝半月
 3510,POPE_MD_H_GUARD@NPC_COMBOATTACK,attack,171,1,500,700,5000,no,target,always,,,,,,,,
 3510,POPE_MD_H_GUARD@NPC_COMBOATTACK,angry,171,1,500,700,5000,no,target,always,0,,,,,,6,
 3510,POPE_MD_H_GUARD@NPC_COMBOATTACK,attack,171,1,500,700,5000,no,target,always,0,,,,,,6,
@@ -12484,7 +12484,7 @@
 3526,POPE_MD_H_KTULLANUX@NPC_SUMMONSLAVE,attack,196,1,10000,700,10000,no,self,slavele,3,3517,,,,,,
 3526,POPE_MD_H_KTULLANUX@NPC_SUMMONSLAVE,idle,196,1,10000,700,10000,no,self,slavele,3,3517,,,,,,
 
-// Weekend Memorial Dungeon
+// 週末紀念副本
 3637,MD_SKELETON_60@NPC_EMOTION,idle,197,1,2000,0,5000,yes,self,always,,1,,,,,,
 3637,MD_SKELETON_60@NPC_UNDEADATTACK,attack,347,1,2000,0,5000,yes,target,always,,,,,,,,
 3637,MD_SKELETON_60@AS_SONICBLOW,attack,136,10,500,800,5000,no,target,always,,,,,,,,
@@ -12588,7 +12588,7 @@
 3654,MD_ZOMBIE_160@NPC_UNDEADATTACK,angry,347,3,2000,0,5000,yes,target,always,,,,,,,,
 3654,MD_ZOMBIE_160@NPC_POISONATTACK,attack,188,3,500,800,5000,no,target,always,,,,,,,,
 
-// Friday Memorial Dungeon
+// 週五紀念副本
 3658,MD_LICH_LORD_100@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,,,,,,,,
 3658,MD_LICH_LORD_100@AL_TELEPORT,walk,26,1,5000,0,5000,yes,self,rudeattacked,,,,,,,,
 3658,MD_LICH_LORD_100@NPC_AGIUP,attack,350,5,10000,0,30000,yes,self,myhpltmaxrate,30,,,,,,6,
@@ -12699,7 +12699,7 @@
 3633,EP16_2_VENOM_KIMERA@NPC_ACIDBREATH,attack,657,6,10000,3000,25000,no,target,always,0,,,,,,,
 3633,EP16_2_VENOM_KIMERA@RG_STRIPARMOR,attack,217,5,500,1000,5000,no,target,always,0,,,,,,,
 
-// Illusion of Vampire
+// 幻影吸血鬼
 3750,Matt Drainliar@NPC_BLINDATTACK,attack,177,3,500,0,5000,yes,target,always,0,,,,,,,
 3750,Matt Drainliar@NPC_BLOODDRAIN,attack,199,1,500,0,5000,yes,target,always,0,,,,,,,
 3750,Matt Drainliar@NPC_DARKNESSATTACK,attack,190,1,2000,0,5000,yes,target,always,0,,,,,,,
@@ -12765,7 +12765,7 @@
 3757,Dracula of Rage@NPC_GRANDDARKNESS,attack,339,10,900,1000,1200,no,self,always,0,,,,,,,
 3757,Dracula of Rage@NPC_DARKTHUNDER,attack,341,10,900,1000,1200,no,target,always,0,,,,,,,
 
-// Illusion of Moonlight
+// 幻影月夜
 3758,Angry Moonlight Flower@AL_HEAL,attack,28,11,10000,0,5000,no,friend,friendhpltmaxrate,60,,,,,,21,
 3758,Angry Moonlight Flower@AL_HEAL,attack,28,11,10000,0,5000,no,self,myhpltmaxrate,30,,,,,,21,
 3758,Angry Moonlight Flower@AL_HEAL,chase,28,11,10000,0,5000,no,friend,friendhpltmaxrate,60,,,,,,21,
@@ -12844,7 +12844,7 @@
 3765,Deranged Adventurer@NPC_TALK,idle,682,10,2500,0,35000,yes,self,always,0,,,,,,,53
 3765,Deranged Adventurer@NPC_TALK,idle,682,10,2500,0,30000,yes,self,always,0,,,,,,,54
 
-// Illusion frozen
+// 幻影冰封區域
 3792,ILL_GAZETI@CR_AUTOGUARD,idle,249,5,1500,0,30000,yes,self,always,0,,,,,,,
 3792,ILL_GAZETI@MG_COLDBOLT,chase,14,5,2000,0,5000,no,target,always,0,,,,,,,
 3792,ILL_GAZETI@MG_COLDBOLT,attack,14,9,2000,0,5000,no,target,always,0,,,,,,,
@@ -12893,7 +12893,7 @@
 3796,ILL_KTULLANUX@NPC_MENTALBREAKER,attack,159,5,10000,0,5000,yes,target,skillused,490,,,,,,,
 3796,ILL_KTULLANUX@WZ_WATERBALL,attack,86,10,10000,0,5000,yes,target,skillused,271,,,,,,,
 
-// Illusion of Turtle
+// 幻影海龜島
 3799,ILL_ASSULTER@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,0,,,,,,,
 3799,ILL_ASSULTER@NPC_EMOTION,idle,197,1,2000,0,5000,yes,self,always,0,0x3695,,,,,7,
 3799,ILL_ASSULTER@NPC_EMOTION,chase,197,1,200,0,5000,yes,self,always,0,0x0081,,,,,19,
@@ -12965,7 +12965,7 @@
 3896,G_ILL_ASSULTER@NPC_COMBOATTACK,attack,171,1,1500,700,5000,no,target,always,0,,,,,,24,
 3896,G_ILL_ASSULTER@TF_BACKSLIDING,attack,150,1,10000,500,600000,no,self,myhpltmaxrate,10,,,,,,,
 
-// Poring Village instance
+// 波利村副本
 3810,MD_KING_PORING@SM_BASH,attack,5,3,1000,1000,9000,yes,target,always,0,,,,,,,60
 3810,MD_KING_PORING@MG_FIREBALL,attack,17,3,1000,1000,9000,yes,target,always,0,,,,,,,61
 3810,MD_KING_PORING@MC_MAMMONITE,attack,42,3,1000,1000,9000,yes,target,always,0,,,,,,,62
@@ -12973,7 +12973,7 @@
 3810,MD_KING_PORING@TF_POISON,attack,52,3,1000,1000,9000,yes,target,always,0,,,,,,,64
 3810,MD_KING_PORING@AL_DECAGI,attack,30,3,1000,1000,9000,yes,target,always,0,,,,,,,65
 3811,MD_GOLDRING@NPC_STUNATTACK,attack,179,5,3500,1000,10000,no,target,always,0,,,,,,,
-// todo NPC_WIDECONFUSE2
+// 待處理：NPC_WIDECONFUSE2
 //3812,MD_AMERING@NPC_WIDECONFUSE2,attack,762,1,3000,2000,20000,yes,target,always,0,,,,,,,
 3812,MD_AMERING@NPC_WIDECONFUSE,attack,667,1,3000,2000,20000,yes,target,always,0,,,,,,,
 3813,MD_DROPS@NPC_EMOTION,loot,197,1,2000,0,5000,yes,self,always,0,,,,,,,
@@ -12989,7 +12989,7 @@
 3816,MD_MARIN@AL_HEAL,idle,28,1,10000,500,5000,yes,friend,myhpltmaxrate,90,,,,,,2,
 3816,MD_MARIN@AL_HEAL,attack,28,1,10000,500,5000,yes,friend,myhpltmaxrate,90,,,,,,,69
 
-// Illusion of Luanda
+// 幻影盧安達
 20270,ILL_TRI_JOINT@AL_TELEPORT,idle,26,1,5000,0,5000,yes,self,rudeattacked,0,,,,,,,
 20270,ILL_TRI_JOINT@AL_HEAL,idle,28,9,5000,0,1500,yes,friend,mystatuson,hiding,,,,,,18,
 20270,ILL_TRI_JOINT@AL_TELEPORT,chase,26,1,5000,0,5000,yes,self,mobnearbygt,4,,,,,,,
@@ -13105,7 +13105,7 @@
 20280,G_ILL_WOOTAN_FIGHTER@KN_BRANDISHSPEAR,attack,57,5,2000,0,10000,yes,target,always,0,,,,,,6,
 20280,G_ILL_WOOTAN_FIGHTER@NPC_FIREATTACK,attack,186,4,1000,0,5000,yes,target,always,0,,,,,,,
 
-// Illusion of Teddy Bear
+// 幻影泰迪熊
 20255,ILL_TEDDY_BEAR_R@AL_TELEPORT,idle,26,1,5000,0,5000,yes,self,rudeattacked,0,,,,,,,
 20255,ILL_TEDDY_BEAR_R@NPC_CURSEATTACK,chase,181,3,1000,500,5000,no,target,always,0,,,,,,2,
 20255,ILL_TEDDY_BEAR_R@NPC_CRITICALSLASH,attack,170,1,1500,500,5000,no,target,always,0,,,,,,6,
@@ -13207,7 +13207,7 @@
 20268,G_ILL_TEDDY_BEAR_B@NPC_WATERATTACK,attack,184,2,1500,0,5000,yes,target,always,0,,,,,,6,
 20268,G_ILL_TEDDY_BEAR_B@MG_COLDBOLT,attack,14,3,500,1500,10000,no,target,always,0,,,,,,,
 
-// Episode 17.1 - Illusion (custom) #!todo
+// 第 17.1 章－幻影（自訂內容）#!待處理
 20340,EL-A17T@NPC_AGIUP,chase,350,5,2000,0,60000,no,self,always,0,,,,,,6,
 20340,EL-A17T@NPC_POWERUP,attack,349,5,2000,0,60000,no,self,always,0,,,,,,6,
 20340,EL-A17T@NPC_CRITICALSLASH,attack,170,1,2000,500,5000,no,target,always,0,,,,,,,
@@ -13347,7 +13347,7 @@
 20382,G Twin Caput@NPC_POISON,attack,176,2,500,800,5000,no,target,always,0,,,,,,,
 20382,G Twin Caput@NPC_CRITICALSLASH,attack,170,1,500,500,5000,no,target,always,0,,,,,,29,
 
-// Abyss OGH
+// 深淵舊古城
 20367,RAYDRIC_H@KN_SPEARBOOMERANG,idle,59,5,3000,0,15000,yes,target,always,0,,,,,,,
 20367,RAYDRIC_H@NPC_EMOTION,idle,197,1,7000,0,30000,yes,self,always,0,0x3695,,,,,44,
 20367,RAYDRIC_H@NPC_EMOTION,chase,197,1,2000,0,30000,yes,self,always,0,0x0091,,,,,19,
@@ -13499,7 +13499,7 @@
 20419,MUSPELLSKOLL_H@NPC_SUMMONSLAVE,idle,196,1,10000,700,10000,no,self,slavele,2,1834,1835,,,,,
 20419,MUSPELLSKOLL_H@AL_TELEPORT,walk,26,1,10000,0,0,yes,self,rudeattacked,0,,,,,,,
 
-// Illusion of Underwater
+// 幻影海底
 20801,ILL_SROPHO@NPC_WINDATTACK,attack,187,5,2000,0,5000,no,target,always,0,,,,,,29,
 20801,ILL_SROPHO@NPC_WINDATTACK,chase,187,5,2000,0,5000,no,target,always,0,,,,,,29,
 20801,ILL_SROPHO@NPC_STUNATTACK,attack,179,5,3000,1000,10000,no,target,always,0,,,,,,,
@@ -13641,7 +13641,7 @@
 20843,ILL_ABYSMAL_WITCH@NPC_DAMAGE_HEAL,attack,753,1,10000,1000,60000,no,self,myhpltmaxrate,10,,,,,,,
 20843,ILL_ABYSMAL_WITCH@NPC_CALLSLAVE,idle,352,1,5000,0,30000,yes,self,always,0,,,,,,,
 
-// Episode 17.2 - Sage's Legacy
+// 第 17.2 章－賢者的傳承
 20620,MD_REDPEPPER@MG_FIREBOLT,chase,19,3,2000,300,5000,yes,target,always,0,,,,,,,
 20620,MD_REDPEPPER@MG_FIREBALL,chase,17,5,4000,300,15000,yes,target,always,0,,,,,,9,
 20620,MD_REDPEPPER@NPC_CRITICALSLASH,attack,170,2,2000,500,15000,no,target,always,0,,,,,,9,
@@ -14164,7 +14164,7 @@
 20603,ABYSSMAN@NPC_COMBOATTACK,attack,171,2,2000,500,5000,no,target,always,0,,,,,,,
 20603,ABYSSMAN@NPC_BLOODDRAIN,attack,199,1,500,0,5000,yes,target,always,0,,,,,,29,
 
-// Meister ABR's (Automated Battle Robot)
+// 機械大師 ABR（自動戰鬥機器人）
 20834,ABR_BATTLE_WARIOR@ABR_BATTLE_BUSTER,attack,8601,1,5000,500,3000,no,target,always,0,,,,,,,
 20835,ABR_DUAL_CANNON@ABR_DUAL_CANNON_FIRE,attack,8602,1,5000,500,3000,no,target,always,0,,,,,,,
 20836,ABR_MOTHER_NET@ABR_NET_REPAIR,idle,8603,1,5000,1000,5000,no,self,friendhpltmaxrate,60,,,,,,,
@@ -14173,7 +14173,7 @@
 20836,ABR_MOTHER_NET@ABR_NET_SUPPORT,attack,8604,1,5000,1000,5000,no,self,always,0,,,,,,,
 20837,ABR_INFINITY@ABR_INFINITY_BUSTER,attack,8605,1,5000,500,3000,no,target,always,0,,,,,,,
 
-// Biolo Summons
+// 生化學者召喚物
 20848,SUMMON_WOODENWARRIOR@BO_WOODEN_THROWROCK,attack,5384,1,5000,500,5000,yes,target,always,0,,,,,,,
 20848,SUMMON_WOODENWARRIOR@BO_WOODEN_ATTACK,attack,5385,1,5000,500,5000,yes,target,always,0,,,,,,,
 20849,SUMMON_WOODEN_FAIRY@BO_FAIRY_DUSTY,attack,5388,1,5000,500,15000,yes,target,always,0,,,,,,,
@@ -14346,7 +14346,7 @@
 20943,DEATH_WITCH@NPC_CALLSLAVE,idle,352,1,5000,0,30000,yes,self,always,0,,,,,,,
 20943,DEATH_WITCH@NPC_CALLSLAVE,attack,352,1,5000,0,30000,yes,self,always,0,,,,,,,
 
-// Amicitia
+// 艾密提亞
 20920,CHIMERA_LAVA@WZ_FIREPILLAR,idle,80,5,10000,300,30000,no,around2,always,0,,,,,,,
 20920,CHIMERA_LAVA@MG_FIREBOLT,chase,19,7,10000,0,5000,yes,target,always,0,,,,,,11,
 20920,CHIMERA_LAVA@NPC_FIREATTACK,attack,186,4,1000,0,5000,yes,target,always,0,,,,,,17,
@@ -14404,7 +14404,7 @@
 20928,CHIMERA_THEONE@NPC_FIREBREATH,chase,654,10,2000,500,5000,no,target,myhpltmaxrate,80,,,,,,,
 20928,CHIMERA_THEONE@WZ_WATERBALL,attack,86,5,5000,1000,35000,no,target,always,0,,,,,,,
 20928,CHIMERA_THEONE@WZ_WATERBALL,chase,86,5,5000,1000,35000,no,target,always,0,,,,,,,
-// TODO
+// 待處理
 // 20928,CHIMERA_THEONE@NPC_EARTHQUAKE_K,chase,750,5,10000,500,20000,no,target,myhpltmaxrate,40,,,,,,,
 20928,CHIMERA_THEONE@NPC_EARTHQUAKE,chase,653,5,10000,500,20000,no,self,myhpltmaxrate,40,,,,,,,
 20928,CHIMERA_THEONE@NPC_CALLSLAVE,attack,352,1,10000,0,30000,yes,self,always,0,,,,,,,
@@ -14427,7 +14427,7 @@
 20928,CHIMERA_THEONE@NPC_CHANGEWATER,attack,162,1,10000,500,100000,no,self,myhpltmaxrate,40,,,,,,,
 20928,CHIMERA_THEONE@NPC_CHANGEGROUND,attack,163,1,10000,500,100000,no,self,myhpltmaxrate,20,,,,,,,
 
-// Training Ground outside Prontera
+// 普隆德拉城外訓練場
 21064,S_DUMMY_100_SMALL@NPC_ALLHEAL,attack,687,1,10000,0,500,no,self,myhpltmaxrate,90,,,,,,,
 21064,S_DUMMY_100_SMALL@NPC_ALLHEAL,idle,687,1,10000,0,500,no,self,myhpltmaxrate,90,,,,,,,
 21065,S_DUMMY_100_MEDIUM@NPC_ALLHEAL,attack,687,1,10000,0,500,no,self,myhpltmaxrate,90,,,,,,,
@@ -14475,7 +14475,7 @@
 21086,S_DUMMY_100_UNDEAD2@NPC_ALLHEAL,attack,687,1,10000,0,500,no,self,myhpltmaxrate,90,,,,,,,
 21086,S_DUMMY_100_UNDEAD2@NPC_ALLHEAL,idle,687,1,10000,0,500,no,self,myhpltmaxrate,90,,,,,,,
 
-// Illusion of Twins
+// 幻影雙子
 21386,ILL_ANDRE@NPC_COMBOATTACK,attack,171,10,3000,0,5000,no,target,always,0,,,,,,,
 21386,ILL_ANDRE@NPC_FIREATTACK,attack,186,5,2000,500,5000,no,target,always,0,,,,,,6,
 21386,ILL_ANDRE@NPC_FIREATTACK,chase,186,5,2000,500,5000,no,target,always,0,,,,,,6,
@@ -14576,7 +14576,7 @@
 21395,ILL_MAYA@NPC_DAMAGE_HEAL,attack,753,1,500,1500,120000,no,self,myhpltmaxrate,50,,,,,,32,
 21395,ILL_MAYA@NPC_ALL_STAT_DOWN,attack,751,5,5000,1500,45000,no,target,always,0,,,,,,18,
 
-// Episode 18
+// 第 18 章
 20846,MD_HIDDEN_GROUND01@NPC_GRADUAL_GRAVITY,idle,752,3,1000,0,5000,no,target,always,0,,,,,,,
 20846,MD_HIDDEN_GROUND01@NPC_GRADUAL_GRAVITY,attack,752,3,1000,0,5000,no,target,always,0,,,,,,,
 21295,EP18_ASH_TOAD@AL_TELEPORT,idle,26,1,10000,0,0,yes,self,rudeattacked,0,,,,,,,
@@ -14809,7 +14809,7 @@
 
 // Garden of Time (placeholder). Ids [22177-22180], [22192-22239]
 
-// ep19 - Walkthrough skills data
+// 第 19 章－流程技能資料
 
 // jor_tail
 21523,EP19_ICE_STRAW@MG_COLDBOLT,chase,14,5,2000,0,5000,no,target,always,0,,,,,,,
@@ -14837,7 +14837,7 @@
 21521,EP19_UNFROST_FLOWER@ASC_METEORASSAULT,attack,406,2,500,1000,5000,no,self,always,0,,,,,,,
 
 // jor_back3
-// todo stat down atk
+// 待處理：能力值下降攻擊
 21522,EP19_CALMARING@MG_COLDBOLT,chase,14,5,2000,1000,5000,no,target,always,0,,,,,,,
 21522,EP19_CALMARING@NPC_EMOTION,chase,197,1,200,0,5000,no,self,always,0,19,0x81,,,,,
 21522,EP19_CALMARING@NPC_EMOTION,idle,197,1,1000,0,5000,no,self,always,0,7,0x3885,,,,,
@@ -14871,7 +14871,7 @@
 21538,EP19_WASTED_RGAN_A@AS_VENOMDUST,attack,140,1,500,0,5000,no,around1,always,0,,,,,,,
 21538,EP19_WASTED_RGAN_A@ASC_METEORASSAULT,attack,406,2,500,1000,5000,no,self,always,0,,,,,,,
 
-// todo stat down atk
+// 待處理：能力值下降攻擊
 21540,EP19_CAVE_CALMARING@NPC_EMOTION,chase,197,1,200,0,5000,no,self,always,0,19,0x81,,,,,
 21540,EP19_CAVE_CALMARING@NPC_EMOTION,idle,197,1,1000,0,5000,no,self,always,0,7,0x3885,,,,,
 21540,EP19_CAVE_CALMARING@NPC_IGNITIONBREAK,attack,740,5,1000,3000,5000,no,self,always,,,,,,,,
@@ -14895,7 +14895,7 @@
 21544,EP19_ONE_EYE_DOLLOCARIS@MG_SOULSTRIKE,chase,13,9,2000,0,5000,yes,target,always,0,,,,,,,
 21544,EP19_ONE_EYE_DOLLOCARIS@MG_SOULSTRIKE,attack,13,9,2000,0,5000,yes,target,always,0,,,,,,,
 
-// todo gravity
+// 待處理：重力攻擊
 21542,EP19_HALLUCIGENIA@NPC_EMOTION,chase,197,1,200,0,5000,no,self,always,0,19,0x81,,,,,
 21542,EP19_HALLUCIGENIA@NPC_EMOTION,idle,197,1,1000,0,5000,no,self,always,0,7,0x3885,,,,,
 21542,EP19_HALLUCIGENIA@MG_COLDBOLT,attack,14,5,2000,0,5000,no,target,always,0,,,,,,,
@@ -15150,7 +15150,7 @@
 23060,EP20_ARMOERDCOPO@NPC_GROUNDATTACK,attack,185,1,500,0,10000,no,target,always,0,,,,,,,
 
 
-// Episode 21
+// 第 21 章
 22313,EP21_SEAWIND@NPC_COMBOATTACK,attack,171,1,2500,500,5000,no,target,always,,,,,,,6,
 22313,EP21_SEAWIND@KN_PIERCE,attack,56,10,500,2700,5000,no,target,always,0,,,,,,6,
 22313,EP21_SEAWIND@NPC_PIERCINGATT,attack,170,1,2500,500,5000,no,target,always,0,,,,,,6,
