@@ -123,6 +123,25 @@ setmapflag "prontera", MF_NOATTACK;
 removemapflag "prontera", MF_NOATTACK;
 ```
 
+### MaxHeal 地圖標記
+
+- 新增 `MF_MAXHEAL`／`maxheal` 地圖標記，限制該地圖上治癒系技能單次施法的最大 HP 恢復量。
+- 參數設定為 0 時會依共用 MapFlag 規則關閉此標記；設定大於 0 時作為每次治癒量上限。
+- 此標記透過 NPC 腳本設定，不允許使用 `@mapflag` 直接開啟。
+- 僅限制治療計算（`heal=true`）；傷害計算（`heal=false`）不受此標記影響。
+
+設定（以下範例將單次治癒量限制為 5,000 HP）：
+
+```text
+setmapflag "prontera", MF_MAXHEAL, 5000;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_MAXHEAL;
+```
+
 ### NoUseItem 地圖標記
 
 - 新增 `MF_NOUSEITEM`／`nouseitem` 地圖標記。

@@ -38,8 +38,15 @@ def production_condition() -> str:
 def source_contract() -> None:
     header = (ROOT / "src/map/map.hpp").read_text(encoding="utf-8-sig")
     enum_start = header.index("enum e_mapflag")
-    enum_end = header.index("MF_MAX", enum_start)
-    if header[enum_start:enum_end].count("MF_NOTOKEN") != 1:
+    enum_lines = header[enum_start:].splitlines()
+    enum_sentinel = next(
+        (index for index, line in enumerate(enum_lines) if line.strip() == "MF_MAX"),
+        None,
+    )
+    if enum_sentinel is None:
+        raise AssertionError("e_mapflag 的 MF_MAX 結尾標記不存在")
+    enum_body = "\n".join(enum_lines[:enum_sentinel])
+    if enum_body.count("MF_NOTOKEN") != 1:
         raise AssertionError("MF_NOTOKEN 必須在 e_mapflag 中、MF_MAX 之前且只出現一次")
 
     config = (ROOT / "src/config/pandas.hpp").read_text(encoding="utf-8-sig")
