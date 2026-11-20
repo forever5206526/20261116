@@ -2,7 +2,12 @@
 setlocal EnableExtensions DisableDelayedExpansion
 
 set "TOOLS_DIR=%~dp0"
-for %%I in ("%~dp0..") do set "SERVER_DIR=%%~fI"
+if exist "%~dp0tools\serv.bat" (
+    set "SERVER_DIR=%~dp0"
+    set "TOOLS_DIR=%~dp0tools\\"
+) else (
+    for %%I in ("%~dp0..") do set "SERVER_DIR=%%~fI"
+)
 
 pushd "%SERVER_DIR%" >nul
 if errorlevel 1 (
@@ -12,6 +17,7 @@ if errorlevel 1 (
 
 if "%~1"=="" (set "target=watch") else set "target=%~1"
 echo target=%target%
+echo server directory=%SERVER_DIR%
 
 REM Keep service state variables independent from localized tasklist output.
 set "login_running=false"
