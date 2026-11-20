@@ -1740,6 +1740,14 @@ int32 unit_skilluse_id2(struct block_list *src, int32 target_id, uint16 skill_id
 	if(status_isdead(*src))
 		return 0; // Do not continue source is dead
 
+#ifdef Pandas_MapFlag_NoSkill2
+	// NoSkill2 mask only applies to NPC-originated skill use in this entry point.
+	if (src->type == BL_NPC && map_getmapflag(src->m, MF_NOSKILL2)) {
+		if ((map_getmapflag_param(src->m, MF_NOSKILL2, 1) & BL_NPC) == BL_NPC)
+			return 0;
+	}
+#endif // Pandas_MapFlag_NoSkill2
+
 	sd = BL_CAST(BL_PC, src);
 	ud = unit_bl2ud(src);
 
@@ -2536,6 +2544,14 @@ int32 unit_attack(struct block_list *src,int32 target_id,int32 continuous)
 	if (src && map_getmapflag(src->m, MF_NOATTACK))
 		return 1;
 #endif // Pandas_MapFlag_NoAttack
+
+#ifdef Pandas_MapFlag_NoAttack2
+	// The mask identifies which unit types are forbidden to perform normal attacks.
+	if (map_getmapflag(src->m, MF_NOATTACK2)) {
+		if ((map_getmapflag_param(src->m, MF_NOATTACK2, 1) & src->type) == src->type)
+			return 1;
+	}
+#endif // Pandas_MapFlag_NoAttack2
 
 
 	target = map_id2bl(target_id);
