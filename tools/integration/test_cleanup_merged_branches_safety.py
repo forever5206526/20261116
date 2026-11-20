@@ -37,9 +37,14 @@ def main() -> None:
             "the workflow must obtain the current main Git tree before cleanup", failures)
     require("branchCommit.data.tree.sha === mainTreeSha" in source,
             "a history-diverged branch may be deleted only when its complete Git tree equals main", failures)
-    require("unable to prove it is merged" in source and
+    require("Commit-history comparison failed for " in source and
+            "unable to verify its Git tree" in source and
             "still contains commits not merged into main" in source,
             "unknown or unmerged branches must be kept with a diagnostic", failures)
+    delete_guard = source.rfind("if (!safeToDelete) {")
+    delete_call = source.find("github.rest.git.deleteRef({")
+    require(delete_guard >= 0 and delete_call > delete_guard,
+            "the delete API must remain behind the final safeToDelete guard", failures)
     require("github.rest.git.deleteRef({" in source and
             '"heads/" + name' in source,
             "deletion must target only the explicitly validated branch ref", failures)
