@@ -65,6 +65,17 @@ jobs:
               }
             }
 
+            const mainBranch = branches.find((branch) => branch.name === "main");
+            if (!mainBranch) {
+              throw new Error("The main branch could not be found; refusing all branch cleanup.");
+            }
+            const mainCommit = await github.rest.git.getCommit({
+              owner,
+              repo,
+              commit_sha: mainBranch.commit.sha,
+            });
+            const mainTreeSha = mainCommit.data.tree.sha;
+
             const mergedHeadShas = new Map();
             for (const pr of closedPullRequests) {
               if (!pr.merged_at || pr.base.ref !== "main" ||
@@ -96,9 +107,25 @@ jobs:
                   });
                   safeToDelete = comparison.data.ahead_by === 0;
                 } catch (error) {
-                  core.warning("Keep " + name + ": unable to prove it is merged (" + error.message + ").");
-                  kept++;
-                  continue;
+                  core.warning("Commit-history comparison failed for " + name + ": " + error.message);
+                }
+              }
+
+              // Different commit histories can still have identical file trees.
+              // Delete only when the complete branch tree is byte-for-byte the same as main.
+              if (!safeToDelete) {
+                try {
+                  const branchCommit = await github.rest.git.getCommit({
+                    owner,
+                    repo,
+                    commit_sha: branch.commit.sha,
+                  });
+                  safeToDelete = branchCommit.data.tree.sha === mainTreeSha;
+                  if (safeToDelete) {
+                    core.info("Delete " + name + ": its complete Git tree is identical to main.");
+                  }
+                } catch (error) {
+                  core.warning("Keep " + name + ": unable to verify its Git tree (" + error.message + ").");
                 }
               }
 
