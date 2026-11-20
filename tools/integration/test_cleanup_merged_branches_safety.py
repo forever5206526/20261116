@@ -32,6 +32,11 @@ def main() -> None:
             "branch ancestry must use the current Octokit compare endpoint", failures)
     require("comparison.data.ahead_by === 0" in source,
             "a branch may only be deleted after proving it has zero commits ahead of main", failures)
+    require('branches.find((branch) => branch.name === "main")' in source and
+            "const mainTreeSha = mainCommit.data.tree.sha;" in source,
+            "the workflow must obtain the current main Git tree before cleanup", failures)
+    require("branchCommit.data.tree.sha === mainTreeSha" in source,
+            "a history-diverged branch may be deleted only when its complete Git tree equals main", failures)
     require("unable to prove it is merged" in source and
             "still contains commits not merged into main" in source,
             "unknown or unmerged branches must be kept with a diagnostic", failures)
