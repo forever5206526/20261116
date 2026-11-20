@@ -164,6 +164,24 @@ removemapflag "prontera", MF_MAXDMG_SKILL;
 removemapflag "prontera", MF_MAXDMG_NORMAL;
 ```
 
+### NoBank 地圖標記提示
+
+- `MF_NOBANK` 是 brHades 原生地圖旗標，已支援禁止在指定地圖開啟銀行介面。
+- 啟用 `Pandas_MapFlag_NoBank` 後，玩家在禁止銀行的地圖嘗試開啟銀行時，會以紅色訊息框顯示「此地圖無法使用銀行」提示；不改變原有銀行限制判斷或銀行資料流程。
+- `MF_NOBANK` 已是原生腳本常數，不需要另加 enum 或 script constant。
+
+設定範例：
+
+```text
+setmapflag "prontera", MF_NOBANK;
+```
+
+移除：
+
+```text
+removemapflag "prontera", MF_NOBANK;
+```
+
 ### NoUseItem 地圖標記
 
 - 新增 `MF_NOUSEITEM`／`nouseitem` 地圖標記。

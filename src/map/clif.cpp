@@ -7596,7 +7596,11 @@ void clif_parse_BankOpen(int32 fd, map_session_data* sd) {
 		return;
 	}
 	if( map_getmapflag( sd->bl.m, MF_NOBANK ) ){
-		clif_displaymessage( sd->fd, msg_txt( sd, 831 ) ); // You cannot use the Bank on this map.
+#ifdef Pandas_MapFlag_NoBank
+		clif_messagecolor( &sd->bl, color_table[COLOR_RED], msg_txt( sd, 831 ), false, SELF ); // You cannot use the Bank on this map.
+#else
+		clif_displaymessage( sd->fd, msg_txt( sd, 831 ) );
+#endif // Pandas_MapFlag_NoBank
 		return;
 	}
 	else {
