@@ -45,6 +45,8 @@ def main() -> None:
             "mysql-was-invoked.txt" in workflow and
             "sql.bat invoked mysql despite the missing DB_ROOTPW variable" in workflow,
             "Windows SQL negative test must remove DB_ROOTPW and prove MySQL was not invoked", failures)
+    require("exit 0" in workflow,
+            "Windows SQL negative test must clear the expected child-process exit code after assertions", failures)
     require("$env:BRHADES_SQL_USER" in workflow and "$env:BRHADES_SQL_PASSWORD" in workflow,
             "Startup workflow does not consume the generated CI credentials", failures)
     require("(?m)^sql_user:" in workflow and "(?m)^sql_password:" in workflow and
