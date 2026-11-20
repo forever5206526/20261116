@@ -768,20 +768,20 @@ int32 skill_calc_heal(struct block_list *src, struct block_list *target, uint16 
 		hp += hp * status_get_hplus(src) / 100;
 
 #ifdef Pandas_MapFlag_MaxHeal
-	// Limit the final healing amount on maps that enable MaxHeal.
-	if (src && map_getmapflag(src->m, MF_MAXHEAL)) {
-		int32 result = (heal) ? max(1, hp) : hp;
+	// Limit healing only; the same function also calculates the damage component.
+	if (heal && src && map_getmapflag(src->m, MF_MAXHEAL)) {
+		int32 result = max(1, hp);
 		int32 limit = map_getmapflag_param(src->m, MF_MAXHEAL, 1);
-		return (limit > 0) ? cap_value(result, 0, limit) : result;
+		return (limit > 0) ? cap_value(result, 1, limit) : result;
 	}
 #endif // Pandas_MapFlag_MaxHeal
 	return (heal) ? max(1, hp) : hp;
 #else
 #ifdef Pandas_MapFlag_MaxHeal
-	// Limit the final healing amount on maps that enable MaxHeal.
-	if (src && map_getmapflag(src->m, MF_MAXHEAL)) {
+	// Limit healing only; leave the damage component unchanged.
+	if (heal && src && map_getmapflag(src->m, MF_MAXHEAL)) {
 		int32 limit = map_getmapflag_param(src->m, MF_MAXHEAL, 1);
-		return (limit > 0) ? cap_value(hp, 0, limit) : hp;
+		return (limit > 0) ? cap_value(hp, 1, limit) : max(1, hp);
 	}
 #endif // Pandas_MapFlag_MaxHeal
 	return hp;
