@@ -29,27 +29,29 @@ REM Windows 2000, XP, Vista, 7
 REM There is no CHOICE in 2000 and XP, but you get asked whether to
 REM abort the batch file, when pressing Ctrl+C in PING.
 IF "%1"=="mapcache.exe" GOTO END
-if "%restart_mode%" == "off" GOTO END
+if "%restart_mode%"=="off" GOTO END
 ECHO Restarting in 15 seconds, press Ctrl+C to cancel.
 PING -n 15 127.0.0.1 > NUL
 
 :START_RA
 %1
+set "server_exit_code=%ERRORLEVEL%"
 ECHO.
-REM Return value 1 is EXIT_FAILURE
-IF ERRORLEVEL 1 GOTO EXIT1
-REM Return value is not 0 the process has crashed
-IF NOT ERRORLEVEL 0 GOTO CRASHED
+REM EXIT_FAILURE (1) means the service rejected startup or stopped normally with an error.
+REM Do not restart a service that reports a normal failure (for example, invalid SQL credentials).
+if "%server_exit_code%"=="1" GOTO EXIT1
+REM Any other non-zero result indicates an unexpected crash and may be restarted.
+if not "%server_exit_code%"=="0" GOTO CRASHED
 REM Return value 0 is EXIT_SUCCESS
 ECHO %2 has shutdown successfully.
 GOTO RESTART_NT
 
 :EXIT1
-ECHO %2 has terminated abnormally.
-GOTO RESTART_NT
+ECHO %2 has terminated with EXIT_FAILURE (exit code 1); automatic restart is suppressed.
+GOTO END
 
 :CRASHED
-ECHO %2 has crashed!
+ECHO %2 has crashed (exit code %server_exit_code%)!
 GOTO RESTART_NT
 
 :DIRECT
