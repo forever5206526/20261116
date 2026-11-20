@@ -709,6 +709,9 @@ enum e_mapflag : int16 {
 #ifdef Pandas_MapFlag_MaxDmg_Normal
 	MF_MAXDMG_NORMAL,
 #endif // Pandas_MapFlag_MaxDmg_Normal
+#ifdef Pandas_MapFlag_NoSkill2
+	MF_NOSKILL2,
+#endif // Pandas_MapFlag_NoSkill2
 #ifdef Pandas_MapFlag_NoAutoLoot
 	MF_NOAUTOLOOT,
 #endif // Pandas_MapFlag_NoAutoLoot
@@ -730,6 +733,9 @@ enum e_mapflag : int16 {
 #ifdef Pandas_MapFlag_NoAttack
 	MF_NOATTACK,
 #endif // Pandas_MapFlag_NoAttack
+#ifdef Pandas_MapFlag_NoAttack2
+	MF_NOATTACK2,
+#endif // Pandas_MapFlag_NoAttack2
 #ifdef Pandas_MapFlag_NoUseItem
 	MF_NOUSEITEM,
 #endif // Pandas_MapFlag_NoUseItem
